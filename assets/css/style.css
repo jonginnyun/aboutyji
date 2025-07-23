@@ -30,7 +30,13 @@ a {
 }
 
 a:hover {
-  color: #0078ff;
+  color: #52ff02;
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+}
+
+.files {
+  color: blue; /* Default color when not hovered */
   text-decoration: none;
   transition: all 0.5s ease-in-out;
 }
@@ -128,6 +134,20 @@ a:hover {
   display: table-cell;
   vertical-align: middle;
 }
+
+
+/* Hero section specific styles */
+
+.project-period {
+  float: right;  /* Aligns the text to the right */
+  font-style: italic;  /* Keeps the italic style */
+  font-size: 0.8em;  /* Smaller font size */
+  position: relative;  /* Allows for relative positioning */
+  bottom: -3px;  /* Adjust this value to align at the bottom of the title */
+  line-height: 1;  /* Adjust line height to fit the title's height */
+}
+
+
 
 /*--/ Sections /--*/
 .sect-4 {
@@ -238,6 +258,28 @@ a:hover {
   transition: all 500ms ease;
 }
 
+.socials .ico-square {
+  height: 40px;
+  width: 40px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  line-height: 1.6;
+  margin: 0 15px 0 0;
+  box-shadow: 0 0 0 3px #0078ff;
+  transition: all 500ms ease;
+}
+
+.socials .ico-square2 {
+  height: 40px;
+  width: 40px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  line-height: 1.6;
+  margin: 0 15px 0 0;
+  box-shadow: 0 0 0 3px #0078ff;
+  transition: all 500ms ease;
+}
+
 .socials .ico-circle:hover {
   background-color: #0078ff;
   color: #fff;
@@ -278,6 +320,34 @@ a:hover {
   text-align: center;
   box-shadow: 0 0 0 6px #000000;
   display: block;
+}
+
+.ico-square {/*-- added by Jaewon Jung*/
+  height: 280px;
+  width: 300px;
+  font-size: 2rem;
+  border-radius: 4%;
+  line-height: 1.55;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+  box-shadow: 0 0 0 6px #000000;
+  align-items: center;
+  justify-content: center;
+}
+
+.ico-square2 {/*-- added by Jaewon Jung*/
+  height: 240px;
+  width: 240px;
+  font-size: 2rem;
+  border-radius: 4%;
+  line-height: 1.55;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+  box-shadow: 0 0 0 6px #000000;
+  align-items: center;
+  justify-content: center;
 }
 
 /*------/ Owl Carousel /------*/
@@ -573,7 +643,7 @@ a:hover {
   z-index: 99;
   opacity: 0;
   visibility: hidden;
-  background: #000000;
+  background: #ffffff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -596,7 +666,7 @@ a:hover {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #000000;
+  color: #1e00ff;
 }
 
 .navbar .dropdown:hover>ul {
@@ -625,6 +695,21 @@ a:hover {
 
   .navbar .dropdown .dropdown:hover>ul {
     left: -100%;
+  }
+}
+@media (max-width: 480px) {
+  .ico-square {
+    width: 100%; /* Make the width responsive to the screen size */
+    height: auto; /* Adjust height automatically based on the width */
+    padding: 10px; /* Add some padding to maintain visual balance */
+  }
+}
+
+@media (max-width: 480px) {
+  .ico-square2 {
+    width: 100%; /* Make the width responsive to the screen size */
+    height: auto; /* Adjust height automatically based on the width */
+    padding: 10px; /* Add some padding to maintain visual balance */
   }
 }
 
@@ -712,7 +797,7 @@ a:hover {
   z-index: 99;
   opacity: 0;
   visibility: hidden;
-  background: #000000;
+  background: #ffffff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -725,8 +810,8 @@ a:hover {
   padding: 10px 20px;
   font-size: 14px;
   text-transform: none;
-  color: #444444;
-}
+  color: #000000;
+} 
 
 .navbar.scroll .dropdown ul a i {
   font-size: 12px;
@@ -735,7 +820,7 @@ a:hover {
 .navbar.scroll .dropdown ul a:hover,
 .navbar.scroll .dropdown ul .active:hover,
 .navbar.scroll .dropdown ul li:hover>a {
-  color: #000000;
+  color: #0000fc;
 }
 
 .navbar.scroll .dropdown:hover>ul {
@@ -1001,7 +1086,7 @@ a:hover {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  height: 100vh;
+  height: 95vh;
   position: relative;
   color: #fff;
 }
@@ -1027,6 +1112,28 @@ a:hover {
   font-weight: 600;
   font-size: 3rem;
 }
+
+
+/* .hero-circle {
+  position: absolute;
+  width: 300px; 
+  height: 300px; 
+  background-color: rgba(255, 165, 0, 0.8); 
+  border-radius: 50%;
+  pointer-events: none; 
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  mix-blend-mode: difference;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+} */
+
+
+
+/**/
 
 @media (min-width: 768px) {
   .hero .hero-title {
@@ -1144,6 +1251,19 @@ a:hover {
   background-color: #000000;
   box-shadow: 0 0 0 6px #b3b909;
 }
+.service-box:hover .ico-square {
+  transition: all 500ms ease;
+  color: #ffffff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 6px #b3b909;
+}
+
+.service-box:hover .ico-square2 {
+  transition: all 500ms ease;
+  color: #ffffff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 6px #b3b909;
+}
 
 .service-box .service-ico {
   margin-bottom: 1rem;
@@ -1178,6 +1298,19 @@ a:hover {
   width: 150px;
   border-radius: 4%;
 }
+
+.bg-no-crop {/*-- added by Jaewon Jung*/
+  /* Set the width and height to auto to maintain the aspect ratio */
+  width: 95%;
+  height: 95%;
+  /* Maximum size constraints to ensure it fits within its container */
+  /* Center the image within its container */
+  display: flex;
+  margin: 0 auto; 
+  /* /* Optional: Add a border-radius if needed */
+  border-radius: 4%;
+  object-fit: contain;
+}
 /*--------------------------------------------------------------
 # Counter
 --------------------------------------------------------------*/
@@ -1197,6 +1330,20 @@ a:hover {
 }
 
 .counter-ico .ico-circle {
+  height: 60px;
+  width: 60px;
+  line-height: 1.5;
+  box-shadow: 0 0 0 10px #cde1f8;
+}
+
+.counter-ico .ico-square {
+  height: 60px;
+  width: 60px;
+  line-height: 1.5;
+  box-shadow: 0 0 0 10px #cde1f8;
+}
+
+.counter-ico .ico-square2 {
   height: 60px;
   width: 60px;
   line-height: 1.5;
@@ -1342,6 +1489,29 @@ a:hover {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+
+/**//**//**//**//**//**//**//**//**/
+/* Position the inner Swiper navigation arrows at the bottom */
+.inner-swiper .swiper-button-next,
+.inner-swiper .swiper-button-prev {
+  position: absolute;
+  bottom: 10px; /* Adjust as necessary */
+  width: auto;
+  height: auto;
+  z-index: 10; /* Ensure they are above other content */
+}
+
+/* Ensure that the outer Swiper arrows stay in their original position */
+.outer-swiper .swiper-button-next,
+.outer-swiper .swiper-button-prev {
+  top: 50%; /* Default positioning, centered vertically */
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+}
+
+
+/**//**//**//**//**//**//**//**//**/
 
 /*--------------------------------------------------------------
 # Testimonials

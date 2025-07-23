@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Research Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: DevFolio
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">Jonginn Yun</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
+            </ul>
+          </li>
+          -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/qdspinqmeas/qdspinqmeas-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Spin Qubit Experiments</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item">
+              <a href="index.html#hero">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Coherent Control of Semiconductor Spin Qubits</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="silicon-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+          
+          <div class="col-sm-6">
+            <div class="portfolio-details-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+
+                    <div class="swiper-slide">
+                    <img src="assets/img/qdspinqmeas/qdspinqmeas-fig1.png" alt="">
+                    <p>
+                        <b>Figure 1</b> 
+
+                        <b>(a)</b> Rabi oscillation. Inset: Oscillation quality factor as a function of rf amplitude. The red symbol marks the condition for the maximum quality factor. 
+                        <b>(b)</b> Representative Rabi oscillation with visibility higher than 97%. The oscillation is fit to the sinusoidal function with the Gaussian envelope. 
+                        <b>(c)</b> Singlet return probability as a function of the number of random Clifford gates obtained from a single qubit standard and interleaved randomized benchmarking. Traces are offset by 0.3 for clarity. 
+                        <b>(d)</b> Density matrices (top row) and Pauli transfer matrices (bottom row) evaluated by gate set tomography.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/qdspinqmeas/qdspinqmeas-fig2.png" alt="">
+                    <p>
+                        <b>Figure 2</b> 
+                        <b>(a,b)</b> The exchange oscillations of Q<sub>L</sub> (Q<sub>R</sub>) depending on the state of the other qubit as control. The lower and upper traces are measured when the state of Q<sub>T</sub> is singlet and triplet, respectively. 
+                        <b>(c)</b> The simulated maximum attainable Bell state fidelity as a function of J<sub>L</sub> for bilinear (black) and superlinear (red) J<sub>RL</sub>. The fidelity is estimated at J<sub>R</sub> = 500 MHz. 
+                        <b>(d)</b> The estimated maximum attainable Bell state fidelity from the experimental values. The fidelity shows an increasing tendency with a maximum value of ~0.95. The error bars are estimated from the uncertainty of J<sub>RL</sub> and T<sub>echo</sub> of each qubit.
+                        
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/qdspinqmeas/qdspinqmeas-fig3.jpg" alt="">
+                    <p>
+                        <b>Figure 3</b> 
+                        <b>(a)</b> Schematic diagram of pulse sequence for a Ramsey oscillation, the z-axis manipulation on Bloch sphere during the free evolution time t<sub>evol</sub> and the pulse amplitude V<sub>evol</sub>. π/2 pulse was applied with V<sub>evol</sub> = 0.27 V and properly calibrated pulse duration time. 
+                        <b>(b)</b> The representative Ramsey oscillation with the probability of triplet state P<sub>T</sub> in B<sub>z,ext</sub> = 400 mT and V<sub>evol</sub> = 770 mV, which shows high coherence time <i>T</i><sub>2</sub>* and quality factor Q* values. The left and the right figures were 10000 and 100 times averaged, respectively.
+                        <b>(c)</b> Ramsey oscillations as a function of t<sub>evol</sub> and V<sub>evol</sub>. The white dashed line indicates the contour line of <i>T</i><sub>2</sub>* extracted from each Ramsey oscillation line of V<sub>evol</sub>. The inset shows the reproduced Ramsey oscillation results through numerical simulation.
+                        <b>(d)</b> Line-to-line FFT result of (c). The expected transition line of the right dot is indicated as a dotted line on the right figure. Two dashed orange lines show the linearly fitted f<sub>Q</sub> with V<sub>evol</sub> before and after the frequency shift of Δ<i>f</i><sub>Q</sub> ~ 1.7 MHz during the charge transition of QD<sub>R</sub>. A small bump with maximum Δ<i>f</i><sub>Q</sub> ~ 0.4 MHz, indicated by the red dotted line, is the footprint of the enhanced spin-dependent charge number fluctuation led by fast tunneling between QD<sub>R</sub> and the electron reservoir on the right side of QD<sub>R</sub>.
+                        <b>(e)</b> Schematic illustration for each marker in (d) that depicts the energy levels of each dot, capacitive coupling between ST<sub>0</sub> qubit and QD<sub>R</sub>, and the tunneling between QD<sub>R</sub> and the electron reservoir.
+                        
+                    </p>
+                    </div>
+                </div>
+                
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            
+            <div id="portfolio-details" class="work-description-p">
+              <h5><b>Quantum Dot Spin Qubit Experiments</b> <span class="project-period">Jan. 2022 – Feb. 2023</span></h5>
+              <br> 
+              <p class="libre-baskerville-regular-italic">
+                    ⌜Performed <b>high-fidelity single- and two-qubit operations</b> in both <b>GaAs and ²⁸Si/SiGe quantum dot systems</b>. Optimized single-qubit gate fidelity to >99.6% using <b>real-time Bayesian Hamiltonian estimation</b>. Discovered and characterized a strong, <b>superlinear two-qubit capacitive coupling</b> (>190 MHz) beyond the bilinear regime. Analyzed qubit coherence as a function of system parameters and demonstrated coherent coupling to ancillary dot spin states.⌟
+                </p>
+
+                <p>
+                    &emsp;A central challenge in quantum computing is the high-fidelity control and readout of qubits in the presence of environmental noise. 
+                    My research has focused on developing and implementing advanced techniques to address this challenge in semiconductor spin qubits. 
+                    These projects were made possible by a comprehensive experimental toolkit for operating and characterizing quantum devices at cryogenic temperatures. 
+                    Measurements were automated using the <b>Labber software environment</b>, with quantum dots defined by low-noise DC sources (<b>SRS SIM928</b>) and qubit states manipulated by an <b>AWG</b> and a <b>Zurich Instruments UHFLI</b>. 
+                    My hands-on experience includes IQ mixer calibration and programming a <b>Quantum Machines OPX</b> controller using QUA for real-time feedback.
+                    <br><br>
+                    &emsp;In a GaAs quantum dot array, I implemented a Hamiltonian estimation protocol based on energy-selective tunneling to perform <b>real-time Bayesian inference</b> of system parameters. 
+                    By actively feeding back this information, we corrected for quasi-static noise and demonstrated a <b>single-qubit gate fidelity of 99.6%</b>, confirmed via Randomized Benchmarking (RB) and Gate-Set Tomography (GST). 
+                    This work was published in <u><a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.129.040501" target="_blank">Physical Review Letters</a></u>.
+                    <br><br>
+                    &emsp;Scaling up quantum processors requires robust inter-qubit coupling. While capacitive coupling between singlet-triplet qubits is typically weak and bilinear, I experimentally demonstrated a <b>strong two-qubit capacitive interaction (>190 MHz)</b> in a GaAs quadruple-dot array. 
+                    This interaction exhibited a state-conditional frequency shift that was distinctly beyond the bilinear regime, consistent with recent theoretical predictions, and was published in <u><a href="https://www.nature.com/articles/s41534-023-00699-4" target="_blank">npj Quantum Information</a></u>.
+                    <br><br>
+                    &emsp;To further explore qubit performance in an isotopically purified environment, I characterized singlet-triplet qubits in a <b>²⁸Si/SiGe double quantum dot</b>. 
+                    We achieved fast qubit oscillations (~100 MHz) with a quality factor over 580 and found evidence of coherent coupling between the qubit and the spin states of a nearby quantum dot, 
+                    demonstrating that the spin-electric coupling in this system may enable a charge-based two-qubit gate, as detailed in <u><a href="https://www.nature.com/articles/s41534-024-00869-y" target="_blank">npj Quantum Information</a></u>.
+                </p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              
+            Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
