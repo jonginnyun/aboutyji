@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Research Portfolio</title>
+  <title>Research Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,6 +32,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 </head>
 
 <body>
@@ -43,29 +52,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href=index.html>Home</a></li>
-          <li><a class="nav-link scrollto" href=index.html#about>CV</a></li>
-          <li><a class="nav-link scrollto" href=index.html#services>Technical Skills</a></li>
-          <li><a class="nav-link scrollto " href=index.html#work>Research Projects</a></li>
-          <!--
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
             </ul>
           </li>
           -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -74,17 +91,17 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/sim_code_2.png)">
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/simul/simul-fig4.png)">
     <div class="overlay-mf"></div>
     <div class="hero-content display-table">
       <div class="table-cell">
         <div class="container">
-          <h2 class="hero-title mb-4">SIMulation</h2>
+          <h2 class="hero-title mb-4">Computational Modeling of Quantum Systems</h2>
           <ol class="breadcrumb d-flex justify-content-center">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="index.html#hero">Home</a>
             </li>
-            <li class="breadcrumb-item active">Computational Simulation</li>
+            <li class="breadcrumb-item active">Computational Modeling of Quantum Systems</li>
           </ol>
         </div>
       </div>
@@ -94,86 +111,102 @@
   <main id="main">
 
     <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
+    <section id="silicon-details" class="portfolio-details">
       <div class="container">
 
         <div class="row gy-4">
           
           <div class="col-sm-6">
             <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="assets/img/simul-detail_1.png" alt="">
-                  <p>
-                    <b>Figure 1</b> 
-                    <b>(a)</b> The AlGaAs/GaAs quantum dot device used throughout the experiment, whose crystallographic alignment is indicated at the lower-left corner. The orange circle marks the location of the quantum dot, and the crossed boxes indicate ohmic contacts. The cobalt micromagnet is enclosed by the red dotted lines, whose
+                    <div class="swiper-slide">
+                    <img src="assets/img/simul/simul-fig1.png" alt="">
+                    <p>
+                        <b>Figure 1 | Bidirectional Dynamic Nuclear Polarization Controlled by Pulse Parking Position</b> 
+
+                        <b>(a)</b> The AlGaAs/GaAs quantum dot device used throughout the experiment, whose crystallographic alignment is indicated at the lower-left corner. The orange circle marks the location of the quantum dot, and the crossed boxes indicate ohmic contacts. The cobalt micromagnet is enclosed by the red dotted lines, whose
                               field direction is qualitatively plotted by the red transparent arrow. The magnetic field
                               is applied in-plane to the 2DEG, as depicted in the upper left corner. 
-                    <b>(b)</b> The charge stability diagram near (1,1) and (2,0) regimes. The location of the EST (PSB) regime is marked by the green box (blue triangle).
-                    <b>(c)</b> The Rabi oscillation, which is plotted after a series of Rabi pulse applications whose parking position was at either EST (green)
+                        <b>(b)</b> The charge stability diagram near (1,1) and (2,0) regimes. The location of the EST (PSB) regime is marked by the green box (blue triangle).
+                        <b>(c)</b> The Rabi oscillation, which is plotted after a series of Rabi pulse applications whose parking position was at either EST (green)
                               or PSB (blue). When parked at EST, the oscillation frequency increased with the lab time, indicating that the serial Rabi pulse application increased ∆Bz. On the contrary,
                               the parking at PSB showed the exact opposite behavior. 
-                    <b>(d)</b> The change of the Rabi oscillation frequency as a function of lab time. The PSB- and EST-parking scheme shows the opposite behavior.
-                  </p>
+                        <b>(d)</b> The change of the Rabi oscillation frequency as a function of lab time. The PSB- and EST-parking scheme shows the opposite behavior.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/simul/simul-fig2.png" alt="">
+                    <p>
+                        <b>Figure 2 | Analysis of Triplet State Dynamics Under a Single Rabi Pulse</b> 
+                        <b>(a)</b> The color plot of <i>dP</i> change under a single Rabi pulse. The clear reversal appears. The orange dotted lines mark the location for the left line-cut plot.
+                        <b>(b)</b> The line-cut plot of (a). Neither of line-cut shows dP reversal, indicating that <i>T</i>(2, 0) included dynamics is crucial in the <i>T</i><sup>+</sup> pumping effect in PSB regime.
+                        <b>(c)</b> The color plot of <i>dP</i> change under a single Rabi pulse with zero pulse width. The orange dotted lines mark the location for the left line-cut plot.
+                        <b>(d)</b> The line-cut of Fig (c).
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/simul/simul-fig3.png" alt="">
+                    <p>
+            
+                        <b>Figure 3 | Comparison of Experimental Data and Numerical Simulation of Qubit Dynamics</b>
+                        <b>(a)</b> Experimental Ramsey oscillations of a singlet-triplet qubit in a <sup>28</sup>Si/SiGe device as a function of evolution time (t<sub>evol</sub>) and gate voltage (V<sub>evol</sub>). 
+                        The FFT result (right) shows a characteristic peak splitting below V<sub>evol</sub> ≈ 0.42 V. 
+                        <b>(b)</b> Line cuts of the experimental data at two different voltages. 
+                        The bottom trace clearly shows a "beating" pattern, 
+                        which is a signature of coherent coupling to a neighboring quantum dot spin states. 
+                        <b>(c)</b> Numerical simulation of the Ramsey oscillations based on a quantum master equation with a dephasing Lindbladian.
+                        The simulation consistently reproduces the significant decoherence and FFT peak splitting observed in the experiment. 
+                        <b>(d)</b> Simulated line cuts that successfully replicate the experimental data, 
+                        including the characteristic beating of the oscillation in the strong coupling regime.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/simul/simul-fig4.png" alt="">
+                    <p>
+                        <b>Figure 4 | End-to-End Simulation Pipeline from Device Geometry to Qubit Performance</b> 
+                        <b>(a)</b> The 2D electrostatic potential landscape of a double quantum dot, calculated from the device's CAD geometry using a Green's function-based approximation.
+                        <b>(b)</b> The ground state probability density of a single electron, obtained by solving the 2D Schrödinger equation with the potential from (a) using a finite difference method.
+                        <b>(c)</b> The effective magnetic driving gradient experienced by the electron. This is calculated by convolving the micromagnet's simulated stray field with the electron probability density from (b).
+                        <b>(d)</b> The final calculated map of the qubit's dephasing time (T<sub>2</sub>*). The "sweet spot" of long coherence is determined from the effective magnetic field, providing a direct link between device design and qubit performance.
+                        
+                        
+                    </p>
+                    </div>
                 </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/simul-detail_2.png" alt="">
-                  <p>
-                    <b>Figure 2 </b> 
-                    <b>(a)</b> The color plot of <i>dP</i> change under a single Rabi pulse. The clear reversal appears. The orange dotted lines mark the location for the left line-cut plot.
-                    <b>(b)</b> The line-cut plot of (a). Neither of line-cut shows dP reversal, indicating that <i>T</i>(2, 0) included dynamics is crucial in the <i>T</i><sup>+</sup> pumping effect in PSB regime.
-                    <b>(c)</b> The color plot of <i>dP</i> change under a single Rabi pulse with zero pulse width. The orange dotted lines mark the location for the left line-cut plot.
-                    <b>(d)</b> The line-cut of Fig (c).
-                  </p>
-                </div>
-
-
-              </div>
+                
               <div class="swiper-pagination"></div>
             </div>
           </div>
           <div class="col-sm-6">
             
-            <div class="portfolio-info">
-              <h3>Computational Simulation</h3>
-              <p>This page contains detailed information about the simulation of experimentally observed parking-position dependent dynamic nuclear polarization effect.</p>
+            <div id="portfolio-details" class="work-description-p">
+              <h5><b>Quantum Dot Spin Qubit Experiments</b> <span class="project-period">Jun. 2020 – Jun. 2025</span></h5>
+              <br> 
+              <p class="libre-baskerville-regular-italic">
+              ⌜Developed <b>comprehensive simulation frameworks</b> to model complex quantum phenomena in semiconductor qubits. Created a <b>full, end-to-end simulation package</b> that computes electron wavefunctions from CAD layouts by solving the Schrödinger equation, and convolves them with <b>MuMax3-simulated</b> magnetic fields. Utilized <b>QuTiP</b> to solve the quantum master equation with Lindblad operators to reproduce experimental observations of qubit-environment interactions in silicon. Modeled <b>dynamic nuclear polarization</b> in GaAs dots using a modified Hubbard model.⌟
+              </p>
+
+              <p>
+                  &emsp;To complement my experimental work, I have developed a strong expertise in computational modeling to understand the complex physics governing quantum dot systems. 
+                  My initial work focused on explaining the bidirectional <b>dynamic nuclear polarization (DNP)</b> observed in GaAs singlet-triplet qubits. 
+                  By modeling the system with a modified Hubbard model that incorporated excited-level spin mixing, my simulation successfully reproduced the experimental DNP behavior, providing a theoretical explanation for this previously unexplained phenomenon. 
+                  The details can be found in my <u><a href="https://s-space.snu.ac.kr/bitstream/10371/181098/1/000000169288.pdf" target="_blank">Master's thesis</a></u>.
+                  <br><br>
+                  &emsp;Building on this experience, I later used the <b>QuTiP (Quantum Toolbox in Python)</b> framework to investigate the coherent interaction between a singlet-triplet qubit and a neighboring multi-electron quantum dot in a <sup>28</sup>Si/SiGe device. 
+                  To explain the characteristic beating and dephasing observed in Ramsey measurements (as seen in Figs. 2c and 3c of our <u><a href="https://www.nature.com/articles/s41534-024-00869-y" target="_blank">npj Quantum Information</a></u> publication), 
+                  I solved the <b>quantum master equation</b> for the coupled system, introducing a phenomenological <b>Lindbladian for dephasing</b>. 
+                  These computationally intensive simulations were accelerated by leveraging Python's <b>multiprocessing</b> capabilities to parallelize the calculations.
+                  <br><br>
+                  &emsp;Most recently, to investigate an anomalously long coherence time observed in a silicon device, I developed a <b>full, end-to-end simulation package</b> that connects device geometry to quantum mechanical properties.
+                  This package features a pipeline that: (1) Parses device layouts from <b>CAD files</b> using a custom Python tool, (2) Calculates the 2D electrostatic potential landscape, (3) Solves the 2D <b>Schrödinger equation using a Finite Difference Method</b> to obtain the electron wavefunction, (4) Simulates the micromagnet's 3D stray field using <b>MuMax3</b>, and finally, (5) Convolves the wavefunction with the stray field to compute the effective magnetic field experienced by the qubit. 
+                   To accelerate this computationally intensive step, the core calculation was implemented in C++ utilizing multithreading, which achieved a nearly <b>100x speedup</b> compared to a pure Python implementation. This high-performance C++ backend was then seamlessly integrated into the Python workflow using Pybind11. 
+                  This tool, some of which can be found at this <u><a href="https://github.com/jonginnyun/qsimjy" target="_blank">link</a></u>, enables rapid design validation and a deeper understanding of the physics underlying our experimental results.
+              </p>
             </div>
           </div>
         </div>
-        <div class="row gy-4">
-          <!--
-          <div class="portfolio-info">
-            <h3>Semiconductor Quantum Dot</h3>
-          </div>
-          -->
-          <div class="work-description">
-            <p>
-              <b><h3>Measurement of Superlinear tendency of Capacitive Coupling between Singlet-Triplet Qubits </h3></b>
-              Due to their relatively long coherence time and high scalability, spin qubit in a
-              semiconductor quantum dot is considered to be a promising candidate for realizing a
-              quantum computer. Among the various types of host materials, GaAs has been one
-              of the most successful materials in realizing a quantum dot spin qubit, although the
-              nucleus spin in GaAs results in relatively fast decoherence limiting the usability of the
-              GaAs. Fortunately, the dynamic nuclear polarization technique based on the hyperfine
-              mediated adiabatic spin flip-flop enabled the control of the nuclear spin. Furthermore,
-              the unidirectional <i>T</i><sup>+</sup>-pumping effect even by nonadiabatic Rabi pulse has also been
-              reported, whose theoretical explanation has yet to be provided.
-              This thesis presents the bidirectional nuclear spin polarization effect of a nonadiabatic
-              Rabi pulse, whose polarization direction depends on the parking position. In
-              addition, we provide the theoretical explanation of the polarization effect of a nonadiabatic
-              Rabi pulse by the simulation result based on the excited-level spin mixing. 
-              Specifically, We modeled the system using a modified Hubbard model for a two quantum dot system. The
-              results showed the triplet population change is consonant with the previously reported
-              <i>T</i><sup>+</sup>-pumping effect of a PSB-parked Rabi pulse only when the excited levels are incorporated.
-              Moreover, the simulated population change also agreed with the observed
-              bidirectional polarization induced by a Rabi pulse, although long-term dynamics such
-              as the nuclear spin diffusion must be considered to explain the experimental observation
-              fully, especially in the EST regime. More information can be found at <u><a href = "https://s-space.snu.ac.kr/bitstream/10371/181098/1/000000169288.pdf">my master's thesis</a></u>
-            </p>
-          </div>
-        </div>
+
 
 
       </div>
@@ -181,20 +214,22 @@
 
   </main><!-- End #main -->
 
-  <!-- 
+
+  
   <footer>
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
           <div class="copyright-box">
             <div class="credits">
+              
             Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer>
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

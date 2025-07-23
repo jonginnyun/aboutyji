@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,12 +16,15 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.ico" rel="icon" type = "image/x-icon">
-  <link href="assets/img/favicon.ico" rel="apple-touch-icon" type = "image/x-icon">
+  <link href="assets/img/favicon.png" rel="icon" type = "image/x-icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon" type = "image/x-icon">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,9 +32,9 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
   <!-- =======================================================
   * Template Name: DevFolio
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -52,31 +56,38 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">CV</a></li>
-          <li><a class="nav-link scrollto" href="#services">Technical Skills</a></li>
-          <li><a class="nav-link scrollto " href="#work">Research Projects</a></li>
-          <!--<li><a class="nav-link scrollto " href="#blog">Blog</a></li>-->
-          <!--
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
             </ul>
           </li>
-          --> 
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
+            </ul>
+          </li>
+          -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -86,18 +97,24 @@
 
   <!-- ======= Hero Section ======= -->
   <div id="hero" class="hero route bg-image" style="background-image: url(assets/img/background.png)">
+
     <div class="overlay-itro"></div>
+
     <div class="hero-content display-table">
       <div class="table-cell">
         <div class="container">
           <!--<p class="display-6 color-d">Hello, world!</p>-->
           <h1 class="hero-title mb-4">I am Jonginn Yun</h1>
-          <p class="hero-subtitle"><span class="typed" data-typed-items="Quantum Information, Quantum Simulation, Quantum Transport"></span></p>
+          <p class="hero-subtitle"><span class="typed" data-typed-items="Quantum Sensing and Information, Experimental Condensed Matter Physics, Engineered Nanostructures, Nanofabrication and Advanced Measurement"></span></p>
           <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
         </div>
       </div>
     </div>
-  </div><!-- End Hero Section -->
+    
+  </div>
+  <!-- End Hero Section -->
+
+
 
   <main id="main">
 
@@ -112,35 +129,62 @@
                   <div class="row">
                     <div class="col-sm-6 col-md-5">
                       <div class="about-img">
-                        <img src="assets/img/JYun_Profile_Truncated.jpg" class="img-fluid rounded b-shadow-a" alt="">
+                        <img src="assets/img/jonginn_optimized.png" class="img-fluid rounded b-shadow-a" alt="">
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-7">
                       <div class="about-info">
                         <p><span class="title-s">Name: </span> <span>Jonginn Yun</span></p>
-                        <p><span class="title-s">Email: </span> <span>alyuuv@snu.ac.kr</span></p>
-                        <p><span class="title-s">Phone: </span> <span>(+82) 010-9760-2199</span></p>
+                        <p><span class="title-s">Email: </span> <span>alyuuv@snu.ac.kr | alyuuv (at) stanford (dot) edu</span></p>
+                        <p><span class="title-s">Phone: </span> <span>(+82) 010-9760-2199 </span></p>
+                        <p><span class="title-s"> [<b><i><a href="assets/pdf/JonginnYun_CV.pdf" target="_blank" class='files'> Curriculum Vitae </a></i></b>]</span><span>
+                          <br> <i>last updated 2025. 06. 13. </i></span></p>
+                          <!--
+                          <span>
+                            <b>[ <a href="#ALT" class='files'>Awards</a> | <a href="#ALT" class='files'>Leadership</a> | <a href="#ALT" class='files'>Teaching</a> ]</b> 
+                          </span>
+                          -->
                       </div>
                     </div>
                   </div>
                   <div class="skill-mf">
-                    <p class="title-s">Research Interest</p>
-                    <span class = "title-tiny"><b>Experimental Quantum Information</b></span>
+                    <span>
+                      
+                    </span>
+                      <span>
+                      Welcome. I am Jonginn Yun, an incoming Ph.D. student in the Department of Applied Physics at Stanford University. I previously worked as a Research Scientist in the <a href="https://www.iqslab.net/" class="blue" target="_blank"><b>Integrated Quantum Systems Lab</b></a> with <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=22" class="blue" target="_blank"><b>Prof. Dohun Kim</b></a> at Seoul National University. 
+                      <br><br>
+                      I am currently exploring opportunities for <u><b>a lab rotation for the Fall 2025 quarter</b></u>.
+                      </span>
+                      
+                      <div class="title-box-2">
+                        <h5 class="title-left">
+                          <br>Research interests
+                        </h5>
+                      </div>
+                    <!-- <p class="title-s"> <br>Research Interest</p> -->
+                    <span class = "title-tiny"><b>Fundamental Science: Probing Novel Physical Phenomena</b></span>
                     <ul class = "about-list">
+                      
                       <li>
-                        Physical qubit implementation (Neutral atom, superconducting qubit, ion trap, semiconductor quantum dot, etc.)
+                        Exploration of emergent wave phenomena (photonic, phononic, RF) in custom-engineered metamaterials and nanostructures.
                       </li>
                       <li>
-                        Digital/analog quantum simulation
-                      </li>
+                        Probing and controlling coherent light-matter interactions at the quantum limit in solid-state systems.                      </li>
                       <li>
-                        Semiconductor-superconductor hybrid system
+                        Investigation of many-body quantum states and non-equilibrium dynamics in novel materials.                       
                       </li>
                     </ul>
-                    <span class = "title-tiny"><b>Quantum Transport</b></span>
+                    <span class = "title-tiny"><b>Applied Engineering: Device Design & Nanofabrication</b></span>
                     <ul class = "about-list">
                       <li>
-                        Transport phenomena in 2D van der Waals materials
+                        Design and fabrication of novel devices for applications in sensing, information processing, and energy conversion.                      
+                      </li>
+                      <li>
+                        Heterogeneous integration of 2D materials and other quantum materials with photonic and electronic platforms.
+                      </li>
+                      <li>
+                        Nanofabrication of hybrid quantum systems
                       </li>
                     </ul>
                     <!--<span>HTML</span> <span class="pull-right">85%</span>
@@ -170,7 +214,7 @@
                     </div>
                     <p class="lead">
                       <ul>
-                        <li>2025~: Ph.D. Student in Applied Physics, Stanford University (pending)</i></li>
+                        <li>2025~: Ph.D. Student in Applied Physics, Stanford University</i></li>
                         <li>2022: Master of Science in Physics, Seoul National University</i></li>
                         <li>2020: Bachelor of Science, <i>summa cum laude</i>, in Chemistry Education and Physics, Seoul National University (ranked first in class)</li>
                       </ul>
@@ -181,19 +225,43 @@
                       </h5>
                     </div>
                     <p style="font-size: 1">
-                    (*: equal contribution)
-                    </p>
+                      (*: equal contribution)
+                      </p>
                     <p class="lead">
                       <ul>
-                        <li> Y. Song*, <b>J. Yun*</b>, J. Kim, W. Jang, H. Jang, J. Park, M.-K. Cho, H. Sohn, S. Miyamoto, K. Itoh and D. Kim, <i>Coherence of a field-gradient-driven singlet-triplet qubit coupled to many-electron spin states in 28Si/SiGe"</i>, submitted for publication, <a href = "https://arxiv.org/abs/2310.12603"><b>arXiv:2310.12603</b></a></li>
+                        <li> J. Park*, H. Jang*, H. Sohn, <b>J. Yun</b>, Y. Song, B. Kang, L. Stehouwer, D. Esposti, G. Scappucci, and D. Kim, <i>and Passive and active suppression of transduced noise in silicon spin qubits</i>, <a href = https://www.nature.com/articles/s41467-024-55338-z> <b>Nat Commun. 16</b></a>, 78 (2025)</li>
+                        <li> Y. Song*, <b>J. Yun*</b>, J. Kim, W. Jang, H. Jang, J. Park, M.-K. Cho, H. Sohn, S. Miyamoto, K. Itoh and D. Kim, <i>Coherence of a field-gradient-driven singlet-triplet qubit coupled to many-electron spin states in 28Si/SiGe</i>, <a href = "https://www.nature.com/articles/s41534-024-00869-y"><b>npj Quantum Inform. 10</b></a>, 77 (2024)</li>
                         <li> <b>J. Yun*</b>, S. Son*, J. Shin*, G. Park, K. Zhang, Y. Shin, J.-G. Park and D. Kim, <i>Magnetic Proximity-Induced Superconducting Diode Effect and Infinite Magnetoresistance in van der Waals Heterostructure</i>, <a href = "https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.5.L022064"><b>Phys. Rev. Res. 5</b></a>, L022064 (2023)</li>
                         <li><b>J. Yun*</b>, J. Park*, H. Jang, J. Kim, W. Jang, Y. Song, M.-K. Cho, H. Sohn, H. Jung, V. Umansky and D. Kim, <i>Probing two-qubit capacitive interactions beyond bilinear regime using dual Hamiltonian parameter estimations</i>, <a href = "https://www.nature.com/articles/s41534-023-00699-4"><b>npj Quantum Inform. 9</b></a>, 30 (2023)</li>
                         <li>J. Kim*, <b>J. Yun*</b>, W. Jang*, H. Jang, J. Park, Y. Song, M.-K. Cho, S. Sim, H. Sohn, H. Jung, V. Umansky and D. Kim, <i>Approaching ideal visibility in singlet-triplet qubit operations using energy selective tunneling-based Hamiltonian estimation</i>, <a href = "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.129.040501"><b>Phys. Rev. Lett. 129</b></a>, 040501 (2022)</li>
                       </ul>
                     </p>
                   </div>
+                <!--
+                <div class="title-box-2">
+                  <h5 class="title-left">
+                  Conferences
+                  </h5>
                 </div>
-                
+                <p style="font-size: 1">
+                  (*: presentation files are attached)
+                  </p>
+                <p class="lead">
+                  <ul>
+                    <li> <b>J. Jung</b>, D. Ohm, M. Kim, J. Lee, and E. Kim, <i>Scalable Benchmarking Protocol for Mid-circuit
+                      Measurements</i>, <b>Poster Presentation</b> at <i>Adaptive Quantum Circuits 2024</i>, Brewster, United States 2024 
+                    <li> <b>J. Jung</b>, J. Yu, D. Ohm, M. Kim, J. Lee, and E. Kim, <i>Scalable Benchmarking Protocol for Mid-circuit
+                      Measurements</i>, <a href="assets/pdf/poster_icqs.pdf" target="_blanck" class='files'><b>Poster Presentation*</b></a> at <i>International Conference on Quantum Simulation 2024</i>, Seoul, Korea 2024 
+                    <li> <b>J. Jung</b>, H. Sohn, J. Park, H. Jang, L. E, A. Stehouwer, D. Degli Esposti, G. Scappucci and D. Kim,
+                      <i>Implementation of Zero-noise Extrapolation in 28Si/SiGe Spin Qubits</i>, <a href="assets/pdf/ppt_kcs.pdf" target="_blanck" class='files'><b>Oral Presentation*</b></a> at The 31st Korean
+                      Conference on Semiconductors, Gyeongju, Korea 2024</li> 
+                  </ul>
+                </p>
+                -->
+              </div>
+            </div>
+
+
               </div>
             </div>
           </div>
@@ -202,14 +270,14 @@
     </section><!-- End About Section -->
 
     <!-- ======= Technical Skills Section ======= -->
-    <section id="services" class="services-mf pt-5 route">
+    <section id="skills" class="services-mf pt-5 route">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <div class="title-box text-center">
               <h3 class="title-a">
-                Technical Skills
-              </h3>
+                Expertise and Skills
+              </p>
               <!--<p class="subtitle-a">
                 Lorem ipsum,  dolor sit amet consectetur adipisicing elit.
               </p>-->
@@ -221,15 +289,19 @@
           <div class="col-md-4">
             <div class="service-box">
               <div class="service-ico">
-                <span class="ico-circle">
-                <img src="assets/img/dilution_2.jpg" class="bg-crop" alt="">
+                <span class="ico-square2">
+                <img src="assets/img/cryo-skill.png" class="bg-no-crop" alt="">
                 </span>
               </div>
               <div class="service-content">
-                <h2 class="s-title">Cryogenics</h2>
+                <h2 class="s-title">Cryogenics &amp; Vacuum Systems</h2>
                 <p class="s-description text-start">
                   <ul class="s-description text-start">
-                  <li>Extensive experience with <sup>3</sup>He-<sup>4</sup>He dilution refrigerators (Triton, Oxford Instruments) and <sup>4</sup>He dry refrigerators (Teslatron, Oxford Instruments).</li>
+                  <!-- For more than two sentences, use li, otherwise, span -->
+                  <span> 
+                    Deep hands-on experience in operating and customizing cryogen-free ³He-⁴He dilution refrigerators (<a href = https://nanoscience.oxinst.com/assets/uploads/products/nanoscience/documents/4640_NS_Triton_Brochure.pdf><b>Triton</b></a>) 
+                    and ⁴He dry cryostats (<a href = https://nanoscience.oxinst.com/dry-systems/products/teslatronpt><b>Teslatron</b></a>) to create ultra-low-noise environments for probing delicate quantum phenomena.
+                  </span>
                   </ul>
                 </p>
               </div>
@@ -238,20 +310,18 @@
           <div class="col-md-4">
             <div class="service-box">
               <div class="service-ico">
-                <span class="ico-circle">
-                  <img src="assets/img/rflines.jpg" class="bg-crop" alt="">
+                <span class="ico-square2">
+                  <img src="assets/img/rf-skill.png" class="bg-no-crop" alt="">
                 </span>
               </div>
               <div class="service-content">
-                <h2 class="s-title">electronic setup</h2>
+                <h2 class="s-title">Low-Noise Electronics</h2>
                 <p class="s-description text-start">
                   <ul class="s-description text-start">
-                    <li>
-                    Electronic set-up of DC lines and filters for a low noise DC measurement. 
-                    </li>
-                    <li>
-                    Configuration of mixers, filters, and RF lines for a low noise RF measurement.
-                    </li>
+                    <span>
+                    Specialized in designing and building high-precision measurement systems from the ground up. 
+                    This includes <b>custom-building breakout boxes and filters</b>, and <b>configuring complex RF and DC lines</b> to achieve maximum signal integrity for sensitive quantum measurements.
+                    </span>
                   </ul>
                 </p>
               </div>
@@ -260,38 +330,81 @@
           <div class="col-md-4">
             <div class="service-box">
               <div class="service-ico">
-                <span class="ico-circle">
-                <img src="assets/img/meas1.jpg" class="bg-crop" alt="">
+                <span class="ico-square2">
+                <img src="assets/img/meas-skill.png" class="bg-no-crop" alt="">
+                </span>
+              </div>
+
+              <div class="service-content">
+                <h2 class="s-title">Quantum Measurement &amp; Control</h2>
+                <p class="s-description text-center">
+                  <ul class="s-description text-start">
+                    Proficient in performing sensitive low-noise AC/DC transport measurements to characterize nanoscale quantum devices. 
+                    Extensive experience in high-fidelity qubit manipulation and single-shot readout using arbitrary waveform generators (AWG).
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="service-box">
+              <div class="service-ico">
+                <span class="ico-square2">
+                  <img src="assets/img/fab-skill.png" class="bg-no-crop" alt="">
+
                 </span>
               </div>
               <div class="service-content">
-                <h2 class="s-title">Measurement</h2>
+                <h2 class="s-title">Device Nanofabrication</h2>
                 <p class="s-description text-center">
                   <ul class="s-description text-start">
-                    <li>
-                    Low-noise AC and DC characterization of semiconductor quantum dot devices. 
-                    </li>
-                    <li>
-                    Qubit manipulation of double electron and triple electron qubits using AWG hardwares for spin qubit application.</li>
+                    Comprehensive understanding of the full fabrication lifecycle, from device design to multi-step cleanroom processing. 
+                    Experienced with <a href = "https://isrc.snu.ac.kr/hm/equipInfo/detail?EQUIP_SKEY=143"><b>e-beam lithography</b></a>, 
+                    <a href = "https://isrc.snu.ac.kr/hm/equipInfo/detail?EQUIP_SKEY=191"><b>photolithography</b></a>, 
+                    <a href = "https://isrc.snu.ac.kr/hm/equipInfo/detail?EQUIP_SKEY=152"><b>thin-film deposition</b></a>, 
+                    and <a href = "https://iap.snu.ac.kr/en/equipment/list?mode=view&equipidx=7"><b>etching</b></a> 
+                    to create complex semiconductor quantum dot devices.
                   </ul>
                 </p>
               </div>
             </div>
           </div>
+          
           <div class="col-md-4">
             <div class="service-box">
               <div class="service-ico">
-                <span class="ico-circle">
-                  <img src="assets/img/comp.jpg" class="bg-crop" alt="">
+                <span class="ico-square2">
+                  <img src="assets/img/computer-skill.png" class="bg-no-crop" alt="">
                 </span>
               </div>
               <div class="service-content">
-                <h2 class="s-title">Computer Skills</h2>
+                <h2 class="s-title">Computation & Data Analysis</h2>
                 <p class="s-description text-center">
                   <ul class="s-description text-start">
-                  <li>Extensive use of Python for analyzing experimental data.</li>
-                  <li>Extensive use of QUA language for an OPX device (Quantum Machines).</li>
-                  <li>Experienced user of Matlab, Mathematica, Origin, AutoCAD and LaTeX.</li> 
+                     Extensive use of Python and C++ for instrument control, automation, and analysis of large experimental datasets. 
+                    Experienced in using hardware-level languages like QUA for real-time quantum control protocols on FPGAs (Quantum Machines OPX).
+                    <br>
+                    <span><b style="font-size: larger;">Languages </b></span> <br>
+                    <span><b>Python</span></b> <span class="pull-right"></span>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 97%;" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span><b>C++</b></span> <span class="pull-right"></span>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <span><b style="font-size: larger;">Tools and Frameworks </b></span> <br>
+                    <span><b><a href="https://docs.quantum-machines.co/0.1/qm-qua-sdk/docs/Introduction/qua_overview/" target="_blanck">QUA</a>, <a href="https://qutip.org/" target="_blanck">Qutip</a></b></span>, <b><a href="https://mumax.github.io/" target="_blanck">MuMax3</a></b></span> <span class="pull-right"></span>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span><b>Matlab, LaTeX</b> <span class="pull-right"></span>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
                   </ul>
                 </p>
               </div>
@@ -300,42 +413,18 @@
           <div class="col-md-4">
             <div class="service-box">
               <div class="service-ico">
-                <span class="ico-circle">
-                  <img src="assets/img/dev_fav.jpg" class="bg-crop" alt="">
-                </span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Device Fabrication</h2>
-                <p class="s-description text-center">
-                  <ul class="s-description text-start">
-                    <li>
-                    Experienced user of e-beam lithography system (JEOL), maskless photo lithography system (Nanosystem Solutions), e-beam evaporator, dicing saw, thermal annealing system and atomic layer deposition system
-                    </li>
-                    <li>
-                    Knowledge in lift-off and etching techniques, semiconductor quantum dot device fabrication
-                    </li>
-                  </ul>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box">
-              <div class="service-ico">
-                <span class="ico-circle">
-                  <img src="assets/img/lang.png" class="bg-crop" alt="">
+                <span class="ico-square2">
+                  <img src="assets/img/lang.png" class="bg-no-crop" alt="">
                 </span>
               </div>
               <div class="service-content">
                 <h2 class="s-title">Languages</h2>
                 <p class="s-description text-center">
                   <ul class="s-description text-start">
-                    <li>
-                    Korean (Native)
-                    </li>
-                    <li>
-                    English (Fluent; TOEFL: 109, GRE: V166/Q170/W4.5)
-                    </li>
+                    <span>
+                    <b>Korean (Native)</b><br> 
+                    <b>English (Fluent)</b><br> 
+                    </span>
                   </ul>
                 </p>
               </div>
@@ -345,68 +434,15 @@
       </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Counter Section ======= --
-    <div class="section-counter paralax-mf bg-image" style="background-image: url(assets/img/counters-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container position-relative">
-        <div class="row">
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-check"></i></span>
-              </div>
-              <div class="counter-num">
-                <p data-purecounter-start="0" data-purecounter-end="450" data-purecounter-duration="1" class="counter purecounter"></p>
-                <span class="counter-text">WORKS COMPLETED</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-journal-richtext"></i></span>
-              </div>
-              <div class="counter-num">
-                <p data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="counter purecounter"></p>
-                <span class="counter-text">YEARS OF EXPERIENCE</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-people"></i></span>
-              </div>
-              <div class="counter-num">
-                <p data-purecounter-start="0" data-purecounter-end="550" data-purecounter-duration="1" class="counter purecounter"></p>
-                <span class="counter-text">TOTAL CLIENTS</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 col-lg-3">
-            <div class="counter-box pt-4 pt-md-0">
-              <div class="counter-ico">
-                <span class="ico-circle"><i class="bi bi-award"></i></span>
-              </div>
-              <div class="counter-num">
-                <p data-purecounter-start="0" data-purecounter-end="48" data-purecounter-duration="1" class="counter purecounter"></p>
-                <span class="counter-text">AWARD WON</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>!-- End Counter Section -->
-
     <!-- ======= Research Project Section ======= -->
-    <section id="work" class="portfolio-mf sect-pt4 route">
+    <section id="projects" class="portfolio-mf sect-pt4 route">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <div class="title-box text-center">
               <h3 class="title-a">
                 Research Projects
-              </h3>
+              </p>
               <!--
               <p class="subtitle-a">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -418,9 +454,34 @@
         <div class="row">
           <div class="col-md-4">
             <div class="work-box">
-              <a href="assets/img/fab_port.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
+              <a href="msoga-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
                 <div class="work-img">
-                  <img src="assets/img/fab_port.jpg" alt="" class="img-fluid">
+                  <img src="assets/img/msoga-bg.png" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Micromagnet Shape Optimization for Spin Qubits</h2>
+                    <div class="w-more">
+                      <span class="w-date">Jan. 2025 – Jun. 2025</span><br>
+                      <span> <b>Description</b>: Engineered on-chip magnetic field gradients using genetic algorithms to significantly extend qubit coherence time.</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="msoga-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="devfab-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/fab-bg.png" alt="" class="img-fluid">
                 </div>
               </a>
               <div class="work-content">
@@ -428,7 +489,8 @@
                   <div class="col-sm-8">
                     <h2 class="w-title">Device Fabrication</h2>
                     <div class="w-more">
-                      <span class="w-date">Mar. 2023~Present</span>
+                      <span class="w-date">Mar. 2023 – Dec. 2024</span><br>
+                      <span> <b>Description</b>: Led the full-cycle, multi-step cleanroom process to fabricate high-performance silicon quantum dot devices.</span>
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -442,22 +504,23 @@
           </div>
           <div class="col-md-4">
             <div class="work-box">
-              <a href="assets/img/Meas_P.png" data-gallery="portfolioGallery" class="portfolio-lightbox">
+              <a href="qdspinqmeas-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
                 <div class="work-img">
-                  <img src="assets/img/Meas_P.png" alt="" class="img-fluid">
+                  <img src="assets/img/qdspinqmeas-bg.png" alt="" class="img-fluid">
                 </div>
               </a>
               <div class="work-content">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="w-title">Electronic Measurement of Semiconductor Quantum Dot Devices</h2>
+                    <h2 class="w-title">Coherent Control of Semiconductor Spin Qubits</h2>
                     <div class="w-more">
-                      <span class="w-date">Jan. 2022~Feb. 2023</span>
+                      <span class="w-date">Jan. 2022 – Feb. 2023</span><br>
+                      <span> <b>Description</b>: Achieved high-fidelity qubit control and single-shot readout by implementing advanced Bayesian-based active denoising protocols.</span>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="w-like">
-                      <a href="qmeas-details.html"> <span class="bi bi-plus-circle"></span></a>
+                      <a href="qdspinqmeas-details.html"> <span class="bi bi-plus-circle"></span></a>
                     </div>
                   </div>
                 </div>
@@ -466,22 +529,23 @@
           </div>
           <div class="col-md-4">
             <div class="work-box">
-              <a href="assets/img/vmeas_P.png" data-gallery="portfolioGallery" class="portfolio-lightbox">
+              <a href="vdw-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
                 <div class="work-img">
-                  <img src="assets/img/vmeas_P.png" alt="" class="img-fluid">
+                  <img src="assets/img/vdw-bg.png" alt="" class="img-fluid">
                 </div>
               </a>
               <div class="work-content">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="w-title">Electronic Measurement of vdW Heterostructure</h2>
+                    <h2 class="w-title">Nonreciprocal Transport in vdW Heterostructures</h2>
                     <div class="w-more">
-                      <span class="w-date">Nov. 2020~Nov. 2021</span>
+                      <span class="w-date">Nov. 2020 – Nov. 2021</span><br>
+                      <span> <b>Description</b>: Observed the first magnetic proximity-induced superconducting diode effect in a custom-fabricated vdW heterostructure.</span>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="w-like">
-                      <a href="vmeas-details.html"> <span class="bi bi-plus-circle"></span></a>
+                      <a href="vdw-details.html"> <span class="bi bi-plus-circle"></span></a>
                     </div>
                   </div>
                 </div>
@@ -490,17 +554,18 @@
           </div>
           <div class="col-md-4">
             <div class="work-box">
-              <a href="assets/img/setups.png" data-gallery="portfolioGallery" class="portfolio-lightbox">
+              <a href="setup-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
                 <div class="work-img">
-                  <img src="assets/img/setups.png" alt="" class="img-fluid">
+                  <img src="assets/img/setup-bg.png" alt="" class="img-fluid">
                 </div>
               </a>
               <div class="work-content">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="w-title">Dilution Refrigerator Set-up</h2>
+                    <h2 class="w-title">Cryogenic & RF System Integration</h2>
                     <div class="w-more">
-                      <span class="w-date">Nov. 2020~Oct. 2021</span>
+                      <span class="w-date">Nov. 2020 – Oct. 2021</span><br>
+                      <span> <b>Description</b>: Designed and built a custom low-noise infrastructure, integrating RF-reflectometry and cryogenic systems for sensitive quantum measurements.</span>
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -514,17 +579,21 @@
           </div>
           <div class="col-md-4">
             <div class="work-box">
-              <a href="assets/img/sim_code.png" data-gallery="portfolioGallery" class="portfolio-lightbox">
+              <a href="simul-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
                 <div class="work-img">
-                  <img src="assets/img/sim_code.png" alt="" class="img-fluid">
+                  <img src="assets/img/simul-bg.png" alt="" class="img-fluid">
                 </div>
               </a>
               <div class="work-content">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="w-title">Computational Simulation</h2>
+                    <h2 class="w-title">Computational Modeling of Quantum Systems</h2>
                     <div class="w-more">
-                      <span class="w-date">Jun. 2020~Oct. 2020</span>
+                      <span class="w-date">Jun. 2020 – Jun. 2025</span><br>
+                      <span> 
+                        <b>Description</b>: 
+                        Developed Python-based simulations to model quantum-nuclear interactions and identify key sources of decoherence in spin qubits. 
+                      </span>
                     </div>
                   </div>
                   <div class="col-sm-4">
@@ -566,67 +635,174 @@
       </div>
     </section><!-- End Portfolio Section -->
     
-    <!-- ======= Testimonials Section ======= -->
+    <!--======= Awards | Leadership | Teaching Section =======-->
     <!--
-    <div class="testimonials paralax-mf bg-image" style="background-image: url(assets/img/overlay-bg.jpg)">
-      <div class="overlay-mf"></div>
+    <section id="ALT" class="about-mf sect-pt4 route">
       <div class="container">
+        <div class="title-box text-center">
+          <h3 class="title-a">
+            Awards | Leadership | Teaching
+          </p>
+        </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-sm-12">
+            <div class="box-shadow-full">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="about-me pt-4 pt-md-0">
+                    <div class="title-box-2">
+                      <h5 class="title-left"> <a href="awards-details.html"><b>Honors and Awards</b></a><a href="awards-details.html"> <span class="bi bi-plus-circle"></span></a> 
 
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-              <div class="swiper-wrapper">
+                      </h5>
+                    </div>
+                    <div class="resume-item">
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        <a href="assets/pdf/QIRS_2024.pdf" target="_blanck"><b>Special Award, IBM Quantum*</b></a>
+                        <i style="font-size: smaller;">Quantum Information Research Support Center</i>
+                    </h6>
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <a href="https://qhackathon.kr/2024/?p=0401&idx=5493" target="_blanck">2024 Korea Quantum Information Competition</a>
+                      <i style="font-size: smaller;">group of 4, Jun. 21 – 23, 2024</i>
+                    </div>
+                    <div class="resume-item">
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        <b>2nd place among 645 teams</b> 
+                        <i style="font-size: smaller;">Xanadu Quantum Technologies</i>
+                      </h6>
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <a href="https://pennylane.ai/blog/2024/03/qhack-2024-highlights/" target="_blanck">QHack 2024 Coding Challenge</a>
+                      <i style="font-size: smaller;">group of 4, Feb. 12 – 16, 2024</i>
+                      </h6>
+                    </div>
+                    <div class="resume-item">
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        <b>Ministry of Science and ICT Minister's Award</b> 
+                        <i style="font-size: smaller;">Quantum Information Research Support Center, IonQ</i>
+                      </h6>
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <a href="https://qcenter.kr/sub/sub06_02.php?mNum=6&sNum=2&boardid=center&mode=view&idx=117" target="_blanck">2023 IonQ Quantum challenge</a>
+                      <i style="font-size: smaller;">individual, Nov. 7 – Dec. 5. 2023</i>
+                      </h6>
 
-                <div class="swiper-slide">
-                  <div class="testimonial-box">
-                    <div class="author-test">
-                      <img src="assets/img/testimonial-2.jpg" alt="" class="rounded-circle b-shadow-a">
-                      <span class="author">Xavi Alonso</span>
                     </div>
-                    <div class="content-test">
-                      <p class="description lead">
-                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit.
-                      </p>
+                    <div class="resume-item">
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        <b>Scholarship, Semiconductor-Specialized University</b> 
+                        <i style="font-size: smaller;">Korea Institute for Advancement of Technology</i>
+                    </h6>
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <a href="https://www.newswire.co.kr/newsRead.php?no=979014" target="_blanck">Semiconductor track, the first cohort scholarship recipient</a>
+                      <i style="font-size: smaller;"> Oct. 2023</i>
+                    </h6>
                     </div>
+                    <div class="resume-item">
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        <a href="assets/pdf/QIRS_2023.pdf" target="_blanck"><b>Quantum Information Research Support Center Director's Award*</b></a> 
+                        <i style="font-size: smaller;">Quantum Information Research Support Center</i>
+                    </h6>
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <a href="https://qhackathon.kr/2024/?p=0401&idx=5469" target="_blanck">2023 Korea Quantum information Competition</a>
+                      <i style="font-size: smaller;">group of 4, Jun. 21 – 23, 2023</i>
+                    </div><br>
+                    (*: presentation files are attached<br>Click <a href="awards-details.html" target="_blanck"><b>"Honors and Awards*"</b></a> to see what I've done for each competition!<br>Click <a href="lead-details.html" target="_blanck"><b>"Leadership*"</b></a> for details.)
                   </div>
+                  
                 </div>
+                    <div class="col-md-6">
+                      <div class="about-me pt-4 pt-md-0">
+                        <div class="title-box-2">
+                          <h5 class="title-left">
+                            <a href="lead-details.html"><b>Leadership</b></a><a href="lead-details.html"> <span class="bi bi-plus-circle"></span></a> 
+                          </h5>
+                        </div>
+                        <div class="resume-item">
+                          <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                            <b>Seoul National University Quantum Research Team</b> 
+                            <i style="font-size: smaller;"> Seoul National University</i>
+                        </h6>
+                        <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                          President
+                          <i style="font-size: smaller;"> Jun. 2023 – Aug. 2024</i>
+                      </h6>                        
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        Vice President
+                        <i style="font-size: smaller;"> Mar. 2023 – Jun. 2023</i>
+                    </h6>                                     
+                        </div>
+                        <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                          <b>SAMSUNG Software Developer Community-KATUSA</b> 
+                          <i style="font-size: smaller;">SAMSUNG</i>
+                      </h6>
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        Co-Founder
+                        <i style="font-size: smaller;"> Oct. 2022 – Jun. 2023</i>
+                    </h6>            
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <b>KATUSA-Korean Augmentation To the United States Army</b> 
+                      <i style="font-size: smaller;">Republic of Korea Army</i>
+                  </h6> 
+                  <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                    Sergeant, 92A Automated Logistical Specialist
+                    <i style="font-size: smaller;"> Dec. 2021 – Jun. 2023</i>
+                </h6>      
+                  <div class="title-box-2">
+                    <h5 class="title-left">
+                          Teaching Experience
+                    </h5>
+                    </div>
+                        <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                          <b>Physics Laboratory</b> 
+                          <i style="font-size: smaller;">Seoul National Univeristy</i>
+                      </h6> 
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        Teaching Assistant, Physics Laboratory 2
+                        <i style="font-size: smaller;"> Sep. 2024 – Present</i>
+                    </h6>  
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        Teaching Assistant, Physics Laboratory 1
+                        <i style="font-size: smaller;"> Mar. 2024 – Jun. 2024</i>
+                    </h6>  
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <b>Basic Physics 2</b> 
+                      <i style="font-size: smaller;">Seoul National Univeristy</i>
+                      <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                        Tutor
+                        <i style="font-size: smaller;"> Sep. 2024 – Present</i>
+                    </h6>
+                  </h6> 
+                    <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                      <b>Foundation of Physics</b> 
+                      <i style="font-size: smaller;">Seoul National Univeristy</i>
+                  </h6> 
 
-                <div class="swiper-slide">
-                  <div class="testimonial-box">
-                    <div class="author-test">
-                      <img src="assets/img/testimonial-4.jpg" alt="" class="rounded-circle b-shadow-a">
-                      <span class="author">Marta Socrate</span>
-                    </div>
-                    <div class="content-test">
-                      <p class="description lead">
-                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit.
-                      </p>
-                    </div>
-                  </div>
+                  <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                    Tutor, Foundation of Physics 1
+                    <i style="font-size: smaller;"> Mar. 2024 – Jun. 2024</i>
+                </h6>
+                <h6 style="display: flex; justify-content: space-between; align-items: center;">
+                  Tutor, Foundation of Physics 2
+                  <i style="font-size: smaller;"> Sep. 2023 – Dec. 2023</i>
+              </h6>    
                 </div>
               </div>
-              <div class="swiper-pagination"></div>
             </div>
-
           </div>
         </div>
       </div>
-    </div>--><!-- End Testimonials Section -->
+    </section>
+    -->
 
-    <!-- ======= Blog Section ======= -->
+
+    
+    <!-- ======= Research Project Section ======= -->
     <!--
-    <section id="blog" class="blog-mf sect-pt4 route">
+    <section id="course" class="portfolio-mf sect-pt4 route">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <div class="title-box text-center">
               <h3 class="title-a">
-                Blog
-              </h3>
-              <p class="subtitle-a">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Coursework
               </p>
               <div class="line-mf"></div>
             </div>
@@ -634,198 +810,193 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="blog-single.html"><img src="assets/img/post-1.jpg" alt="" class="img-fluid"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Travel</h6>
-                  </div>
+            <div class="work-box">
+              <a href="SPL-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/SPL-bg.jpg" alt="" class="img-fluid">
                 </div>
-                <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                <p class="card-description">
-                  Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis
-                  a pellentesque nec,
-                  egestas non nisi.
-                </p>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                  <a href="#">
-                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                    <span class="author">Morgan Freeman</span>
-                  </a>
-                </div>
-                <div class="post-date">
-                  <span class="bi bi-clock"></span> 10 min
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="blog-single.html"><img src="assets/img/post-2.jpg" alt="" class="img-fluid"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Web Design</h6>
-                  </div>
-                </div>
-                <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                <p class="card-description">
-                  Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis
-                  a pellentesque nec,
-                  egestas non nisi.
-                </p>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                  <a href="#">
-                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                    <span class="author">Morgan Freeman</span>
-                  </a>
-                </div>
-                <div class="post-date">
-                  <span class="bi bi-clock"></span> 10 min
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-blog">
-              <div class="card-img">
-                <a href="blog-single.html"><img src="assets/img/post-3.jpg" alt="" class="img-fluid"></a>
-              </div>
-              <div class="card-body">
-                <div class="card-category-box">
-                  <div class="card-category">
-                    <h6 class="category">Web Design</h6>
-                  </div>
-                </div>
-                <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                <p class="card-description">
-                  Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis
-                  a pellentesque nec,
-                  egestas non nisi.
-                </p>
-              </div>
-              <div class="card-footer">
-                <div class="post-author">
-                  <a href="#">
-                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                    <span class="author">Morgan Freeman</span>
-                  </a>
-                </div>
-                <div class="post-date">
-                  <span class="bi bi-clock"></span> 10 min
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>--><!-- End Blog Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(assets/img/overlay-bg.jpg)">
-      <div class="overlay-mf"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="contact-mf">
-              <div id="contact" class="box-shadow-full">
+              </a>
+              <div class="work-content">
                 <div class="row">
-                  <!--
-                  <div class="col-md-6">
-                    <div class="title-box-2">
-                      <h5 class="title-left">
-                        Send Mail
-                      </h5>
-                    </div>
-                    <div>
-                      <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="row">
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-center my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                          </div>
-                          <div class="col-md-12 text-center">
-                            <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
-                          </div>
-                        </div>
-                      </form>
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Senior Physics Laboratory</h2>
+                    <div class="w-more">
+                      <span class="w-date">Spring Semester 2024</span><br>
+                      <span>Lecturer: <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=22" target="_blanck">Prof. Dohun Kim</a></span>
                     </div>
                   </div>
-                  -->
-                  <div class="col-md-6">
-                    <div class="title-box-2 pt-4 pt-md-0">
-                      <h5 class="title-left">
-                        Contact
-                      </h5>
-                    </div>
-                    <div class="more-info">
-                      <!--
-                      <p class="lead">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem
-                        expedita aperiam aliquid at.
-                        Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis
-                        mollitia inventore?
-                      </p>
-                      -->
-                      <ul class="list-ico">
-                        <li><span class="bi bi-geo-alt"></span> 22-213, Seoul National University, Seoul 08826, Korea</li>
-                        <li><span class="bi bi-phone"></span> (+82) 010-9760-2199</li>
-                        <li><span class="bi bi-envelope"></span> alyuuv@snu.ac.kr</li>
-                      </ul>
-                    </div>
-                    <div class="socials">
-                      <!--
-                      <ul>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-instagram"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-twitter"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-linkedin"></i></span></a></li>
-                      </ul>
-                      -->
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="SPL-details.html"> <span class="bi bi-plus-circle"></span></a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="super-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/super-bg.png" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Advanced Topics in Applied Physics 1 <br>(Introduction to Superconducting Quantum Circuits)</h2>
+                    <div class="w-more">
+                      <span class="w-date">Spring Semester 2024</span><br>
+                      <span>Lecturer: <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=50" target="_blank">Prof. Eunjong Kim</a></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="super-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="laser-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/laser-bg.png" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Laser Physics</h2>
+                    <div class="w-more">
+                      <span class="w-date">Spring Semester 2024</span><br>
+                      <span>Lecturer: <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=13" target="_blanck">Prof. Kyungwon An</a></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="laser-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="IPL1-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/IPL1-bg.png" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Intermediate Physics Laboratory 1</h2>
+                    <div class="w-more">
+                      <span class="w-date">Spring Semester 2024</span><br>
+                      <span>Lecturer: <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=23" target="_blanck">Prof. Changyoung Kim</a></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="IPL1-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="IPL2-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/IPL2-bg.png" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Intermediate Physics Laboratory 2</h2>
+                    <div class="w-more">
+                      <span class="w-date">Fall Semester 2023</span><br>
+                      <span>Lecturer: <a href="https://physics.snu.ac.kr/en/research-faculty/faculty/fulltime?mode=view&profidx=25" target="_blanck">Prof. Yun Daniel Park</a></span>
+
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="IPL2-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+
+          <div class="col-md-4">
+            <div class="work-box">
+              <a href="QCQI-details.html" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                <div class="work-img">
+                  <img src="assets/img/QCQI-bg.jpg" alt="" class="img-fluid">
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">Introduction to Quantum Computing and Information</h2>
+                    <div class="w-more">
+                      <span class="w-date">Spring Semester 2021</span><br>
+                      <span>Lecturer: <a href="https://cse.snu.ac.kr/en/people/faculty/74" target="_blanck">Prof. Taehyun Kim</a></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="QCQI-details.html"> <span class="bi bi-plus-circle"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section><!-- End Contact Section -->
+    </section>
+    -->
+    <!-- End Portfolio Section -->
+    
+    <!-- ======= Contact Section ======= -->
+     <!-- ======= Contact Section ======= -->
+     <section id="contact" class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(assets/img/overlay-bg.png)">
+  <div class="overlay-mf"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="contact-mf text-center">
+          <div id="contact" class="box-shadow-full">
+            <div class="title-box-2 pt-4">
+              <h5 class="title-left">Contact</h5>
+            </div>
+            <ul class="list-ico">
+              <!--<li><span class="bi bi-geo-alt"></span> <a href="https://maps.app.goo.gl/3Fgh2b2VbtNqRFPBA" target="_blanck"><b>22-213, Seoul National University, Seoul 08826, Korea</b></a></li>-->
+              <li><span class="bi bi-phone"></span> <b>(+82) 010-9760-2199</b></li>
+              <li><span class="bi bi-envelope"></span> <b>alyuuv (at) stanford (dot) edu</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Contact Section -->
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <!--
+  
   <footer>
     <div class="container">
       <div class="row">
@@ -840,7 +1011,7 @@
       </div>
     </div>
   </footer>
-  -->
+ 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -851,6 +1022,8 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.umd.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

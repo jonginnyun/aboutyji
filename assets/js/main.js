@@ -41,6 +41,52 @@
     el.addEventListener('scroll', listener)
   }
 
+/**
+ * Site update added by Jung, Jaewon
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  const sections = document.querySelectorAll('section');
+  const menuLinks = document.querySelectorAll('#navbar .scrollto');
+
+  function changeHashOnScroll() {
+    let scrollPosition = window.scrollY;
+    
+    sections.forEach(section => {
+      if (section.offsetTop <= scrollPosition &&
+          section.offsetTop + section.offsetHeight > scrollPosition) {
+        history.replaceState(null, null, '#' + section.id);
+        
+        // Update Google Analytics / Tag Manager
+        gtag('config', 'G-CLVQSER21V', {'page_path': location.pathname + location.hash});
+      }
+    });
+  }
+
+  window.addEventListener('scroll', changeHashOnScroll);
+
+  // Handling clicks on navigation to update URL hash
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      let hash = this.hash;
+      let target = document.querySelector(hash);
+      if (target) {
+        event.preventDefault();
+        // Smooth scroll to section
+        window.scrollTo({
+          'behavior': 'smooth',
+          'top': target.offsetTop
+        });
+        // Update the URL hash
+        history.pushState(null, null, hash);
+        // Manually trigger a hash change for Google Analytics
+        gtag('config', 'G-CLVQSER21V', {'page_path': location.pathname + location.hash});
+      }
+    });
+  });
+});
+
+
+
   /**
    * Navbar links active state on scroll
    */
@@ -64,20 +110,37 @@
   /**
    * Scrolls to an element with header offset
    */
+  // const scrollto = (el) => {
+  //   let header = select('#header')
+  //   let offset = header.offsetHeight
+
+  //   if (!header.classList.contains('header-scrolled')) {
+  //     offset -= 16
+  //   }
+
+  //   let elementPos = select(el).offsetTop
+  //   window.scrollTo({
+  //     top: elementPos - offset,
+  //     behavior: 'smooth'
+  //   })
+  // }
+
+
   const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
-
+    const header = select('#header');
+    let offset = header.offsetHeight;
+  
     if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
+      offset -= 20; // Adjust this value if there's still an offset issue
     }
-
-    let elementPos = select(el).offsetTop
+  
+    const elementPos = select(el).offsetTop;
     window.scrollTo({
       top: elementPos - offset,
       behavior: 'smooth'
-    })
+    });
   }
+
 
   /**
    * Toggle .header-scrolled class to #header when page is scrolled
@@ -190,6 +253,7 @@
     }
   }, true)
 
+
   /**
    * Scroll with ofset on page load with hash links in the url
    */
@@ -201,6 +265,26 @@
     }
   });
 
+/** */
+// document.addEventListener('DOMContentLoaded', () => {
+//   // Create the circle element
+//   const heroCircle = document.createElement('div');
+//   heroCircle.classList.add('hero-circle');
+//   document.getElementById('hero').appendChild(heroCircle);
+
+//   // Update the circle's position based on mouse movement
+//   document.getElementById('hero').addEventListener('mousemove', (e) => {
+//     const hero = e.currentTarget.getBoundingClientRect();
+//     const x = e.clientX - hero.left;
+//     const y = e.clientY - hero.top;
+
+//     heroCircle.style.left = `${x}px`;
+//     heroCircle.style.top = `${y}px`;
+//   });
+// });
+
+
+/**/
   /**
    * Intro type effect
    */
@@ -216,35 +300,55 @@
       backDelay: 2000
     });
   }
+//
 
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
+//
 
   /**
    * Portfolio details slider
    */
+
+  // Initialize Swiper for each competition's image slider
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Inner Swipers
+    new Swiper('.outer-swiper', {
+      speed: 600,
+      loop: true,
+      navigation: {
+          nextEl: '.outer-next',
+          prevEl: '.outer-prev',
+      },
+      allowTouchMove: false // Disable swiping to change slides
+  });
+    document.querySelectorAll('.inner-swiper').forEach(slider => {
+        new Swiper(slider, {
+            speed: 400,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: slider.querySelector('.swiper-pagination'),
+                type: 'bullets',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: slider.querySelector('.swiper-button-next'),
+                prevEl: slider.querySelector('.swiper-button-prev'),
+            }
+        });
+    });
+
+    // Initialize Outer Swiper
+
+});
+
+
+// inner outer swipe
+
+
+
   new Swiper('.portfolio-details-slider', {
     speed: 400,
     loop: true,

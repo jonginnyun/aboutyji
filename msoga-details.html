@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Research Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: DevFolio
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="index.html">Jonginn Yun</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
+            </ul>
+          </li>
+          -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/msoga/msoga-fig1.png)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Micromagnet Shape Optimization</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item">
+              <a href="index.html#hero">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Micromagnet Shape Optimization for Spin Qubits</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="silicon-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+          
+          <div class="col-sm-6">
+            <div class="portfolio-details-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+
+                    <div class="swiper-slide">
+                    <img src="assets/img/msoga/msoga-fig1.png" alt="">
+                    <p>
+                        <b>Figure 1 Polygon-based Genetic Algorithm for Micromagnet Shape Optimization.</b> 
+                        <b>(a)</b> Schematic of the geometric crossover operator. The vertices of two overlapping parent polygons are linearly interpolated (blended) to create a new offspring polygon that inherits structural features from both parents.
+                        <b>(b)</b> Schematic of the mutation operator. Each vertex of a polygon has a small probability of being randomly displaced within a defined boundary. The algorithm validates the new geometry to ensure the polygon remains topologically valid after mutation.
+                        <b>(c)</b> A representative plot showing the evolution of the population's fitness over 100 generations (epochs). The y-axis shows the Quality Factor (Q) of the best-performing individual in the population at each generation, which serves as the optimization's objective function.
+                        <b>(d)</b> An example of a final, optimized micromagnet geometry discovered by the genetic algorithm. The resulting non-intuitive and complex shape is evolved to generate a tailored magnetic field landscape that enhances spin qubit coherence time.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/msoga/msoga-fig2.png" alt="">
+                    <p>
+                        <b>Figure 2 Comparison of Micromagnet Geometries and Resulting Qubit Coherence.</b> 
+                        <b>(a)</b> A conventional bar-type micromagnet geometry commonly used to generate magnetic field gradients 
+                        in silicon spin qubit devices.
+                        <b>(b)</b> The corresponding simulated map of the qubit coherence time ($T_2*$) for the conventional design. 
+                        The high-coherence "sweet spot" (bright yellow region) is confined to a very small, localized area, 
+                        making it challenging to place multiple qubits with uniform high performance.
+                        <b>(c)</b> The complex and non-intuitive micromagnet geometry discovered and optimized by the genetic algorithm.
+                        <b>(d)</b> The simulated $T_2*$ map for the optimized geometry. 
+                        The high-coherence sweet spot is significantly extended into a large, uniform region along the x-axis. 
+                        This allows for placing multiple qubits (indicated by red dots) in locations that can simultaneously benefit from long coherence times, a critical step towards building scalable and robust multi-qubit processors.
+                    </p>
+                    </div>
+
+                </div>
+                
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            
+            <div id="portfolio-details" class="work-description-p">
+              <h5><b>Genetic-algorithm-based Micromagnet Shape Optimization</b> <span class="project-period">Jan. 2025 – Jun. 2025</span></h5>
+              <br> 
+              <p class = "libre-baskerville-regular-italic">⌜Developed a <b>custom genetic algorithm from scratch in Python</b> to autonomously design complex micromagnet 
+                geometries. Implemented both mesh-based and advanced polygon-based representations, and integrated the algorithm 
+                with <b>MuMax3 micromagnetic simulator</b> to optimize on-chip magnetic field gradients for 
+                <b>enhanced spin qubit coherence</b>.⌟ 
+                </p>
+                <p>
+                &emsp;The performance of spin qubits driven by Electric Dipole Spin Resonance (EDSR) is often limited by dephasing 
+                caused by the same magnetic field gradients used to drive them. 
+                While significant efforts in the field have focused on improving material properties or applying advanced denoising 
+                protocols to enhance coherence, 
+                the geometric optimization of the micromagnet itself has often been overlooked as a crucial degree of freedom.
+                <br>
+                <br>
+                This project aimed to overcome this fundamental trade-off by 
+                <b>optimizing the physical shape of an on-chip micromagnet</b> to create an extended "sweet spot" 
+                of high qubit coherence (T<sub>2</sub>*). As the numerical nature of the problem precluded traditional gradient-based methods, 
+                I developed a comprehensive, gradient-free <a href = "https://github.com/jonginnyun/qsimjy"><b>Genetic Algorithm (GA) framework from scratch in Python</b></a>
+                 to evolve magnet shapes. This approach evolves a population of candidate micromagnet shapes, represented as 
+                 sophisticated <b>'MultiPolygonChrom' objects</b>, over many generations.
+                <br><br>
+                &emsp;The core of the algorithm is a custom fitness function that evaluates each candidate by first calling the 
+                <b>MuMax3 micromagnetic simulator</b> via a C++ backend to compute the stray magnetic field. 
+                It then calculates local field gradients using a 3x3 stencil method to determine the qubit quality factor 
+                ($Q = T_2^* \times \delta B_{driv}$) at specific quantum dot locations. 
+                A sophisticated <b>penalty term was also introduced to enforce field uniformity</b> across multiple dots, 
+                ensuring individual qubit addressability. The evolution is driven by custom implementations of 
+                <b>tournament selection</b>, geometric <b>crossover via vertex blending</b>, 
+                and <b>mutation via random vertex displacement</b>.
+                <br><br>
+                &emsp;Crucially, to ensure the final designs are <b>robust against real-world manufacturing imperfections</b>, 
+                the framework includes an optional evaluation mode that simulates fabrication blur by applying Gaussian 
+                offsets to the polygons and averaging the fitness over these perturbed samples. 
+                The result is a <b>fully automated and robust pipeline</b> that successfully designs non-intuitive magnet geometries 
+                for improved qubit performance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              
+            Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Research Portfolio</title>
+  <title>Research Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,6 +32,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 </head>
 
 <body>
@@ -43,29 +52,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href=index.html>Home</a></li>
-          <li><a class="nav-link scrollto" href=index.html#about>CV</a></li>
-          <li><a class="nav-link scrollto" href=index.html#services>Technical Skills</a></li>
-          <li><a class="nav-link scrollto " href=index.html#work>Research Projects</a></li>
-          <!--
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
             </ul>
           </li>
           -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -74,15 +91,15 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/fab_port.jpg)">
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/devfab/devfab-bg.png)">
     <div class="overlay-mf"></div>
     <div class="hero-content display-table">
       <div class="table-cell">
         <div class="container">
-          <h2 class="hero-title mb-4">Device Fabrication</h2>
+          <h2 class="hero-title mb-4">Device Fabrication of Spin Qubit Device</h2>
           <ol class="breadcrumb d-flex justify-content-center">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="index.html#hero">Home</a>
             </li>
             <li class="breadcrumb-item active">Device Fabrication</li>
           </ol>
@@ -94,68 +111,92 @@
   <main id="main">
 
     <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
+    <section id="silicon-details" class="portfolio-details">
       <div class="container">
 
         <div class="row gy-4">
-
-          <div class="col-lg-6">
+          
+          <div class="col-sm-6">
             <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="assets/img/fab_det_1.jpg" alt="">
+                    <div class="swiper-slide">
+                    <img src="assets/img/devfab/devfab-fig1.png" alt="">
+                    <p>
+                        <b>Figure 1 Key Steps in the Nanofabrication of a Silicon Quantum Dot Device.</b> 
+
+                        <b>(a)</b> Calibration of the reactive ion etching (RIE) rate for the Si/SiGe substrate. The etching was performed using $\mathrm{SF_6/O_2}$ plasma at 30 W RF power, yielding a linear etch rate of approximately 10.9 nm/s.
+                        <b>(b)</b> Optical microscope image of the device mesa structure after the RIE process. The calibrated etch rate from (a) was used to precisely control the etch depth to define the active device area.
+                        <b>(c)</b> Computer-aided design (CAD) layout of the multi-layered, overlapping nanogates. This complex pattern is designed for high-resolution electron-beam (E-beam) lithography.
+                        <b>(d)</b> Scanning electron microscope (SEM) image of the final device after E-beam lithography, Ti/Pd metal deposition, and liftoff. 
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/devfab/devfab-fig2.png" alt="">
+                    <p>
+                        <b>Figure 2 Key Fabrication and Characterization Tool Interfaces and Processes.</b> 
+                        <b>(a)</b> In-situ laser alignment of a cantilever for an Atomic Force Microscope (AFM), a critical calibration step required for the precise topographical characterization of nanoscale device features.
+                        <b>(b)</b> Locating a global alignment marker using the backscattered electron (BE) signal in an electron-beam (E-beam) lithography system. This is an essential process for establishing a coordinate system for high-precision, multi-layer patterning.
+                        <b>(c)</b> The user interface of a thin-film deposition system during the adjustment of a process recipe (e.g., for Atomic Layer Deposition or E-beam evaporation), which allows for precise control over deposition parameters.
+                        <b>(d)</b> An optical microscope image of large-scale gold alignment markers patterned on the chip. These markers are used for global alignment in subsequent photolithography and E-beam lithography steps.
+                        
+                    </p>
+                    </div>
+
                 </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/fab_det_2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/fab_det_3.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/fab_det_4.jpg" alt="">
-                </div>
-
-              </div>
+                
               <div class="swiper-pagination"></div>
             </div>
           </div>
-
-          <div class="col-lg-6">
-            <!--
-            <div class="portfolio-info">
-              <h3>Semiconductor Quantum Dot</h3>
-            </div>
-            -->
+          <div class="col-sm-6">
+            
             <div id="portfolio-details" class="work-description-p">
-              <h5><b>Semiconductor Quantum Dot Fabrication</b></h5>
-              <p>
-                &emsp;In a semiconductor quantum dot device, precise control of electron and hole confinement is achieved by applying 
-                voltages to metallic gates, forming potential landscapes that confine and concomitantly define the energy levels used for qubits. 
-                These metallic gates, or "<i>nanogates</i>," must match the nanometer-scale dimensions of the confined particles. 
-                To meet this exacting size requirement, the utilization of an electron-beam (E-beam) lithography system becomes 
-                imperative. E-beam ligthography guarantees the creation of nanometer-sized pitches for these metallic gates, 
-                ensuring their alignment with the stringent demands of quantum dot confinement.
-                <br>
-                &emsp;The fabrication of a semiconductor quantum dot device involves several key steps. 
-                It begins with etching a mesa and establishing an Ohmic contact. Next, a series of alignment markers are patterned, 
-                and nanogates are meticulously deposited before being covered with oxide layers. The process ends with the deposition 
-                of bonding pads.
-                <br>
-                &emsp;A range of specialized equipment is essential to accomplish this intricate fabrication. 
-                This includes an <b>E-beam lithography system, a photolithography system, an electron-beam evaporator, 
-                  a reactive ion etcher (RIE), an atomic layer deposition system (ALD), a rapid thermal annealing system (RTA), 
-                  and various characterization tools like atomic force microscopes (AFM) and scanning electron microscopes (SEM)</b>. 
-                  Additionally, <b>wet-etching and cleaning techniques</b> are employed to ensure precision and cleanliness 
-                  throughout the process.
+              <h5><b>Device Fabrication</b> <span class="project-period">Mar. 2023 – Dec. 2024</span></h5>
+              <br> 
+              <p class = "libre-baskerville-regular-italic">⌜Led the <b>end-to-end cleanroom fabrication</b> of multi-layered 
+                <b>silicon quantum dot devices</b>. 
+                Utilized a <b>hybrid lithography</b> approach, combining maskless photolithography for large features 
+                and E-beam lithography for nanoscale gates. 
+                Developed a process for <b>overlaid gate structures</b> requiring high-precision alignment to prevent spurious quantum dots, 
+                and implemented <b>manual E-beam focus correction</b> to overcome pattern blurring from large marker topography. 
+                The full process involved RIE/wet etching, ALD for dielectric layers, and rigorous AFM/SEM metrology.⌟ 
                 </p>
+                <p>
+                &emsp;In a semiconductor quantum dot device, the precise manipulation of individual electrons is achieved 
+                by applying voltages to metallic nanogates, forming potential landscapes that confine particles and define 
+                the energy levels of a qubit. To meet the exacting nanometer-scale dimensions required, the utilization of 
+                <b>electron-beam (E-beam) lithography</b> becomes imperative for patterning these critical features.
+                <br><br>
+                 &emsp;My work involved the complete, end-to-end fabrication of multi-layered silicon quantum dot devices,
+                 starting from a bare Si/SiGe quantum well wafer. The process began with defining the active device area via 
+                 <b>mesa etching</b>, where I gained experience with both dry (Reactive Ion Etching) and wet (chemical) 
+                 etching techniques. This was followed by defining ohmic contacts through <b>phosphorus ion implantation and 
+                 rapid thermal annealing (RTA)</b>. 
+                 A critical challenge in silicon is preventing the formation of spurious quantum dots between gates. To address this, we employed an <b>overlaid gate structure</b>, which demands exceptional alignment between multiple layers. To achieve this, I implemented a comprehensive alignment strategy using a full set of P, Q, R, and S markers for maximum precision.
+                <br><br>
+                &emsp;The core of the fabrication relied on a <b>hybrid lithography approach</b>: 
+                I used a maskless photolithography system for large-scale patterns like pads and markers, 
+                and an E-beam lithography system for the fine, nanometer-scale gates. 
+                A practical challenge I solved during E-beam writing was the blurring of patterns due to the significant 
+                topography of the pre-etched alignment markers (2-3 µm deep). 
+                To overcome this, I developed a protocol involving <b>manual focus and stigmation adjustments</b> for each marker, 
+                ensuring sharp and accurately placed nanogates. 
+                The multi-layered gate stack was built up through successive steps of E-beam lithography, 
+                metal deposition via E-beam evaporation, and liftoff, 
+                with each gate layer isolated by a thin film of Al₂O₃ deposited via <b>Atomic Layer Deposition (ALD)</b>. 
+                Intermediate cleaning steps, such as using <b>O₂ plasma ashing</b> to remove photoresist residue, 
+                were employed to maintain device quality.
+                <br><br>
+                &emsp;Throughout the entire process, rigorous characterization and calibration were performed using tools such as 
+                <b>Atomic Force Microscopes (AFM) and Scanning Electron Microscopes (SEM)</b> to verify critical dimensions, 
+                etch depths, and alignment accuracy. This systematic and detail-oriented approach to fabrication was essential 
+                for producing the high-quality, reliable quantum devices used in my subsequent measurement experiments.
+              </p>
             </div>
           </div>
-
         </div>
+
+
 
       </div>
     </section><!-- End Portfolio Details Section -->
@@ -163,7 +204,7 @@
   </main><!-- End #main -->
 
 
-  <!-- 
+  
   <footer>
     <div class="container">
       <div class="row">
@@ -177,7 +218,8 @@
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer>
+
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

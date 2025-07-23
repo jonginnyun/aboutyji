@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Research Portfolio</title>
+  <title>Research Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,6 +32,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 </head>
 
 <body>
@@ -43,29 +52,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href=index.html>Home</a></li>
-          <li><a class="nav-link scrollto" href=index.html#about>CV</a></li>
-          <li><a class="nav-link scrollto" href=index.html#services>Technical Skills</a></li>
-          <li><a class="nav-link scrollto " href=index.html#work>Research Projects</a></li>
-          <!--
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+              <li><a href="devfab-details.html">Device Fabrication</a></li>
+              <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+              <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+              <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+              <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <!--
+          <li class="dropdown"><a href="index.html#ALT"><span>Extracurricular</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="awards-details.html">Competitions</a></li>
+              <li><a href="lead-details.html">Leadership</a></li>
             </ul>
           </li>
           -->
+          <li class="dropdown"><a href="index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics </a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href=index.html#contact>Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -74,17 +91,17 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/fab_port.jpg)">
+  <div class="hero hero-single route bg-image" style="background-image: url(assets/img/setup/setup-bg.png)">
     <div class="overlay-mf"></div>
     <div class="hero-content display-table">
       <div class="table-cell">
         <div class="container">
-          <h2 class="hero-title mb-4">Dilution Refrigerator Setup</h2>
+          <h2 class="hero-title mb-4">Cryogenic and RF System Integration</h2>
           <ol class="breadcrumb d-flex justify-content-center">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="index.html#hero">Home</a>
             </li>
-            <li class="breadcrumb-item active">Dilution Refrigerator Set-up</li>
+            <li class="breadcrumb-item active">Cryogenic & RF System Integration</li>
           </ol>
         </div>
       </div>
@@ -94,62 +111,89 @@
   <main id="main">
 
     <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
+    <section id="silicon-details" class="portfolio-details">
       <div class="container">
 
         <div class="row gy-4">
-
-          <div class="col-lg-6">
+          
+          <div class="col-sm-6">
             <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="assets/img/setup-details_0.jpg" alt="">
+                    <div class="swiper-slide">
+                    <img src="assets/img/setup/setup-fig1.jpg" alt="">
+                    <p>
+                        Performing system maintenance on the dilution refrigerator with a colleague. 
+                        Pictured here is the process of removing a radiation shield to access the mixing chamber plate for system modifications and device installation.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/setup/setup-fig2.jpg" alt="">
+                    <p>
+                      A view of the fully wired mixing chamber plate, the coldest stage of the cryostat (~10 mK). 
+                      This showcases the complex, multi-layered assembly of custom RF/DC lines for operating quantum devices.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/setup/setup-fig3.jpg" alt="">
+                    <p>
+                      An early iteration of the experimental setup, showing custom-made copper powder filters (blue components) mounted at the mixing chamber stage for thermalization and noise filtering. 
+                      These were later removed after characterization showed they were not effective for our specific setup, as part of an iterative process to optimize the measurement system.
+                    </p>
+                    </div>
+                    <div class="swiper-slide"> 
+                    <img src="assets/img/setup/setup-fig4.jpg" alt="">
+                    <p>
+                      A custom-fabricated bias-tee which I helped design and build. 
+                      This component is essential for combining DC gate voltages and high-frequency RF signals on a single coaxial line, enabling the control of qubit states.
+                    </p>
+                    </div>
+
                 </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/setup-details_1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/setup-details_2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/setup-details_3.jpg" alt="">
-                </div>
-
-              </div>
+                
               <div class="swiper-pagination"></div>
             </div>
           </div>
-
-          <div class="col-lg-6">
-            <!--
-            <div class="portfolio-info">
-              <h3>Semiconductor Quantum Dot</h3>
-            </div>
-            -->
+          <div class="col-sm-6">
+            
             <div id="portfolio-details" class="work-description-p">
-              <h5><b>Semiconductor Quantum Dot Fabrication</b></h5>
+              <h5><b>Device Set-up</b> <span class="project-period">Mar. 2023 – Dec. 2024</span></h5>
+              <br> 
+              <p class="libre-baskerville-regular-italic">
+                ⌜Designed, built, and maintained a <b>custom low-noise experimental infrastructure</b> for quantum device measurements within a <b>dilution refrigerator</b>. 
+                Led the customization of <b>RF reflectometry</b> lines, including the design of passive components like <b>bias-tees using MATLAB</b>. Performed comprehensive system validation using a <b>Network Analyzer</b> to characterize S-parameters and ensure signal integrity. 
+                Acquired extensive hands-on experience in <b>cryostat maintenance</b>, including <sup>3</sup>He line cleaning and OVC disassembly.⌟
+              </p>
+
               <p>
-                &emsp;Electronic noise affects measuring the physical phenomena of various systems, particularly those regarding the precise measurement of quantum states. For example, the signal originating from a spin qubit within a semiconductor quantum dot device hinges on a small charge difference (a charge quanta in most cases), rendering it highly susceptible to electronic noise. Moreover, electrical line noise can induce decoherence by interacting with the quantum states of the system. In some cases, extremely low temperatures, often in the millikelvin range, are required to mitigate these challenges. Achieving such conditions necessitates the use of dilution refrigerators along with meticulously designed DC and RF lines.
-                <br>
-                &emsp;While commercial dilution refrigerators are readily available, customization of electrical lines is often needed to tailor them to specific physical systems. In our case, we had to customize both RF and DC lines to suppress the decoherence induced by electrical noise and ensure high signal-to-noise ratio (SNR) readouts of qubit states. Throughout the project, my contributions included configuring RF reflectometry setups with attenuators and directional couplers, developing and installing DC filters and bias-tees, and constructing various passive component devices like breakout boxes.
-                <br>
-                &emsp;In addition to customizing the dilution refrigerator, I also participated in selecting and installing various electronic measurement instruments such as the ultrahigh lock-in amplifier (UHFLI), low-noise stable DC voltage source, and arbitrary waveform generator. These measures collectively contributed to achieving the stringent noise suppression required for our experiments.
-                </p>
+                  &emsp;Probing the delicate quantum states of a semiconductor spin qubit requires an extremely well-isolated environment, necessitating millikelvin temperatures and meticulously engineered DC and RF lines to minimize noise-induced decoherence and ensure high-fidelity readout. 
+                  This project involved the comprehensive customization of a commercial <b>Oxford Instruments Triton dilution refrigerator</b> to meet the stringent demands of our experiments. 
+                  My contributions began at the most fundamental level, including preparing the equipment frame by scraping paint to ensure proper electrical grounding and shielding, and fabricating custom cables and performing high-quality soldering. 
+                  I also participated in the design of critical passive components, such as <b>bias-tees, using MATLAB</b> for simulation and layout.
+                  <br><br>
+                  &emsp;A key part of my work was the end-to-end customization of the RF lines for fast qubit readout via <b>RF reflectometry</b>. 
+                  After installing components like attenuators and directional couplers, it was crucial to quantitatively verify their performance. 
+                  To do this, I utilized a <b>Vector Network Analyzer (VNA)</b> to characterize the frequency-dependent S-parameters of the fully assembled lines. 
+                  I measured S11 to confirm minimal signal reflection (<b>impedance matching to 50 Ω</b>) and S21/S12 to analyze signal transmission and distortion. 
+                  I then exported this data and used <b>Python to analyze the waveform characteristics</b>, ensuring that our control and readout pulses would arrive at the device with their integrity intact.
+                  <br><br>
+                  &emsp;Beyond the initial setup and validation, I was also responsible for the regular <b>maintenance and operation of the dilution refrigerator</b>. 
+                  This provided me with deep, practical expertise in a range of essential procedures, including periodically replacing the liquid nitrogen trap, cleaning the ³He line to maintain cooling power, disassembling the outer vacuum chamber (OVC) for system modifications, and the entire cycle of sample loading and unloading. 
+                  This comprehensive experience has given me the skills to not only use but also troubleshoot and maintain the complex infrastructure required for cutting-edge quantum experiments.
+              </p>
             </div>
           </div>
-
         </div>
+
+
 
       </div>
     </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
 
-  <!-- 
+
+  
   <footer>
     <div class="container">
       <div class="row">
@@ -163,7 +207,7 @@
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer>
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

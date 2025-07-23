@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Personal Study: Mathematics - Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="A personal archive of study notes on various topics in mathematics." name="description">
+  <meta content="mathematics, physics, study notes, jonginn yun, algebra, topology, analysis" name="keywords">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  
+  <style>
+    .study-sidebar {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-right: 15px;
+    }
+    .study-sidebar .nav-link {
+      color: #4e4e4e;
+      padding: 8px 15px;
+      border-left: 3px solid transparent;
+    }
+    .study-sidebar .nav-link:hover, .study-sidebar .nav-link.active {
+      color: #0078ff;
+      background-color: #f8f9fa;
+      border-left: 3px solid #0078ff;
+    }
+    .study-sidebar .sub-nav .nav-link {
+      padding-left: 30px;
+      font-size: 0.9em;
+    }
+    .study-sidebar h5 {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    .study-content h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-top: 1rem;
+    }
+    .study-content p, .study-content li {
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header" class="fixed-top header-scrolled">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="index.html">Jonginn Yun</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a href="msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+                <li><a href="devfab-details.html">Device Fabrication</a></li>
+                <li><a href="qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+                <li><a href="vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+                <li><a href="setup-details.html">Cryogenic & RF System Integration</a></li>
+                <li><a href="simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="index.html#course" class="active"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="math.html">Mathematics</a></li>
+              <!--
+              <li><a href="physics.html">Physics</a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav></div>
+  </header><div class="hero hero-single route bg-image" style="background-image: url(assets/img/personal-study-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Personal Study: Mathematics</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Mathematics</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section id="personal-study" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="study-sidebar">
+              <nav class="nav flex-column">
+                <h5>Mathematics</h5>
+                <a class="nav-link" data-bs-toggle="collapse" href="#algebra-sub" role="button" aria-expanded="true" aria-controls="algebra-sub">Algebra</a>
+                <div class="collapse show sub-nav" id="algebra-sub">
+                  <!--
+                  <a class="nav-link" href="group-theory-details.html">Group Theory</a>
+                  <a class="nav-link" href="ring-theory-details.html">Ring Theory</a>
+                  -->
+                </div>
+                
+                <a class="nav-link" data-bs-toggle="collapse" href="#topology-sub" role="button" aria-expanded="false" aria-controls="topology-sub">Topology</a>
+                <div class="collapse sub-nav" id="topology-sub">
+                  <a class="nav-link" href="math/topo-basic.html">Basic Concepts</a>
+                </div>
+
+                <a class="nav-link" data-bs-toggle="collapse" href="#analysis-sub" role="button" aria-expanded="false" aria-controls="analysis-sub">Analysis</a>
+                <div class="collapse sub-nav" id="analysis-sub">
+                  <!--
+                    <a class="nav-link" href="real-analysis-details.html">Real Analysis</a>
+                    <a class="nav-link" href="complex-analysis-details.html">Complex Analysis</a>
+                -->
+                  </div>
+              </nav>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="study-content">
+              
+              <h2>Welcome to My Mathematics Notes</h2>
+              <p class="libre-baskerville-regular-italic">
+                This section serves as a living repository of my study notes. It was created primarily for my own review and to organize key concepts so they are not forgotten. I hope you may find them useful as well.
+              </p>
+              <hr>
+              <p>
+                Welcome to my personal study corner for mathematics. Here, I compile and elaborate on topics that I find fundamental and fascinating. The notes are organized by major fields, accessible through the sidebar on the left.
+                The page is currently under construction, so some functions may not work properly.
+              </p>
+              
+              <h4>Table of Contents</h4>
+              <ul>
+                <li>
+                  <b>Algebra</b>
+                  <ul>
+                    <!--<li><a href="group-theory-details.html">Group Theory</a></li>-->
+                    <!--<li><a href="ring-theory-details.html">Ring Theory</a></li>-->
+                  </ul>
+                </li>
+                <li>
+                  <b>Topology</b>
+                  <ul>
+                    <li><a href="math/topo-basic.html">Basic Concepts</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <b>Analysis</b>
+                   <ul>
+                    <!--<li><a href="real-analysis-details.html">Real Analysis</a></li>-->
+        
+                  </ul>
+                </li>
+              </ul>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section></main><footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
