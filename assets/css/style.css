@@ -5,9 +5,28 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-
 /*--------------------------------------------------------------
-# General
+# Fonts
+--------------------------------------------------------------*/
+.libre-baskerville-regular {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.libre-baskerville-bold {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.libre-baskerville-regular-italic {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+/*--------------------------------------------------------------
+# Study-Sidebar
 --------------------------------------------------------------*/
 .study-sidebar {
   position: -webkit-sticky;
@@ -44,7 +63,9 @@
 .study-content p, .study-content li {
   line-height: 1.8;
 }
-
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
 body {
   background-color: #f5f5f5;
   color: #4e4e4e;

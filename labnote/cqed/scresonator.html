@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Personal Study: PnC - Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="A personal archive of study notes on point-set topology." name="description">
+  <meta content="mathematics, topology, point-set topology, open set, basis, continuity, metric space" name="keywords">
+
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <!--Subject Header Start-->
+  <header id="header" class="fixed-top header-scrolled">
+  </header>
+  <!--Subject Header End-->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(../assets/img/personal-study-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Phonic Crystal</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../labnote.html">Lab Note</a></li>
+            <li class="breadcrumb-item active">Phononic Crystal</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section id="personal-study" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="study-sidebar">
+              <div id="study-sidebar-container"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="study-content">
+
+          <p class="disclaimer">
+            * Currently studying from scratch; may contain incorrect information. The note was originally written in Korean, and later translated into English.
+          </p>
+
+          <!-- ====================================================== -->
+          <h3>I. From Photon Lagrangian to Quantized Resonator Modes</h3>
+
+          <div class="libre-baskerville-regular">
+            <p>
+              The free-space electromagnetic field is governed by the Lagrangian density
+              $$
+                \mathcal{L}_{\mathrm{EM}}
+                  = \frac{\varepsilon_0}{2}\mathbf{E}^2
+                  - \frac{1}{2\mu_0}\mathbf{B}^2 .
+              $$
+              To model a long, two-conductor transmission line (coax, CPW, nanowire) we
+              restrict to the transverse-electro-magnetic (TEM) sector, where
+              $\mathbf{E}_\perp = -\nabla_\perp V$ and
+              $\mathbf{B}_\perp = \nabla_\perp\times ( \hat{z}\, \Phi )$.  Introducing the
+              <em>node flux</em> $\Phi(z,t)=\!\int_{-\infty}^{t}\!V(z,t')dt'$, the
+              field depends only on the longitudinal coordinate $z$ and time $t$.  After
+              integrating over the transverse cross-section we obtain the 1-D
+              Lagrangian
+              $$
+                \mathcal{L}
+                  = \int_0^{\ell}\!dz\;
+                    \Bigg[
+                      \frac{C_\ell}{2}\bigl(\partial_t\Phi\bigr)^2
+                      -\frac{1}{2L_\ell}\bigl(\partial_z\Phi\bigr)^2
+                    \Bigg],
+              $$
+              which is precisely the Lagrangian of the
+              <strong>telegrapher’s equation</strong> with distributed capacitance
+              $C_\ell$ and inductance $L_\ell$.  Quantizing this field therefore yields
+              <em>photons</em> that are confined standing-wave solutions of a microwave
+              resonator.
+            </p>
+
+            <p>
+              For an open-ended $\lambda/2$ resonator (voltage antinodes at both ends),
+              we expand
+              $$
+                \Phi(z,t)=\sum_{n=1}^{\infty}
+                \varphi_n(t)\,\cos\!\bigl(k_n z\bigr),\qquad
+                k_n=\frac{n\pi}{\ell}.
+              $$
+              Canonical quantization gives
+              $$
+                \varphi_n(t)=
+                \sqrt{\frac{\hbar}{2\omega_n C_\ell\ell}}
+                  \bigl(a_n+ a_n^\dagger\bigr),\quad
+                \omega_n = v_p k_n,\;
+                v_p = \frac{1}{\sqrt{L_\ell C_\ell}} .
+              $$
+              Each pair $(a_n,a_n^\dagger)$ obeys $[a_n,a_m^\dagger]=\delta_{nm}$ and
+              corresponds to a <em>single harmonic-oscillator mode</em>—a photon—in the
+              resonator.
+            </p>
+          </div>
+
+          <!-- ====================================================== -->
+          <h3>II. Voltage &amp; Current Operators, Nodes &amp; Antinodes</h3>
+
+          <div class="libre-baskerville-regular">
+            <p>
+              Operator expressions follow directly from the mode expansion:
+              $$
+                \hat V(z) = \partial_t\hat\Phi
+                = i\sum_n \sqrt{\frac{\hbar\omega_n}{2 C_\ell\ell}}
+                  \bigl(a_n^\dagger- a_n\bigr)\cos(k_n z),
+              $$
+              $$
+                \hat I(z) = -\frac{1}{L_\ell}\partial_z\hat\Phi
+                = \sum_n \sqrt{\frac{\hbar\omega_n}{2 L_\ell\ell}}
+                  \bigl(a_n^\dagger+ a_n\bigr)\sin(k_n z).
+              $$
+              Hence:
+              <ul>
+                <li><b>Voltage antinode</b> ($\cos k_n z = \pm1$): $\hat V$ maximal, $\hat I=0$.</li>
+                <li><b>Current antinode</b> ($\sin k_n z = \pm1$): $\hat I$ maximal, $\hat V=0$.</li>
+              </ul>
+              These relations underpin how qubits couple to the resonator field.
+            </p>
+          </div>
+
+          <!-- ====================================================== -->
+          <h3>III. Spin-Qubit Coupling: Transverse vs.&nbsp;Longitudinal</h3>
+
+          <div class="libre-baskerville-regular">
+            <p>
+              For a double-dot spin qubit (e.g.&nbsp;$S$–$T_0$ qubit) positioned at
+              $z=z_0$:
+              </p>
+              <ul>
+                <li>
+                  <b>Transverse (electric-dipole) coupling</b><br>
+                  Occurs when the qubit’s charge-like dipole couples to the local
+                  <em>voltage</em>:
+                  $$
+                    H_\perp = g_\perp
+                      \,\hat\sigma_{x}\,
+                      \bigl(a + a^\dagger\bigr),
+                  $$
+                  with
+                  $g_\perp \propto \partial\omega_q/\partial V \;\cos k_1 z_0$.
+                </li>
+                <li>
+                  <b>Longitudinal (dispersive) coupling</b><br>
+                  Arises from flux or detuning shifts
+                  proportional to the <em>current</em> (magnetic field) or to
+                  charge‐state energy:
+                  $$
+                    H_\parallel = g_\parallel
+                      \,\hat\sigma_{z}\,
+                      \bigl(a + a^\dagger\bigr),\qquad
+                    g_\parallel \propto \sin k_1 z_0.
+                  $$
+                  A longitudinal term commutes with the bare qubit Hamiltonian and
+                  enables fast, high-fidelity gates via qubit-state–dependent phase-space
+                  displacements.
+                </li>
+              </ul>
+              Choice of $z_0$ lets an experimentalist engineer predominantly transverse
+              ($z_0\approx 0$) or longitudinal ($z_0\approx\ell/2$) coupling.
+          </div>
+
+          <!-- ====================================================== -->
+          <h3>IV. Kinetic Inductance &amp; Order-Parameter Anisotropy</h3>
+
+          <div class="libre-baskerville-regular">
+            <p>
+              In a superconductor, Cooper-pair inertia produces a
+              <b>kinetic inductance</b>
+              $$
+                L_k = \frac{m^\ast}{n_s q^{\,2}A},
+              $$
+              where $n_s(T)$ is the superfluid density. Within the two-fluid or
+              Mattis-Bardeen picture, $n_s(T)$ decreases with temperature, so
+              $L_k(T)\!\propto\!1/n_s(T)$ grows and the resonator frequency
+              $f_r(T)\!\approx\!1/\bigl[2\pi\sqrt{(L_g+L_k)C}\bigr]$ shifts upward.
+            </p>
+            <p>
+              If the superconducting <em>order parameter</em> is anisotropic
+              ($\Delta=\Delta(\mathbf{k})$), then the London penetration depth
+              $\lambda_L(\hat{n})$ and thus $L_k(\hat{n})$ are direction dependent.
+              Rotating a thin-film resonator relative to the crystal axes or measuring
+              its frequency shift in an in-plane magnetic field can therefore map the
+              anisotropy of $\Delta$.
+            </p>
+          </div>
+
+        </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+  <!--Custom Scripts-->
+  <script src="../assets/js/study-sidebar.js"></script>
+  <script>
+    // 이 페이지가 어떤 페이지인지, 활성화할 링크는 무엇인지 지정
+    // 예: 'Mathematics' 섹션의 'Point-Set Topology' 페이지
+    // pathPrefix는 하위 폴더로 들어갈수록 ../를 더 붙여주면 됨
+    generateSidebar('labnote', 'Superconducting Resonator', '../'); 
+  </script>
+  <script src="../../assets/js/header.js"></script>
+  <script>
+    // 현재 페이지의 위치에 맞는 경로 접두사를 전달합니다.
+    const pathPrefix = '../../'; // 예시: 최상위 폴더는 ''
+    generateHeader(pathPrefix);
+  </script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

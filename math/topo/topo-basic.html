@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Personal Study: Point-Set Topology - Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="A personal archive of study notes on point-set topology." name="description">
+  <meta content="mathematics, topology, point-set topology, open set, basis, continuity, metric space" name="keywords">
+
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <!--Subject Header Start-->
+  <header id="header" class="fixed-top header-scrolled">
+  </header>
+  <!--Subject Header End-->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(../assets/img/personal-study-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Point-Set Topology</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../../math.html">Mathematics</a></li>
+            <li class="breadcrumb-item active">Point-Set Topology</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section id="personal-study" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="study-sidebar">
+              <div id="study-sidebar-container"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="study-content">
+              
+              <p class="disclaimer">
+                * Please note: The author of these notes is a physics major who has self-studied these mathematical topics from various textbooks. As such, there may be some inaccuracies or a lack of rigor in the descriptions. The note was originally written in Korean, and later translated into English.
+              </p>
+
+              <h3>I. Definition of a Topology</h3>
+              <p style="text-align: center;">
+              <img src="assets/img/topology_basic.png" alt="" height = 300>
+              </p>
+              
+              <div class="libre-baskerville-regular">
+              <p>
+                In analysis, the concept of a 'limit' is defined by considering whether for any small number $\epsilon$, there exists a point $y$ such that the metric $d(x,y) < \epsilon$. This notion of proximity relies on the existence of a metric, i.e., a concept of 'distance'. Topology generalizes this by introducing a space where only 'open sets' exist, thus removing the dependency on distance for defining limits and neighborhoods.
+              </p>
+              <p>
+                The motivation for this abstraction comes from the idea of an open ball, $B(x, r) = \{ y \mid d(x,y) < r \}$. Instead of dealing with distances, we can consider the collection of all open balls containing a point $x$. This allows for a metric-free definition of a neighborhood. A collection of such 'open balls' can define a notion of 'nearness' or 'proximity' on an arbitrary set $X$, providing the basic intuition for a topology.
+              </p>
+              <p>
+                Starting from this intuition, a collection of subsets $\mathcal{T}$ of a set $X$ is called a <b>topology</b> if it satisfies the following axioms. A set $X$ equipped with a topology is called a <b>topological space</b>. These axioms are natural consequences of the properties of open balls.
+              </p>
+              <div class="definition-box">
+                A collection of subsets $\mathcal{T}$ of a set $X$ is a <b>topology</b> on $X$ if:
+                <ol>
+                    <li>The empty set $\emptyset$ and the entire set $X$ are in $\mathcal{T}$.</li>
+                    <li>The union of any number of sets in $\mathcal{T}$ is also in $\mathcal{T}$.</li>
+                    <li>The intersection of any finite number of sets in $\mathcal{T}$ is also in $\mathcal{T}$.</li>
+                </ol>
+              </div>
+              <p>
+                Essentially, a topology is an abstraction that precisely preserves the behavior of 'neighborhoods' observed in metric spaces while discarding the concept of distance. An open set containing a point $x$ is often called a <b>neighborhood</b> of $x$. Extending this intuition, a point $x$ is a <b>limit point</b> of a set $A$ if every neighborhood of $x$ intersects $A$ at some point other than $x$ itself.
+              </p>
+              </div>
+
+              <h4>Basis for a Topology</h4>
+              <div class="libre-baskerville-regular">
+              <p>
+                Describing a topology by listing all its open sets can be inefficient. Therefore, we introduce the concept of a <b>basis</b>. A collection of open sets $\mathcal{B}$ is a basis for a topology $\mathcal{T}$ if every open set in $\mathcal{T}$ can be written as a union of elements of $\mathcal{B}$. This is useful because we can define and work with a topology using a much smaller collection of sets.
+              </p>
+              </div>
+              <h3>II. Closed Sets, Closure, and Interior</h3>
+              <p>
+                The definitions of closed sets can be a source of confusion, as different texts introduce them in different ways. The standard definition, which we will follow, is that a set is <b>closed</b> if its complement is open. From this definition and De Morgan's laws, it follows that (1) $\emptyset$ and $X$ are closed, (2) arbitrary intersections of closed sets are closed, and (3) finite unions of closed sets are closed.
+              </p>
+              <p>
+                Two important related concepts are the closure and interior of a set $A$. The <b>closure</b> of $A$, denoted $\overline{A}$, is the smallest closed set containing $A$. The <b>interior</b> of $A$, denoted $\mathrm{int}(A)$, is the largest open set contained in $A$. It can be shown that the closure $\overline{A}$ consists of all points of $A$ along with all of its limit points. Consequently, a set is closed if and only if it contains all of its limit points.
+              </p>
+
+              <h3>III. Continuity and Homeomorphism</h3>
+              <div class="libre-baskerville-regular">
+              <p>
+                The concept of continuity is central to topology. The epsilon-delta definition of continuity from analysis can be generalized beautifully: a function $f: X \rightarrow Y$ between two topological spaces is <b>continuous</b> if the preimage of every open set in $Y$ is an open set in $X$.
+              </p>
+              <p>
+                A continuous map with a continuous inverse is called a <b>>homeomorphism</b>. If a homeomorphism exists between two topological spaces, they are said to be <b>homeomorphic</b>, meaning they are "topologically equivalent." Any property of a space that is preserved under a homeomorphism is called a <b>topological property</b>. This is the rigorous formulation behind the popular idea of topology as "rubber sheet geometry," where properties that are invariant under continuous deformations (without cutting or gluing) are the ones that matter.
+              </p>
+              </div>
+
+              <h3>IV. Metric Topology</h3>
+              
+              <div class="libre-baskerville-regular">
+              <p>
+                We can now return to our starting point. Any space with a <b>metric</b> $d$ (a function that defines a distance between elements) naturally gives rise to a topology. The basis for this <b>metric topology</b> is the collection of all open balls $B(x, r)$ for all $x \in X$ and $r > 0$. A topological space is called <b>metrizable</b> if there exists a metric that induces its topology. All metric spaces are also Hausdorff spaces, a property meaning that any two distinct points have disjoint neighborhoods.
+              </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+  <!--Custom Scripts-->
+  <script src="../assets/js/study-sidebar.js"></script>
+  <script>
+    // 이 페이지가 어떤 페이지인지, 활성화할 링크는 무엇인지 지정
+    // 예: 'Mathematics' 섹션의 'Point-Set Topology' 페이지
+    // pathPrefix는 하위 폴더로 들어갈수록 ../를 더 붙여주면 됨
+    generateSidebar('mathematics', 'Point-Set Topology', '../'); 
+  </script>
+  <script src="../../assets/js/header.js"></script>
+  <script>
+    // 현재 페이지의 위치에 맞는 경로 접두사를 전달합니다.
+    const pathPrefix = '../../'; // 예시: 최상위 폴더는 ''
+    generateHeader(pathPrefix);
+  </script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

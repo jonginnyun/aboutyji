@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Personal Study: PnC - Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="A personal archive of study notes on point-set topology." name="description">
+  <meta content="mathematics, topology, point-set topology, open set, basis, continuity, metric space" name="keywords">
+
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <!--Subject Header Start-->
+  <header id="header" class="fixed-top header-scrolled">
+  </header>
+  <!--Subject Header End-->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(../assets/img/personal-study-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Phonic Crystal</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../labnote.html">Lab Note</a></li>
+            <li class="breadcrumb-item active">Phononic Crystal</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section id="personal-study" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="study-sidebar">
+              <div id="study-sidebar-container"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="study-content">
+
+            <p class="disclaimer">
+              * Currently studying from a scratch; may contain incorrect information. The note was originally written in Korean, and later translated into English.
+            </p>
+            <!-- ===================================================== -->
+            <h3>I. Definition of a Phononic Crystal (PnC)</h3>
+            <p style="text-align: center;">
+              <img src="../assets/img/pnc_lattice.png" alt="schematic of a 2-D phononic crystal" height="300">
+              <br> Image source: Nat. Commun. <b>5</b>, 5580 (2014)
+            </p>
+
+            <div class="libre-baskerville-regular">
+              <p>
+                A <b>phononic crystal</b> is an artificially engineered elastic medium whose mass density
+                $\rho(\mathbf{r})$ and stiffness tensor $C(\mathbf{r})$ vary periodically with a lattice
+                vector $\mathbf{R}$.<br>
+                The small-amplitude elastic-wave equation
+                $$
+                  \nabla \cdot \left(C(\mathbf{r}): \nabla\mathbf{u}\right)
+                  = \rho(\mathbf{r}) \,\partial_t^2\mathbf{u}
+                $$
+                therefore admits Bloch-type eigen-solutions
+                $$
+                  \bigl[\omega_{n}(\mathbf{k}),\,
+                  \mathbf{u}_{n,\mathbf{k}}(\mathbf{r})=e^{i\mathbf{k} \cdot \mathbf{r}}
+                  \tilde{\mathbf{u}}_{n,\mathbf{k}}(\mathbf{r})\bigr],
+                $$
+                with $\tilde{\mathbf{u}}_{n,\mathbf{k}}(\mathbf{r})$ sharing the lattice
+                periodicity. The resulting dispersion $\omega_{n}(\mathbf{k})$ can
+                exhibit <b>band gaps</b>—frequency ranges where no propagating phonon mode exists.
+              </p>
+
+              <div class="definition-box">
+                A solid is a <b>phononic crystal</b> if its elastic parameters satisfy
+                $$
+                  C(\mathbf{r}+\mathbf{R}) = C(\mathbf{r}),\quad
+                  \rho(\mathbf{r}+\mathbf{R}) = \rho(\mathbf{r})
+                $$
+                for every lattice vector $\mathbf{R}$.  The periodic modulation must be
+                strong enough (typically $\gtrsim\!20\%$ impedance contrast) or combined
+                with local resonators to yield a measurable stop-band.
+              </div>
+
+              <p>
+                The PnC concept is the elastic analogue of photonic crystals in optics
+                and electronic crystals in solid-state physics, but the relevant
+                wavelengths range from nanometers (hypersonic) to centimeters (ultrasonic),
+                enabling chip-scale vibration isolation and wave-guiding.
+              </p>
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <h4>Band-Gap Formation Mechanisms</h4>
+            <div class="libre-baskerville-regular">
+              <p>
+                Two complementary mechanisms open gaps:
+              </p>
+              <ol>
+                <li><b>Bragg Scattering</b> — Destructive interference of
+                    counter-propagating plane waves when the Bragg condition
+                    $2\mathbf{k}\cdot\mathbf{G}=|\mathbf{G}|^2$ is met
+                    ($\mathbf{G}$: reciprocal-lattice vector).<br>
+                    Gaps scale roughly with lattice constant
+                    $a\!\sim\!\lambda/2$, so miniaturization is required for
+                    GHz applications.</li>
+                <li><b>Local Resonance</b> — Sub-lattice inclusions with internal
+                    resonant frequency $\omega_\text{res}$ hybridize with host modes.
+                    Near $\omega_\text{res}$ the effective dynamic mass
+                    $m_\text{eff}(\omega)$ becomes negative, opening a <i>sub-Bragg</i>
+                    gap even when $a\!\ll\!\lambda$.  This permits compact
+                    (sub-wavelength) stop-bands.</li>
+              </ol>
+              <p>
+                In practice, modern PnC devices often combine both effects:
+                periodic air-slots (Bragg) etched into a membrane that also supports
+                patterned pillars (local resonators).
+              </p>
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <h3>II. Defects, Cavities, and Waveguides</h3>
+            <div class="libre-baskerville-regular">
+              <p>
+                Introducing an <b>intentional defect</b>—altering or removing
+                lattice cells—creates <b>localized modes</b> inside the band gap.
+                The defect potential can be modeled by adding a perturbation
+                $\Delta C,\Delta\rho$:
+                $$
+                  \bigl[\mathcal{H}_0  + \lambda\,\Delta\mathcal{H}\bigr]\mathbf{u}
+                  = \rho\,\partial_t^2\mathbf{u},
+                $$
+                where $\lambda$ tunes the perturbation strength.  Solving for
+                eigenvalues with an imaginary wave-vector
+                $k \!\to\! i\kappa$ reveals exponentially
+                localized solutions of the form
+                $\mathbf{u}(\mathbf{r})\!\propto\!e^{-\kappa |x|}$.
+              </p>
+
+              <p>
+                <b>Point defects</b> (single-cell modifications) act as
+                <i>phononic cavities</i> and show discrete spectra,
+                whereas <b>line defects</b> (1-D row removal) form
+                <i>band-gap waveguides</i> that support guided modes
+                confined laterally by the gap yet free along the defect axis.
+              </p>
+
+              <p>
+                Proper defect design—often via FEM plane-wave expansion or adjoint
+                optimization—enables ultra-high
+                quality factors $Q_i\!>\!10^7$ at hundreds of MHz, vital for
+                quantum acoustics and sensing.
+              </p>
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <h3>III. Actuation & Coupling Mechanisms</h3>
+            <div class="libre-baskerville-regular">
+              <p>
+                To excite or read out PnC modes one attaches a <b>transducer</b>:
+              </p>
+              <ul>
+                <li><b>Piezoelectric</b> (LiNbO<sub>3</sub>, AlN): RF electrodes drive
+                    strain via $d_{33}$ coupling, enabling direct microwave-phonon
+                    conversion with interaction rate
+                    $g_\text{pe}\!\propto\!|E_\text{RF}\!:\!d:C|$.</li>
+                <li><b>Electrostatic</b> (Si flexures): a DC bias $V_\text{dc}$
+                    + AC drive $V_\text{ac}$ modulate the gap $g$ between
+                    beam and electrode, producing a force
+                    $F\!\approx\!(\varepsilon_0 A/2) V_\text{dc}V_\text{ac}/g^2$.</li>
+                <li><b>Optomechanical</b>: embedding the PnC in a photonic cavity
+                    yields radiation-pressure and photo-elastic couplings
+                    $g_0\!=\!\partial\omega_\text{opt}/\partial x$, useful for
+                    quantum control at mK temperatures.</li>
+              </ul>
+              <p>
+                Hybrid devices (e.g.&nbsp;LiNbO<sub>3</sub>-on-Si PnCs clad with
+                superconducting microwave resonators) simultaneously harness
+                piezo- and opto-mechanical effects for coherent microwave-optical
+                transduction.
+              </p>
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <h3>IV. Characterization Metrics</h3>
+            <div class="libre-baskerville-regular">
+              <p>
+                <b>Ring-down</b> measurements fit the exponential decay
+                $A(t)=A_0\,e^{-t/\tau}$ to extract the total quality factor
+                $Q= \pi f_0 \tau$.  Decomposing
+                $1/Q = 1/Q_i + 1/Q_e$ isolates intrinsic loss $Q_i$ from
+                external loading $Q_e$.
+              </p>
+
+              <p>
+                Frequency noise in superconducting PnC cavities is often expressed
+                via a dephasing quality factor
+                $Q_\phi\!=\!(\pi f_0 S_\phi)^{-1}$, where the phase-noise spectral
+                density $S_\phi(f)$ shows a 1/$f$ knee set by two-level systems
+                (TLS).  Off-resonant TLS mainly broaden $Q_i$, whereas resonant TLS
+                hybridize and split cavity modes—a hallmark observed as doublet
+                peaks when the coupling $g_\text{TLS}\!>\!\gamma$.
+              </p>
+
+              <p>
+                Full dispersion and modal profiles are typically simulated via
+                FEM (COMSOL, JCMsuite) or plane-wave expansion, then
+                validated experimentally through laser Doppler vibrometry,
+                heterodyne interferometry, or cryogenic RF spectroscopy.
+              </p>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+  <!--Custom Scripts-->
+  <script src="../assets/js/study-sidebar.js"></script>
+  <script>
+    // 이 페이지가 어떤 페이지인지, 활성화할 링크는 무엇인지 지정
+    // 예: 'Mathematics' 섹션의 'Point-Set Topology' 페이지
+    // pathPrefix는 하위 폴더로 들어갈수록 ../를 더 붙여주면 됨
+    generateSidebar('labnote', 'Phononic Crystal', '../'); 
+  </script>
+  <script src="../../assets/js/header.js"></script>
+  <script>
+    // 현재 페이지의 위치에 맞는 경로 접두사를 전달합니다.
+    const pathPrefix = '../../'; // 예시: 최상위 폴더는 ''
+    generateHeader(pathPrefix);
+  </script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>

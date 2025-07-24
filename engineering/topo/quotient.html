@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Personal Study: Point-Set Topology - Jonginn Yun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta content="A personal archive of study notes on point-set topology." name="description">
+  <meta content="mathematics, topology, point-set topology, open set, basis, continuity, metric space" name="keywords">
+
+  <link href="../../assets/img/favicon.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/style.css" rel="stylesheet">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  
+  <style>
+    
+  </style>
+</head>
+
+<body>
+
+  <!--Subject Header Start-->
+  <header id="header" class="fixed-top header-scrolled">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="../../index.html">Jonginn Yun</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="../../index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="../../index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="../../index.html#skills">Expertise and Skills</a></li>
+          <li class="dropdown"><a href="../../index.html#projects"><span>Research Projects</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a href="../../msoga-details.html">Micromagnet Shape Optimization for Spin Qubits</a></li>
+                <li><a href="../../devfab-details.html">Device Fabrication</a></li>
+                <li><a href="../../qdspinqmeas-details.html">Coherent Control of Semiconductor Spin Qubits</a></li>
+                <li><a href="../../vdw-details.html">Nonreciprocal Transport in vdW Heterostructures</a></li>
+                <li><a href="../../setup-details.html">Cryogenic & RF System Integration</a></li>
+                <li><a href="../../simul-details.html">Computational Modeling of Quantum Systems</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="../../index.html#course"><span>Personal Study</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="../../math.html">Mathematics</a></li>
+              <!--
+              <li><a href="../physics.html">Physics</a></li>
+              <li><a href="../engineering.html">Engineering</a></li>
+              <li><a href="../labnote.html">Lab Note</a></li>
+              -->
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="../../index.html#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <!--Subject Header End-->
+
+  <div class="hero hero-single route bg-image" style="background-image: url(../assets/img/personal-study-bg.jpg)">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Point-Set Topology</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../../math.html">Mathematics</a></li>
+            <li class="breadcrumb-item active">Point-Set Topology</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section id="personal-study" class="portfolio-details">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="study-sidebar">
+              <div id="study-sidebar-container"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="study-content">
+              
+              <h3>I. Quotient Topology and Equivalence Class</h3>
+              <p class="libre-baskerville-regular">
+                &emsp;Quotient topology is a crucial concept closely related to the fundamental group in algebraic topology. 
+                Before considering the quotient in a topological space, it's helpful to review how algebraic structures were formed using quotients in algebra.
+                <br>
+                &emsp;In algebra, performing a quotient on a Group or a Ring involved creating an equivalence relation based on a normal subgroup or an ideal, and then forming a smaller group or ring using cosets. 
+                This was analogous to constructing a new algebraic structure from the fibers (equivalence classes where morphism results are equal) of an equivalence relation given by a homomorphism (Isomorphism Theorem).
+                <br>
+                &emsp;The concept of a quotient in topological spaces is similar. 
+                Since there's no algebraic structure, it's defined either as a quotient map, which is a type of continuous surjective map, or as the coarsest possible topology that ensures continuity. 
+                While Munkres defines the quotient map first and then uses it to define the quotient topology, this chapter will define it more intuitively, with Munkres's definition to be discussed later.
+                <br> 
+                &emsp;A quotient topology is defined as the coarsest topology on $Y$ such that a surjective map $p: X \rightarrow Y$ is continuous. 
+                The desire for continuity stems from the need for the original topological structure to be well-transferred to the quotient space, mirroring the use of homomorphisms for quotients in algebra.
+                <br>
+                &emsp;What structure must be satisfied for continuity? 
+                We can define an open set $U$ in $Y$ such that $p^{-1}(U)$ is an open set in $X$. 
+                In other words, if the preimage of a set is open, it is included in $\mathcal{T}_Y$. 
+                Are there any other sets to consider besides these? Due to the properties of preimages, no; if such sets are collected, preimages preserve unions, intersections, the entire set, and the empty set, ultimately forming a topology. This topology becomes the quotient topology induced by the surjective map $p$.
+                
+                $$ \mathcal{T}_{X/p}\mathrm{(Quotient\ topology\ induced\ by\ p)}=\{ U \in X/p | p^{-1}(U) \in \mathcal{T}_X\} $$
+                Above, $Y$ was subtly replaced with $X/p$ to emphasize the quotient. Anyway, a map to a topological space induced by this definition is defined as a quotient map.
+                <br>
+                &emsp;Meanwhile, the very idea of considering the image $Y$ of $X$ as a new topological space is ultimately equivalent to considering it as a topological space composed of fibers. From this perspective, a continuous surjective map $p$ must map open sets formed by the union of these fibers to open sets. Munkres defines such sets, which can be composed of the union of fibers, as <b>saturated sets</b>. The specific wording is as follows:
+                <br>
+                &emsp;A <b>saturated subset</b> $C$ of $X$ for a surjective map $p$ is a set that contains every $p^{-1}(\{y\})$ that intersects $C$.
+                <br>
+                &emsp;Since every point in $X$ belongs to a fiber, this is equivalent to a set composed of the union of fibers. By the same logic, a saturated subset $C$ is ultimately equivalent to finding a set that is $p^{-1}(p(C))$ with respect to map $p$.
+                <br>
+                &emsp;Ultimately, the minimum condition for deriving a topological space from the equivalence classes of an equivalence relation with respect to a continuous surjective map is that saturated open sets must be mapped to open sets. Defining such a map as a 'quotient map' is also equivalent to the definition above.
+              </p>
+
+              <h3>II. Quotient Map and Quotient Topology</h3>
+              <p class="libre-baskerville-regular">
+                &emsp;Munkres first defines a 'quotient map' and then defines the topology induced by such a quotient map as a quotient topology. A quotient map is defined for two topological spaces $X$ and $Y$ as a surjective map $p: X \rightarrow Y$ such that a subset $U$ of $Y$ is open if and only if $p^{-1}(U)$ is open in $X$. When the quotient map is defined this way, the induced topology naturally becomes the same as the definition of quotient topology written above.
+                <br>
+                &emsp;On the other hand, as can be seen from the definition, a quotient map is always continuous by definition, but it is not necessarily homeomorphic. This is because there is no guarantee that every $U \in \mathcal{T}$ appears as a preimage. Therefore, if bijectivity is added, it naturally becomes a homeomorphism.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="copyright-box">
+            <div class="credits">
+              Modified by <b>Jonginn Yun</b>. Template provided by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="../assets/js/study-sidebar.js"></script>
+  <script>
+    // 이 페이지가 어떤 페이지인지, 활성화할 링크는 무엇인지 지정
+    // 예: 'Mathematics' 섹션의 'Point-Set Topology' 페이지
+    generateSidebar('mathematics', 'Quotient Topology', '../'); 
+  </script>
+  <script src="../../assets/js/header.js"></script>
+  <script>
+    // 현재 페이지의 위치에 맞는 경로 접두사를 전달합니다.
+    const pathPrefix = '../../'; // 예시: 최상위 폴더는 ''
+    generateHeader(pathPrefix);
+  </script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+
+</html>
