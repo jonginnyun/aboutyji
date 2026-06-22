@@ -1,0 +1,430 @@
+---
+title: "Device Physics for MMQSim"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: physics/condensed-matter/device-physics-mmqsim
+category: Physics
+section: "Condensed Matter Physics"
+subsection: "Quantum device physics"
+tags: ["quantum devices", "cQED", "transmon", "dispersive readout", "Kerr engineering"]
+summary: "Quantum-device physics notes on transmons, dispersive readout, and Kerr engineering."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+These notes collect the device-physics background used for multimode circuit-QED simulations: transmon degrees of freedom, dispersive readout, effective couplings, and Kerr engineering.
+
+## System Degrees Of Freedom
+
+The MMQSim device model uses the following oscillator and qubit degrees of freedom:
+
+- readout cavity mode: $a_r$
+- transmon qubit mode: $b$
+- buffer mode: $a_b$
+- storage mode: $a_{s,m}$, where $m$ labels the storage mode when the storage is treated as a band or multimode object.
+
+The linear Hamiltonian is written as
+
+$$
+H/\hbar =
+\omega_r a_r^\dagger a_r
++ \omega_b a_b^\dagger a_b
++ \sum_m \omega_{s,m} a_{s,m}^\dagger a_{s,m}
++ H_{\mathrm{transmon,lin}} .
+$$
+
+Most interactions come from terms of the form
+
+$$
+(a+a^\dagger)(b+b^\dagger),
+$$
+
+followed by the rotating-wave approximation. This gives beam-splitter type couplings:
+
+$$
+H_{rq}/\hbar = g_{rq}(a_r^\dagger b + a_r b^\dagger),
+$$
+
+$$
+H_{qb}/\hbar = g_{qb}(b^\dagger a_b + b a_b^\dagger),
+$$
+
+$$
+H_{bs}/\hbar =
+\sum_m g_{b,m}(\Phi)(a_b a^\dagger_{s,m}+a_{s,m}a_b^\dagger).
+$$
+
+## Transmon Qubit
+
+For a transmon, the canonical variables are the phase difference $\varphi$ across the Josephson element and the island charge $Q$. It is conventional to use the dimensionless charge
+
+$$
+n \equiv \frac{Q}{2e}.
+$$
+
+Here $Q$ is the net charge stored on the island node. If the island carries charge $Q$, the reservoir carries $-Q$, and $n$ counts the excess Cooper pairs that create the net charge.
+
+The basic transmon Hamiltonian is
+
+$$
+H_{\mathrm{transmon}}
+= 4E_C(n-n_g)^2 - E_J \cos \varphi .
+$$
+
+For a flux-tunable transmon, the Josephson junction is replaced by a SQUID so that, in the symmetric-SQUID approximation,
+
+$$
+E_J(\Phi)
+= E_{J,\mathrm{max}}
+\cos\left(\pi\frac{\Phi}{\Phi_0}\right).
+$$
+
+The exact expression changes for an asymmetric SQUID, but the important point is that the external flux tunes the effective Josephson energy.
+
+Expanding the cosine to fourth order gives
+
+$$
+H \approx
+-E_J
++ \left(4E_C n^2+\frac{E_J}{2}\varphi^2\right)
+- \frac{E_J}{24}\varphi^4 .
+$$
+
+Using
+
+$$
+\phi_{\mathrm{zpf}}=\left(\frac{2E_C}{E_J}\right)^{1/4},
+\qquad
+n_{\mathrm{zpf}}=\left(\frac{E_J}{32E_C}\right)^{1/4},
+$$
+
+the harmonic part becomes $\hbar\omega_p a^\dagger a$, with plasma frequency
+
+$$
+\omega_p = \frac{1}{\hbar}\sqrt{8E_JE_C}.
+$$
+
+The anharmonic correction comes from the quartic term.
+
+There are two main ways to control a transmon:
+
+- `XY drive`: an RF drive pushes the charge/electric-field degree of freedom and drives $\sigma_x,\sigma_y$.
+- `Z/flux drive`: an external flux changes $E_J$, thereby modulating the qubit frequency $\omega_q$ or coupling parameters such as $g$ and $J$ in time.
+
+## Transmon-Mediated Coupling
+
+A transmon is a nonlinear oscillator with charge $n$ and phase $\varphi$. When the resonator voltage $V$ is applied to the transmon island, the coupling energy has the form
+
+$$
+H_{\mathrm{int}} \sim 2enV.
+$$
+
+This is the same physical idea as $U=QV$ with $Q=2en$, although in an actual circuit the coupling capacitor attenuates the voltage.
+
+For a resonator,
+
+$$
+V \propto V_{\mathrm{zpf}}(a+a^\dagger),
+$$
+
+and, from the transmon Hamiltonian, the charge quadrature behaves like
+
+$$
+n \propto i(b^\dagger-b).
+$$
+
+Multiplying the two linear terms and applying the RWA gives a beam-splitter Hamiltonian.
+
+If a qubit couples two resonator modes $a_1$ and $a_2$, one model Hamiltonian is
+
+$$
+H/\hbar =
+\omega_1 a_1^\dagger a_1
++ \omega_2 a_2^\dagger a_2
++ \frac{\omega_q}{2}\sigma_z
++ g_1(a_1^\dagger\sigma_-+a_1\sigma_+)
++ g_2(a_2^\dagger\sigma_-+a_2\sigma_+).
+$$
+
+A Schrieffer-Wolff transformation decouples the qubit and resonator spaces perturbatively. If
+
+$$
+V =
+g_1(a_1^\dagger\sigma_-+a_1\sigma_+)
++ g_2(a_2^\dagger\sigma_-+a_2\sigma_+),
+$$
+
+then one chooses $S$ so that $[H_0,S]=-V$:
+
+$$
+S =
+\frac{g_1}{\Delta_1}(a_1\sigma_+-a_1^\dagger\sigma_-)
++ \frac{g_2}{\Delta_2}(a_2\sigma_+-a_2^\dagger\sigma_-).
+$$
+
+The remaining effective exchange contains
+
+$$
+\frac{g_1g_2}{2}
+\left(\frac{1}{\Delta_1}+\frac{1}{\Delta_2}\right)
+\sigma_z(a_1^\dagger a_2+a_1a_2^\dagger).
+$$
+
+## AC Stark Shift
+
+For the Jaynes-Cummings Hamiltonian
+
+$$
+H =
+\omega_r a^\dagger a
++ \frac{\omega_q}{2}\sigma_z
++ g(a\sigma_+ + a^\dagger\sigma_-),
+$$
+
+in the dispersive regime $|g/\Delta|\ll 1$, a Schrieffer-Wolff transformation removes the exchange coupling and gives
+
+$$
+H_{\mathrm{disp}} =
+\omega_r a^\dagger a
++ \frac{1}{2}(\omega_q+\chi)\sigma_z
++ \chi a^\dagger a\sigma_z .
+$$
+
+The qubit splitting depends on the cavity photon number:
+
+$$
+\omega_q(n)=\omega_q(0)+2\chi n.
+$$
+
+Perturbatively, states such as $|e,n\rangle$ and $|g,n+1\rangle$ weakly mix and shift by level repulsion.
+
+The same logic appears in an off-resonant Rabi drive. In the rotating frame,
+
+$$
+H = \frac{\Delta}{2}\sigma_z + \frac{\Omega}{2}\sigma_x,
+$$
+
+and for large detuning,
+
+$$
+\Omega_R
+= \sqrt{\Delta^2+\Omega^2}
+= |\Delta|\left(1+\frac{\Omega^2}{2\Delta^2}+\cdots\right).
+$$
+
+The energy levels shift at second order in the drive.
+
+## Dispersive Regime And Parametric Drive
+
+The dispersive regime is the regime $|\Delta|\gg g$, where real energy exchange between a cavity and a qubit is strongly suppressed because it is off-resonant. Instead, each system mostly shifts the other's frequency or phase.
+
+A parametric drive modulates a Hamiltonian parameter in time. This differs from a direct resonator drive such as $a^\dagger e^{-i\omega t}$: one shakes a coupling coefficient or frequency so that energy exchange between resonators becomes resonant in an effective rotating frame.
+
+The Jacobi-Anger expansion is also a relevant tool for treating parametrically modulated couplings.
+
+## Open Technical Topics
+
+The following topics are important for this line of notes and should be expanded with full derivations:
+
+- equivalence between Schrieffer-Wolff transformations and perturbation theory,
+- perturbation, virtual processes, and transitions,
+- the general method for removing off-diagonal terms using Schrieffer-Wolff transformations,
+- Kerr effect,
+- Kerr term,
+- commutator identities,
+- superconductivity recap.
+
+They are listed here as technical reminders, not as completed derivations.
+
+## Qubit-State Readout
+
+For a Jaynes-Cummings system,
+
+$$
+H =
+\omega_r a^\dagger a
++ \frac{\omega_q}{2}\sigma_z
++ g(a\sigma_+ + a^\dagger\sigma_-),
+$$
+
+if the coupling is small compared with the detuning, real transitions are suppressed. The coupling remains as a perturbation, producing second-order shifts of frequency and phase. This is analogous to a medium changing a phase by refraction rather than fully absorbing the field: in cQED the qubit acts like a state-dependent medium for the cavity.
+
+The dispersive Hamiltonian is
+
+$$
+H_{\mathrm{disp}} =
+\omega_r a^\dagger a
++ \frac{1}{2}(\omega_q+\chi)\sigma_z
++ \chi a^\dagger a\sigma_z .
+$$
+
+The cavity resonance therefore depends on the qubit state, which enables readout.
+
+For a multilevel transmon,
+
+$$
+H =
+\omega_r a^\dagger a
++ \omega_q b^\dagger b
++ \frac{\alpha}{2}b^\dagger b^\dagger bb
++ g(ab^\dagger+a^\dagger b).
+$$
+
+Keeping the Schrieffer-Wolff calculation to this perturbative order gives
+
+$$
+\begin{aligned}
+H_{\mathrm{disp}}
+&=
+\left(\omega_r-2\frac{g^2}{\Delta}\right)a^\dagger a
++ \left(\omega_r-2\frac{g^2}{\Delta}\right)b^\dagger b
++ \frac{\alpha}{2}b^\dagger b^\dagger bb\\
+&\quad
++ \frac{\alpha}{2}\left(\frac{g}{\Delta}\right)^2
+a^\dagger a^\dagger aa
++ \alpha\left(\frac{g}{\Delta}\right)^2
+b^\dagger a^\dagger ba .
+\end{aligned}
+$$
+
+From the cavity point of view, the resonance frequency shifts with the transmon level.
+
+## Dispersive Readout
+
+Input-output theory gives the cavity equation
+
+$$
+\dot a(t)=
+-\left(\frac{\kappa}{2}+i\omega_r\right)a(t)
++ \sqrt{\kappa_c}a_{\mathrm{in}} .
+$$
+
+With a single-frequency measurement tone,
+
+$$
+\langle a_{\mathrm{in}}(t)\rangle
+= \alpha_{\mathrm{in}}e^{-i\omega_dt},
+$$
+
+and in steady state one obtains a Lorentzian response. The output amplitude can be written as
+
+$$
+\alpha_{\mathrm{out}}
+=
+\alpha_{\mathrm{in}}
+-\frac{\kappa\alpha_{\mathrm{in}}}
+{\frac{\kappa}{2}+i(\omega_r-\omega_d)} .
+$$
+
+Thus
+
+$$
+|S_{21}|^2
+=
+\left|\frac{\alpha_{\mathrm{out}}}{\alpha_{\mathrm{in}}}\right|
+=
+\left|
+1-\frac{\kappa}{\frac{\kappa}{2}+i(\omega_r-\omega_d)}
+\right|.
+$$
+
+If $\Delta=\omega_r-\omega_d$, the idealized lossless expression becomes
+
+$$
+S_{21}
+=
+1-\frac{\kappa}{\frac{\kappa}{2}+i\Delta}
+=
+\frac{-\frac{\kappa}{2}+i\Delta}{\frac{\kappa}{2}+i\Delta}
+= \cos\phi+i\sin\phi .
+$$
+
+In the IQ plane this traces a unit circle. If the measurement tone is resonant with the ground-state cavity frequency, then a qubit-state-dependent shift moves the point around the IQ circle.
+
+To describe a real dip, separate internal loss from external coupling:
+
+$$
+\kappa = \kappa_i+\kappa_c .
+$$
+
+Then
+
+$$
+S_{21}
+=
+1-\frac{\kappa_c}{\frac{\kappa}{2}+i\Delta}
+=
+\frac{\frac{\kappa_i-\kappa_c}{2}+i\Delta}
+{\frac{\kappa_i+\kappa_c}{2}+i\Delta}.
+$$
+
+In IQ coordinates,
+
+$$
+\left(I-\left(1-\frac{\kappa_c}{\kappa}\right)\right)^2+Q^2
+=
+\left(\frac{\kappa_c}{\kappa}\right)^2 .
+$$
+
+As $\Delta$ is swept, $S_{21}$ moves on a circle centered at $(1-\kappa_c/\kappa,0)$ with radius $\kappa_c/\kappa$.
+
+- `Undercoupled`: $\kappa_i>\kappa_c$. Internal loss dominates; the circle is small and does not enclose the origin.
+- `Critically coupled`: $\kappa_i=\kappa_c$. Internal and external decay are matched; the on-resonance point reaches the origin.
+- `Overcoupled`: $\kappa_c>\kappa_i$. External coupling dominates; the circle is larger and encloses the origin, with the on-resonance point on the negative axis.
+
+## Kerr Engineering
+
+There are two useful cases to keep separate.
+
+For qubit-mediated Kerr engineering, the drive enters the effective Hamiltonian and generates nonlinear corrections through the qubit. This still needs a full derivation.
+
+For SQUID-mediated Kerr engineering, a symmetric SQUID gives
+
+$$
+E_J(\Phi_{\mathrm{ext}})
+=
+E_{J,\mathrm{max}}
+\cos\left(\pi\frac{\Phi_{\mathrm{ext}}}{\Phi_0}\right).
+$$
+
+The coupler potential as a function of phase is
+
+$$
+U_J =
+-E_J(\Phi_{\mathrm{ext}})\cos\varphi
+\approx
+\frac{E_J}{2}\varphi^2
+-\frac{E_J}{24}\varphi^4+\cdots,
+$$
+
+with dimensionless phase
+
+$$
+\varphi \equiv \frac{2\pi}{\Phi_0}\Phi .
+$$
+
+Linearization is around the potential minimum. If $E_J(\Phi_{\mathrm{ext}})<0$, the expansion is around $\varphi=\pi$, and the linearized Josephson inductance becomes
+
+$$
+L_J =
+\left(\frac{\Phi_0}{2\pi}\right)^2
+\frac{1}{E_J\cos\varphi_0}.
+$$
+
+Flux modulation is marked for later expansion.
+
+## Pulse Sequences
+
+Useful pulse-sequence ideas include:
+
+- F0-Gate, with Naik et al. as a reference pointer,
+- Trotter/Floquet,
+- Lie-Trotter product formula,
+- Floquet or stroboscopic dynamics.
+
+The retained intuition is: if $\delta t$ is sufficiently small, a single switching block generates almost the same effective generator as simultaneous couplings. Repeating short fractional swaps among several modes can approximate simultaneous coupling. Intuitively, when the switching is fast enough, the system responds to the time average rather than to each instantaneous coupling.

@@ -1,0 +1,203 @@
+---
+title: "Shot-Noise Limit, Coherent States, and Quadrature Noise"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: physics/quantum-mechanics/shot-noise-limit
+category: Physics
+section: "Quantum Mechanics"
+subsection: "Quantum measurement"
+tags: ["shot noise", "coherent states", "photodetection", "quadrature noise", "quantum optics"]
+summary: "How Poisson photon counting, coherent states, and the quadrature shot-noise floor fit together."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## What The Shot-Noise Limit Means
+
+The shot-noise limit asks the following reference question:
+
+> For an output mode, here the $2\omega$ output mode, whose average occupation is $\langle n_{2\omega}\rangle$, how large would the noise be if the detection events were independent, i.e. Poisson distributed?
+
+The quantum state that represents this independent-event reference is the coherent state.
+
+For a coherent state $|\beta\rangle$, photon number follows Poisson statistics:
+
+$$
+\mathrm{Var}(n)=\langle n\rangle .
+$$
+
+Therefore a coherent state supplies the conventional `0 dB` shot-noise reference. This does not assume the real output is necessarily coherent; it defines the reference floor against which the measured noise is compared.
+
+## Time-Bin Picture
+
+The note uses a time-bin or temporal-mode picture. Instead of starting directly with continuous arrival times, take a short time interval $\Delta t$ and treat the photon number detected in that interval as the observable. The temporal mode for that bin is denoted $\hat b$, and the measured number operator is
+
+$$
+\hat N = \hat b^\dagger \hat b .
+$$
+
+Thus continuous detection is approximated by chopping time into very small bins and counting photons in each bin.
+
+## Coherent State Gives Poisson Counts Per Bin
+
+For an input coherent state,
+
+$$
+\hat D(\alpha)|0\rangle,
+$$
+
+the photon-number distribution in a time bin is
+
+$$
+p(n)
+=
+e^{-|\alpha|^2}\frac{|\alpha|^{2n}}{n!}.
+$$
+
+This is the Poisson distribution.
+
+## From Poisson Distribution To Poisson Process
+
+A single Poisson-distributed random variable is not yet a Poisson process. To obtain a point process in time, one also needs:
+
+1. In a short interval $\Delta t$, the probability of one click is proportional to $\Delta t$.
+2. The probability of two or more clicks in the same short interval is $\mathcal O(\Delta t^2)$.
+3. Different time bins are independent.
+
+When these are satisfied, the total count $N(T)$ in the interval $[0,T]$ is Poisson distributed, and the counting process has independent increments. In the continuous-time limit this is a Poisson point process.
+
+## Photodetection Reason For Independence
+
+In Glauber photodetection theory, the click rate at time $t$ is proportional to
+
+$$
+\langle \hat a^\dagger(t)\hat a(t)\rangle .
+$$
+
+Two-click correlations involve normally ordered moments such as
+
+$$
+\langle
+\hat a^\dagger(t)
+\hat a^\dagger(t+\tau)
+\hat a(t+\tau)
+\hat a(t)
+\rangle .
+$$
+
+For a coherent state,
+
+$$
+\hat a|\alpha\rangle=\alpha|\alpha\rangle,
+$$
+
+so all normally ordered moments factorize. For example,
+
+$$
+\begin{aligned}
+&\langle
+\hat a^\dagger(t)
+\hat a^\dagger(t+\tau)
+\hat a(t+\tau)
+\hat a(t)
+\rangle\\
+&\qquad =
+\langle \hat a^\dagger(t)\hat a(t)\rangle
+\langle \hat a^\dagger(t+\tau)\hat a(t+\tau)\rangle .
+\end{aligned}
+$$
+
+This means that a click at one time does not change the probability of a click a little later. There is no bunching or antibunching, so the arrival events behave independently.
+
+Nonclassical states can have time correlations and therefore can show bunching or antibunching.
+
+## Precise Meaning Of The Coherent-State Assumption
+
+The statement `coherent state assumption = Poisson process assumption` should be read with the detection model included:
+
+- coherent input field,
+- Poisson photon counts in each time bin,
+- factorized normally ordered correlations between bins,
+- independent click events in the continuous-time limit,
+- white shot-noise correlations.
+
+Thus the statement that photon arrival times are modeled as a Poisson process is justified when the relevant input fields, such as a local oscillator or signal field, are coherent or treated as coherent mixtures.
+
+## What $S_{XX}=1/4$ Means
+
+$S_{XX}(\omega)$ is the Fourier transform of the autocorrelation of the quadrature $X(t)$, up to whatever one-sided, two-sided, or symmetrized convention the note is using.
+
+Vacuum fluctuations are white over the relevant band, so the spectrum is flat. In this normalization, the vacuum or coherent-state quadrature floor is
+
+$$
+S_{XX}=\frac{1}{4}.
+$$
+
+This flat value is what is called the shot-noise floor or shot-noise limit in this quadrature normalization.
+
+## Connection Between Poisson Shot Noise And $S_{XX}=1/4$
+
+The photon-counting statement is
+
+$$
+\mathrm{Var}(n)=\langle n\rangle .
+$$
+
+To connect this to quadrature noise, use bright-beam linearization. Write
+
+$$
+\hat a(t)=\alpha+\delta \hat a(t),
+\qquad
+\hat n=\hat a^\dagger\hat a
+\approx
+|\alpha|^2+\alpha(\delta\hat a+\delta\hat a^\dagger),
+$$
+
+where $\alpha$ is chosen real. Then
+
+$$
+\Delta \hat n(t)
+\approx
+2\alpha\,\Delta \hat X(t).
+$$
+
+The spectra obey
+
+$$
+S_{nn}(\omega)\approx 4\alpha^2 S_{XX}(\omega).
+$$
+
+For a coherent, shot-noise-limited field,
+
+$$
+S_{XX}=\frac{1}{4},
+$$
+
+so
+
+$$
+S_{nn}(\omega)
+\approx
+4\alpha^2\cdot\frac{1}{4}
+=
+\alpha^2.
+$$
+
+Since
+
+$$
+\langle n\rangle=|\alpha|^2=\alpha^2,
+$$
+
+one obtains
+
+$$
+S_{nn}\sim \langle n\rangle .
+$$
+
+Thus the quadrature floor $S_{XX}=1/4$ and Poisson photon-counting shot noise are the same physical limit expressed in two different normalizations.

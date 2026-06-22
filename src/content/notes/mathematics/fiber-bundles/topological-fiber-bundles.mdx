@@ -1,0 +1,88 @@
+---
+title: "Topological Fiber Bundles"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/fiber-bundles/topological-fiber-bundles
+category: Mathematics
+section: "Fiber Bundles"
+subsection: "Local triviality and gluing"
+tags: ["fiber bundles", "topology", "transition functions", "sections"]
+summary: "The topological definition of a fiber bundle, local trivializations, transition functions, and the gluing viewpoint."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## The Point of the Definition
+
+A fiber bundle is a space that looks like a product locally but may fail to be a product globally. The basic picture is a projection
+$$
+\pi:E\to B,
+$$
+where $B$ is the base space, $E$ is the total space, and the fiber over $b\in B$ is
+$$
+E_b=\pi^{-1}(b).
+$$
+
+The phrase "looks like a product locally" means that each point of the base has an open neighborhood $U\subset B$ for which there is a homeomorphism
+$$
+\varphi_U:\pi^{-1}(U)\to U\times F
+$$
+such that projection to $U$ agrees with $\pi$. In other words, over a small enough patch of the base, every point carries a copy of the same model fiber $F$.
+
+## Local Trivializations
+
+The maps $\varphi_U$ are called local trivializations. They are not extra decoration; they are the data that tells us how the bundle is locally organized.
+
+If $e\in \pi^{-1}(U)$ and $\varphi_U(e)=(b,f)$, then $b=\pi(e)$ and $f$ is the coordinate of $e$ inside the model fiber. A different trivialization over another open set $V$ may assign a different fiber coordinate to the same point.
+
+This is why bundles are about gluing. The local pieces are simple, but their overlap rules can carry nontrivial global information.
+
+## Transition Functions
+
+On an overlap $U\cap V$, two trivializations are related by
+$$
+\varphi_V\circ\varphi_U^{-1}:(U\cap V)\times F\to (U\cap V)\times F.
+$$
+
+Because both sides must project to the same base point, this map has the form
+$$
+(b,f)\mapsto (b,g_{VU}(b)f),
+$$
+where $g_{VU}(b)$ is a symmetry of the fiber. The functions $g_{VU}$ are the transition functions of the bundle.
+
+They satisfy the cocycle condition on triple overlaps:
+$$
+g_{WU}(b)=g_{WV}(b)g_{VU}(b).
+$$
+
+This condition is exactly the statement that changing charts from $U$ to $V$ to $W$ agrees with changing directly from $U$ to $W$.
+
+## Sections
+
+A section is a map
+$$
+s:B\to E
+$$
+such that $\pi\circ s=\operatorname{id}_B$. It chooses one point in every fiber.
+
+In a local trivialization, a section becomes an ordinary function
+$$
+s_U:U\to F.
+$$
+On overlaps, these local representatives must transform by the transition functions:
+$$
+s_V(b)=g_{VU}(b)s_U(b).
+$$
+
+This is the first place where the bundle viewpoint becomes useful in physics. A field can often be read as a section, while a change of local trivialization looks like a gauge transformation.
+
+## Why Nontrivial Bundles Exist
+
+If all transition functions can be removed by changing local trivializations, then the bundle is globally a product $B\times F$. If they cannot, the bundle has genuine global twisting.
+
+The Mobius strip is the simplest geometric warning: locally it is an interval over a circle, but one full trip around the base reverses the fiber. The obstruction is not visible in any sufficiently small patch. It is visible only after comparing patches around a loop.

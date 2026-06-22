@@ -1,0 +1,111 @@
+---
+title: "Quotient Spaces"
+date: 2026-06-21
+updated: 2026-06-22
+lang: en
+slug: mathematics/topology/quotient-spaces
+category: Mathematics
+section: "Topology"
+subsection: "Quotient spaces"
+tags: ["topology", "quotients", "fiber bundles"]
+summary: "Quotient topology, saturated sets, and the intuition behind identifying points."
+math: true
+draft: false
+source_note: "math/topo/quotient.html; source_notes/lecture_notes/fibre_bundles_phys374_selfcontained_v13.tex"
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## The Basic Intuition
+
+Quotient topology is the topology of identification.
+
+In algebra, quotients appear when we decide that some elements should be regarded as equivalent: a group modulo a normal subgroup, a ring modulo an ideal, a vector space modulo a subspace. The quotient remembers the original structure only insofar as that structure is compatible with the equivalence relation.
+
+Topology has the same problem, but with open sets. If a space $X$ is collapsed along some equivalence relation, the quotient set $X/{\sim}$ is easy to define. The harder question is:
+
+> Which subsets of $X/{\sim}$ should count as open?
+
+The answer is: a subset of the quotient is open exactly when its full preimage upstairs is open.
+
+## Quotient Topology
+
+Let $q:X\to Y$ be a surjective map. The quotient topology on $Y$ declares a subset $U\subseteq Y$ open exactly when
+$$
+q^{-1}(U)\subset X
+$$
+is open.
+
+Equivalently,
+$$
+\mathcal T_Y=\{U\subset Y:q^{-1}(U)\in\mathcal T_X\}.
+$$
+
+If $Y=X/{\sim}$ and $q:X\to X/{\sim}$ is the projection map, this becomes
+$$
+\mathcal T_{X/{\sim}}=\{U\subset X/{\sim}:q^{-1}(U)\text{ is open in }X\}.
+$$
+
+This is the finest topology on $Y$ making $q$ continuous. Some texts phrase this as "the quotient topology is the topology induced by the quotient map." Others define quotient maps first. The content is the same: openness downstairs is tested by pulling back upstairs.
+
+## Why Preimages Again?
+
+This definition mirrors the definition of continuity. It uses preimages because preimages behave well:
+
+$$
+q^{-1}\left(\bigcup_\alpha U_\alpha\right)=\bigcup_\alpha q^{-1}(U_\alpha),
+$$
+and
+$$
+q^{-1}(U\cap V)=q^{-1}(U)\cap q^{-1}(V).
+$$
+
+Therefore the collection of subsets whose preimages are open automatically satisfies the topology axioms.
+
+The quotient topology is not saying that every open set upstairs has an open image downstairs. That would usually be too strong. It only says that open sets downstairs are precisely those whose inverse images are open upstairs.
+
+## Fibers and Saturated Sets
+
+The quotient map $q:X\to Y$ partitions $X$ into fibers:
+$$
+q^{-1}(\{y\}).
+$$
+
+Thinking in terms of fibers is often the clearest way to understand quotients. A subset $C\subset X$ is called saturated if it is a union of whole fibers. Equivalently,
+$$
+C=q^{-1}(q(C)).
+$$
+
+Only saturated subsets of $X$ can honestly descend to subsets of $Y$. If $C$ contains half of an equivalence class but not the rest, it is not the preimage of any subset downstairs.
+
+Thus the quotient topology can also be read as:
+
+> A set downstairs is open exactly when the corresponding saturated set upstairs is open.
+
+This is the topological analogue of compatibility in algebraic quotients. One is not merely forming a smaller set; one is asking which structure survives the identification.
+
+## Quotient Maps Are Continuous, But Not Usually Homeomorphisms
+
+A quotient map is continuous by construction. But it is usually not a homeomorphism, because points may have been identified and because images of arbitrary open sets need not be open.
+
+If $q$ happens to be bijective and is a quotient map, then it is a homeomorphism: the topology downstairs is exactly the topology transported from upstairs.
+
+The interesting cases are the non-bijective ones: intervals with endpoints glued, disks with boundary points identified, projective spaces, orbit spaces of group actions, and total spaces built by gluing local pieces.
+
+## Bundle Motivation
+
+If pieces $U_i\times F$ are glued on overlaps by transition functions, the total space can be described as a quotient of a disjoint union:
+$$
+\bigsqcup_i (U_i\times F)\big/\sim.
+$$
+
+The topology is not optional; it determines whether the projection to the base is continuous and locally trivial.
+
+This is why quotient topology reappears constantly in fibre bundles. One starts with simple local products, imposes transition-function identifications on overlaps, and then gives the resulting quotient set the topology that is forced by the disjoint union upstairs.
+
+In short:
+
+- Algebraic quotient: identify elements while preserving algebraic operations.
+- Topological quotient: identify points while preserving the correct open-set structure.
+- Bundle construction: glue local product charts and let the quotient topology define the total space.

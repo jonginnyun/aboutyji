@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const showDrafts = import.meta.env.DEV || import.meta.env.PUBLIC_SHOW_DRAFTS === 'true';
+const essays = (await getCollection('essays'))
+  .filter((essay) => showDrafts || !essay.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const entrySlug = (entry: { slug?: string; data: { slug?: string }; id: string }) => entry.slug ?? entry.data.slug ?? entry.id.replace(/\.mdx$/, '');
+---
+
+<LegacyLayout title="Essays - Jonginn Yun">
+  <PageHero title="Essays" subtitle="Long-form writing separate from technical notes." />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        <div class="v1-card">
+          {essays.length > 0 ? essays.map((essay) => (
+            <article class="v1-entry">
+              <h3><a href={`/essays/${entrySlug(essay)}/`}>{essay.data.title}</a>{essay.data.draft && <span class="draft-badge">draft</span>}</h3>
+              <p>{essay.data.summary}</p>
+              <p class="v1-meta">{essay.data.date.toLocaleDateString('en-US')}</p>
+            </article>
+          )) : <p>No public essays are listed yet.</p>}
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

@@ -9,19 +9,19 @@
 # Fonts
 --------------------------------------------------------------*/
 .libre-baskerville-regular {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .libre-baskerville-bold {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
   font-weight: 700;
   font-style: normal;
 }
 
 .libre-baskerville-regular-italic {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
   font-weight: 400;
   font-style: italic;
 }
@@ -379,7 +379,7 @@ a:hover {
   display: block;
 }
 
-.ico-square {/*-- added by Jaewon Jung*/
+.ico-square {
   height: 280px;
   width: 300px;
   font-size: 2rem;
@@ -393,7 +393,7 @@ a:hover {
   justify-content: center;
 }
 
-.ico-square2 {/*-- added by Jaewon Jung*/
+.ico-square2 {
   height: 240px;
   width: 240px;
   font-size: 2rem;
@@ -1356,7 +1356,7 @@ a:hover {
   border-radius: 4%;
 }
 
-.bg-no-crop {/*-- added by Jaewon Jung*/
+.bg-no-crop {
   /* Set the width and height to auto to maintain the aspect ratio */
   width: 95%;
   height: 95%;

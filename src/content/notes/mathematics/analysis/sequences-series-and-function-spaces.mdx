@@ -1,0 +1,62 @@
+---
+title: "Sequences, Series, and Function Spaces"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/analysis/sequences-series-and-function-spaces
+category: Mathematics
+section: "Analysis"
+subsection: "Sequences and function spaces"
+tags: ["analysis", "sequences", "series", "function spaces", "uniform convergence"]
+summary: "A compact refresher on sequences, series, uniform convergence, and why function spaces need norms."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Sequences and Series
+
+Many analytic questions reduce to controlling limits. For a numerical sequence $(a_n)$, convergence means
+$$
+\forall\varepsilon>0,\ \exists N,\ n\ge N\Rightarrow |a_n-a|<\varepsilon.
+$$
+
+A series is a sequence of partial sums:
+$$
+\sum_{n=0}^{\infty} a_n=\lim_{N\to\infty}\sum_{n=0}^{N}a_n.
+$$
+
+The important habit is to distinguish pointwise statements from uniform ones.
+
+## Uniform Convergence
+
+A sequence of functions $f_n:X\to Y$ converges uniformly to $f$ if one $N$ works for all $x\in X$:
+$$
+\sup_{x\in X} |f_n(x)-f(x)|\to 0.
+$$
+
+Uniform convergence preserves more structure than pointwise convergence. It is often the condition needed to exchange limits with continuity, integration, or differentiation under additional hypotheses.
+
+## Normed Spaces
+
+A normed vector space has a function
+$$
+\|-\|:V\to \mathbb R_{\ge 0}
+$$
+that measures vector size and induces a metric
+$$
+d(v,w)=\|v-w\|.
+$$
+
+Function spaces become analytic objects once equipped with norms such as
+$$
+\|f\|_\infty=\sup_x |f(x)|
+$$
+or $L^p$ norms.
+
+## Why This Shows Up in Geometry
+
+Differential geometry often studies spaces of functions, vector fields, forms, sections, and solutions to differential equations. The correct topology or norm on these spaces determines what convergence means and which limiting operations are legitimate.

@@ -1,0 +1,24 @@
+---
+title: "Computational Modeling of Quantum Systems"
+date: 2022-01-01
+lang: en
+slug: quantum-system-modeling
+category: "Modeling"
+tags: ["simulation", "quantum systems", "numerics"]
+summary: "Physics-informed simulation, parameter-estimation, and optimization workflows for quantum-device experiments."
+math: true
+draft: false
+naver_export: false
+role: "Research project"
+image: "/assets/img/simul-bg.png"
+period: "Jun. 2020 - Jun. 2025"
+legacy_url: "/legacy/simul-details.html"
+---
+
+This project collects physics-informed computational modeling work used to support experiment design and interpretation in semiconductor spin-qubit systems. The models range from effective-Hamiltonian simulations to device-level workflows connecting lithographic layouts, electron wavefunctions, micromagnetic fields, and qubit dynamics.
+
+One direction built a Python-based simulation framework for estimating dynamic nuclear polarization rates in lateral GaAs quantum dots using a modified Hubbard-model picture with excited-state spin mixing. The simulations helped explain bidirectional nuclear polarization behavior observed experimentally.
+
+Another direction used QuTiP to solve quantum master equations with Lindblad operators for singlet-triplet qubits interacting with nearby many-electron dot states in Si/SiGe devices. These simulations reproduced beating and dephasing signatures in Ramsey measurements and helped interpret coherent qubit-environment interactions.
+
+The project also includes data-analysis and estimation routines for device screening, qubit calibration, and performance characterization, as well as workflows that start from device geometry, compute electron wavefunctions, combine them with MuMax3-simulated magnetic fields, and estimate quantities relevant to spin-qubit control.

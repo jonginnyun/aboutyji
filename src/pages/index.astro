@@ -1,0 +1,188 @@
+---
+import { getCollection } from 'astro:content';
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import { site } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => (b.data.date.valueOf() - a.data.date.valueOf())).slice(0, 6);
+const publications = (await getCollection('publications')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0)).slice(0, 5);
+const entrySlug = (entry: { slug?: string; data: { slug?: string }; id: string }) => entry.slug ?? entry.data.slug ?? entry.id.replace(/\.mdx$/, '');
+---
+
+<LegacyLayout title="Jonginn Yun" description={site.description} bodyClass="v1-home-page">
+  <div id="hero" class="hero route bg-image v1-home-hero">
+    <div class="overlay-itro"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h1 class="hero-title mb-4">Jonginn Yun</h1>
+          <p class="hero-subtitle">Applied physics, quantum-device measurement, and mathematical notes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section id="about" class="about-mf sect-pt4 route">
+      <div class="container">
+        <div class="box-shadow-full">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="row">
+                <div class="col-sm-5">
+                  <div class="about-img">
+                    <img src="/assets/img/jonginn_optimized.png" class="img-fluid rounded b-shadow-a" alt="Jonginn Yun" />
+                  </div>
+                </div>
+                <div class="col-sm-7">
+                  <div class="about-info">
+                    <p><span class="title-s">Name: </span> <span>Jonginn Yun</span></p>
+                    <p>
+                      <span class="title-s">Email: </span>
+                      <img
+                        class="v1-contact-image-inline"
+                        src="/assets/img/contact-email-inline.png"
+                        alt="Contact email address rendered as an image"
+                        loading="lazy"
+                        draggable="false"
+                      />
+                    </p>
+                    <p><span class="title-s">CV: </span> <span><a class="files" href={site.cvPath}>Curriculum Vitae</a></span></p>
+                  </div>
+                </div>
+              </div>
+              <p>
+                Jonginn Yun is a PhD student in Applied Physics at Stanford University. His research background includes semiconductor quantum devices, spin qubits, quantum control, cryogenic measurement, RF reflectometry, nanofabrication, superconducting circuits, and multimode cQED.
+              </p>
+            </div>
+            <div class="col-md-7">
+              <div class="about-me pt-4 pt-md-0">
+                <div class="title-box-2">
+                  <h5 class="title-left">Research Interests</h5>
+                </div>
+                <ul class="about-list">
+                  <li>Experimental studies of quantum devices and engineered nanostructures.</li>
+                  <li>Measurement and control techniques for semiconductor spin-qubit platforms.</li>
+                  <li>Cryogenic RF measurement, device fabrication, and modeling for condensed matter systems.</li>
+                  <li>Mathematics and physics notes written for long-term study and review.</li>
+                </ul>
+                <div class="title-box-2">
+                  <h5 class="title-left">Education</h5>
+                </div>
+                <ul>
+                  <li>2025-present: PhD student in Applied Physics, Stanford University</li>
+                  <li>2022: MS in Physics, Seoul National University</li>
+                  <li>2020: BS in Chemistry Education and Physics, Seoul National University</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="services-mf pt-5 route">
+      <div class="container">
+        <div class="title-box text-center">
+          <h3 class="title-a">Research</h3>
+          <p class="subtitle-a">A conservative overview of current and previous research directions.</p>
+          <div class="line-mf"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="service-box">
+              <div class="service-ico"><span class="ico-circle"><i class="bi bi-cpu"></i></span></div>
+              <div class="service-content">
+                <h2 class="s-title">Quantum Devices</h2>
+                <p class="s-description text-center">Semiconductor spin qubits, coherent control, benchmarking, and Hamiltonian parameter estimation.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-box">
+              <div class="service-ico"><span class="ico-circle"><i class="bi bi-broadcast-pin"></i></span></div>
+              <div class="service-content">
+                <h2 class="s-title">Measurement</h2>
+                <p class="s-description text-center">Cryogenic measurement, RF reflectometry, device setup, and low-noise experimental workflows.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-box">
+              <div class="service-ico"><span class="ico-circle"><i class="bi bi-diagram-3"></i></span></div>
+              <div class="service-content">
+                <h2 class="s-title">Condensed Matter</h2>
+                <p class="s-description text-center">Nanofabricated heterostructures, superconducting circuits, multimode cQED, and solid-state modeling.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="portfolio-mf sect-pt4 route">
+      <div class="container">
+        <div class="title-box text-center">
+          <h3 class="title-a">Projects</h3>
+          <p class="subtitle-a">Selected research and technical projects.</p>
+          <div class="line-mf"></div>
+        </div>
+        <div class="row">
+          {projects.map((project) => (
+            <div class="col-md-4">
+              <div class="work-box">
+                <a href={`/projects/${entrySlug(project)}/`}>
+                  <div class="work-img"><img src={project.data.image ?? '/assets/img/work-1.jpg'} alt="" class="img-fluid v1-project-image" /></div>
+                </a>
+                <div class="work-content">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <h2 class="w-title">{project.data.title}</h2>
+                      <div class="w-more"><span class="w-ctegory">{project.data.category}</span> / <span class="w-date">{project.data.period}</span></div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="w-like"><a href={`/projects/${entrySlug(project)}/`}><span class="bi bi-plus-circle"></span></a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="publications" class="v1-section">
+      <div class="container">
+        <div class="v1-card">
+          <div class="title-box-2"><h5 class="title-left">Publications</h5></div>
+          {publications.map((pub) => (
+            <div class="v1-entry">
+              <h3><a href={pub.data.doi_url}>{pub.data.title}</a></h3>
+              <p>{pub.data.authors.join(', ')}</p>
+              <p class="v1-meta">{pub.data.venue} ({pub.data.year})</p>
+            </div>
+          ))}
+          <p class="mt-3"><a class="files" href="/publications/">Full publications page</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(/assets/img/overlay-bg.png)">
+      <div class="overlay-mf"></div>
+      <div class="container">
+        <div class="contact-mf text-center">
+          <div class="box-shadow-full">
+            <div class="title-box-2"><h5 class="title-left">Contact</h5></div>
+            <img
+              class="v1-contact-image v1-contact-image-centered"
+              src="/assets/img/contact-email.png"
+              alt="Contact email address rendered as an image"
+              loading="lazy"
+              draggable="false"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

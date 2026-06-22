@@ -1,0 +1,321 @@
+---
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { getCollection, render } from 'astro:content';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+export async function getStaticPaths() {
+  const showDrafts = import.meta.env.PUBLIC_SHOW_DRAFTS === 'true';
+  const notes = await getCollection('notes');
+  return notes
+    .filter((note) => showDrafts || !note.data.draft)
+    .map((note) => ({
+      params: { slug: note.slug ?? note.data.slug ?? note.id.replace(/\.mdx$/, '') },
+      props: { note }
+    }));
+}
+
+const { note } = Astro.props;
+const { Content, headings } = await render(note);
+const showDrafts = import.meta.env.PUBLIC_SHOW_DRAFTS === 'true';
+const allNotes = (await getCollection('notes'))
+  .filter((entry) => showDrafts || !entry.data.draft)
+  .sort((a, b) => {
+    const sectionCompare = (a.data.section ?? '').localeCompare(b.data.section ?? '');
+    if (sectionCompare !== 0) return sectionCompare;
+    return a.data.title.localeCompare(b.data.title);
+  });
+
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+const generatedNoteHtmlBySlug: Record<string, string> = {
+  'mathematics/topology/topological-spaces': 'src/generated/notes/mathematics/topology-point-set.html',
+  'mathematics/differential-geometry/manifolds-forms-connections':
+    'src/generated/notes/mathematics/differential-geometry-manifolds-forms-lie.html',
+  'mathematics/fiber-bundles/fiber-bundles-and-connections':
+    'src/generated/notes/mathematics/fiber-bundles-connections-curvature.html',
+  'mathematics/algebraic-topology/homotopy-fundamental-group-coverings':
+    'src/generated/notes/mathematics/algebraic-topology-homology-cohomology.html',
+  'mathematics/algebra/groups-rings-fields-modules':
+    'src/generated/notes/mathematics/algebra-category-refresher.html',
+  'mathematics/analysis/metric-spaces-and-convergence':
+    'src/generated/notes/mathematics/analysis-measure-refresher.html'
+};
+
+interface NoteNavItem {
+  title: string;
+  href: string;
+  active: boolean;
+}
+
+function noteEntrySlug(entry: { slug?: string; id: string; data: { slug?: string } }) {
+  return entry.data.slug ?? entry.slug ?? entry.id.replace(/\.mdx$/, '');
+}
+
+function noteSlug() {
+  return noteEntrySlug(note);
+}
+
+function noteUrl(entry: { slug?: string; id: string; data: { slug?: string } }) {
+  return `/notes/${noteEntrySlug(entry)}/`;
+}
+
+function chunkItems<T>(items: T[], size: number) {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
+function sourceHtml(path?: string) {
+  if (!path) return '';
+  const absolutePath = join(process.cwd(), path);
+  return existsSync(absolutePath) ? readFileSync(absolutePath, 'utf8') : '';
+}
+
+function cleanHeadingText(html: string) {
+  return html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function headingsFromHtml(html: string): TocItem[] {
+  return [...html.matchAll(/<h([1-3])\b[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g)]
+    .map((match) => ({
+      depth: Number(match[1]),
+      slug: match[2],
+      text: cleanHeadingText(match[3])
+    }))
+    .filter((heading) => heading.slug && heading.text);
+}
+
+const convertedHtml = sourceHtml(note.data.source_html ?? generatedNoteHtmlBySlug[noteSlug()]);
+const sameSectionNotes = allNotes.filter(
+  (entry) => entry.data.category === note.data.category && entry.data.section === note.data.section
+);
+const currentSectionIndex = sameSectionNotes.findIndex((entry) => noteEntrySlug(entry) === noteSlug());
+const siblingGroupSize = 5;
+const activeSiblingGroup = Math.max(0, Math.floor(currentSectionIndex / siblingGroupSize));
+const siblingGroups = chunkItems<NoteNavItem>(
+  sameSectionNotes.map((entry) => ({
+    title: entry.data.title,
+    href: noteUrl(entry),
+    active: noteEntrySlug(entry) === noteSlug()
+  })),
+  siblingGroupSize
+);
+const previousNote = currentSectionIndex > 0 ? sameSectionNotes[currentSectionIndex - 1] : undefined;
+const nextNote =
+  currentSectionIndex >= 0 && currentSectionIndex + 1 < sameSectionNotes.length
+    ? sameSectionNotes[currentSectionIndex + 1]
+    : undefined;
+const tocItems: TocItem[] = convertedHtml
+  ? [
+      ...(note.data.render_body_before_source
+        ? headings
+            .filter((heading) => heading.depth >= 1 && heading.depth <= 3)
+            .map((heading) => ({ depth: heading.depth, slug: heading.slug, text: heading.text }))
+        : []),
+      ...headingsFromHtml(convertedHtml)
+    ]
+  : headings
+      .filter((heading) => heading.depth >= 1 && heading.depth <= 3)
+      .map((heading) => ({ depth: heading.depth, slug: heading.slug, text: heading.text }));
+const showToc = tocItems.length >= 4;
+const showRail = showToc || sameSectionNotes.length > 1;
+const noteHeroBackgrounds: Record<string, string> = {
+  Mathematics: '/assets/img/math-notes-hero.png',
+  Physics: '/assets/img/physics-notes-hero.png'
+};
+const noteHeroBackground = noteHeroBackgrounds[note.data.category ?? ''] ?? '/assets/img/notes-hero.png';
+---
+
+<LegacyLayout title={`${note.data.title} - Notes - Jonginn Yun`} enableMathJax={note.data.math}>
+  <PageHero title={note.data.title} subtitle={note.data.summary} background={noteHeroBackground} />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        <div class:list={['v1-note-layout', showRail && 'v1-note-layout-with-toc']}>
+          {showRail && (
+            <aside class="v1-note-toc" aria-label="Note navigation">
+              <div class="v1-note-toc-inner">
+                <section
+                  class="v1-note-rail-nav"
+                  data-note-neighbor-bar
+                  data-active-group={activeSiblingGroup}
+                  aria-label={`${note.data.section} notes`}
+                >
+                  <div class="v1-note-neighbor-head">
+                    <a class="v1-note-back-link" href="/notes/">Notes</a>
+                    <span>{note.data.section}</span>
+                  </div>
+                  <div class="v1-note-neighbor-controls">
+                    <a class:list={['v1-note-neighbor-step', !previousNote && 'is-disabled']} href={previousNote ? noteUrl(previousNote) : undefined}>
+                      Previous
+                    </a>
+                    <a class:list={['v1-note-neighbor-step', !nextNote && 'is-disabled']} href={nextNote ? noteUrl(nextNote) : undefined}>
+                      Next
+                    </a>
+                  </div>
+                  <div class="v1-note-neighbor-groups">
+                    {siblingGroups.map((group, groupIndex) => (
+                      <div class="v1-note-neighbor-group" data-note-group={groupIndex} hidden={groupIndex !== activeSiblingGroup}>
+                        {group.map((item) => (
+                          <a class:list={['v1-note-neighbor-item', item.active && 'is-active']} href={item.href} aria-current={item.active ? 'page' : undefined}>
+                            <span>{item.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  {siblingGroups.length > 1 && (
+                    <div class="v1-note-neighbor-pager" aria-label="Section note groups">
+                      <button type="button" data-note-group-prev aria-label="Previous group">Prev 5</button>
+                      <span data-note-group-count>
+                        {activeSiblingGroup + 1} / {siblingGroups.length}
+                      </span>
+                      <button type="button" data-note-group-next aria-label="Next group">Next 5</button>
+                    </div>
+                  )}
+                </section>
+                {showToc && (
+                  <section class="v1-note-rail-sections">
+                    <p class="v1-note-toc-title">Sections</p>
+                    <nav>
+                      {tocItems.map((item) => (
+                        <a class={`v1-note-toc-link depth-${item.depth}`} href={`#${item.slug}`}>
+                          {item.text}
+                        </a>
+                      ))}
+                    </nav>
+                    <a class="v1-note-toc-top" href="#">Back to top</a>
+                  </section>
+                )}
+              </div>
+            </aside>
+          )}
+          <article class:list={['v1-prose', convertedHtml && 'v1-prose-wide']}>
+            <p class="v1-meta">
+              {note.data.category} / {note.data.section}
+              {note.data.subsection ? ` / ${note.data.subsection}` : ''}
+            </p>
+            {sameSectionNotes.length > 1 && (
+              <details
+                class="v1-note-neighbor-mobile"
+                data-note-neighbor-bar
+                data-active-group={activeSiblingGroup}
+              >
+                <summary>{note.data.section} notes</summary>
+                <div class="v1-note-neighbor-controls">
+                  <a class:list={['v1-note-neighbor-step', !previousNote && 'is-disabled']} href={previousNote ? noteUrl(previousNote) : undefined}>
+                    Previous
+                  </a>
+                  <a class:list={['v1-note-neighbor-step', !nextNote && 'is-disabled']} href={nextNote ? noteUrl(nextNote) : undefined}>
+                    Next
+                  </a>
+                </div>
+                <div class="v1-note-neighbor-groups">
+                  {siblingGroups.map((group, groupIndex) => (
+                    <div class="v1-note-neighbor-group" data-note-group={groupIndex} hidden={groupIndex !== activeSiblingGroup}>
+                      {group.map((item) => (
+                        <a class:list={['v1-note-neighbor-item', item.active && 'is-active']} href={item.href} aria-current={item.active ? 'page' : undefined}>
+                          <span>{item.title}</span>
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                {siblingGroups.length > 1 && (
+                  <div class="v1-note-neighbor-pager" aria-label="Section note groups">
+                    <button type="button" data-note-group-prev aria-label="Previous group">Prev 5</button>
+                    <span data-note-group-count>
+                      {activeSiblingGroup + 1} / {siblingGroups.length}
+                    </span>
+                    <button type="button" data-note-group-next aria-label="Next group">Next 5</button>
+                  </div>
+                )}
+              </details>
+            )}
+            {showToc && (
+              <details class="v1-note-toc-mobile">
+                <summary>Sections</summary>
+                <nav>
+                  {tocItems.map((item) => (
+                    <a class={`v1-note-toc-link depth-${item.depth}`} href={`#${item.slug}`}>
+                      {item.text}
+                    </a>
+                  ))}
+                </nav>
+              </details>
+            )}
+            {convertedHtml && note.data.render_body_before_source && (
+              <div class="v1-note-content v1-note-curated">
+                <Content />
+              </div>
+            )}
+            <div class="v1-note-content">
+              {convertedHtml ? <Fragment set:html={convertedHtml} /> : <Content />}
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script is:inline>
+    const tocLinks = [...document.querySelectorAll('.v1-note-toc-link')];
+    const headings = [...document.querySelectorAll('.v1-note-content :is(h1, h2, h3)[id]')];
+
+    if (tocLinks.length && headings.length) {
+      const linkById = new Map(tocLinks.map((link) => [decodeURIComponent(link.hash.slice(1)), link]));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+
+          if (!visible) return;
+          tocLinks.forEach((link) => link.removeAttribute('aria-current'));
+          linkById.get(visible.target.id)?.setAttribute('aria-current', 'true');
+        },
+        { rootMargin: '-20% 0px -65% 0px', threshold: 0.01 }
+      );
+
+      headings.forEach((heading) => observer.observe(heading));
+    }
+
+    const noteBars = [...document.querySelectorAll('[data-note-neighbor-bar]')];
+    noteBars.forEach((bar) => {
+      const groups = [...bar.querySelectorAll('[data-note-group]')];
+      const count = bar.querySelector('[data-note-group-count]');
+      const prev = bar.querySelector('[data-note-group-prev]');
+      const next = bar.querySelector('[data-note-group-next]');
+      let activeGroup = Number(bar.dataset.activeGroup || 0);
+
+      const showGroup = (index) => {
+        activeGroup = Math.max(0, Math.min(index, groups.length - 1));
+        groups.forEach((group, groupIndex) => {
+          group.hidden = groupIndex !== activeGroup;
+        });
+        if (count) count.textContent = `${activeGroup + 1} / ${groups.length}`;
+        if (prev) prev.disabled = activeGroup === 0;
+        if (next) next.disabled = activeGroup === groups.length - 1;
+      };
+
+      prev?.addEventListener('click', () => showGroup(activeGroup - 1));
+      next?.addEventListener('click', () => showGroup(activeGroup + 1));
+      if (groups.length) showGroup(activeGroup);
+    });
+  </script>
+</LegacyLayout>

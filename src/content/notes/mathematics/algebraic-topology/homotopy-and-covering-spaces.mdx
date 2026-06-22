@@ -1,0 +1,50 @@
+---
+title: "Homotopy and Covering Spaces"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/algebraic-topology/homotopy-and-covering-spaces
+category: Mathematics
+section: "Algebraic Topology"
+subsection: "Homotopy and covering spaces"
+tags: ["homotopy", "fundamental group", "covering spaces"]
+summary: "A compact note on homotopy, loops, the fundamental group, and covering spaces."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Homotopy
+
+Two maps $f,g:X\to Y$ are homotopic if one can be continuously deformed into the other:
+$$
+H:X\times[0,1]\to Y,\qquad H(-,0)=f,\quad H(-,1)=g.
+$$
+
+Homotopy keeps track of qualitative shape. It ignores metric details but remembers obstructions such as holes.
+
+## Fundamental Group
+
+At a base point $x_0\in X$, loops based at $x_0$ can be multiplied by concatenation. After quotienting by homotopy of loops, one obtains the fundamental group
+$$
+\pi_1(X,x_0).
+$$
+
+This group detects one-dimensional holes. For example,
+$$
+\pi_1(S^1)\cong \mathbb Z,
+$$
+because a loop around the circle has an integer winding number.
+
+## Covering Spaces
+
+A covering map $p:\widetilde X\to X$ is a map such that every point of $X$ has a neighborhood $U$ whose preimage is a disjoint union of copies of $U$.
+
+Covering spaces turn questions about loops into questions about lifting paths. A loop in $X$ may lift to a path in $\widetilde X$ whose endpoint records winding information.
+
+## Why This Matters Later
+
+Principal bundles and gauge theory often contain global information that cannot be seen in a single coordinate patch. Homotopy and covering spaces provide the first algebraic language for such global obstructions.

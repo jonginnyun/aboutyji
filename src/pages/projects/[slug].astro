@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug ?? project.data.slug ?? project.id.replace(/\.mdx$/, '') },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<LegacyLayout title={`${project.data.title} - Jonginn Yun`}>
+  <PageHero title={project.data.title} background={project.data.image} />
+  <main id="main">
+    <section class="portfolio-details">
+      <div class="container">
+        <div class="v1-project-detail v1-prose v1-prose-wide">
+          <div class="v1-project-kicker">
+            <span>{project.data.category}</span>
+            {project.data.period && <span>{project.data.period}</span>}
+            {project.data.role && <span>{project.data.role}</span>}
+          </div>
+          {project.data.summary && <p class="v1-project-summary">{project.data.summary}</p>}
+          <Content />
+        </div>
+      </div>
+    </section>
+    {project.data.legacy_url && (
+      <div class="container v1-archive-link">
+        <p>
+          Preserved legacy archive: <a class="files" href={project.data.legacy_url}>open original HTML</a>
+        </p>
+      </div>
+    )}
+  </main>
+</LegacyLayout>

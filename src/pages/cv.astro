@@ -1,0 +1,27 @@
+---
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+const cvPreviewPath = `${site.cvPath}#zoom=125&view=FitH&pagemode=none`;
+---
+
+<LegacyLayout title="CV - Jonginn Yun">
+  <PageHero title="CV" subtitle="Curriculum vitae and academic profile links." background="/assets/img/cv-hero.png" />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container-fluid v1-cv-container">
+        <div class="v1-card v1-cv-card">
+          <div class="v1-cv-actions">
+            <p>The current CV is embedded below.</p>
+            <a class="files" href={site.cvPath}>Open PDF in a new tab</a>
+          </div>
+          <object class="v1-cv-pdf" data={cvPreviewPath} type="application/pdf">
+            <iframe class="v1-cv-pdf" src={cvPreviewPath} title="Jonginn Yun CV"></iframe>
+            <p><a class="files" href={site.cvPath}>Open JonginnYun_CV.pdf</a></p>
+          </object>
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

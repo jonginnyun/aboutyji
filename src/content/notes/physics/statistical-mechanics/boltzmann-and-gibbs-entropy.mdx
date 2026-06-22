@@ -1,0 +1,54 @@
+---
+title: "Boltzmann Entropy and Gibbs Entropy"
+date: 2026-06-21
+updated: 2026-06-21
+lang: en
+slug: physics/statistical-mechanics/boltzmann-and-gibbs-entropy
+category: Physics
+section: "Statistical Mechanics"
+subsection: "Entropy"
+tags: ["statistical mechanics", "Boltzmann entropy", "Gibbs entropy", "Liouville theorem"]
+summary: "Draft note comparing Boltzmann entropy, fine-grained Gibbs entropy, and coarse-grained Gibbs entropy."
+math: true
+draft: true
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Microstates and Macrostates
+
+A microstate is a point $x$ in phase space $\Gamma$ for a classical system, or a quantum state in the appropriate Hilbert-space description. A macrostate is specified by coarse variables such as energy, volume, particle number, magnetization, or density profiles. Many microstates may realize the same macrostate.
+
+The Boltzmann entropy of a macrostate $M$ is
+$$
+S_B(M)=k_B\log |\Gamma_M|,
+$$
+where $\Gamma_M\subset\Gamma$ is the region of phase space compatible with the macroscopic constraints. In quantum mechanics the phase-space volume is replaced by a count or dimension of compatible states, with the correct normalization.
+
+## Probability Distributions
+
+Gibbs entropy starts from a probability density $\rho(x)$ over phase space:
+$$
+S_G[\rho] = -k_B \int_\Gamma \rho(x)\log \rho(x)\,dx,
+$$
+with the measure and normalization chosen for the physical system. For a discrete distribution this becomes
+$$
+S_G[p] = -k_B\sum_i p_i\log p_i.
+$$
+
+## Liouville Theorem and Fine-Grained Entropy
+
+Hamiltonian time evolution preserves phase-space volume. The density evolves by the Liouville equation, and the fine-grained Gibbs entropy is constant under exact Hamiltonian dynamics. This means entropy increase is not obtained merely by saying that microscopic dynamics "wants" equilibrium. Additional statistical assumptions are doing work.
+
+## Coarse Graining
+
+Coarse graining replaces the exact distribution with a distribution resolved only at finite macroscopic precision. Under mixing dynamics, an initially localized distribution can stretch and fold through phase space. Fine-grained entropy remains constant, but coarse-grained entropy can increase because the coarse cells become more uniformly occupied.
+
+## Statistical Assumptions
+
+Entropy growth depends on assumptions about preparation, typicality, molecular chaos, limited macroscopic observables, and the practical irrelevance of extremely fine correlations. Boltzmann entropy emphasizes the size of the macrostate compatible with what is observed; Gibbs entropy emphasizes uncertainty in a probability distribution. The two are compatible in equilibrium but answer different conceptual questions away from equilibrium.
+
+{/* TODO: Add examples for the ideal gas and two-state systems before making this note public. */}
+

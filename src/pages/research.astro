@@ -1,0 +1,38 @@
+---
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<LegacyLayout title="Research - Jonginn Yun">
+  <PageHero
+    title="Research"
+    subtitle="Experimental physics with an emphasis on quantum devices and measurement."
+    background="/assets/img/research-hero.png"
+  />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        <div class="v1-card">
+          <div class="title-box-2"><h5 class="title-left">Research Overview</h5></div>
+          <p>
+            Jonginn Yun's research background includes semiconductor quantum devices, spin qubits, quantum control, cryogenic measurement, RF reflectometry, nanofabrication, superconducting circuits, and multimode cQED. This page is intentionally conservative and does not claim active projects beyond what is represented in the public project archive.
+          </p>
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <h3 class="title-tiny">Quantum Devices</h3>
+              <p>Semiconductor spin-qubit experiments, Hamiltonian parameter estimation, coherent control, and benchmarking.</p>
+            </div>
+            <div class="col-md-4">
+              <h3 class="title-tiny">Measurement Systems</h3>
+              <p>Cryogenic device integration, RF reflectometry, low-noise readout, and measurement infrastructure.</p>
+            </div>
+            <div class="col-md-4">
+              <h3 class="title-tiny">Materials and Circuits</h3>
+              <p>Nanofabricated devices, van der Waals heterostructures, superconducting circuits, and condensed matter modeling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

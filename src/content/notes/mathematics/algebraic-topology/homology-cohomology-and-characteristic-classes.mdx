@@ -1,0 +1,59 @@
+---
+title: "Homology, Cohomology, and Characteristic Classes"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/algebraic-topology/homology-cohomology-and-characteristic-classes
+category: Mathematics
+section: "Algebraic Topology"
+subsection: "Homology and cohomology"
+tags: ["homology", "cohomology", "characteristic classes", "Chern classes"]
+summary: "A short bridge from chains and cochains to characteristic classes and Chern-number language."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Homology
+
+Homology assigns algebraic data to holes of different dimensions. Very roughly, one studies chains, cycles, and boundaries:
+$$
+\partial_{k}\partial_{k+1}=0.
+$$
+
+Cycles with no boundary may still be boundaries of higher-dimensional chains. Homology classes are cycles modulo boundaries.
+
+## Cohomology
+
+Cohomology is the dual theory. Instead of chains, it uses cochains, and the coboundary operator satisfies
+$$
+d^2=0.
+$$
+
+In de Rham cohomology, cochains are differential forms. Closed forms satisfy $d\omega=0$, and exact forms have the form $\omega=d\eta$.
+
+The quotient
+$$
+H^k_{\mathrm{dR}}(M)=\frac{\ker d:\Omega^k(M)\to\Omega^{k+1}(M)}{\operatorname{im}d:\Omega^{k-1}(M)\to\Omega^k(M)}
+$$
+captures global information invisible to local calculus.
+
+## Characteristic Classes
+
+Characteristic classes assign cohomology classes to vector bundles. They measure global twisting that cannot be removed by local trivialization.
+
+For a complex line bundle with curvature two-form $F$, the first Chern class is represented by
+$$
+\frac{F}{2\pi}
+$$
+up to conventional factors depending on whether the connection is written as real or imaginary-valued.
+
+On a closed oriented surface, the first Chern number is
+$$
+\frac{1}{2\pi}\int F.
+$$
+
+This is the algebraic-topology backbone behind Berry curvature, Bloch bundles, and Chern insulators.

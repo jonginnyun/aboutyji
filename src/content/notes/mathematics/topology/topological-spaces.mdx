@@ -1,0 +1,95 @@
+---
+title: "Topological Spaces and Point-Set Topology"
+date: 2026-06-21
+updated: 2026-06-22
+lang: en
+slug: mathematics/topology/topological-spaces
+category: Mathematics
+section: "Topology"
+subsection: "Point-set topology"
+tags: ["topology", "continuity", "open sets"]
+summary: "Point-set topology foundations preserved from the fiber-bundle lecture note source."
+math: true
+draft: false
+source_note: "source_notes/lecture_notes/fibre_bundles_phys374_selfcontained_v13.tex; math/topo/topo-basic.html"
+render_body_before_source: true
+translation_of: ""
+canonical_lang: en
+naver_export: false
+source_html: "src/generated/notes/mathematics/topology-point-set.html"
+---
+
+## Working Intuition: Topology Without Distance
+
+The quickest way into topology is not to memorize the three axioms first. It is to ask what part of analysis survives after one removes the numerical distance function.
+
+In a metric space, proximity is measured by balls
+$$
+B_r(x)=\{y\in X:d(x,y)<r\}.
+$$
+Limits, continuity, neighborhoods, and local arguments are all phrased using these balls. But many geometric constructions do not really need the number $d(x,y)$ itself. They only need to know which subsets count as neighborhoods, which properties can be checked locally, and which points cannot be separated by the available open sets.
+
+A topology keeps exactly that information. It forgets the ruler and remembers the pattern of open sets.
+
+This is why the axioms for open sets are not arbitrary. In metric spaces:
+
+- the empty set and the whole space are open;
+- an arbitrary union of open sets is open, because being locally inside one of them is enough;
+- a finite intersection of open sets is open, because finitely many local conditions can be satisfied at once by shrinking the radius.
+
+The finite-intersection condition is important. If one tries to satisfy infinitely many radius constraints at once, the allowed radius can collapse to zero. Topology is built to preserve the kind of local reasoning that actually works.
+
+## Neighborhoods Are the Real Primitive
+
+Although one defines a topology as a collection of open subsets, the mental object is often the neighborhood system of each point. A neighborhood of $x$ is something large enough to contain an open set around $x$. Once neighborhoods are known, we can define:
+
+- convergence: eventually every neighborhood is entered;
+- limit points: every neighborhood meets the set again;
+- closure: all points forced by neighborhoods;
+- continuity: inverse images preserve neighborhoods/open sets;
+- local structure: a property is checked after restricting to neighborhoods.
+
+This is the bridge from analysis to geometry. A manifold is locally Euclidean because every point has a neighborhood that looks like an open subset of $\mathbb R^n$. A fibre bundle is locally a product because every base point has a neighborhood over which the total space looks like $U\times F$. In both cases, topology tells us what "locally" means before calculus or linear algebra enters.
+
+## Closed Sets, Closure, and the Common Confusion
+
+Closed does not mean "not open." A set is closed if its complement is open. A set can be both open and closed, or neither.
+
+The useful intuition is:
+
+$$
+\overline A=\text{the set }A\text{ together with all points that }A\text{ cannot avoid locally.}
+$$
+
+Equivalently, $x\in\overline A$ if every neighborhood of $x$ intersects $A$. A closed set is one that already contains all such forced boundary or limiting points.
+
+The interior goes in the opposite direction:
+$$
+\operatorname{int}(A)=\text{the part of }A\text{ that is safely surrounded by }A.
+$$
+
+So closure asks what must be added to make $A$ topologically complete from the outside; interior asks what part of $A$ is robustly inside.
+
+## Continuity as Pulling Back Observations
+
+The definition
+$$
+f:X\to Y \text{ is continuous}\quad\Longleftrightarrow\quad f^{-1}(U)\text{ is open in }X\text{ for every open }U\subset Y
+$$
+is one of the cleanest ideas in point-set topology.
+
+It says: every observable open condition in the target can be checked by an open condition in the source. We use preimages rather than images because preimages preserve unions, finite intersections, the empty set, and the whole set automatically. Images do not.
+
+A homeomorphism is then a change of description that loses no topological information. Two spaces are homeomorphic when they have the same open-set structure, even if they are embedded, drawn, or parametrized differently.
+
+## Why This Matters Later
+
+For the notes that follow, topology supplies the grammar for gluing.
+
+- Quotient spaces describe what happens when points are identified.
+- Product and subspace topologies describe how local coordinate pieces sit inside larger constructions.
+- Hausdorffness prevents points from being topologically indistinguishable.
+- Compactness turns local covers into finite data.
+- Paracompactness and partitions of unity let local constructions be patched globally.
+
+The fibre-bundle language later in these notes is built on this foundation: local triviality is a statement about open neighborhoods, transition functions live on overlaps, and total spaces are often constructed by quotienting a disjoint union of local pieces.

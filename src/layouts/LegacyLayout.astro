@@ -1,0 +1,82 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../data/site';
+import '../styles/v1.css';
+import 'katex/dist/katex.min.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+  enableMathJax?: boolean;
+}
+
+const {
+  title = 'Jonginn Yun',
+  description = 'Personal academic website of Jonginn Yun.',
+  bodyClass = '',
+  enableMathJax = false
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link href="https://cdn.jsdelivr.net/gh/sugina-dev/latin-modern-web@1.0.1/style/latinmodern-roman.css" rel="stylesheet" />
+    <link href="/assets/img/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/assets/img/favicon.png" rel="icon" type="image/png" />
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    {site.googleAnalyticsId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.googleAnalyticsId}`}></script>
+        <script is:inline define:vars={{ googleAnalyticsId: site.googleAnalyticsId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', googleAnalyticsId);
+        </script>
+      </>
+    )}
+  </head>
+  <body class={bodyClass}>
+    <SiteHeader />
+    <slot />
+    <SiteFooter />
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script is:inline src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script is:inline src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script is:inline src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script is:inline src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script is:inline src="/assets/vendor/typed.js/typed.umd.js"></script>
+    {enableMathJax && (
+      <>
+        <script is:inline>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['\\(', '\\)'], ['$', '$']],
+              displayMath: [['\\[', '\\]'], ['$$', '$$']],
+              processEscapes: true
+            },
+            options: {
+              skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          };
+        </script>
+        <script is:inline async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      </>
+    )}
+    <script is:inline src="/assets/js/main.js"></script>
+  </body>
+</html>

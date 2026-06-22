@@ -1,0 +1,25 @@
+---
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<LegacyLayout title="Contact - Jonginn Yun">
+  <PageHero title="Contact" subtitle="Academic contact information." />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        <div class="v1-card">
+          <p class="v1-contact-line"><span class="title-s">Email</span></p>
+          <img
+            class="v1-contact-image"
+            src="/assets/img/contact-email.png"
+            alt="Contact email address rendered as an image"
+            loading="lazy"
+            draggable="false"
+          />
+          <p class="v1-meta">The address is rendered as an image to reduce automated scraping. No contact form credentials or backend secrets are included in this static site.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

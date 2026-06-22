@@ -1,0 +1,17 @@
+---
+import { navItems, site } from '../data/site';
+---
+
+<header id="header" class="fixed-top header-scrolled">
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="/">{site.name}</a></h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+        {navItems.map((item) => (
+          <li><a class="nav-link scrollto" href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+  </div>
+</header>

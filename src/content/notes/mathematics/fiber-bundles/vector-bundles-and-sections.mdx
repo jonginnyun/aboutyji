@@ -1,0 +1,83 @@
+---
+title: "Vector Bundles, Frames, and Sections"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/fiber-bundles/vector-bundles-and-sections
+category: Mathematics
+section: "Fiber Bundles"
+subsection: "Vector bundles and local frames"
+tags: ["vector bundles", "sections", "frames", "gauge transformations"]
+summary: "Vector bundles as fiber bundles with linear fibers, local frames, section components, and gauge changes."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Vector Bundles
+
+A rank-$n$ vector bundle is a fiber bundle
+$$
+\pi:E\to B
+$$
+whose fibers $E_b$ are $n$-dimensional vector spaces and whose local trivializations identify
+$$
+\pi^{-1}(U)\simeq U\times \mathbb F^n
+$$
+by linear maps on each fiber.
+
+The transition functions therefore take values in
+$$
+GL(n,\mathbb F),
+$$
+so on overlaps
+$$
+v_V(b)=g_{VU}(b)v_U(b),\qquad g_{VU}:U\cap V\to GL(n,\mathbb F).
+$$
+
+## Local Frames
+
+A local frame over $U$ is a choice of basis
+$$
+e_1(b),\ldots,e_n(b)
+$$
+for every fiber $E_b$ with $b\in U$, varying continuously or smoothly depending on the category.
+
+Once a local frame is chosen, a section can be written as
+$$
+s(b)=\sum_i s^i_U(b)e_i(b).
+$$
+
+Changing the frame changes the component functions $s^i_U$, but not the geometric section $s$ itself. This distinction is the cleanest way to keep track of coordinate-dependent expressions.
+
+## Gauge as Change of Frame
+
+In a vector bundle, a gauge transformation can be understood as a point-dependent change of local frame. If
+$$
+e'_i(b)=\sum_j e_j(b)G^j{}_i(b),
+$$
+then the component column vector of a section transforms by the inverse matrix:
+$$
+s'_U(b)=G(b)^{-1}s_U(b).
+$$
+
+This is why gauge language is not an optional overlay on bundle theory. It appears as soon as one asks how local component descriptions compare on overlaps or under frame changes.
+
+## Important Examples
+
+The tangent bundle $TM$ is the vector bundle whose fiber at $p\in M$ is the tangent space $T_pM$. A vector field is a section of $TM$.
+
+The cotangent bundle $T^*M$ has fibers $T_p^*M$. A one-form is a section of $T^*M$.
+
+Exterior powers such as $\Lambda^kT^*M$ are also vector bundles. Differential $k$-forms are sections of these bundles.
+
+The Bloch bundle in band theory is another vector bundle: over each crystal momentum $k$ in the Brillouin zone, its fiber is the occupied eigenspace of the Bloch Hamiltonian.
+
+## The Useful Mental Model
+
+The vector space structure lives fiberwise. There is no automatic way to subtract vectors in different fibers unless extra structure, such as a connection, is introduced.
+
+This point is easy to miss because local trivializations temporarily identify nearby fibers with a fixed model vector space. But those identifications are chart choices, not canonical facts.

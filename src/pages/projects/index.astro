@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => (b.data.date.valueOf() - a.data.date.valueOf()));
+const entrySlug = (entry: { slug?: string; data: { slug?: string }; id: string }) => entry.slug ?? entry.data.slug ?? entry.id.replace(/\.mdx$/, '');
+---
+
+<LegacyLayout title="Projects - Jonginn Yun">
+  <PageHero
+    title="Projects"
+    subtitle="Selected research and technical project notes."
+    background="/assets/img/projects-hero.png"
+  />
+  <main id="main">
+    <section class="portfolio-mf sect-pt4 route">
+      <div class="container">
+        <div class="row">
+          {projects.map((project) => (
+            <div class="col-md-4">
+              <div class="work-box">
+                <a href={`/projects/${entrySlug(project)}/`}>
+                  <div class="work-img"><img src={project.data.image ?? '/assets/img/work-1.jpg'} alt="" class="img-fluid v1-project-image" /></div>
+                </a>
+                <div class="work-content">
+                  <h2 class="w-title"><a href={`/projects/${entrySlug(project)}/`}>{project.data.title}</a></h2>
+                  <div class="w-more"><span class="w-ctegory">{project.data.category}</span> / <span class="w-date">{project.data.period}</span></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

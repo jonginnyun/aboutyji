@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const publications = (await getCollection('publications')).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+---
+
+<LegacyLayout title="Publications - Jonginn Yun">
+  <PageHero
+    title="Publications"
+    subtitle="Selected peer-reviewed publication records."
+    background="/assets/img/publications-hero.png"
+  />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        <div class="v1-card">
+          <p class="v1-meta">*: equal contribution where indicated in the publication record.</p>
+          {publications.map((pub) => (
+            <article class="v1-entry">
+              <h3><a href={pub.data.doi_url}>{pub.data.title}</a></h3>
+              <p>{pub.data.authors.join(', ')}</p>
+              <p class="v1-meta">{pub.data.venue} ({pub.data.year})</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

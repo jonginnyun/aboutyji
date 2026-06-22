@@ -1,141 +1,98 @@
-# PROJECT_BRIEF.md
+\# PROJECT\_BRIEF.md
 
-## Goal
 
-Refactor my current personal HTML-based website into a maintainable academic website and long-form writing platform.
 
-The current problem is that I have to manually write and upload HTML pages. I want to move toward a system where I can write posts and notes in Markdown or MDX, build the site automatically, and eventually generate English translations from Korean source posts.
+Goal:
 
-## Primary audiences
+Create Version 1 of my personal academic website.
 
-1. Academic collaborators and researchers
-2. Professors and lab members
-3. Recruiters or technical interviewers
-4. Immigration attorneys or reviewers who may need a clean public record of my research profile
-5. Students or readers interested in physics explanations and research notes
-6. Myself, as a long-term knowledge base
 
-## Site tone
 
-The site should be serious, technical, precise, and academic. It should not look like a startup landing page or a generic personal blog.
+The website should serve as:
 
-## Desired top-level navigation
+1\. A professional academic profile.
 
-* Home
-* Research
-* Publications
-* Projects
-* Notes
-* Essays
-* CV
-* Contact
+2\. A research/publication/project archive.
 
-## Content categories
+3\. A long-term writing platform for physics and mathematics notes.
 
-### Home
+4\. A future bilingual Korean/English site.
 
-A concise landing page explaining who I am and what I work on.
 
-### Research
 
-A structured overview of my research interests and technical background. It should organize my work into themes such as semiconductor quantum devices, quantum control/benchmarking, superconducting circuits, and hybrid quantum systems.
+The original site was adapted from another static HTML site. I want to preserve the existing design as much as possible while replacing the fragile hand-written HTML workflow with a maintainable MDX-based content workflow.
 
-### Publications
 
-A clean publication list. Each publication should support fields such as title, authors, venue, year, DOI/arXiv link, role, and short contribution summary.
 
-### Projects
+Required top-level pages:
 
-Selected research projects written in an accessible but technically accurate style. Each project should have problem, method, result, and significance.
+\- Home
 
-### Notes
+\- Research
 
-Long-form technical notes. These may include LaTeX, equations, derivations, code snippets, diagrams, and conceptual explanations.
+\- Publications
 
-### Essays
+\- Projects
 
-Less formal but still precise physics intuition posts, career reflections, or research-adjacent writing.
+\- Notes
 
-### CV
+\- Essays
 
-A simple page linking to a PDF CV and possibly an HTML summary.
+\- CV
 
-### Contact
+\- Contact
 
-A minimal contact page.
 
-## Bilingual strategy
 
-Korean may be the source language for many notes and essays. English versions should be supported as separate pages, not as machine-translated text hidden inside the same page.
+Owner:
 
-Desired URL pattern:
+Jonginn Yun, Stanford Applied Physics PhD student and experimental physicist.
 
-* /ko/notes/example-slug/
-* /en/notes/example-slug/
 
-or another consistent bilingual route chosen during implementation.
 
-## Writing format
+Relevant research background:
 
-Prefer MDX so that most posts can be written as Markdown, but special components can be embedded later when needed.
+\- semiconductor quantum devices
 
-The content system should support front matter fields such as:
+\- spin qubits
 
-* title
-* date
-* updated
-* lang
-* slug
-* category
-* tags
-* summary
-* math
-* draft
-* translation_of
-* canonical_lang
-* naver_export
+\- quantum control and benchmarking
 
-## Translation automation
+\- cryogenic measurement
 
-After migration, add a script that uses the OpenAI API to translate Korean MDX into English MDX. The script should preserve LaTeX, code blocks, links, image paths, front matter structure, and headings.
+\- RF reflectometry
 
-The translation system should use source hashes to avoid retranslating unchanged posts.
+\- nanofabrication
 
-## Naver Blog workflow
+\- superconducting circuits
 
-Do not auto-post to Naver Blog. Instead, create an export command that produces draft files for manual posting.
+\- multimode cQED
 
-Example output:
+\- physics notes and conceptual explanations
 
-* naver_drafts/my-post.html
-* naver_drafts/my-post.txt
 
-The draft should contain a short summary and links back to the original post on my website.
 
-## Migration priority
+Do not exaggerate claims. Use conservative academic language.
 
-Priority 1:
 
-* Preserve the existing website.
-* Inventory the current structure.
-* Create a minimal Astro + MDX migration.
-* Migrate only a few representative pages first.
 
-Priority 2:
+Writing platform:
 
-* Add content collections.
-* Add bilingual routing.
-* Add math support.
-* Add publication/project schemas.
+\- Notes should be written in MDX.
 
-Priority 3:
+\- Math-heavy content must render correctly.
 
-* Add OpenAI translation script.
-* Add Naver draft export.
-* Add GitHub Actions deployment.
+\- Draft content should not be publicly listed by default.
 
-Priority 4:
+\- LaTeX lecture notes should be reorganized into readable draft MDX notes.
 
-* Polish design.
-* Improve SEO.
-* Add RSS/search/tags if useful.
+
+
+Security:
+
+\- No credentials in the repository.
+
+\- No GitHub tokens, OpenAI keys, OAuth secrets, or deployment credentials in frontend code.
+
+\- Future writing automation should be Git-based or GitHub Actions based.
+

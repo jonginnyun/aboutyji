@@ -1,0 +1,64 @@
+---
+title: "Forms, Flows, and Lie Derivatives"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/differential-geometry/forms-flows-and-lie-derivatives
+category: Mathematics
+section: "Differential Geometry"
+subsection: "Forms, flows, and Lie derivatives"
+tags: ["differential forms", "vector fields", "flows", "Lie derivative"]
+summary: "A focused note on differential forms, vector-field flows, pullbacks, and the meaning of the Lie derivative."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Differential Forms
+
+A differential $k$-form is a section of
+$$
+\Lambda^kT^*M.
+$$
+
+It eats $k$ tangent vectors and returns a number, alternating sign when two arguments are exchanged. The exterior derivative
+$$
+d:\Omega^k(M)\to \Omega^{k+1}(M)
+$$
+satisfies $d^2=0$ and generalizes gradient, curl, and divergence in a coordinate-independent way.
+
+## Pullbacks
+
+If $F:M\to N$ is smooth, then forms on $N$ can be pulled back to forms on $M$:
+$$
+F^*:\Omega^k(N)\to \Omega^k(M).
+$$
+
+Pullback is the natural direction because forms evaluate on tangent vectors, and $F$ pushes tangent vectors forward. This is also the correct language for change of variables and coordinate invariance.
+
+## Flows
+
+A vector field $X$ generates a local flow $\Phi_t$, a family of diffeomorphisms satisfying
+$$
+\frac{d}{dt}\Phi_t(p)=X_{\Phi_t(p)},\qquad \Phi_0(p)=p.
+$$
+
+The flow tells us how geometric objects move when points are transported along the vector field.
+
+## Lie Derivative
+
+The Lie derivative measures the infinitesimal change of a tensor field along a vector field. For a function,
+$$
+\mathcal L_X f=X(f).
+$$
+
+For a differential form $\omega$, Cartan's formula gives
+$$
+\mathcal L_X\omega=i_Xd\omega+d(i_X\omega),
+$$
+where $i_X$ is contraction with the vector field.
+
+The Lie derivative should not be confused with a connection. It differentiates along a flow that moves points of the manifold. A connection differentiates sections by comparing nearby fibers.

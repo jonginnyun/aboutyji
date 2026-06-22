@@ -1,0 +1,69 @@
+---
+title: "Crystals, Bands, and Quantum-Device Basics"
+date: 2026-06-21
+updated: 2026-06-21
+lang: en
+slug: physics/condensed-matter/crystals-bands-and-devices
+category: Physics
+section: "Condensed Matter Physics"
+subsection: "Crystal and band basics"
+tags: ["condensed matter", "crystals", "band theory", "semiconductors", "2DEG"]
+summary: "Draft source-note-derived condensed matter overview."
+math: true
+draft: true
+source_note: "source_notes/lecture_notes/solid_state_physics_notes_revised.tex"
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+{/* TODO: Split this overview into separate notes for lattice structure, Bloch theory, transport, phonons, and semiconductor devices. */}
+
+## Crystal Structure
+
+A Bravais lattice is a set of translations
+$$
+\mathcal L=\{n_1\mathbf a_1+n_2\mathbf a_2+n_3\mathbf a_3:n_i\in\mathbb Z\}.
+$$
+
+A crystal structure is a Bravais lattice plus a basis. This distinction matters: a honeycomb crystal, for example, is not itself a Bravais lattice but can be described as a triangular Bravais lattice with a two-site basis.
+
+## Reciprocal Space
+
+The reciprocal lattice consists of vectors $\mathbf G$ satisfying
+$$
+e^{i\mathbf G\cdot \mathbf R}=1
+$$
+for every lattice vector $\mathbf R$. The first Brillouin zone is a primitive cell in reciprocal space, usually chosen as the Wigner-Seitz cell around the origin.
+
+## Band Theory
+
+For a periodic potential, Bloch states take the form
+$$
+\psi_{n\mathbf k}(\mathbf r)=e^{i\mathbf k\cdot \mathbf r}u_{n\mathbf k}(\mathbf r),
+$$
+where $u_{n\mathbf k}$ has lattice periodicity. The band energy $\epsilon_n(\mathbf k)$ defines Fermi surfaces, effective masses, and semiclassical electron dynamics.
+
+The effective mass near a band extremum is controlled by curvature:
+$$
+\left(m^{-1}\right)_{ij}=\frac{1}{\hbar^2}\frac{\partial^2 \epsilon}{\partial k_i\partial k_j}.
+$$
+
+## Envelope Functions and Semiconductor Devices
+
+In semiconductor heterostructures, slowly varying envelope functions are used when the device potential varies on a scale longer than the lattice spacing. This is one route from microscopic band structure to effective quantum-well, 2DEG, and quantum-dot models.
+
+## Phonons
+
+Phonons arise from quantized lattice vibrations. Harmonic lattice dynamics gives normal modes labeled by crystal momentum and branch index. Coupling between electrons and phonons becomes important for transport, relaxation, and superconductivity.
+
+## Semiclassical Dynamics
+
+In the simplest band picture without Berry-curvature corrections,
+$$
+\hbar\dot{\mathbf k}=-e(\mathbf E+\dot{\mathbf r}\times\mathbf B),\qquad
+\dot{\mathbf r}=\frac{1}{\hbar}\nabla_{\mathbf k}\epsilon_n(\mathbf k).
+$$
+
+Modern treatments add Berry connection and curvature terms when the geometry of Bloch states is important.
+

@@ -1,0 +1,74 @@
+---
+title: "Manifolds and Tangent Spaces"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/differential-geometry/manifolds-and-tangent-spaces
+category: Mathematics
+section: "Differential Geometry"
+subsection: "Manifolds and tangent spaces"
+tags: ["manifolds", "tangent spaces", "charts", "differential geometry"]
+summary: "A compact note on smooth manifolds, charts, tangent vectors, cotangent vectors, and the local-to-global viewpoint."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Manifolds
+
+A smooth $n$-manifold is a space locally modeled on $\mathbb R^n$ with smooth transition maps between coordinate charts. A chart is a map
+$$
+\varphi:U\to \varphi(U)\subset \mathbb R^n,
+$$
+where $U$ is open in the manifold.
+
+The point of the definition is not that the manifold is secretly $\mathbb R^n$. It is that calculus can be done locally, and the answers can be checked to transform consistently when coordinates change.
+
+## Tangent Vectors
+
+At a point $p\in M$, a tangent vector can be understood as a directional derivative acting on smooth functions:
+$$
+v:C^\infty(M)\to \mathbb R.
+$$
+
+It is linear and satisfies the Leibniz rule
+$$
+v(fg)=v(f)g(p)+f(p)v(g).
+$$
+
+In local coordinates $x^1,\ldots,x^n$, every tangent vector can be written
+$$
+v=v^i\frac{\partial}{\partial x^i}\bigg|_p.
+$$
+
+The coordinate expression changes under a chart change, but the tangent vector itself is intrinsic.
+
+## Cotangent Vectors
+
+The cotangent space $T_p^*M$ is the dual vector space of $T_pM$. Its elements are covectors. In coordinates, the dual basis is
+$$
+dx^1,\ldots,dx^n,
+$$
+with
+$$
+dx^i\left(\frac{\partial}{\partial x^j}\right)=\delta^i_j.
+$$
+
+A one-form is a smoothly varying choice of cotangent vector:
+$$
+\alpha=\alpha_i dx^i.
+$$
+
+This language is the beginning of differential forms and integration on manifolds.
+
+## Bundles Already Appear
+
+The tangent spaces over all points assemble into the tangent bundle
+$$
+TM=\bigsqcup_{p\in M}T_pM.
+$$
+
+Vector fields are sections of $TM$, and one-forms are sections of $T^*M$. This is why differential geometry naturally leads into vector bundles.

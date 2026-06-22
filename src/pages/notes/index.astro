@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { noteHierarchy } from '../../data/site';
+
+const showDrafts = import.meta.env.PUBLIC_SHOW_DRAFTS === 'true';
+const allNotes = await getCollection('notes');
+const notes = allNotes.filter((note) => showDrafts || !note.data.draft);
+
+function noteUrl(note: { slug?: string; data: { slug?: string }; id: string }) {
+  return `/notes/${note.slug ?? note.data.slug ?? note.id.replace(/\.mdx$/, '')}/`;
+}
+---
+
+<LegacyLayout title="Notes - Jonginn Yun">
+  <PageHero title="Notes" subtitle="Math-heavy MDX notes, organized for long-term study." background="/assets/img/notes-hero.png" />
+  <main id="main">
+    <section class="v1-section">
+      <div class="container">
+        {noteHierarchy.map((group) => (
+          <div class="mb-5">
+            <div class="title-box-2"><h5 class="title-left">{group.category}</h5></div>
+            <div class="v1-note-dropdown-list">
+              {group.sections.map((section) => {
+                const sectionNotes = notes.filter((note) => note.data.category?.toLowerCase() === group.category.toLowerCase() && note.data.section === section);
+                return (
+                  <details class="v1-note-dropdown">
+                    <summary>
+                      <span>{section}</span>
+                      <span class="v1-note-count">{sectionNotes.length} {sectionNotes.length === 1 ? 'note' : 'notes'}</span>
+                    </summary>
+                    {sectionNotes.length > 0 ? (
+                      <ul>
+                        {sectionNotes.map((note) => (
+                          <li>
+                            <a href={noteUrl(note)}>{note.data.title}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p class="v1-meta">No public notes listed yet.</p>
+                    )}
+                  </details>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</LegacyLayout>

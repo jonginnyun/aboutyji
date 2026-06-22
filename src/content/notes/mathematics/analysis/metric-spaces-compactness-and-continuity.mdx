@@ -1,0 +1,56 @@
+---
+title: "Metric Spaces, Compactness, and Continuity"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/analysis/metric-spaces-compactness-and-continuity
+category: Mathematics
+section: "Analysis"
+subsection: "Metric spaces and compactness"
+tags: ["analysis", "metric spaces", "compactness", "continuity"]
+summary: "A focused refresher on metric spaces, convergence, compactness, connectedness, and continuity."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Metric Spaces
+
+A metric space is a set $X$ equipped with a distance function
+$$
+d:X\times X\to \mathbb R_{\ge 0}
+$$
+satisfying positivity, symmetry, and the triangle inequality.
+
+Metric spaces are the bridge between analysis and topology. They give a concrete source of open balls,
+$$
+B_r(x)=\{y:d(x,y)<r\},
+$$
+and therefore a topology.
+
+## Convergence
+
+A sequence $x_n$ converges to $x$ if for every $\varepsilon>0$, there exists $N$ such that
+$$
+n\ge N\Rightarrow d(x_n,x)<\varepsilon.
+$$
+
+This definition is numerical, but the idea is topological: eventually the sequence enters every neighborhood of the limit.
+
+## Compactness
+
+In metric spaces, compactness can often be read through sequences: every sequence has a convergent subsequence. In general topology, compactness is phrased using open covers.
+
+Compactness is useful because it turns local control into finite control. This is why compactness appears repeatedly in geometry, analysis, and physics.
+
+## Continuity
+
+A function $f:X\to Y$ between metric spaces is continuous if
+$$
+d_X(x_n,x)\to 0 \Rightarrow d_Y(f(x_n),f(x))\to 0.
+$$
+
+Equivalently, inverse images of open sets are open. The second formulation is the one that survives after the metric is forgotten.

@@ -1,0 +1,48 @@
+---
+title: "Sets, Functions, and Relations"
+date: 2026-06-21
+updated: 2026-06-21
+lang: en
+slug: mathematics/foundations/sets-functions-relations
+category: Mathematics
+section: "Foundations"
+subsection: "Sets, functions, relations"
+tags: ["sets", "functions", "relations", "proofs"]
+summary: "Draft foundation note for the mathematics hierarchy."
+math: true
+draft: true
+source_note: "source_notes/lecture_notes/fibre_bundles_phys374_selfcontained_v13.tex"
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+{/* TODO: Reconcile this overview with any future handwritten foundation notes before publishing. */}
+
+## Basic Objects
+
+A set is treated extensionally: two sets are equal when they have the same elements. A function
+$
+f : X \to Y
+$
+assigns to each point of the domain exactly one point of the codomain. For long-form geometry notes, the distinction between image, preimage, injection, surjection, and bijection is not cosmetic; it controls when structures can be pushed forward or pulled back.
+
+For a subset $A \subseteq Y$, the preimage
+$$
+f^{-1}(A)=\{x\in X: f(x)\in A\}
+$$
+is defined without requiring $f$ to be invertible. This is why continuity is most naturally phrased using preimages of open sets.
+
+## Relations
+
+A relation on $X$ is a subset $R\subseteq X\times X$. An equivalence relation is reflexive, symmetric, and transitive. Equivalence classes form a quotient set $X/R$, and the quotient construction is the set-theoretic prototype for quotient spaces, covering spaces, and bundle constructions.
+
+## Proof Style
+
+Most notes in this site use a definition-first style:
+
+1. State the object and the maps involved.
+2. Check whether the property is local or global.
+3. Track the direction of functions, especially for pullbacks.
+4. Separate canonical statements from choices of coordinates, bases, gauges, or representatives.
+

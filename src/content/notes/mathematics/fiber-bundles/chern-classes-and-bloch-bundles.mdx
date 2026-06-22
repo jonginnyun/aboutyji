@@ -1,0 +1,80 @@
+---
+title: "Chern Classes and Bloch Bundles"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/fiber-bundles/chern-classes-and-bloch-bundles
+category: Mathematics
+section: "Fiber Bundles"
+subsection: "Characteristic classes and Berry curvature"
+tags: ["Chern classes", "Berry curvature", "Bloch bundles", "topological phases"]
+summary: "First Chern numbers, Berry connections, Bloch bundles, and the geometric origin of topological band invariants."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## From Curvature to Topology
+
+For a complex line bundle with a $U(1)$ connection, the curvature is a two-form
+$$
+F=dA.
+$$
+
+On a closed oriented two-dimensional base, the first Chern number is
+$$
+c_1=\frac{1}{2\pi}\int_B F
+$$
+after the conventional physics normalization in which factors of $i$ are absorbed into the definition of the Berry curvature.
+
+The striking point is that this integral is an integer when the bundle is globally well-defined. Smooth changes of the connection can move curvature around locally, but cannot change the integer unless the bundle itself changes through a singular event.
+
+## Berry Connection
+
+Suppose a Hamiltonian $H(R)$ depends smoothly on parameters $R$. If $\lvert u_n(R)\rangle$ is a locally chosen normalized eigenstate, the Berry connection is
+$$
+A_n=i\langle u_n(R)\mid d u_n(R)\rangle.
+$$
+
+The Berry curvature is
+$$
+F_n=dA_n.
+$$
+
+Under a local phase change
+$$
+\lvert u_n\rangle\mapsto e^{i\chi}\lvert u_n\rangle,
+$$
+the connection changes by
+$$
+A_n\mapsto A_n-d\chi,
+$$
+while the curvature remains invariant.
+
+This is exactly the bundle story in quantum-mechanical language: the state vector is locally chosen, the phase is gauge freedom, and the curvature is geometric.
+
+## Bloch Bundles
+
+For a periodic crystal, the Brillouin zone is the base space. At each crystal momentum $k$, an isolated band or group of occupied bands determines a vector space of Bloch eigenstates.
+
+As $k$ varies, these eigenspaces assemble into a vector bundle over the Brillouin zone. This is the Bloch bundle.
+
+Topological band theory studies whether that bundle can be globally trivialized by smooth choices of Bloch states. When it cannot, the obstruction appears as a quantized invariant such as a Chern number.
+
+## Chern Insulator Intuition
+
+In a two-dimensional Chern insulator, the occupied-band Berry curvature integrates over the Brillouin zone to a nonzero integer:
+$$
+C=\frac{1}{2\pi}\int_{\mathrm{BZ}} F.
+$$
+
+This integer controls robust physical response, including quantized Hall conductance in the appropriate setting. The invariant is not a property of a single eigenvector at a single momentum; it is a global property of how eigenspaces twist across the entire Brillouin zone.
+
+## Why This Belongs With Fiber Bundles
+
+Fiber bundles give the correct grammar for statements like "the eigenstate is only locally defined" or "the gauge choice changes the Berry connection but not the curvature."
+
+Without the bundle viewpoint, these statements can look like technical annoyances. With it, they become the central structure: topology lives in the obstruction to making all local choices agree globally.

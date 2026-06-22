@@ -1,0 +1,89 @@
+---
+title: "Principal Bundles and Connections"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: mathematics/fiber-bundles/principal-bundles-and-connections
+category: Mathematics
+section: "Fiber Bundles"
+subsection: "Gauge fields and curvature"
+tags: ["principal bundles", "connections", "gauge fields", "curvature"]
+summary: "Principal bundles, associated vector bundles, connection one-forms, gauge potentials, and curvature."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Principal Bundles
+
+A principal $G$-bundle is a fiber bundle
+$$
+\pi:P\to B
+$$
+whose fibers look like the group $G$ itself, with a free and transitive right action of $G$ on each fiber.
+
+The important point is that a principal bundle stores frames or gauges rather than vectors. Once a representation
+$$
+\rho:G\to GL(V)
+$$
+is chosen, one can build an associated vector bundle
+$$
+P\times_G V.
+$$
+
+This construction explains why principal bundles are often the natural home for gauge theory: the principal bundle contains the gauge freedom, while associated bundles contain matter fields or vector-valued fields.
+
+## Why a Connection Is Needed
+
+In a product bundle, one can compare nearby fibers by using the product structure. In a general bundle, there is no canonical comparison.
+
+A connection supplies a rule for horizontal motion in the total space. It tells us how to lift a tangent vector on the base into a horizontal tangent vector upstairs. Equivalently, it gives a notion of parallel transport.
+
+Locally, a connection on a principal bundle is represented by a Lie-algebra-valued one-form
+$$
+A\in \Omega^1(U,\mathfrak g).
+$$
+
+In physics language, this local object is the gauge potential.
+
+## Gauge Transformation Law
+
+If the local section or gauge is changed by a map
+$$
+g:U\to G,
+$$
+then the local connection form transforms as
+$$
+A\mapsto g^{-1}Ag+g^{-1}dg.
+$$
+
+The inhomogeneous term $g^{-1}dg$ is the key signature that $A$ is not an ordinary tensor field. It is a local expression of a geometric rule for comparing fibers.
+
+## Curvature
+
+The curvature of a connection is the Lie-algebra-valued two-form
+$$
+F=dA+A\wedge A.
+$$
+
+For an abelian group such as $U(1)$, this reduces to
+$$
+F=dA.
+$$
+
+Curvature measures the failure of parallel transport to be path independent. Infinitesimally, it records the holonomy around small loops. Globally, curvature can carry topological information when integrated over cycles.
+
+## The Physical Dictionary
+
+The bundle language organizes several familiar statements:
+
+- a vector field is a section of $TM$;
+- a one-form is a section of $T^*M$;
+- a gauge field is a local expression of a connection;
+- field strength is curvature;
+- Berry curvature is curvature of the Bloch or eigenstate bundle.
+
+The notation may look abstract at first, but it is designed to separate intrinsic geometry from the local coordinates and gauges used to compute it.

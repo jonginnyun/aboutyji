@@ -1,0 +1,123 @@
+---
+title: "Uncertainty Principle from Noncommutativity"
+date: 2026-06-22
+updated: 2026-06-22
+lang: en
+slug: physics/quantum-mechanics/uncertainty-principle
+category: Physics
+section: "Quantum Mechanics"
+subsection: "Foundations"
+tags: ["uncertainty principle", "commutators", "canonical quantization", "Cauchy-Schwarz"]
+summary: "A short derivation of the uncertainty principle from noncommuting observables."
+math: true
+draft: false
+source_note: ""
+translation_of: ""
+canonical_lang: en
+naver_export: false
+---
+
+## Quantization And Noncommutativity
+
+Canonical quantization replaces Poisson brackets by commutators:
+
+$$
+\{\,\cdot\,,\,\cdot\,\}
+\quad\longrightarrow\quad
+\frac{1}{i\hbar}[\,\cdot\,,\,\cdot\,].
+$$
+
+This means that canonical observables are not merely uncertain because of experimental imperfection. Their noncommutativity is part of the structure of the theory.
+
+For position and momentum,
+
+$$
+[x,p]=i\hbar.
+$$
+
+This algebraic statement is the root of the uncertainty principle.
+
+## Fluctuation Operators
+
+For an observable $A$, define the fluctuation operator
+
+$$
+\Delta A = A-\langle A\rangle.
+$$
+
+The variance is
+
+$$
+(\sigma_A)^2
+=
+\langle(\Delta A)^2\rangle.
+$$
+
+Similarly,
+
+$$
+\Delta B = B-\langle B\rangle,
+\qquad
+(\sigma_B)^2=\langle(\Delta B)^2\rangle.
+$$
+
+## Cauchy-Schwarz Argument
+
+Apply Cauchy-Schwarz to the two state vectors
+
+$$
+\Delta A|\psi\rangle,
+\qquad
+\Delta B|\psi\rangle.
+$$
+
+Then
+
+$$
+\langle(\Delta A)^2\rangle
+\langle(\Delta B)^2\rangle
+\ge
+\left|
+\langle \Delta A\,\Delta B\rangle
+\right|^2.
+$$
+
+The product $\Delta A\Delta B$ can be decomposed into anticommutator and commutator pieces:
+
+$$
+\Delta A\Delta B
+=
+\frac{1}{2}\{\Delta A,\Delta B\}
++ \frac{1}{2}[\Delta A,\Delta B].
+$$
+
+Since constants commute,
+
+$$
+[\Delta A,\Delta B]=[A,B].
+$$
+
+Keeping only the commutator contribution gives the standard lower bound
+
+$$
+\sigma_A\sigma_B
+\ge
+\frac{1}{2}
+\left|
+\langle[A,B]\rangle
+\right|.
+$$
+
+For $A=x$ and $B=p$,
+
+$$
+\sigma_x\sigma_p
+\ge
+\frac{\hbar}{2}.
+$$
+
+## Interpretation
+
+The uncertainty principle is not just a statement about measurement disturbance. It follows from the impossibility of assigning a state sharply localized in two noncommuting observables.
+
+The phase-space picture of a classical point therefore cannot survive unchanged in quantum mechanics. Coherent states are important precisely because they saturate this bound while retaining the most classical phase-space behavior available.
