@@ -599,6 +599,14 @@ body {
   margin-top: 0;
 }
 
+.v1-project-legacy .portfolio-details {
+  padding-top: 0;
+}
+
+.v1-project-legacy .portfolio-details .container {
+  margin-top: 0;
+}
+
 .v1-contact-line {
   font-size: 1.05rem;
   margin-bottom: 0.7rem;
