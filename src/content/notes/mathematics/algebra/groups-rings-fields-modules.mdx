@@ -1,7 +1,7 @@
 ---
 title: "Groups, Rings, Fields, Modules, and Category Theory"
 date: 2026-06-21
-updated: 2026-06-21
+updated: 2026-06-26
 lang: en
 slug: mathematics/algebra/groups-rings-fields-modules
 category: Mathematics
@@ -16,8 +16,1565 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Reading Guide
+# Basic Algebra and Group Homological Algebra
 
-This note is a compact algebra refresher for the structures that recur in geometry and physics: groups, rings, fields, vector spaces, modules, maps preserving structure, and the categorical habit of tracking objects through their morphisms.
+This section is a compact algebra supplement. It is included because group cohomology, projective representations, transition cocycles, and characteristic classes all use the same algebraic grammar: objects, maps between them, quotients by trivial objects, and chain complexes.
 
-Use it as a reference while reading the topology, differential-geometry, and bundle notes.
+## Groups, homomorphisms, kernels, and quotients
+
+A group is a set $G$ with a multiplication law 
+
+$$
+G\times G\to G,
+\qquad
+(g,h)\mapsto gh,
+$$
+
+ an identity element $e$, inverses $g^{-1}$, and an associative multiplication law.
+
+A group homomorphism is a map 
+
+$$
+f:G\to H
+$$
+
+ such that 
+
+$$
+f(gh)=f(g)f(h)
+$$
+
+ for all $g,h\in G$. Its kernel and image are 
+
+$$
+\ker f=\{g\in G:f(g)=e_H\},
+\qquad
+\operatorname{im}f=\{f(g):g\in G\}.
+$$
+
+ The kernel is always a normal subgroup of $G$. If $N\triangleleft G$ is a normal subgroup, the quotient group $G/N$ is the set of cosets 
+
+$$
+gN=\{gn:n\in N\}
+$$
+
+ with multiplication 
+
+$$
+(gN)(hN)=(gh)N.
+$$
+
+ Normality is exactly the condition needed to make this multiplication independent of the representatives $g$ and $h$.
+
+## Abelian groups and modules
+
+An Abelian group is a group whose operation is commutative. We usually write Abelian groups additively: 
+
+$$
+a+b=b+a,
+\qquad
+0\text{ is the identity},
+\qquad
+-a\text{ is the inverse of }a.
+$$
+
+ The integers $\mathbb{Z}$, the reals $\mathbb{R}$, and the circle group $U(1)$ are basic Abelian groups, with $U(1)$ often written multiplicatively.
+
+A ring $R$ is an Abelian group under addition together with an associative multiplication that distributes over addition. The main example in this section is the group ring $\mathbb{Z}[G]$, whose elements are finite formal sums 
+
+$$
+\sum_{g\in G} n_g g,
+\qquad
+n_g\in\mathbb{Z},
+$$
+
+ with multiplication determined by the group law and distributivity: 
+
+$$
+\left(\sum_g n_g g\right)\left(\sum_h m_h h\right)
+=
+\sum_{g,h} n_gm_h(gh).
+$$
+
+
+A left $R$-module is an Abelian group $M$ equipped with a scalar multiplication 
+
+$$
+R\times M\to M,
+\qquad
+(r,m)\mapsto r m,
+$$
+
+ satisfying the usual distributive and associativity rules. A vector space is a module over a field. An Abelian group is the same thing as a module over $\mathbb{Z}$.
+
+A left $G$-module is an Abelian group $A$ with an action of $G$ by group automorphisms: 
+
+$$
+G\times A\to A,
+\qquad
+(g,a)\mapsto g\cdot a,
+$$
+
+ such that 
+
+$$
+e\cdot a=a,
+\qquad
+(gh)\cdot a=g\cdot(h\cdot a).
+$$
+
+ Equivalently, a left $G$-module is a left $\mathbb{Z}[G]$-module. If $g\cdot a=a$ for all $g\in G$, the action is called trivial.
+
+## Exact sequences and chain complexes
+
+A sequence of Abelian groups and homomorphisms 
+
+$$
+A\xrightarrow{f}B\xrightarrow{g}C
+$$
+
+ is exact at $B$ if 
+
+$$
+\operatorname{im}f=\ker g.
+$$
+
+ This condition says that the elements killed by $g$ are exactly the elements that came from $A$.
+
+A chain complex is a sequence of Abelian groups 
+
+$$
+\cdots\xrightarrow{\partial_{n+2}} C_{n+1}
+\xrightarrow{\partial_{n+1}} C_n
+\xrightarrow{\partial_n} C_{n-1}
+\xrightarrow{\partial_{n-1}}\cdots
+$$
+
+ such that 
+
+$$
+\partial_n\circ\partial_{n+1}=0
+$$
+
+ for every $n$. The $n$-cycles and $n$-boundaries are 
+
+$$
+Z_n(C_*)=\ker(\partial_n:C_n\to C_{n-1}),
+\qquad
+B_n(C_*)=\operatorname{im}(\partial_{n+1}:C_{n+1}\to C_n).
+$$
+
+ Since $\partial^2=0$, every boundary is a cycle, so $B_n(C_*)\subseteq Z_n(C_*)$. The $n$th homology group is 
+
+$$
+H_n(C_*):=Z_n(C_*)/B_n(C_*).
+$$
+
+ A cochain complex is a sequence 
+
+$$
+\cdots\xrightarrow{\delta^{n-2}} C^{n-1}
+\xrightarrow{\delta^{n-1}} C^n
+\xrightarrow{\delta^n} C^{n+1}
+\xrightarrow{\delta^{n+1}}\cdots
+$$
+
+ with 
+
+$$
+\delta^{n}\circ\delta^{n-1}=0.
+$$
+
+ Its cohomology is 
+
+$$
+H^n(C^*)=\ker(\delta^n:C^n\to C^{n+1})/\operatorname{im}(\delta^{n-1}:C^{n-1}\to C^n).
+$$
+
+
+## Group cochains
+
+Let $G$ be a group and let $A$ be a left $G$-module. For $n\geq1$, the group of inhomogeneous $n$-cochains is 
+
+$$
+C^n(G;A):=\{f:G^n\to A\}.
+$$
+
+ For $n=0$, define 
+
+$$
+C^0(G;A):=A.
+$$
+
+ We use additive notation for $A$ in this subsection. The group coboundary 
+
+$$
+\delta:C^n(G;A)\to C^{n+1}(G;A)
+$$
+
+ is defined by 
+
+$$
+\begin{align*}
+(\delta f)(g_1,\ldots,g_{n+1})
+&=g_1\cdot f(g_2,\ldots,g_{n+1})\\
+&\quad +\sum_{i=1}^{n}(-1)^i
+f(g_1,\ldots,g_ig_{i+1},\ldots,g_{n+1})\\
+&\quad +(-1)^{n+1}f(g_1,\ldots,g_n).
+\end{align*}
+$$
+
+ For $a\in C^0(G;A)=A$, 
+
+$$
+(\delta a)(g)=g\cdot a-a.
+$$
+
+ One checks directly that 
+
+$$
+\delta^2=0.
+$$
+
+ The group cohomology of $G$ with coefficients in $A$ is 
+
+$$
+\boxed{
+H^n(G;A):=\ker(\delta:C^n(G;A)\to C^{n+1}(G;A))/\operatorname{im}(\delta:C^{n-1}(G;A)\to C^n(G;A)).
+}
+$$
+
+
+## Low-degree meanings of group cohomology
+
+The zeroth group cohomology is the subgroup of $G$-invariant elements: 
+
+$$
+H^0(G;A)=A^G:=\{a\in A:g\cdot a=a\text{ for all }g\in G\}.
+$$
+
+
+A one-cocycle is a function $f:G\to A$ satisfying 
+
+$$
+f(gh)=f(g)+g\cdot f(h).
+$$
+
+ This is called a crossed homomorphism. A one-coboundary has the form 
+
+$$
+f(g)=g\cdot a-a.
+$$
+
+ If the action of $G$ on $A$ is trivial, the one-cocycle condition reduces to 
+
+$$
+f(gh)=f(g)+f(h),
+$$
+
+ so 
+
+$$
+H^1(G;A)=\mathrm{Hom}(G,A)
+$$
+
+ for trivial action, up to the usual identification that one-coboundaries vanish.
+
+A two-cocycle is a function $\omega:G\times G\to A$ satisfying 
+
+$$
+g_1\cdot \omega(g_2,g_3)-\omega(g_1g_2,g_3)+\omega(g_1,g_2g_3)-\omega(g_1,g_2)=0
+$$
+
+ in additive notation. With multiplicative $U(1)$ coefficients, this becomes the familiar expression 
+
+$$
+\omega(g_1,g_2)\omega(g_1g_2,g_3)
+=
+(g_1\cdot\omega(g_2,g_3))\omega(g_1,g_2g_3).
+$$
+
+ This is the condition that appears in projective representations.
+
+## Projective representations from group cohomology
+
+Let a symmetry group $G$ act on a Hilbert space projectively: 
+
+$$
+U(g_1)U(g_2)=\omega(g_1,g_2)U(g_1g_2),
+\qquad
+\omega(g_1,g_2)\in U(1).
+$$
+
+ Associativity of operator multiplication forces 
+
+$$
+\omega(g_1,g_2)\omega(g_1g_2,g_3)
+=
+(g_1\cdot\omega(g_2,g_3))\omega(g_1,g_2g_3),
+$$
+
+ where the action of $g_1$ on $U(1)$ is trivial if $U(g_1)$ is unitary and complex conjugation if $U(g_1)$ is anti-unitary.
+
+Changing phase conventions by a function 
+
+$$
+\beta:G\to U(1),
+\qquad
+U(g)\mapsto \widetilde U(g)=\beta(g)U(g),
+$$
+
+ changes the factor system by a two-coboundary: 
+
+$$
+\widetilde\omega(g_1,g_2)
+=
+\omega(g_1,g_2)
+\frac{\beta(g_1)(g_1\cdot\beta(g_2))}{\beta(g_1g_2)}.
+$$
+
+ Therefore inequivalent projective factor systems are classified by 
+
+$$
+H^2(G;U(1)_\phi),
+$$
+
+ where $\phi:G\to\mathop{\mathrm{Aut}}(U(1))$ records which symmetries are unitary and which are anti-unitary.
+
+This is the same algebraic pattern as Cech transition functions: a cocycle is local consistency data, and a coboundary is a change of convention.
+
+## Central extensions
+
+For a trivial action of $G$ on an Abelian group $A$, a normalized two-cocycle 
+
+$$
+\omega:G\times G\to A
+$$
+
+ defines a group $\widetilde G$ whose underlying set is 
+
+$$
+A\times G.
+$$
+
+ In multiplicative notation, define multiplication by 
+
+$$
+(a,g)(b,h)=(ab\,\omega(g,h),gh).
+$$
+
+ The two-cocycle condition is exactly the associativity condition for this multiplication. There is an exact sequence 
+
+$$
+1\to A\to \widetilde G\to G\to 1.
+$$
+
+ The subgroup $A$ lies in the center of $\widetilde G$, so this is a central extension. Equivalent two-cocycles give isomorphic extensions. This is the algebraic reason projective representations of $G$ can often be replaced by honest representations of a larger group $\widetilde G$.
+
+## The bar complex and group homology
+
+Group cohomology can be defined more conceptually using a free resolution. This is the homological-algebra version of the preceding formulas.
+
+Let $B_n(G)$ be the free left $\mathbb{Z}[G]$-module generated by symbols 
+
+$$
+[g_1|g_2|\cdots|g_n],
+\qquad
+g_i\in G,
+$$
+
+ with $B_0(G)$ generated by the empty symbol $[\,]$. Define the boundary 
+
+$$
+\partial:B_n(G)\to B_{n-1}(G)
+$$
+
+ by 
+
+$$
+\begin{align*}
+\partial[g_1|\cdots|g_n]
+&=g_1[g_2|\cdots|g_n]\\
+&\quad+\sum_{i=1}^{n-1}(-1)^i[g_1|\cdots|g_ig_{i+1}|\cdots|g_n]\\
+&\quad+(-1)^n[g_1|\cdots|g_{n-1}].
+\end{align*}
+$$
+
+ Together with the augmentation map 
+
+$$
+\epsilon:B_0(G)=\mathbb{Z}[G]\to\mathbb{Z},
+\qquad
+\epsilon\left(\sum_g n_gg\right)=\sum_g n_g,
+$$
+
+ this gives a free resolution of the trivial $\mathbb{Z}[G]$-module $\mathbb{Z}$: 
+
+$$
+\cdots\to B_2(G)\to B_1(G)\to B_0(G)\to \mathbb{Z}\to0.
+$$
+
+
+If $M$ is a left $\mathbb{Z}[G]$-module, applying 
+
+$$
+\mathrm{Hom}_{\mathbb{Z}[G]}(-,M)
+$$
+
+ to the bar resolution gives the cochain complex computing group cohomology: 
+
+$$
+H^n(G;M)=\operatorname{Ext}^n_{\mathbb{Z}[G]}(\mathbb{Z},M).
+$$
+
+ This abstract definition reproduces the inhomogeneous cochain formula above.
+
+If $A$ is a right $\mathbb{Z}[G]$-module, applying 
+
+$$
+A\otimes_{\mathbb{Z}[G]}-
+$$
+
+ to the bar resolution gives the chain complex computing group homology: 
+
+$$
+H_n(G;A)=\operatorname{Tor}^{\mathbb{Z}[G]}_n(A,\mathbb{Z}).
+$$
+
+ Explicitly, chains are finite sums of elements 
+
+$$
+a\otimes[g_1|\cdots|g_n]
+$$
+
+ modulo the balancing relation 
+
+$$
+(a\cdot h)\otimes b=a\otimes hb,
+\qquad
+h\in G.
+$$
+
+ The boundary is induced from the bar differential above. This is the group-theoretic analogue of singular homology: a boundary operator squares to zero, and homology is cycles modulo boundaries.
+
+## Why this section matters for fiber bundles
+
+The same algebraic skeleton appears repeatedly:
+
+<div className="center">
+  Context                      Cocycle data modulo coboundary data
+  ---------------------------- ---------------------------------------------------------------------------------------
+  Projective representations   Factor systems $\omega(g_1,g_2)$ modulo phase redefinitions $U(g)\mapsto\beta(g)U(g)$
+  Vector bundles               Transition functions $g_{ij}$ modulo changes of local frame
+  Line bundles                 $U(1)$ transition functions whose Cech class gives $c_1\in H^2(M;\mathbb{Z})$
+  Gauge fields                 Local connection forms $A_i$ glued by $A_j=g_{ij}^{-1}A_ig_{ij}+g_{ij}^{-1}dg_{ij}$
+  SPT/anomaly language         Higher group cocycles modulo higher coboundaries
+</div>
+The details differ from one setting to another, but the organizing principle is the same: local data are meaningful only when they satisfy consistency conditions, and changing local conventions should not change the resulting global object.
+
+# Core Algebra and Category Theory Refresher
+
+<div className="mainbox">
+Purpose of this section This section is a self-contained algebra refresher. It is not written as a replacement for a full algebra textbook, but it is designed so that a reader who has already seen abstract algebra can recall the definitions, examples, and structural theorems needed for fiber bundles, Lie groups, representation theory, group cohomology, and characteristic classes without opening another book.
+
+The level is intentionally parallel to the earlier manifold discussion: definitions are precise, standard maps are spelled out, and shorthand notation is introduced only after the underlying construction has been defined.
+</div>
+## Sets, maps, equivalence relations, and quotient sets
+
+A map from a set $X$ to a set $Y$ is a rule 
+
+$$
+f:X\to Y
+$$
+
+ assigning to each $x\in X$ a unique element $f(x)\in Y$. The image and preimage are 
+
+$$
+f(A)=\{f(a):a\in A\}\subset Y,
+ \qquad
+ f^{-1}(B)=\{x\in X:f(x)\in B\}\subset X.
+$$
+
+ A map is injective if $f(x)=f(x')$ implies $x=x'$, surjective if $f(X)=Y$, and bijective if it is both.
+
+An equivalence relation on $X$ is a relation $\sim$ satisfying reflexivity, symmetry, and transitivity. The equivalence class of $x$ is 
+
+$$
+[x]=\{x'\in X:x'\sim x\}.
+$$
+
+ The quotient set is the set of equivalence classes: 
+
+$$
+X/{\sim}=\{[x]:x\in X\}.
+$$
+
+ The quotient map is 
+
+$$
+q:X\to X/{\sim},\qquad q(x)=[x].
+$$
+
+
+<div className="checkpointbox">
+Why quotients occur everywhere A ray in Hilbert space, a projective representation up to phase convention, a vector bundle glued from local trivializations, and an associated bundle 
+
+$$
+P\times_G V=(P\times V)/{\sim}
+$$
+
+ are all quotient constructions. The mathematical act is always the same: identify objects that differ by a declared redundancy.
+</div>
+## Binary operations and algebraic structures
+
+A binary operation on a set $S$ is a map 
+
+$$
+*:S\times S\to S.
+$$
+
+ It is associative if $(a*b)*c=a*(b*c)$, commutative if $a*b=b*a$, and has an identity element $e$ if $e*a=a*e=a$ for all $a\in S$.
+
+A common pattern is: 
+
+$$
+\text{set} + \text{operations} + \text{axioms}.
+$$
+
+ Groups have one operation, rings have two operations, modules combine a ring action with an Abelian group, and algebras combine a ring/module structure with multiplication.
+
+## Groups
+
+A group is a set $G$ with a multiplication 
+
+$$
+G\times G\to G,
+\qquad
+(g,h)\mapsto gh,
+$$
+
+ an identity $e$, and inverses $g^{-1}$, such that multiplication is associative.
+
+A subgroup $H\leq G$ is a subset that is itself a group under the restricted multiplication. A subgroup $N\leq G$ is normal if 
+
+$$
+gNg^{-1}=N
+\qquad
+\text{for every }g\in G.
+$$
+
+ Equivalently, $gng^{-1}\in N$ for every $g\in G$ and $n\in N$.
+
+A group homomorphism is a map 
+
+$$
+\varphi:G\to H
+$$
+
+ satisfying 
+
+$$
+\varphi(g_1g_2)=\varphi(g_1)\varphi(g_2).
+$$
+
+ The kernel and image are 
+
+$$
+\ker\varphi=\{g\in G:\varphi(g)=e_H\},
+\qquad
+\operatorname{im}\varphi=\{\varphi(g):g\in G\}.
+$$
+
+ The kernel is normal in $G$, and the image is a subgroup of $H$.
+
+<div className="theorem">
+**Theorem 4** (First isomorphism theorem for groups). If $\varphi:G\to H$ is a group homomorphism, then 
+
+$$
+G/\ker\varphi \cong \operatorname{im}\varphi.
+$$
+
+ The isomorphism sends the coset $g\ker\varphi$ to $\varphi(g)$.
+</div>
+This theorem is the algebraic prototype for many quotient constructions: divide by the transformations that act trivially, and what remains is the effective image.
+
+## Cosets and quotient groups
+
+If $H\leq G$, the left coset of $H$ by $g$ is 
+
+$$
+gH=\{gh:h\in H\}.
+$$
+
+ If $N\trianglelefteq G$ is normal, the set of cosets 
+
+$$
+G/N=\{gN:g\in G\}
+$$
+
+ becomes a group under 
+
+$$
+(gN)(hN)=(gh)N.
+$$
+
+ Normality is precisely what makes this multiplication independent of the chosen coset representatives.
+
+## Group actions
+
+A left action of a group $G$ on a set $X$ is a map 
+
+$$
+G\times X\to X,
+\qquad
+(g,x)\mapsto g\cdot x,
+$$
+
+ satisfying 
+
+$$
+e\cdot x=x,
+\qquad
+(g_1g_2)\cdot x=g_1\cdot(g_2\cdot x).
+$$
+
+ The orbit and stabilizer of $x\in X$ are 
+
+$$
+G\cdot x=\{g\cdot x:g\in G\},
+\qquad
+G_x=\{g\in G:g\cdot x=x\}.
+$$
+
+
+<div className="theorem">
+**Theorem 5** (Orbit-stabilizer theorem). If $G$ is finite and acts on $X$, then 
+
+$$
+|G\cdot x|=[G:G_x]=\frac{|G|}{|G_x|}.
+$$
+
+
+</div>
+Group actions are the algebraic abstraction behind symmetry. In a principal $G$-bundle, the group acts freely and transitively on each fiber. In a representation, $G$ acts linearly on a vector space.
+
+## Conjugacy, centralizers, centers, and commutators
+
+The conjugation action of $G$ on itself is 
+
+$$
+g\cdot h=ghg^{-1}.
+$$
+
+ The conjugacy class of $h$ is 
+
+$$
+\mathcal C(h)=\{ghg^{-1}:g\in G\}.
+$$
+
+ The centralizer of $h$ is 
+
+$$
+C_G(h)=\{g\in G:gh=hg\}.
+$$
+
+ The center of $G$ is 
+
+$$
+Z(G)=\{z\in G:zg=gz\text{ for every }g\in G\}.
+$$
+
+ The commutator of $g,h\in G$ is 
+
+$$
+[g,h]_{\mathrm{grp}}=ghg^{-1}h^{-1}.
+$$
+
+ The group is Abelian exactly when every commutator is $e$.
+
+<div className="warningbox">
+Notation warning The group commutator $[g,h]_{\mathrm{grp}}=ghg^{-1}h^{-1}$ is not the same object as the Lie algebra bracket $[X,Y]$. The Lie algebra bracket is the infinitesimal version of group noncommutativity. For matrix Lie groups it becomes 
+
+$$
+[X,Y]=XY-YX.
+$$
+
+
+</div>
+## Products, semidirect products, and extensions
+
+The direct product of groups $G$ and $H$ is the group $G\times H$ with multiplication 
+
+$$
+(g_1,h_1)(g_2,h_2)=(g_1g_2,h_1h_2).
+$$
+
+ A semidirect product requires an action 
+
+$$
+\alpha:H\to\operatorname{Aut}(G).
+$$
+
+ Then $G\rtimes_\alpha H$ has underlying set $G\times H$ and multiplication 
+
+$$
+(g_1,h_1)(g_2,h_2)=\bigl(g_1\alpha(h_1)(g_2),h_1h_2\bigr).
+$$
+
+
+An extension of $Q$ by $N$ is a short exact sequence 
+
+$$
+1\to N\xrightarrow{i} E\xrightarrow{p} Q\to 1.
+$$
+
+ This means $i$ is injective, $p$ is surjective, and 
+
+$$
+\operatorname{im}i=\ker p.
+$$
+
+ A central extension is one in which $i(N)\subset Z(E)$. Projective representations are naturally related to central extensions.
+
+## Presentations and generators
+
+A group presentation records generators and relations: 
+
+$$
+G=\langle S\mid R\rangle.
+$$
+
+ For example, 
+
+$$
+\mathbb Z_n=\langle r\mid r^n=e\rangle,
+$$
+
+ and the dihedral group of order $2n$ is 
+
+$$
+D_n=\langle r,s\mid r^n=e,\\ s^2=e,
+\ srs^{-1}=r^{-1}\rangle.
+$$
+
+ Presentations are useful in physics because symmetry groups are often specified by generators and relations.
+
+## Sylow theory in one page
+
+Let $G$ be a finite group and let $p$ be a prime. A $p$-subgroup is a subgroup whose order is a power of $p$. A Sylow $p$-subgroup is a $p$-subgroup whose order is the largest power of $p$ dividing $|G|$.
+
+<div className="theorem">
+**Theorem 6** (Sylow theorems). Let $|G|=p^a m$ with $p\nmid m$. Then:
+
+1.  $G$ has a subgroup of order $p^a$.
+
+2.  Any two Sylow $p$-subgroups are conjugate.
+
+3.  The number $n_p$ of Sylow $p$-subgroups satisfies 
+
+$$
+n_p\equiv 1\pmod p,
+    \qquad
+    n_p\mid m.
+$$
+
+
+</div>
+The Sylow theorems are classification tools for finite groups. They are less central to fiber bundles than actions, quotients, and representations, but they are part of the standard algebra toolkit.
+
+## Rings, ideals, and quotient rings
+
+A ring $R$ is an Abelian group under addition together with an associative multiplication satisfying distributivity: 
+
+$$
+a(b+c)=ab+ac,
+\qquad
+(a+b)c=ac+bc.
+$$
+
+ Unless stated otherwise, we assume rings have a multiplicative identity $1$ and ring homomorphisms preserve $1$.
+
+A left ideal $I\subset R$ is an additive subgroup such that $rI\subset I$ for all $r\in R$. A right ideal satisfies $Ir\subset I$. A two-sided ideal satisfies both. If $I$ is a two-sided ideal, the quotient group $R/I$ becomes a ring by 
+
+$$
+(r+I)(s+I)=rs+I.
+$$
+
+
+A ring homomorphism $\varphi:R\to S$ satisfies 
+
+$$
+\varphi(r+s)=\varphi(r)+\varphi(s),
+\qquad
+\varphi(rs)=\varphi(r)\varphi(s),
+\qquad
+\varphi(1_R)=1_S.
+$$
+
+ Its kernel is a two-sided ideal.
+
+<div className="theorem">
+**Theorem 7** (First isomorphism theorem for rings). If $\varphi:R\to S$ is a ring homomorphism, then 
+
+$$
+R/\ker\varphi\cong\operatorname{im}\varphi.
+$$
+
+
+</div>
+## Domains, fields, Euclidean domains, PIDs, and UFDs
+
+A commutative ring $R$ with $1\ne0$ is an integral domain if $ab=0$ implies $a=0$ or $b=0$. A field is a commutative ring in which every nonzero element has a multiplicative inverse.
+
+An element $u\in R$ is a unit if there exists $v\in R$ such that $uv=1$. Elements $a,b\in R$ are associates if $a=ub$ for some unit $u$.
+
+A principal ideal domain is an integral domain in which every ideal is generated by one element: 
+
+$$
+I=(a)=\{ra:r\in R\}.
+$$
+
+ A unique factorization domain is an integral domain in which every nonzero nonunit factors uniquely into irreducibles up to order and associates.
+
+A Euclidean domain is a domain with a function 
+
+$$
+\nu:R\setminus\{0\}\to\mathbb N
+$$
+
+ allowing division with remainder. The standard implications are 
+
+$$
+\text{Euclidean domain}\Rightarrow
+\text{PID}\Rightarrow
+\text{UFD}.
+$$
+
+
+## Polynomial rings and quotient constructions
+
+If $R$ is a ring, the polynomial ring $R[x]$ consists of formal finite sums 
+
+$$
+a_0+a_1x+\cdots+a_nx^n.
+$$
+
+ If $F$ is a field and $p(x)\in F[x]$ is irreducible, then 
+
+$$
+F[x]/(p(x))
+$$
+
+ is a field. This is the basic algebraic construction of field extensions.
+
+Example: 
+
+$$
+\mathbb C\cong\mathbb R[x]/(x^2+1).
+$$
+
+ The class of $x$ becomes $i$.
+
+## Modules
+
+Let $R$ be a ring. A left $R$-module is an Abelian group $M$ together with scalar multiplication 
+
+$$
+R\times M\to M,
+\qquad
+(r,m)\mapsto rm,
+$$
+
+ such that 
+
+$$
+(r+s)m=rm+sm,
+\qquad
+r(m+n)=rm+rn,
+\qquad
+(rs)m=r(sm),
+\qquad
+1m=m.
+$$
+
+ A module over a field is exactly a vector space.
+
+A module homomorphism $f:M\to N$ is an Abelian group homomorphism satisfying 
+
+$$
+f(rm)=rf(m).
+$$
+
+ Submodules, quotient modules, kernels, images, direct sums, and exact sequences are defined exactly as one expects from vector spaces, but bases need not exist.
+
+## Free, projective, injective, and flat modules
+
+A free $R$-module has a basis and is isomorphic to a direct sum of copies of $R$: 
+
+$$
+R^{(I)}=\bigoplus_{i\in I}R.
+$$
+
+ A module $P$ is projective if every surjection $M\to N$ and every map $P\to N$ lift through $M$: 
+
+$$
+\begin{array}{ccc}
+& P & \\
+& \downarrow & \\
+M & \twoheadrightarrow & N.
+\end{array}
+$$
+
+ Equivalently, $P$ is a direct summand of a free module.
+
+A module $I$ is injective if maps into $I$ extend across injections. A module $F$ is flat if tensoring with $F$ preserves exact sequences. These notions are the algebraic foundations of derived functors such as $\operatorname{Ext}$ and $\operatorname{Tor}$.
+
+## Tensor products
+
+Let $M$ be a right $R$-module and $N$ a left $R$-module. The tensor product $M\otimes_R N$ is an Abelian group equipped with a bilinear balanced map 
+
+$$
+M\times N\to M\otimes_R N,
+\qquad
+(m,n)\mapsto m\otimes n,
+$$
+
+ satisfying 
+
+$$
+(mr)\otimes n=m\otimes(rn).
+$$
+
+ It is characterized by the universal property: every balanced bilinear map 
+
+$$
+B:M\times N\to A
+$$
+
+ to an Abelian group $A$ factors uniquely through a group homomorphism 
+
+$$
+\widetilde B:M\otimes_R N\to A.
+$$
+
+
+Tensor products are not just notation. They are the algebraic mechanism behind associated bundles, tensor bundles, differential forms, and Kunneth-type formulas.
+
+## Algebras
+
+Let $k$ be a commutative ring, often a field. A $k$-algebra is a $k$-module $A$ equipped with a bilinear multiplication 
+
+$$
+A\times A\to A,
+\qquad
+(a,b)\mapsto ab.
+$$
+
+ If multiplication is associative and has a unit, $A$ is an associative unital algebra. Examples include matrix algebras $M_n(k)$ and polynomial algebras $k[x_1,\ldots,x_n]$.
+
+A Lie algebra over $k$ is a $k$-module $\mathfrak g$ with a bilinear bracket 
+
+$$
+[-,-]:\mathfrak g\times\mathfrak g\to\mathfrak g
+$$
+
+ satisfying antisymmetry 
+
+$$
+[X,Y]=-[Y,X]
+$$
+
+ and the Jacobi identity 
+
+$$
+[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0.
+$$
+
+ For an associative algebra $A$, the commutator 
+
+$$
+[X,Y]=XY-YX
+$$
+
+ defines a Lie algebra structure on $A$.
+
+## Exterior, symmetric, and Clifford algebras
+
+Given a vector space $V$, the tensor algebra is 
+
+$$
+T(V)=\bigoplus_{n\ge0}V^{\otimes n}.
+$$
+
+ The exterior algebra is the quotient 
+
+$$
+\Lambda V=T(V)/\langle v\otimes v:v\in V\rangle.
+$$
+
+ This imposes $v\wedge v=0$, hence $v\wedge w=-w\wedge v$ over characteristic not equal to two. Differential forms live in exterior powers of cotangent spaces: 
+
+$$
+\Lambda^k T_p^*M.
+$$
+
+
+The symmetric algebra is 
+
+$$
+\operatorname{Sym}(V)=T(V)/\langle v\otimes w-w\otimes v:v,w\in V\rangle.
+$$
+
+ The Clifford algebra of a vector space with quadratic form $q$ is 
+
+$$
+\operatorname{Cl}(V,q)=T(V)/\langle v\otimes v-q(v)1:v\in V\rangle.
+$$
+
+ Clifford algebras underlie spinors and the relation between orthogonal groups and spin groups.
+
+## Field extensions and Galois theory
+
+A field extension is an inclusion of fields 
+
+$$
+F\subset K.
+$$
+
+ Then $K$ is a vector space over $F$. The degree is 
+
+$$
+[K:F]=\dim_F K.
+$$
+
+ An element $\alpha\in K$ is algebraic over $F$ if it satisfies a nonzero polynomial with coefficients in $F$. It is transcendental otherwise.
+
+The minimal polynomial of an algebraic element $\alpha$ over $F$ is the monic polynomial $m_\alpha(x)\in F[x]$ of least degree with $m_\alpha(\alpha)=0$.
+
+A splitting field of a polynomial $f\in F[x]$ is a field extension $K/F$ in which $f$ factors into linear factors and which is generated by the roots of $f$.
+
+The Galois group of an extension $K/F$ is 
+
+$$
+\operatorname{Gal}(K/F)=\{\sigma:K\to K:\sigma\text{ is a field automorphism and }\sigma|_F=\mathrm{id}_F\}.
+$$
+
+
+<div className="theorem">
+**Theorem 8** (Fundamental theorem of Galois theory, finite case). Let $K/F$ be a finite Galois extension. There is an inclusion-reversing bijection between intermediate fields 
+
+$$
+F\subset E\subset K
+$$
+
+ and subgroups 
+
+$$
+H\leq \operatorname{Gal}(K/F),
+$$
+
+ given by 
+
+$$
+E\mapsto\operatorname{Gal}(K/E),
+\qquad
+H\mapsto K^H=\{x\in K:\sigma(x)=x\text{ for every }\sigma\in H\}.
+$$
+
+ Normal subgroups correspond to Galois intermediate extensions.
+</div>
+Galois theory is not directly required for fiber bundles, but it is one of the clearest examples of a classification by symmetry groups.
+
+## Categories
+
+A category $\mathcal C$ consists of:
+
+1.  a class of objects $\operatorname{Ob}(\mathcal C)$,
+
+2.  for every pair of objects $X,Y$, a set of morphisms $\operatorname{Hom}_{\mathcal C}(X,Y)$,
+
+3.  identity morphisms $\mathrm{id}_X\in\operatorname{Hom}_{\mathcal C}(X,X)$,
+
+4.  composition maps 
+
+$$
+\operatorname{Hom}_{\mathcal C}(Y,Z)\times\operatorname{Hom}_{\mathcal C}(X,Y)
+    \to
+    \operatorname{Hom}_{\mathcal C}(X,Z),
+$$
+
+ written $(g,f)\mapsto g\circ f$,
+
+satisfying associativity and identity laws.
+
+Examples:
+
+<div className="center">
+  Category            Objects and morphisms
+  ------------------- -------------------------------------------
+  $\mathbf{Set}$      Sets and maps
+  $\mathbf{Grp}$      Groups and group homomorphisms
+  $\mathbf{Ring}$     Rings and ring homomorphisms
+  $R\mathbf{-Mod}$    Left $R$-modules and module homomorphisms
+  $\mathbf{Top}$      Topological spaces and continuous maps
+  $\mathbf{Man}$      Smooth manifolds and smooth maps
+  $\mathbf{Vect}_k$   Vector spaces over $k$ and linear maps
+</div>
+An isomorphism in a category is a morphism $f:X\to Y$ with an inverse $g:Y\to X$ such that 
+
+$$
+g\circ f=\mathrm{id}_X,
+\qquad
+f\circ g=\mathrm{id}_Y.
+$$
+
+
+## Functors and natural transformations
+
+A covariant functor 
+
+$$
+F:\mathcal C\to\mathcal D
+$$
+
+ assigns to each object $X$ of $\mathcal C$ an object $F(X)$ of $\mathcal D$, and to each morphism $f:X\to Y$ a morphism 
+
+$$
+F(f):F(X)\to F(Y),
+$$
+
+ such that 
+
+$$
+F(\mathrm{id}_X)=\mathrm{id}_{F(X)},
+\qquad
+F(g\circ f)=F(g)\circ F(f).
+$$
+
+ A contravariant functor reverses arrows: 
+
+$$
+F(f):F(Y)\to F(X).
+$$
+
+ Cohomology is contravariant: a continuous map $f:X\to Y$ induces 
+
+$$
+f^*:H^n(Y;A)\to H^n(X;A).
+$$
+
+ Homology is covariant: 
+
+$$
+f_*:H_n(X;A)\to H_n(Y;A).
+$$
+
+
+A natural transformation $\eta:F\Rightarrow G$ between functors $F,G:\mathcal C\to\mathcal D$ assigns a morphism 
+
+$$
+\eta_X:F(X)\to G(X)
+$$
+
+ to every object $X$ of $\mathcal C$, such that for every $f:X\to Y$ the square 
+
+$$
+\begin{array}{ccc}
+F(X) & \xrightarrow{F(f)} & F(Y) \\
+\downarrow \eta_X & & \downarrow \eta_Y \\
+G(X) & \xrightarrow{G(f)} & G(Y)
+\end{array}
+$$
+
+ commutes.
+
+## Universal properties
+
+A universal property defines an object by how maps to or from it behave. This is usually more robust than defining it by elements.
+
+For example, the product $X\times Y$ in a category is an object equipped with projections 
+
+$$
+\pi_X:X\times Y\to X,
+\qquad
+\pi_Y:X\times Y\to Y,
+$$
+
+ such that for every object $Z$ and maps $f:Z\to X$, $g:Z\to Y$, there exists a unique map 
+
+$$
+\langle f,g\rangle:Z\to X\times Y
+$$
+
+ with 
+
+$$
+\pi_X\circ\langle f,g\rangle=f,
+\qquad
+\pi_Y\circ\langle f,g\rangle=g.
+$$
+
+
+A coproduct reverses the arrows. In sets, coproducts are disjoint unions. In modules, coproducts are direct sums.
+
+## Limits, colimits, and pullbacks
+
+Products, equalizers, inverse limits, and pullbacks are examples of limits. Coproducts, coequalizers, direct limits, and pushouts are examples of colimits.
+
+The categorical pullback of maps $f:X\to Z$ and $g:Y\to Z$ is the object 
+
+$$
+X\times_Z Y=\{(x,y)\in X\times Y:f(x)=g(y)\}
+$$
+
+ with projections to $X$ and $Y$. It satisfies the universal property that any object mapping compatibly to $X$ and $Y$ factors uniquely through $X\times_ZY$.
+
+This categorical pullback should not be confused with the pullback of differential forms, although both are functorial constructions involving reversing direction in the appropriate sense.
+
+## Adjunctions
+
+An adjunction between categories $\mathcal C$ and $\mathcal D$ is a pair of functors 
+
+$$
+F:\mathcal C\rightleftarrows\mathcal D:G
+$$
+
+ with natural bijections 
+
+$$
+\operatorname{Hom}_{\mathcal D}(F(X),Y)
+\cong
+\operatorname{Hom}_{\mathcal C}(X,G(Y)).
+$$
+
+ We write $F\dashv G$, and say $F$ is left adjoint to $G$.
+
+Examples include:
+
+- free group $\dashv$ forgetful functor from groups to sets,
+
+- tensor product $-\otimes_R M\dashv\operatorname{Hom}_R(M,-)$ under appropriate handedness conditions,
+
+- quotient constructions as left adjoints in many settings.
+
+## Yoneda lemma
+
+For an object $X$ in a category $\mathcal C$, the functor 
+
+$$
+h_X=\operatorname{Hom}_{\mathcal C}(-,X):\mathcal C^{\mathrm{op}}\to\mathbf{Set}
+$$
+
+ records all ways of probing $X$ by maps into $X$.
+
+<div className="theorem">
+**Theorem 9** (Yoneda lemma, informal but precise enough). For any contravariant functor $F:\mathcal C^{\mathrm{op}}\to\mathbf{Set}$, natural transformations 
+
+$$
+h_X\Rightarrow F
+$$
+
+ are in natural bijection with elements of $F(X)$.
+</div>
+The slogan is: an object is determined by how all other objects map into it. This is the categorical version of studying a space by its functions, a bundle by its sections, or a representation by its matrix elements.
+
+## Monoidal categories and tensor products
+
+A monoidal category is a category $\mathcal C$ with a bifunctor 
+
+$$
+\otimes:\mathcal C\times\mathcal C\to\mathcal C,
+$$
+
+ a unit object $\mathbf 1$, and coherent associativity and unit isomorphisms. Vector spaces with the usual tensor product form a monoidal category. Representations of a group also form a monoidal category, with tensor product representation 
+
+$$
+g\cdot(v\otimes w)=(g\cdot v)\otimes(g\cdot w).
+$$
+
+ Fusion categories, braided tensor categories, and modular tensor categories are deeper versions of this structure appearing in topological order. The present notes do not need the full theory, but recognizing tensor-product functoriality helps keep notation honest.
+
+## Presheaves and sheaves
+
+A presheaf $\mathcal F$ on a topological space $X$ assigns to each open set $U\subset X$ a set, group, ring, or vector space $\mathcal F(U)$, and to every inclusion $V\subset U$ a restriction map 
+
+$$
+\rho^U_V:\mathcal F(U)\to\mathcal F(V),
+$$
+
+ such that restrictions compose correctly.
+
+A sheaf is a presheaf satisfying two gluing axioms:
+
+1.  Locality: if two sections agree on every set in an open cover, then they agree globally.
+
+2.  Gluing: compatible local sections glue to a unique global section.
+
+Smooth functions, continuous functions, differential forms, and sections of a vector bundle form sheaves. The sheaf viewpoint is the natural formal language behind local-to-global constructions.
+
+## Algebraic summary for the surrounding material
+
+The algebraic structures most used in these fiber-bundle notes are:
+
+<div className="center">
+  Algebraic object     Role in the surrounding material
+  -------------------- -------------------------------------------------------
+  Group                Symmetry or structure group
+  Group action         How a group transforms fibers, frames, or fields
+  Representation       How a group becomes matrices acting on a vector space
+  Lie algebra          Infinitesimal version of a Lie group
+  Module               Generalized vector space over a ring
+  Chain complex        Algebraic engine for homology and cohomology
+  Cocycle/coboundary   Consistency data modulo convention changes
+  Category/functor     Precise language for natural constructions
+</div>
+## Finite Abelian groups
+
+A finite Abelian group is built from cyclic groups. The classification theorem says that if $A$ is a finite Abelian group, then 
+
+$$
+A\cong \mathbb Z_{n_1}\oplus\cdots\oplus\mathbb Z_{n_r}
+$$
+
+ with $n_i\mid n_{i+1}$, or equivalently as a direct sum of prime-power cyclic groups. The decomposition is unique up to the standard ordering conventions.
+
+This theorem is useful because many low-dimensional cohomology groups in physics are finite Abelian groups. When one writes 
+
+$$
+H^2(G,U(1))\cong \mathbb Z_2,
+$$
+
+ one is saying that there are exactly two classes: a trivial class and one nontrivial class.
+
+## Linear algebra over a field
+
+Let $V$ be a vector space over a field $k$. A basis is a subset $\{e_i\}_{i\in I}$ such that every $v\in V$ can be written uniquely as a finite linear combination 
+
+$$
+v=\sum_{i\in I}a_i e_i.
+$$
+
+ The dual vector space is 
+
+$$
+V^*=\operatorname{Hom}_k(V,k).
+$$
+
+ If $\{e_i\}$ is a finite basis, the dual basis $\{e^i\}$ is defined by 
+
+$$
+e^i(e_j)=\delta^i_j.
+$$
+
+ This is the finite-dimensional algebraic model for 
+
+$$
+dx^\mu\left(\frac{\partial}{\partial x^\nu}\right)=\delta^\mu_\nu.
+$$
+
+
+A linear operator $T:V\to V$ has eigenvalue $\lambda$ if there exists $v\ne0$ such that 
+
+$$
+Tv=\lambda v.
+$$
+
+ The characteristic polynomial is 
+
+$$
+\det(tI-T).
+$$
+
+ Over an algebraically closed field, it splits into linear factors. Jordan normal form describes arbitrary linear maps over algebraically closed fields; diagonalization is the special case where there are enough eigenvectors.
+
+## Inner product spaces and unitary groups
+
+A Hermitian inner product on a complex vector space $V$ is a function 
+
+$$
+\langle-,-\rangle:V\times V\to\mathbb C
+$$
+
+ that is linear in one entry, conjugate-linear in the other, positive definite, and satisfies 
+
+$$
+\langle v,w\rangle=\overline{\langle w,v\rangle}.
+$$
+
+ A linear map $U:V\to V$ is unitary if 
+
+$$
+\langle Uv,Uw\rangle=\langle v,w\rangle.
+$$
+
+ For $V=\mathbb C^n$, the unitary group is 
+
+$$
+U(n)=\{U\in GL(n,\mathbb C):U^\dagger U=I\}.
+$$
+
+ This is why Hermitian vector bundles have structure group $U(n)$ rather than all of $GL(n,\mathbb C)$.
+
+## Modules over a PID
+
+Let $R$ be a principal ideal domain. A finitely generated $R$-module $M$ decomposes as 
+
+$$
+M\cong R^r\oplus R/(d_1)\oplus\cdots\oplus R/(d_s),
+$$
+
+ where $d_i\mid d_{i+1}$. This is the structure theorem for finitely generated modules over a PID.
+
+Important special cases:
+
+- For $R=\mathbb Z$, this classifies finitely generated Abelian groups.
+
+- For $R=k[x]$, it classifies finite-dimensional linear operators via rational canonical form.
+
+The module viewpoint unifies Abelian groups, vector spaces, and linear operators.
+
+## Exactness, complexes, and derived functors
+
+A sequence of module homomorphisms 
+
+$$
+\cdots\to M_{n+1}\xrightarrow{d_{n+1}}M_n\xrightarrow{d_n}M_{n-1}\to\cdots
+$$
+
+ is a chain complex if 
+
+$$
+d_n\circ d_{n+1}=0
+$$
+
+ for every $n$. The homology is 
+
+$$
+H_n(M_\bullet)=\ker d_n/\operatorname{im}d_{n+1}.
+$$
+
+ A cochain complex reverses the grading: 
+
+$$
+\cdots\to C^{n-1}\xrightarrow{\delta^{n-1}}C^n\xrightarrow{\delta^n}C^{n+1}\to\cdots,
+\qquad
+\delta^n\circ\delta^{n-1}=0.
+$$
+
+ The cohomology is 
+
+$$
+H^n(C^\bullet)=\ker\delta^n/\operatorname{im}\delta^{n-1}.
+$$
+
+
+A functor is exact if it preserves short exact sequences. Many important functors are only left-exact or right-exact. Derived functors measure this failure. For example: 
+
+$$
+\operatorname{Ext}^n_R(-,-)
+$$
+
+ derives $\operatorname{Hom}_R(-,-)$, and 
+
+$$
+\operatorname{Tor}^R_n(-,-)
+$$
+
+ derives tensor product.
+
+## Representation theory of finite groups
+
+A representation of a group $G$ on a vector space $V$ over $k$ is a homomorphism 
+
+$$
+\rho:G\to GL(V).
+$$
+
+ Equivalently, $V$ is a module over the group algebra $k[G]$.
+
+If $G$ is finite and $k=\mathbb C$, the character of a representation is 
+
+$$
+\chi_\rho(g)=\operatorname{Tr}(\rho(g)).
+$$
+
+ Characters are constant on conjugacy classes.
+
+<div className="theorem">
+**Theorem 10** (Maschke theorem). If $G$ is finite and $\operatorname{char}(k)$ does not divide $|G|$, then every finite-dimensional representation of $G$ over $k$ decomposes as a direct sum of irreducible representations.
+</div>
+<div className="theorem">
+**Theorem 11** (Schur lemma). Let $V,W$ be irreducible complex representations of $G$. If $T:V\to W$ intertwines the $G$-actions, meaning 
+
+$$
+T\rho_V(g)=\rho_W(g)T
+$$
+
+ for every $g\in G$, then either $T=0$ or $T$ is an isomorphism. In particular, every $G$-equivariant endomorphism of an irreducible complex representation is scalar.
+</div>
+This is the algebraic source of many selection rules and degeneracy arguments in quantum mechanics.
+
+## Projective representations and twisted group algebras
+
+A projective representation with factor system $\omega:G\times G\to U(1)$ satisfies 
+
+$$
+U(g)U(h)=\omega(g,h)U(gh).
+$$
+
+ One can package this as an ordinary module over a twisted group algebra $\mathbb C_\omega[G]$, whose basis elements $e_g$ multiply by 
+
+$$
+e_g e_h=\omega(g,h)e_{gh}.
+$$
+
+ Associativity of this algebra is exactly the 2-cocycle condition on $\omega$. Changing phase convention changes $\omega$ by a coboundary, giving an isomorphic twisted group algebra.
+
+## Abelian categories
+
+An Abelian category is a category in which kernels, cokernels, images, coimages, and exact sequences behave like they do for modules. The categories of Abelian groups, modules over a ring, and sheaves of Abelian groups are Abelian categories.
+
+The language of Abelian categories lets one define homological algebra without referring to elements. This is useful because many cohomology theories are naturally constructed in categories of sheaves, complexes, or modules.
+
+## More on limits and colimits
+
+An equalizer of two maps $f,g:X\to Y$ is an object $E$ with a map $i:E\to X$ such that 
+
+$$
+f\circ i=g\circ i
+$$
+
+ and universal with this property. In sets, 
+
+$$
+E=\{x\in X:f(x)=g(x)\}.
+$$
+
+ A coequalizer reverses this: it is the universal quotient of $Y$ in which $f(x)$ and $g(x)$ are identified for all $x\in X$.
+
+A pushout of maps $A\to X$ and $A\to Y$ is the universal object obtained by gluing $X$ and $Y$ along $A$. Many quotient-space constructions are pushouts.
+
+<div className="checkpointbox">
+Bundle gluing as a categorical construction If local trivial pieces $U_i\times F$ are glued by transition functions, the total space can be viewed as a quotient of a disjoint union. Categorically, this is a colimit: the global object is assembled from local pieces and compatibility maps.
+</div>
+## Localization
+
+Let $R$ be a commutative ring and let $S\subset R$ be a multiplicative set, meaning $1\in S$ and $s,t\in S$ implies $st\in S$. The localization $S^{-1}R$ formally inverts all elements of $S$. Its elements are fractions 
+
+$$
+\frac{r}{s},
+\qquad r\in R,
+\ s\in S,
+$$
+
+ modulo the usual equivalence relation.
+
+Examples: 
+
+$$
+\mathbb Z[(p)^{-1}]
+$$
+
+ inverts powers of a prime $p$, and the field of fractions of an integral domain $R$ is obtained by inverting all nonzero elements.
+
+Localization is central in algebraic geometry and commutative algebra. The geometric intuition is local study: invert functions that do not vanish on the region under consideration.

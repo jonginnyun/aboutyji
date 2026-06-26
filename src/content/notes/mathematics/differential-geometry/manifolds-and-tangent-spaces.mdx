@@ -1,7 +1,7 @@
 ---
 title: "Manifolds and Tangent Spaces"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/differential-geometry/manifolds-and-tangent-spaces
 category: Mathematics
@@ -17,58 +17,464 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Manifolds
+# Topological Spaces, Manifolds, and Smooth Structure
 
-A smooth $n$-manifold is a space locally modeled on $\mathbb R^n$ with smooth transition maps between coordinate charts. A chart is a map
-$$
-\varphi:U\to \varphi(U)\subset \mathbb R^n,
-$$
-where $U$ is open in the manifold.
+## Topological spaces and open sets
 
-The point of the definition is not that the manifold is secretly $\mathbb R^n$. It is that calculus can be done locally, and the answers can be checked to transform consistently when coordinates change.
+Before one can define a manifold or a fiber bundle, one needs a notion of open sets.
 
-## Tangent Vectors
+<div className="definition">
+**Definition 1** (Topological space). A topological space is a set $X$ together with a collection $\mathcal T$ of subsets of $X$, called open sets, such that:
 
-At a point $p\in M$, a tangent vector can be understood as a directional derivative acting on smooth functions:
-$$
-v:C^\infty(M)\to \mathbb R.
-$$
+1.  $\varnothing$ and $X$ are open.
 
-It is linear and satisfies the Leibniz rule
-$$
-v(fg)=v(f)g(p)+f(p)v(g).
-$$
+2.  Arbitrary unions of open sets are open.
 
-In local coordinates $x^1,\ldots,x^n$, every tangent vector can be written
+3.  Finite intersections of open sets are open.
+
+The pair $(X,\mathcal T)$ is called a topological space.
+</div>
+In most geometry examples, the topology is the ordinary topology on $\mathbb{R}^n$ or something built from it. A map 
+
 $$
-v=v^i\frac{\partial}{\partial x^i}\bigg|_p.
+f:X\to Y
 $$
 
-The coordinate expression changes under a chart change, but the tangent vector itself is intrinsic.
+ between topological spaces is **continuous** if the inverse image of every open set is open: 
 
-## Cotangent Vectors
-
-The cotangent space $T_p^*M$ is the dual vector space of $T_pM$. Its elements are covectors. In coordinates, the dual basis is
 $$
-dx^1,\ldots,dx^n,
-$$
-with
-$$
-dx^i\left(\frac{\partial}{\partial x^j}\right)=\delta^i_j.
+V\subset Y\text{ open} \quad \Longrightarrow \quad f^{-1}(V)\subset X\text{ open}.
 $$
 
-A one-form is a smoothly varying choice of cotangent vector:
-$$
-\alpha=\alpha_i dx^i.
-$$
 
-This language is the beginning of differential forms and integration on manifolds.
+<div className="definition">
+**Definition 2** (Homeomorphism). A map $f:X\to Y$ is a homeomorphism if it is continuous, bijective, and its inverse $f^{-1}:Y\to X$ is also continuous. If such an $f$ exists, $X$ and $Y$ are topologically the same space.
+</div>
+## Open covers
 
-## Bundles Already Appear
+An open cover of a topological space $X$ is a collection of open sets $\{U_i\}_{i\in I}$ such that 
 
-The tangent spaces over all points assemble into the tangent bundle
 $$
-TM=\bigsqcup_{p\in M}T_pM.
+X=\bigcup_{i\in I} U_i.
 $$
 
-Vector fields are sections of $TM$, and one-forms are sections of $T^*M$. This is why differential geometry naturally leads into vector bundles.
+ The index set $I$ can be finite or infinite. A cover is simply a way of saying that we will study $X$ patch by patch.
+
+<div className="mainbox">
+Covers in geometry Most definitions in manifolds and bundles are local. This means they are checked on an open cover, then glued together on overlaps $U_i\cap U_j$.
+</div>
+## Topological manifolds
+
+A manifold is a space that looks locally like Euclidean space.
+
+<div className="definition">
+**Definition 3** (Topological $n$-manifold). An $n$-dimensional topological manifold is a topological space $M$ satisfying the following standard conditions:
+
+1.  $M$ is Hausdorff: distinct points can be separated by disjoint open sets.
+
+2.  $M$ is second-countable: its topology has a countable basis.
+
+3.  $M$ is locally Euclidean of dimension $n$: for every $p\in M$, there exists an open neighbourhood $U\subset M$ of $p$ and a homeomorphism 
+
+$$
+\varphi:U\to \varphi(U)\subset \mathbb{R}^n,
+$$
+
+ where $\varphi(U)$ is open in $\mathbb{R}^n$.
+
+The pair $(U,\varphi)$ is called a coordinate chart.
+</div>
+The phrase "locally homeomorphic to an open subset of $\mathbb{R}^n$" is the core idea. The Hausdorff and second-countable conditions are usually included to rule out pathological spaces and to make analysis on manifolds behave as expected.
+
+<div className="examplebox">
+Examples
+
+- $\mathbb{R}^n$ is an $n$-dimensional topological manifold.
+
+- $S^1$ is a one-dimensional topological manifold.
+
+- $S^2$ is a two-dimensional topological manifold.
+
+- $T^2=S^1\times S^1$ is a two-dimensional topological manifold.
+</div>
+## Smooth manifolds
+
+A topological manifold only knows about continuous coordinate changes. Differential geometry needs differentiable coordinate changes.
+
+Let $(U_i,\varphi_i)$ and $(U_j,\varphi_j)$ be two charts. On the overlap $U_i\cap U_j$, the coordinate transition map is 
+
+$$
+\varphi_j\circ \varphi_i^{-1}:\varphi_i(U_i\cap U_j)\to \varphi_j(U_i\cap U_j).
+$$
+
+ This is a map between open subsets of $\mathbb{R}^n$.
+
+<div className="definition">
+**Definition 4** (Smooth manifold). A smooth $n$-manifold is a topological $n$-manifold equipped with an atlas of charts whose transition maps are smooth. Usually one takes a maximal smooth atlas, meaning all charts compatible with the chosen smooth structure are included.
+</div>
+After choosing a smooth structure, one can define smooth functions, smooth maps, tangent vectors, differential forms, and smooth fiber bundles.
+
+A diffeomorphism is a smooth bijection 
+
+$$
+\phi:M\to N
+$$
+
+ whose inverse 
+
+$$
+\phi^{-1}:N\to M
+$$
+
+ is also smooth. Diffeomorphic smooth manifolds are considered the same for differential-geometric purposes.
+
+<div className="warningbox">
+Compactness is not part of the definition A manifold need not be compact. $\mathbb{R}^n$ is noncompact; $S^n$ and $T^n$ are compact. Compactness is useful for some integration and finite-cover arguments, but the definitions of manifolds, fiber bundles, vector bundles, and connections do not require compactness.
+</div>
+## Local coordinates
+
+If $q\in U\subset M$ and 
+
+$$
+\varphi(q)=(x^1(q),\ldots,x^n(q)),
+$$
+
+ then $x^1,\ldots,x^n$ are local coordinate functions on $U$.
+
+Local coordinates are powerful but never sacred. On $S^2$, longitude and latitude fail at the poles. This is not merely a technical nuisance. It is the first sign of a general theme:
+
+<div className="mainbox">
+Local descriptions need transition rules Whenever one description works only on a patch, one must know how to translate between descriptions on overlaps of patches.
+</div>
+If $U_i$ and $U_j$ are two coordinate patches with coordinates $x^\mu$ and $y^a$, then on $U_i\cap U_j$, 
+
+$$
+y^a=y^a(x^1,\ldots,x^n).
+$$
+
+ These coordinate transition functions are the manifold analogue of transition functions for bundles.
+
+## Maps between manifolds
+
+A smooth map 
+
+$$
+f:M\to N
+$$
+
+ assigns to each point $p\in M$ a point $f(p)\in N$. The notation 
+
+$$
+C^\infty(M)
+$$
+
+ means the set, in fact algebra, of smooth real-valued functions on $M$. In local coordinates, if $x^a$ are coordinates on $M$ and $y^i$ are coordinates on $N$, then the map is written as functions 
+
+$$
+y^i=f^i(x^1,\ldots,x^m).
+$$
+
+ The same map gives two important operations:
+
+- It pushes tangent vectors forward: $f_*:T_pM\to T_{f(p)}N$.
+
+- It pulls differential forms back: $f^*:\Omega^k(N)\to\Omega^k(M)$.
+
+We define these after tangent vectors and forms.
+
+# Tangent Vectors as Chart-Independent First-Order Data
+
+The notes so far have treated a manifold as a space that can be studied in coordinate patches. We now define tangent vectors carefully enough that later shorthand such as 
+
+$$
+\frac{d}{dt}\gamma(t),
+\qquad
+\frac{\partial}{\partial x^\mu},
+\qquad
+f_*v
+$$
+
+ has an exact meaning. The central point is this: tangent vectors are local first-order data at one point. Tangent spaces at different points are usually different vector spaces, even if the two points lie in the same coordinate chart.
+
+## Tangent vectors from curves: the chart definition
+
+Let $M$ be a smooth $n$-manifold and let $p\in M$. Consider smooth curves 
+
+$$
+\gamma:(-\epsilon,\epsilon)\to M,
+\qquad
+\gamma(0)=p.
+$$
+
+ Intuitively, the tangent vector of $\gamma$ at $p$ should remember only the first-order velocity of $\gamma$ at $t=0$, not the entire curve.
+
+Choose a chart $(U,\varphi)$ around $p$, with 
+
+$$
+\varphi=(x^1,\ldots,x^n):U\to \varphi(U)\subset \mathbb{R}^n.
+$$
+
+ For $t$ small enough, $\gamma(t)\in U$, and the coordinate representation of the curve is 
+
+$$
+\varphi\circ\gamma:(-\delta,\delta)\to \mathbb{R}^n.
+$$
+
+ Its ordinary Euclidean derivative at $0$ is 
+
+$$
+\left.\frac{d}{dt}\right|_{t=0}(\varphi\circ\gamma)(t)
+=
+\left(
+\left.\frac{d}{dt}\right|_{0}x^1(\gamma(t)),
+\ldots,
+\left.\frac{d}{dt}\right|_{0}x^n(\gamma(t))
+\right).
+$$
+
+
+<div className="definition">
+**Definition 5** (Equivalence of curves through $p$). Two smooth curves $\gamma_1$ and $\gamma_2$ through $p$ are tangent at $p$ if, for one hence every chart $(U,\varphi)$ around $p$, 
+
+$$
+\left.\frac{d}{dt}\right|_{0}(\varphi\circ\gamma_1)(t)
+=
+\left.\frac{d}{dt}\right|_{0}(\varphi\circ\gamma_2)(t).
+$$
+
+ The equivalence class of $\gamma$ is denoted $[\gamma]$.
+</div>
+The phrase "for one hence every chart" is important. If the equality holds in one coordinate system, then it holds in any other coordinate system because coordinate changes are smooth and the chain rule applies.
+
+<div className="definition">
+**Definition 6** (Tangent space via curves). The tangent space $T_pM$ is the set of equivalence classes of smooth curves through $p$: 
+
+$$
+T_pM:=\{[\gamma]:\gamma(0)=p\}.
+$$
+
+ Vector addition and scalar multiplication are defined by transporting the velocity vectors to a chart, doing the usual linear algebra in $\mathbb{R}^n$, and then transporting the result back. The chain rule shows this does not depend on the chart.
+</div>
+If $M$ is $n$-dimensional, then $T_pM$ is an $n$-dimensional real vector space.
+
+## Coordinate basis vectors
+
+Let $(U,x^1,\ldots,x^n)$ be a chart around $p$. The coordinate basis vector 
+
+$$
+\left.\frac{\partial}{\partial x^\mu}\right|_p\in T_pM
+$$
+
+ is the tangent vector represented by the curve which, in coordinates, moves only in the $x^\mu$ direction. More explicitly, if $a=\varphi(p)\in\mathbb{R}^n$, let 
+
+$$
+c_\mu(t)=\varphi^{-1}(a+t e_\mu),
+$$
+
+ where $e_\mu$ is the usual $\mu$-th basis vector of $\mathbb{R}^n$. Then 
+
+$$
+\left.\frac{\partial}{\partial x^\mu}\right|_p := [c_\mu].
+$$
+
+
+Every tangent vector $v\in T_pM$ has a unique expression 
+
+$$
+v=v^\mu\left.\frac{\partial}{\partial x^\mu}\right|_p.
+$$
+
+ The numbers $v^\mu$ depend on the chart, but the vector $v$ does not.
+
+<div className="warningbox">
+Same chart, different tangent spaces If $p,q\in U$ lie in the same coordinate chart, then $T_pM$ and $T_qM$ are still different vector spaces. The chart gives bases 
+
+$$
+\left.\frac{\partial}{\partial x^\mu}\right|_p\in T_pM,
+\qquad
+\left.\frac{\partial}{\partial x^\mu}\right|_q\in T_qM,
+$$
+
+ and it may tempt us to identify the two tangent spaces by matching coordinate components. This identification is convenient but not intrinsic. It depends on the chosen chart. A nonlinear change of coordinates changes the matching rule differently at different points. A connection is precisely the extra structure that later lets us compare nearby tangent spaces in a geometrically controlled way.
+</div>
+On $\mathbb{R}^n$ there is a canonical global identification $T_p\mathbb{R}^n\cong\mathbb{R}^n$ for every $p$, because $\mathbb{R}^n$ is itself a vector space. A general manifold has no such preferred identification.
+
+## Tangent vectors as derivations
+
+There is an equivalent definition that is often cleaner for calculations. Let $C^\infty(M)$ be the algebra of smooth real-valued functions on $M$.
+
+<div className="definition">
+**Definition 7** (Derivation at a point). A derivation at $p$ is a linear map 
+
+$$
+D:C^\infty(M)\to\mathbb{R}
+$$
+
+ satisfying the Leibniz rule at $p$: 
+
+$$
+D(fh)=f(p)D(h)+h(p)D(f)
+$$
+
+ for all $f,h\in C^\infty(M)$.
+</div>
+A curve $\gamma$ through $p$ defines such a derivation by 
+
+$$
+D_\gamma(f):=\left.\frac{d}{dt}\right|_{t=0} f(\gamma(t)).
+$$
+
+ If two curves are tangent in the coordinate sense, they define the same derivation. Conversely, every derivation arises from a tangent vector. Thus one may equivalently define 
+
+$$
+T_pM=\{\text{derivations at }p\}.
+$$
+
+
+In this language, the coordinate basis vector is the derivation 
+
+$$
+\left.\frac{\partial}{\partial x^\mu}\right|_p[f]
+=
+\left.\frac{\partial}{\partial u^\mu}\right|_{u=\varphi(p)}
+\bigl(f\circ\varphi^{-1}\bigr)(u),
+$$
+
+ where $u=(u^1,\ldots,u^n)$ are the standard coordinates on $\mathbb{R}^n$.
+
+Therefore, if 
+
+$$
+v=v^\mu\left.\frac{\partial}{\partial x^\mu}\right|_p,
+$$
+
+ then 
+
+$$
+v[f]=v^\mu
+\left.\frac{\partial}{\partial u^\mu}\right|_{u=\varphi(p)}
+(f\circ\varphi^{-1})(u).
+$$
+
+ This is the precise meaning of the common shorthand 
+
+$$
+v[f]=v^\mu \partial_\mu f(p).
+$$
+
+
+<div className="mainbox">
+When shorthand begins From now on we will often write 
+
+$$
+\partial_\mu:=\frac{\partial}{\partial x^\mu}
+$$
+
+ and omit the vertical bar $|_p$ when the base point is clear. The rigorous meaning is always 
+
+$$
+\left.\partial_\mu\right|_p\in T_pM.
+$$
+
+ The same symbol $\partial_\mu$ used at two different points refers to two different tangent vectors living in two different tangent spaces.
+</div>
+## Velocities of curves are pushforwards of $d/dt$
+
+Let 
+
+$$
+\gamma:I\to M
+$$
+
+ be a smooth curve defined on an interval $I\subset\mathbb{R}$. At $t_0\in I$, the tangent space $T_{t_0}I$ is canonically spanned by 
+
+$$
+\left.\frac{d}{dt}\right|_{t_0}.
+$$
+
+ The velocity of $\gamma$ at $t_0$ is defined by the pushforward 
+
+$$
+\dot\gamma(t_0):=(\gamma_{*})_{t_0}\left(\left.\frac{d}{dt}\right|_{t_0}\right)
+\in T_{\gamma(t_0)}M.
+$$
+
+ As a derivation, this means 
+
+$$
+\dot\gamma(t_0)[f]
+=
+\left.\frac{d}{dt}\right|_{t=t_0} f(\gamma(t)).
+$$
+
+ Thus the shorthand $\dot\gamma(t)$ is not an informal Euclidean derivative. It is the pushforward of the canonical tangent vector on the parameter interval.
+
+## Vector fields
+
+A vector field $X$ on $M$ assigns to each point $p\in M$ a tangent vector 
+
+$$
+X_p\in T_pM.
+$$
+
+ In a chart, 
+
+$$
+X_p=X^\mu(p)\left.\frac{\partial}{\partial x^\mu}\right|_p.
+$$
+
+ The vector field is smooth if the coefficient functions $X^\mu$ are smooth in every chart. Later we will express this by saying that a vector field is a smooth section of the tangent bundle: 
+
+$$
+X\in\Gamma(TM).
+$$
+
+ Before bundles are formally defined, it is enough to remember that $X_p$ lives in $T_pM$, and different points have different tangent spaces.
+
+## Pushforward
+
+Let $f:M\to N$ be a smooth map. It sends points of $M$ to points of $N$. It also sends tangent vectors at $p$ to tangent vectors at $f(p)$.
+
+<div className="definition">
+**Definition 8** (Pushforward). For $v\in T_pM$, the pushforward of $v$ by $f$ is the tangent vector 
+
+$$
+f_{*p}v\in T_{f(p)}N
+$$
+
+ defined as a derivation by 
+
+$$
+(f_{*p}v)[h]=v[h\circ f]
+$$
+
+ for every $h\in C^\infty(N)$.
+</div>
+This definition is forced: to differentiate a function $h$ on $N$ in the direction $f_*v$, first pull it back to the function $h\circ f$ on $M$, then differentiate using $v$.
+
+In coordinates, suppose $x^a$ are coordinates on $M$, $y^i$ are coordinates on $N$, and 
+
+$$
+y^i=f^i(x^1,\ldots,x^m).
+$$
+
+ If 
+
+$$
+v=v^a\left.\frac{\partial}{\partial x^a}\right|_p,
+$$
+
+ then 
+
+$$
+f_{*p}v
+=
+ v^a \frac{\partial f^i}{\partial x^a}(p)
+\left.\frac{\partial}{\partial y^i}\right|_{f(p)}.
+$$
+
+ So the pushforward is the Jacobian acting on tangent vectors, but the intrinsic definition is the derivation formula above.
+
+<div className="mainbox">
+Memory rule Tangent vectors push forward naturally. Differential forms pull back naturally.
+</div>

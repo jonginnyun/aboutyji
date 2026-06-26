@@ -1,7 +1,7 @@
 ---
 title: "Vector Bundles, Frames, and Sections"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/fiber-bundles/vector-bundles-and-sections
 category: Mathematics
@@ -17,67 +17,485 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Vector Bundles
+# Vector Bundles From Scratch
 
-A rank-$n$ vector bundle is a fiber bundle
+## The problem vector bundles solve
+
+In ordinary linear algebra, we work with one fixed vector space $V$. But on a manifold, the natural vector space may depend on the point. For example, at each point $p\in M$ there is a tangent space $T_pM$. These spaces are all isomorphic to $\mathbb{R}^n$, but there is usually no canonical way to identify $T_pM$ with $T_qM$ for two different points $p,q\in M$.
+
+A vector bundle is a controlled way of saying:
+
+> There is a vector space attached to every point of the base space, and these vector spaces vary continuously or smoothly from point to point.
+
+## Formal definition
+
+<div className="definition">
+**Definition 12** (Real vector bundle). A rank-$r$ real vector bundle over a topological space $B$ is a topological fiber bundle 
+
 $$
 \pi:E\to B
 $$
-whose fibers $E_b$ are $n$-dimensional vector spaces and whose local trivializations identify
-$$
-\pi^{-1}(U)\simeq U\times \mathbb F^n
-$$
-by linear maps on each fiber.
 
-The transition functions therefore take values in
+ with fiber $\mathbb{R}^r$, such that:
+
+1.  Each fiber $E_b=\pi^{-1}(b)$ is an $r$-dimensional real vector space.
+
+2.  There exists an open cover $\{U_i\}$ of $B$ and local trivializations 
+
 $$
-GL(n,\mathbb F),
-$$
-so on overlaps
-$$
-v_V(b)=g_{VU}(b)v_U(b),\qquad g_{VU}:U\cap V\to GL(n,\mathbb F).
+\phi_i:\pi^{-1}(U_i)\to U_i\times\mathbb{R}^r
 $$
 
-## Local Frames
+ that restrict on each fiber $E_b$ to a linear isomorphism 
 
-A local frame over $U$ is a choice of basis
 $$
-e_1(b),\ldots,e_n(b)
-$$
-for every fiber $E_b$ with $b\in U$, varying continuously or smoothly depending on the category.
-
-Once a local frame is chosen, a section can be written as
-$$
-s(b)=\sum_i s^i_U(b)e_i(b).
+E_b\to \{b\}\times\mathbb{R}^r\cong\mathbb{R}^r.
 $$
 
-Changing the frame changes the component functions $s^i_U$, but not the geometric section $s$ itself. This distinction is the cleanest way to keep track of coordinate-dependent expressions.
 
-## Gauge as Change of Frame
+3.  On overlaps, transition functions take values in $\mathop{\mathrm{GL}}(r,\mathbb{R})$.
 
-In a vector bundle, a gauge transformation can be understood as a point-dependent change of local frame. If
+A complex vector bundle is the same definition with $\mathbb{C}^r$ and $\mathop{\mathrm{GL}}(r,\mathbb{C})$.
+</div>
+If $B=M$ is a smooth manifold and $E$ is also a smooth manifold, then a smooth vector bundle requires smooth local trivializations and smooth transition functions 
+
 $$
-e'_i(b)=\sum_j e_j(b)G^j{}_i(b),
-$$
-then the component column vector of a section transforms by the inverse matrix:
-$$
-s'_U(b)=G(b)^{-1}s_U(b).
+g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(r,\mathbb{R})
 $$
 
-This is why gauge language is not an optional overlay on bundle theory. It appears as soon as one asks how local component descriptions compare on overlaps or under frame changes.
+ or 
 
-## Important Examples
+$$
+g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(r,\mathbb{C}).
+$$
 
-The tangent bundle $TM$ is the vector bundle whose fiber at $p\in M$ is the tangent space $T_pM$. A vector field is a section of $TM$.
 
-The cotangent bundle $T^*M$ has fibers $T_p^*M$. A one-form is a section of $T^*M$.
+<div className="definition">
+**Definition 13** (Line bundle). A rank-$1$ vector bundle is called a line bundle. A rank-$1$ real vector bundle is a real line bundle, with fiber $\mathbb{R}$. A rank-$1$ complex vector bundle is a complex line bundle, with fiber $\mathbb{C}$.
+</div>
+For a real line bundle, the transition functions take values in 
 
-Exterior powers such as $\Lambda^kT^*M$ are also vector bundles. Differential $k$-forms are sections of these bundles.
+$$
+\mathop{\mathrm{GL}}(1,\mathbb{R})=\mathbb{R}^\times,
+$$
 
-The Bloch bundle in band theory is another vector bundle: over each crystal momentum $k$ in the Brillouin zone, its fiber is the occupied eigenspace of the Bloch Hamiltonian.
+ the nonzero real numbers under multiplication. If a fiber metric is chosen and local frames are normalized, the structure group reduces to 
 
-## The Useful Mental Model
+$$
+O(1)=\{+1,-1\}.
+$$
 
-The vector space structure lives fiberwise. There is no automatic way to subtract vectors in different fibers unless extra structure, such as a connection, is introduced.
+ This is why the Möbius strip can be described using transition functions equal to $+1$ or $-1$.
 
-This point is easy to miss because local trivializations temporarily identify nearby fibers with a fixed model vector space. But those identifications are chart choices, not canonical facts.
+<div className="mainbox">
+Is $E$ arbitrary or equal to $M\times\mathbb{R}^{\dim M}$? The total space $E$ is not assumed to be $M\times\mathbb{R}^{\dim M}$. It is an independent space equipped with a projection $\pi:E\to M$ and local product structures. Only the trivial rank-$r$ bundle is globally $M\times\mathbb{R}^r$. The rank $r$ is independent of $\dim M$ except in special examples such as the tangent bundle, where $r=\dim M$.
+</div>
+If $M$ is an $n$-dimensional smooth manifold and $E\to M$ is a rank-$r$ real smooth vector bundle, then the total space $E$ is locally modeled on 
+
+$$
+U\times\mathbb{R}^r\subset \mathbb{R}^n\times\mathbb{R}^r,
+$$
+
+ so $E$ is an $(n+r)$-dimensional smooth manifold. For the tangent bundle $TM\to M$, $r=n$, so $TM$ has dimension $2n$.
+
+## The trivial bundle
+
+The simplest vector bundle is the product 
+
+$$
+E=M\times\mathbb{R}^r.
+$$
+
+ The projection is 
+
+$$
+\pi(p,v)=p.
+$$
+
+ The fiber over $p$ is 
+
+$$
+E_p=\{p\}\times\mathbb{R}^r\cong\mathbb{R}^r.
+$$
+
+ This is called the trivial rank-$r$ bundle.
+
+A bundle is trivial if there exists a global trivialization 
+
+$$
+E\cong M\times\mathbb{R}^r
+$$
+
+ compatible with the projection and vector-space structures. Many bundles are locally trivial but not globally trivial.
+
+## Local frames
+
+Let $E\to M$ be a rank-$r$ vector bundle. On an open set $U\subset M$, a local frame is a collection of $r$ local sections 
+
+$$
+e_1,\ldots,e_r
+$$
+
+ such that for every $p\in U$, the vectors 
+
+$$
+e_1(p),\ldots,e_r(p)
+$$
+
+ form a basis of $E_p$.
+
+Choosing a local frame is equivalent to choosing a local trivialization. If a section $s$ is defined on $U$, then 
+
+$$
+s(p)=e_a(p)\psi^a(p).
+$$
+
+ The functions $\psi^a$ are the local components of $s$.
+
+## Transition functions for vector bundles
+
+Suppose we have two patches $U_i$ and $U_j$ with local frames 
+
+$$
+e^{(i)}_1,\ldots,e^{(i)}_r,
+\qquad
+ e^{(j)}_1,\ldots,e^{(j)}_r.
+$$
+
+ On the overlap $U_i\cap U_j$, both frames are valid. They must be related by an invertible matrix: 
+
+$$
+e_a^{(j)}=e_b^{(i)}\,g_{ij}^{ba}.
+$$
+
+ In matrix notation, 
+
+$$
+e^{(j)}=e^{(i)}g_{ij}.
+$$
+
+ The map 
+
+$$
+g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(r,\mathbb{R})
+$$
+
+ is called a transition function. For a complex vector bundle, 
+
+$$
+g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(r,\mathbb{C}).
+$$
+
+ If the bundle has a Hermitian metric and we choose orthonormal frames, then 
+
+$$
+g_{ij}:U_i\cap U_j\to U(r).
+$$
+
+ On triple overlaps, 
+
+$$
+g_{ij}g_{jk}=g_{ik}.
+$$
+
+ This is the vector-bundle cocycle condition.
+
+<div className="checkpointbox">
+Analogy with projective representations In projective representations, associativity forces a cocycle condition on phase factors: 
+
+$$
+U(g_1)U(g_2)=\omega(g_1,g_2)U(g_1g_2).
+$$
+
+ For bundles, consistency of patch gluing forces 
+
+$$
+g_{ij}g_{jk}=g_{ik}.
+$$
+
+ These are not the same mathematical object, but they express a common idea: local data must agree consistently on triple overlaps or triple products.
+</div>
+## Sections
+
+Let $\pi:E\to M$ be any vector bundle. A section is a smooth map 
+
+$$
+s:M\to E
+$$
+
+ such that 
+
+$$
+\pi\circ s=\mathrm{id}_M.
+$$
+
+ This means $s(p)\in E_p$ for every $p\in M$.
+
+Notation: 
+
+$$
+\Gamma(E)=\text{space of smooth sections of }E.
+$$
+
+ This notation is used constantly in differential geometry. For example, 
+
+$$
+\Gamma(TM)=\text{vector fields on }M,
+$$
+
+ 
+
+$$
+\Gamma(T^*M)=\text{one-forms on }M,
+$$
+
+ 
+
+$$
+\Omega^k(M)=\Gamma(\Lambda^kT^*M)=\text{$k$-forms on }M.
+$$
+
+
+If $E=M\times\mathbb{R}^r$ is trivial, a section is the same thing as a smooth function 
+
+$$
+\psi:M\to\mathbb{R}^r,
+$$
+
+ because it has the form 
+
+$$
+s(p)=(p,\psi(p)).
+$$
+
+ For a nontrivial vector bundle, sections are still locally vector-valued functions, but globally they need not be expressible as maps $M\to\mathbb{R}^r$.
+
+## How section components transform
+
+Let 
+
+$$
+s=e^{(i)}\psi_i=e^{(j)}\psi_j.
+$$
+
+ Since $e^{(j)}=e^{(i)}g_{ij}$, 
+
+$$
+e^{(i)}\psi_i=e^{(i)}g_{ij}\psi_j.
+$$
+
+ Therefore 
+
+$$
+\psi_i=g_{ij}\psi_j.
+$$
+
+
+<div className="mainbox">
+Physics translation The section $s$ is the global geometric object. The column vector $\psi_i$ is only its coordinate description in patch $U_i$. A gauge transformation changes the description, not the underlying section.
+</div>
+## Gauge changes as changes of frame
+
+Suppose on each patch $U_i$ we change frame by 
+
+$$
+e^{(i)}\mapsto \widetilde e^{(i)}=e^{(i)}h_i,
+$$
+
+ where 
+
+$$
+h_i:U_i\to \mathop{\mathrm{GL}}(r,\mathbb{R})
+$$
+
+ or $\mathop{\mathrm{GL}}(r,\mathbb{C})$.
+
+The transition functions change by 
+
+$$
+g_{ij}\mapsto \widetilde g_{ij}=h_i^{-1}g_{ij}h_j.
+$$
+
+ Thus transition functions are not individually gauge-invariant. The bundle is the equivalence class of such gluing data under changes of local frames.
+
+# Canonical Vector Bundles on a Manifold
+
+## The tangent bundle
+
+For each point $p\in M$, there is a tangent space $T_pM$. Collect all tangent spaces: 
+
+$$
+TM:=\bigsqcup_{p\in M}T_pM.
+$$
+
+ The symbol $\bigsqcup$ means disjoint union: even if two tangent vectors have the same coordinate components, they are regarded as different if they live at different base points.
+
+The projection is 
+
+$$
+\pi:TM\to M,
+\qquad
+\pi(v_p)=p.
+$$
+
+ This is the tangent bundle.
+
+<div className="mainbox">
+Important sentence The tangent bundle $TM\to M$ is a rank-$n$ vector bundle over an $n$-dimensional manifold $M$.
+</div>
+A vector field is a smooth choice of one tangent vector at each point: 
+
+$$
+X(p)\in T_pM.
+$$
+
+ Therefore a vector field is a map 
+
+$$
+X:M\to TM
+$$
+
+ satisfying 
+
+$$
+\pi\circ X=\mathrm{id}_M.
+$$
+
+ Such a map is called a section.
+
+<div className="mainbox">
+Vector field = section A vector field is not the tangent bundle itself. It is a section of the tangent bundle. 
+
+$$
+\text{vector field }X \in \Gamma(TM).
+$$
+
+
+</div>
+## The cotangent bundle
+
+Similarly, collect the cotangent spaces: 
+
+$$
+T^*M:=\bigsqcup_{p\in M}T_p^*M.
+$$
+
+ This is the cotangent bundle.
+
+A one-form is a smooth choice of one covector at each point: 
+
+$$
+\alpha(p)\in T_p^*M.
+$$
+
+ So a one-form is a section of the cotangent bundle: 
+
+$$
+\alpha\in\Gamma(T^*M).
+$$
+
+
+More generally, $k$-forms are sections of the bundle 
+
+$$
+\Lambda^kT^*M\to M.
+$$
+
+
+<div className="warningbox">
+Precise language $TM$, $T^*M$, and $\Lambda^kT^*M$ are vector bundles over $M$. Vector fields and differential forms are sections of these bundles, not the bundles themselves.
+</div>
+# First Examples of Nontrivial Bundles
+
+## Real line bundles
+
+A real line bundle over a base space $B$ is a rank-$1$ real vector bundle 
+
+$$
+\pi:L\to B.
+$$
+
+ This means that every fiber 
+
+$$
+L_b=\pi^{-1}(b)
+$$
+
+ is a one-dimensional real vector space, hence isomorphic to $\mathbb{R}$. Locally, 
+
+$$
+\pi^{-1}(U_i)\cong U_i\times\mathbb{R}.
+$$
+
+ On overlaps, transition functions are nonzero real-valued functions 
+
+$$
+g_{ij}:U_i\cap U_j\to \mathbb{R}^\times.
+$$
+
+ If we choose a fiber metric and normalized local frames, then only signs remain: 
+
+$$
+g_{ij}:U_i\cap U_j\to O(1)=\{+1,-1\}.
+$$
+
+
+The trivial real line bundle over $B$ is 
+
+$$
+B\times\mathbb{R}\to B.
+$$
+
+ A nontrivial real line bundle is locally $U\times\mathbb{R}$ but cannot be globally written as $B\times\mathbb{R}$ in a way compatible with the vector-space structure on fibers.
+
+## The Möbius line bundle
+
+The Möbius strip is the simplest nontrivial real line bundle over $S^1$.
+
+At every point of $S^1$, attach a copy of $\mathbb{R}$. Locally it looks like 
+
+$$
+U\times\mathbb{R}.
+$$
+
+ But after going once around the circle, the fiber coordinate flips sign: 
+
+$$
+v\mapsto -v.
+$$
+
+
+The structure group is 
+
+$$
+O(1)=\{+1,-1\}.
+$$
+
+ The nontrivial transition function is the sign $-1$.
+
+<div className="mainbox">
+Moral of the Möbius example Locally, the Möbius bundle is indistinguishable from the cylinder $S^1\times\mathbb{R}$. Globally, it is twisted. This is the basic phenomenon fiber bundles are designed to capture.
+</div>
+A real line bundle is trivial if it admits a nowhere-zero global section. The Möbius line bundle does not: any attempted nonzero section comes back with opposite sign after going around the circle.
+
+## Complex line bundles
+
+A complex line bundle has fiber $\mathbb{C}$. Its structure group can be taken to be 
+
+$$
+\mathop{\mathrm{GL}}(1,\mathbb{C})=\mathbb{C}^\times.
+$$
+
+ With a Hermitian metric, it reduces to 
+
+$$
+U(1).
+$$
+
+ Thus transition functions are maps 
+
+$$
+g_{ij}:U_i\cap U_j\to U(1).
+$$
+
+ A complex line bundle is the natural home for wavefunctions whose phase can only be chosen locally.

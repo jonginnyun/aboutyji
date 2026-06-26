@@ -1,7 +1,7 @@
 ---
 title: "Manifolds, Forms, Lie Derivatives, and Lie Groups"
 date: 2026-06-21
-updated: 2026-06-21
+updated: 2026-06-26
 lang: en
 slug: mathematics/differential-geometry/manifolds-forms-connections
 category: Mathematics
@@ -16,13 +16,827 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Reading Guide
+# Lie Groups from the Differential-Geometric Point of View
 
-This note collects the differential-geometric background needed before connections and curvature become natural: manifolds, tangent and cotangent spaces, differential forms, pullbacks, vector fields, flows, Lie derivatives, Lie groups, and Lie algebras.
+Before discussing principal bundles and gauge fields, we need Lie groups. In physics, Lie groups appear as symmetry groups and gauge groups. In bundle theory, they also appear as structure groups: the groups that act on fibers and describe how local trivializations are glued together.
 
-Read it as a differential-geometry map rather than as a replacement for a full course.
+The goal of this section is to connect the following objects without treating any of them as unexplained notation: 
 
-Shorter entry points now live beside this comprehensive version:
+$$
+G,
+\qquad
+T_eG,
+\qquad
+\mathfrak g,
+\qquad
+[\cdot,\cdot],
+\qquad
+\exp,
+\qquad
+\mathop{\mathrm{Ad}}_g,
+\qquad
+\mathop{\mathrm{ad}}_X.
+$$
 
-- Manifolds and Tangent Spaces
-- Forms, Flows, and Lie Derivatives
+
+## Topological groups and Lie groups
+
+<div className="definition">
+**Definition 14** (Topological group). A topological group is a group $G$ equipped with a topology such that multiplication and inversion are continuous maps: 
+
+$$
+G\times G\to G,
+\qquad
+(g,h)\mapsto gh,
+$$
+
+ 
+
+$$
+G\to G,
+\qquad
+g\mapsto g^{-1}.
+$$
+
+
+</div>
+<div className="definition">
+**Definition 15** (Lie group). A Lie group is a group $G$ which is also a smooth manifold, such that multiplication and inversion are smooth maps: 
+
+$$
+G\times G\to G,
+\qquad
+(g,h)\mapsto gh,
+$$
+
+ 
+
+$$
+G\to G,
+\qquad
+g\mapsto g^{-1}.
+$$
+
+
+</div>
+Thus a Lie group is simultaneously an algebraic object and a smooth manifold. Its points are group elements, and the group operations can be differentiated.
+
+<div className="examplebox">
+Basic Lie groups
+
+- $(\mathbb{R},+)$ is a one-dimensional Lie group.
+
+- $U(1)=\{e^{i\theta}:\theta\in\mathbb{R}\}$ is a one-dimensional Lie group. As a manifold it is $S^1$.
+
+- $\mathop{\mathrm{GL}}(n,\mathbb{R})$ is the group of invertible real $n\times n$ matrices. It is an open subset of $M_n(\mathbb{R})\cong\mathbb{R}^{n^2}$.
+
+- $SO(n)=\{A\in \mathop{\mathrm{GL}}(n,\mathbb{R}):A^TA=I,\det A=1\}$ is the rotation group.
+
+- $U(n)=\{U\in\mathop{\mathrm{GL}}(n,\mathbb{C}):U^\dagger U=I\}$ is the unitary group.
+
+- $SU(n)=\{U\in U(n):\det U=1\}$ is the special unitary group.
+</div>
+Finite groups can be regarded as zero-dimensional Lie groups with the discrete topology. The differential-geometric content is richest for continuous groups such as $U(1)$, $SU(2)$, and $SO(3)$.
+
+## The Lie algebra as a tangent space
+
+Let $G$ be a Lie group and let $e\in G$ be the identity element.
+
+<div className="definition">
+**Definition 16** (Lie algebra as a vector space). The Lie algebra of $G$ is the tangent space at the identity: 
+
+$$
+\mathfrak g:=T_eG.
+$$
+
+
+</div>
+At this stage, $\mathfrak g$ is only a vector space. Its elements are infinitesimal group elements: velocities of smooth curves in $G$ passing through the identity. If 
+
+$$
+\gamma:(-\epsilon,\epsilon)\to G,
+\qquad
+\gamma(0)=e,
+$$
+
+ then 
+
+$$
+X=\dot\gamma(0)\in T_eG=\mathfrak g.
+$$
+
+
+For matrix Lie groups, this becomes concrete. If $G\subset \mathop{\mathrm{GL}}(n,\mathbb{C})$ is a matrix Lie group, a tangent vector $X\in T_IG$ is represented by an ordinary matrix derivative 
+
+$$
+X=\left.\frac{d}{dt}\right|_{0}\gamma(t),
+\qquad
+\gamma(t)\in G,
+\quad
+\gamma(0)=I.
+$$
+
+ For $U(n)$, differentiating $\gamma(t)^\dagger\gamma(t)=I$ at $t=0$ gives 
+
+$$
+X^\dagger+X=0,
+$$
+
+ so 
+
+$$
+\mathfrak u(n)=\{X\in M_n(\mathbb{C}):X^\dagger=-X\}.
+$$
+
+ For $SO(n)$, 
+
+$$
+\mathfrak{so}(n)=\{X\in M_n(\mathbb{R}):X^T=-X\}.
+$$
+
+ For $SU(n)$, 
+
+$$
+\mathfrak{su}(n)=\{X\in M_n(\mathbb{C}):X^\dagger=-X,\ \mathrm{Tr}X=0\}.
+$$
+
+
+## The bracket on vector fields
+
+Before defining the bracket on a Lie algebra, recall the bracket of vector fields on an arbitrary smooth manifold $M$.
+
+<div className="definition">
+**Definition 17** (Lie bracket of vector fields). For vector fields $X,Y\in\Gamma(TM)$, the Lie bracket $[X,Y]$ is the vector field defined by 
+
+$$
+[X,Y](f)=X(Y(f))-Y(X(f))
+$$
+
+ for every $f\in C^\infty(M)$.
+</div>
+This is exactly the same operation as the Lie derivative of $Y$ along $X$: 
+
+$$
+\boxed{[X,Y]=\mathcal{L}_XY.}
+$$
+
+ Therefore the vector-field bracket is not an additional arbitrary operation. It is the infinitesimal change of $Y$ under the flow of $X$, written in derivation form.
+
+In local coordinates, 
+
+$$
+X=X^\mu\partial_\mu,
+\qquad
+Y=Y^\mu\partial_\mu,
+$$
+
+ one obtains 
+
+$$
+[X,Y]
+=
+\left(X^\nu\partial_\nu Y^\mu-Y^\nu\partial_\nu X^\mu\right)\partial_\mu.
+$$
+
+
+## From vector-field bracket to Lie-algebra bracket
+
+Now let $G$ be a Lie group. For every $g\in G$, left translation is the diffeomorphism 
+
+$$
+L_g:G\to G,
+\qquad
+L_g(h)=gh.
+$$
+
+ Given $X\in\mathfrak g=T_eG$, define a vector field $X^L$ on $G$ by 
+
+$$
+(X^L)_g=(dL_g)_eX.
+$$
+
+ This is called the left-invariant vector field generated by $X$.
+
+<div className="definition">
+**Definition 18** (Left-invariant vector field). A vector field $V\in\Gamma(TG)$ is left-invariant if 
+
+$$
+(dL_g)_h(V_h)=V_{gh}
+$$
+
+ for all $g,h\in G$.
+</div>
+Every $X\in\mathfrak g$ determines exactly one left-invariant vector field $X^L$, and every left-invariant vector field is obtained this way by evaluating at $e$.
+
+The bracket of two left-invariant vector fields is again left-invariant. Indeed, diffeomorphisms preserve Lie brackets: 
+
+$$
+(L_g)_*[V,W]=[(L_g)_*V,(L_g)_*W].
+$$
+
+ If $V$ and $W$ are left-invariant, the right-hand side is $[V,W]$, so $[V,W]$ is left-invariant.
+
+<div className="definition">
+**Definition 19** (Lie algebra bracket). For $X,Y\in\mathfrak g$, define $[X,Y]\in\mathfrak g$ by 
+
+$$
+[X^L,Y^L]=[X,Y]^L.
+$$
+
+ Equivalently, 
+
+$$
+[X,Y]=[X^L,Y^L]_e.
+$$
+
+
+</div>
+This answers an important conceptual question: there is a big bracket operation on all vector fields on $G$, and the Lie-algebra bracket is its restriction to left-invariant vector fields, followed by evaluation at the identity. They are not two unrelated definitions.
+
+<div className="checkpointbox">
+What the bracket remembers The tangent space $T_eG$ records infinitesimal directions away from the identity. The bracket records how these infinitesimal motions fail to commute. Thus the Lie algebra is 
+
+$$
+(\mathfrak g,[\cdot,\cdot]),
+$$
+
+ not merely the vector space $T_eG$.
+</div>
+## Matrix Lie groups: proof of the commutator formula
+
+For a matrix Lie group, the abstract bracket becomes 
+
+$$
+\boxed{[X,Y]=XY-YX.}
+$$
+
+ Here is a direct proof.
+
+Let $G\subset \mathop{\mathrm{GL}}(n,\mathbb{R})$ or $\mathop{\mathrm{GL}}(n,\mathbb{C})$ be a matrix Lie group. Left translation by $g$ is matrix multiplication $h\mapsto gh$, so 
+
+$$
+(X^L)_g=gX.
+$$
+
+ In the ambient vector space of matrices, the vector field $X^L$ is the map 
+
+$$
+g\mapsto gX.
+$$
+
+ Similarly, 
+
+$$
+Y^L_g=gY.
+$$
+
+ The derivative of the matrix-valued function $g\mapsto gY$ in the direction $gX$ is 
+
+$$
+(gX)Y=gXY.
+$$
+
+ The derivative of $g\mapsto gX$ in the direction $gY$ is 
+
+$$
+(gY)X=gYX.
+$$
+
+ Therefore 
+
+$$
+[X^L,Y^L]_g=gXY-gYX=g(XY-YX).
+$$
+
+ This is exactly the left-invariant vector field generated by $XY-YX$. Hence 
+
+$$
+[X,Y]=XY-YX.
+$$
+
+
+## What the group commutator loop measures
+
+The product 
+
+$$
+K(t,s)=\exp(tX)\exp(sY)\exp(-tX)\exp(-sY)
+$$
+
+ is called a group commutator. If the group were Abelian, then $K(t,s)=e$ exactly. For a non-Abelian Lie group, $K(t,s)$ measures the failure of the small motions $\exp(tX)$ and $\exp(sY)$ to commute.
+
+For a matrix group, Taylor expansion gives 
+
+$$
+\exp(tX)=I+tX+O(t^2),
+\qquad
+\exp(sY)=I+sY+O(s^2).
+$$
+
+ Keeping only the terms proportional to $ts$, 
+
+$$
+K(t,s)=I+ts(XY-YX)+O(t^2s,ts^2).
+$$
+
+ Thus the Lie bracket is the first nonzero term in the commutator loop. This computation is not a separate definition of the bracket; it is a concrete way to see that the bracket is infinitesimal noncommutativity.
+
+## Structure constants
+
+If $\{e_a\}$ is a basis of $\mathfrak g$, the bracket is determined by numbers $f_{ab}{}^c$ defined by 
+
+$$
+[e_a,e_b]=f_{ab}{}^c e_c.
+$$
+
+ These are the structure constants in the chosen basis. They change under a change of basis, but the abstract bracket does not.
+
+## Mathematical and physical generator conventions
+
+Mathematicians usually define 
+
+$$
+\mathfrak u(n)=\{X:X^\dagger=-X\},
+$$
+
+ so elements of $\mathfrak u(n)$ are anti-Hermitian. This is natural because exponentials of anti-Hermitian matrices are unitary.
+
+Physicists often write unitary transformations as 
+
+$$
+U(\theta)=\exp(-i\theta^a Q_a),
+$$
+
+ where the $Q_a$ are Hermitian quantum operators. In that convention, the anti-Hermitian Lie algebra element is 
+
+$$
+X=-i\theta^a Q_a.
+$$
+
+ Thus Hermitian operators enter because of unitary representations on Hilbert space, not because the abstract Lie algebra of $U(n)$ is made of Hermitian matrices.
+
+If 
+
+$$
+\rho:G\to U(\mathcal H)
+$$
+
+ is a unitary representation, then its differential 
+
+$$
+d\rho_e:\mathfrak g\to \mathfrak u(\mathcal H)
+$$
+
+ sends Lie algebra elements to anti-Hermitian operators. Physicists then write 
+
+$$
+d\rho_e(X)=-iQ_X
+$$
+
+ with $Q_X$ Hermitian.
+
+## The exponential map and one-parameter subgroups
+
+A one-parameter subgroup of $G$ is a smooth homomorphism 
+
+$$
+\gamma:\mathbb{R}\to G,
+\qquad
+\gamma(t+s)=\gamma(t)\gamma(s).
+$$
+
+ Every $X\in\mathfrak g$ determines a unique one-parameter subgroup $\gamma_X$ satisfying 
+
+$$
+\gamma_X(0)=e,
+\qquad
+\dot\gamma_X(0)=X.
+$$
+
+ The exponential map is 
+
+$$
+\boxed{\exp(X)=\gamma_X(1),}
+\qquad
+\gamma_X(t)=\exp(tX).
+$$
+
+ For matrix Lie groups this is the usual matrix exponential.
+
+## Is $\exp(tX)$ a flow?
+
+The curve 
+
+$$
+t\mapsto \exp(tX)
+$$
+
+ is a path in the Lie group $G$. It is not, by itself, a flow on an arbitrary manifold. A flow is a family of maps from a manifold to itself.
+
+However, $\exp(tX)$ becomes a flow once $G$ acts on something.
+
+First, $G$ acts on itself by right multiplication. The left-invariant vector field $X^L$ has flow 
+
+$$
+\Phi_t^{X^L}(h)=h\exp(tX).
+$$
+
+ Indeed, 
+
+$$
+\left.\frac{d}{dt}\right|_{0}h\exp(tX)=(dL_h)_eX=(X^L)_h.
+$$
+
+ So $t\mapsto \exp(tX)$ is the integral curve of $X^L$ starting at $e$, and $h\mapsto h\exp(tX)$ is the full flow of $X^L$.
+
+Second, if $G$ acts smoothly on a manifold $M$ by a left action 
+
+$$
+G\times M\to M,
+\qquad
+(g,p)\mapsto g\cdot p,
+$$
+
+ then $X\in\mathfrak g$ induces the fundamental vector field 
+
+$$
+X_M(p)=\left.\frac{d}{dt}\right|_{0}\exp(tX)\cdot p.
+$$
+
+ Its flow is 
+
+$$
+\Phi_t^{X_M}(p)=\exp(tX)\cdot p.
+$$
+
+
+<div className="mainbox">
+Exponential versus flow $\exp(tX)$ is a one-parameter subgroup in $G$. It becomes a flow after $G$ acts on a manifold. On $G$ itself, multiplication turns it into a flow. On a representation space or physical configuration space, the group action turns it into the corresponding symmetry flow.
+</div>
+## Right-invariant vector fields and the minus sign
+
+Right translation is 
+
+$$
+R_g:G\to G,
+\qquad
+R_g(h)=hg.
+$$
+
+ For $X\in\mathfrak g$, define the right-invariant vector field 
+
+$$
+(X^R)_g=(dR_g)_eX.
+$$
+
+ For a matrix group, 
+
+$$
+(X^R)_g=Xg.
+$$
+
+ Its flow is 
+
+$$
+\Psi_t^{X^R}(h)=\exp(tX)h.
+$$
+
+
+The bracket has the opposite sign: 
+
+$$
+\boxed{[X^R,Y^R]=-[X,Y]^R.}
+$$
+
+ For matrix groups this is immediate. The derivative of $g\mapsto Yg$ in the direction $Xg$ is $YXg$, while the derivative of $g\mapsto Xg$ in the direction $Yg$ is $XYg$. Therefore 
+
+$$
+[X^R,Y^R]_g=YXg-XYg=-(XY-YX)g=-[X,Y]^R_g.
+$$
+
+ The sign is not a mistake; it comes from using right-invariant rather than left-invariant vector fields. Principal bundles usually use right actions, so this sign convention is one reason inverse adjoint actions such as $\mathop{\mathrm{Ad}}_{g^{-1}}$ appear naturally.
+
+## The adjoint action $\mathop{\mathrm{Ad}}_g$
+
+For $g\in G$, conjugation by $g$ is the diffeomorphism 
+
+$$
+C_g:G\to G,
+\qquad
+C_g(h)=ghg^{-1}.
+$$
+
+ It fixes the identity: $C_g(e)=e$. Therefore its differential at the identity is a linear map 
+
+$$
+(dC_g)_e:T_eG\to T_eG.
+$$
+
+
+<div className="definition">
+**Definition 20** (Adjoint action). The adjoint action of $G$ on $\mathfrak g$ is 
+
+$$
+\mathop{\mathrm{Ad}}_g:=(dC_g)_e:\mathfrak g\to\mathfrak g.
+$$
+
+
+</div>
+This is a pushforward: it is the tangent map of the conjugation diffeomorphism at the identity.
+
+For matrix groups, 
+
+$$
+\boxed{\mathop{\mathrm{Ad}}_gX=gXg^{-1}.}
+$$
+
+ Proof: take a curve $\gamma(t)$ in $G$ with $\gamma(0)=I$ and $\dot\gamma(0)=X$. Then 
+
+$$
+C_g(\gamma(t))=g\gamma(t)g^{-1}.
+$$
+
+ Differentiating at $t=0$ gives 
+
+$$
+\left.\frac{d}{dt}\right|_0 g\gamma(t)g^{-1}=gXg^{-1}.
+$$
+
+ Thus $\mathop{\mathrm{Ad}}_{g^{-1}}X=g^{-1}Xg$.
+
+## The infinitesimal adjoint action $\mathop{\mathrm{ad}}_X$
+
+The adjoint action itself is a smooth map 
+
+$$
+\mathop{\mathrm{Ad}}:G\to \mathop{\mathrm{GL}}(\mathfrak g),
+\qquad
+g\mapsto \mathop{\mathrm{Ad}}_g.
+$$
+
+ Differentiating this map at the identity gives 
+
+$$
+(d\mathop{\mathrm{Ad}})_e:T_eG\to T_I\mathop{\mathrm{GL}}(\mathfrak g).
+$$
+
+ Since $T_eG=\mathfrak g$ and $T_I\mathop{\mathrm{GL}}(\mathfrak g)\cong\mathrm{End}(\mathfrak g)$, each $X\in\mathfrak g$ gives a linear map 
+
+$$
+\mathop{\mathrm{ad}}_X:\mathfrak g\to\mathfrak g.
+$$
+
+
+<div className="definition">
+**Definition 21** (Infinitesimal adjoint action). For $X,Y\in\mathfrak g$, 
+
+$$
+\mathop{\mathrm{ad}}_X(Y)=\left.\frac{d}{dt}\right|_{0}\mathop{\mathrm{Ad}}_{\exp(tX)}Y.
+$$
+
+
+</div>
+The derivative here is an ordinary derivative of a curve in the vector space $\mathfrak g$: for fixed $Y$, the map 
+
+$$
+t\mapsto \mathop{\mathrm{Ad}}_{\exp(tX)}Y
+$$
+
+ is a curve in $\mathfrak g$.
+
+With the left-invariant convention, 
+
+$$
+\boxed{\mathop{\mathrm{ad}}_X(Y)=[X,Y].}
+$$
+
+ For matrix groups, 
+
+$$
+\mathop{\mathrm{Ad}}_{\exp(tX)}Y=e^{tX}Ye^{-tX}.
+$$
+
+ Using 
+
+$$
+e^{tX}=I+tX+O(t^2),
+\qquad
+e^{-tX}=I-tX+O(t^2),
+$$
+
+ we get 
+
+$$
+e^{tX}Ye^{-tX}=Y+t(XY-YX)+O(t^2).
+$$
+
+ Therefore 
+
+$$
+\mathop{\mathrm{ad}}_X(Y)=XY-YX=[X,Y].
+$$
+
+
+## Examples: $U(1)$, $SU(2)$, and $SO(3)$
+
+### $U(1)$
+
+The group $U(1)$ is 
+
+$$
+U(1)=\{e^{i\theta}:\theta\in\mathbb{R}\}.
+$$
+
+ Its Lie algebra is 
+
+$$
+\mathfrak u(1)=i\mathbb{R}.
+$$
+
+ Because $U(1)$ is Abelian, 
+
+$$
+[X,Y]=0
+$$
+
+ for all $X,Y\in\mathfrak u(1)$. The exponential map 
+
+$$
+\exp:i\mathbb{R}\to U(1)
+$$
+
+ has kernel $2\pi i\mathbb{Z}$, showing that the Lie algebra sees the local line while the Lie group is globally a circle.
+
+### $SU(2)$
+
+The group $SU(2)$ consists of unitary $2\times2$ matrices with determinant one. A mathematical basis of $\mathfrak{su}(2)$ is 
+
+$$
+e_a=-\frac{i}{2}\sigma_a,
+$$
+
+ where $\sigma_a$ are the Pauli matrices. Then 
+
+$$
+[e_a,e_b]=\epsilon_{ab}{}^c e_c.
+$$
+
+ A common physics basis is 
+
+$$
+T_a=\frac12\sigma_a,
+$$
+
+ with 
+
+$$
+[T_a,T_b]=i\epsilon_{ab}{}^cT_c.
+$$
+
+ The two conventions differ by the factor $-i$.
+
+### $SO(3)$
+
+The group $SO(3)$ consists of rotations of $\mathbb{R}^3$. Its Lie algebra is 
+
+$$
+\mathfrak{so}(3)=\{X\in M_3(\mathbb{R}):X^T=-X\}.
+$$
+
+ As Lie algebras, 
+
+$$
+\mathfrak{su}(2)\cong\mathfrak{so}(3).
+$$
+
+ But $SU(2)$ and $SO(3)$ are globally different Lie groups: $SU(2)$ is the double cover of $SO(3)$. Thus they have the same infinitesimal algebra but different global topology. This distinction is what allows spin-$1/2$ representations to be linear for $SU(2)$ but projective for $SO(3)$.
+
+## Lie groups as structure groups
+
+In a fiber bundle, a structure group tells us how local product descriptions are glued together. For a rank-$r$ real vector bundle the natural structure group is $\mathop{\mathrm{GL}}(r,\mathbb{R})$. For a complex Hermitian vector bundle it is often $U(r)$. For gauge theory it is usually a Lie group such as 
+
+$$
+U(1),\quad SU(2),\quad SU(N),\quad SO(N).
+$$
+
+ The Lie group gives finite gauge transformations. The Lie algebra gives infinitesimal gauge fields and field strengths.
+
+## Structure group, frame bundle, and principal bundle
+
+There are two equivalent ways to organize the same data.
+
+The bottom-up viewpoint starts with a vector bundle 
+
+$$
+\pi:E\to M
+$$
+
+ whose fiber is a model vector space $V$. On overlaps, local trivializations are glued by transition functions 
+
+$$
+g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(V).
+$$
+
+ If the transition functions can be chosen to land in a subgroup 
+
+$$
+G\subseteq \mathop{\mathrm{GL}}(V),
+$$
+
+ then one says that $E$ has structure group $G$, or that the structure group has been reduced to $G$. In this language, the structure group is not an additional fiber sitting over $M$. It is the allowed class of gluing maps for the vector fibers.
+
+For example, a complex rank-$N$ vector bundle has a priori structure group $\mathop{\mathrm{GL}}(N,\mathbb{C})$. If it is equipped with a Hermitian inner product and the local frames are required to be orthonormal, then transition functions preserve the Hermitian inner product, so they lie in 
+
+$$
+U(N)\subset \mathop{\mathrm{GL}}(N,\mathbb{C}).
+$$
+
+ Thus a Hermitian vector bundle naturally has structure group $U(N)$.
+
+The top-down viewpoint starts instead with a principal $G$-bundle 
+
+$$
+P\to M.
+$$
+
+ This principal bundle is the bundle of frames, gauges, or local reference systems. Once $G$ acts on a vector space $V$ through a representation 
+
+$$
+\rho:G\to \mathop{\mathrm{GL}}(V),
+$$
+
+ one obtains the associated vector bundle 
+
+$$
+P\times_G V.
+$$
+
+
+The bridge between the two viewpoints is the frame bundle. Suppose $E\to M$ is a rank-$r$ real vector bundle. Its full frame bundle is 
+
+$$
+\mathop{\mathrm{Fr}}(E)=\bigsqcup_{x\in M}\mathop{\mathrm{Fr}}(E_x),
+$$
+
+ where 
+
+$$
+\mathop{\mathrm{Fr}}(E_x)=\{u:\mathbb{R}^r\to E_x\; |\; u\text{ is a linear isomorphism}\}.
+$$
+
+ A frame $u$ is an ordered basis of $E_x$, encoded as a linear isomorphism from the model fiber to the actual fiber. The group $\mathop{\mathrm{GL}}(r,\mathbb{R})$ acts on the right by 
+
+$$
+(u\cdot g)(v):=u(gv),
+\qquad
+v\in\mathbb{R}^r,
+\quad g\in\mathop{\mathrm{GL}}(r,\mathbb{R}).
+$$
+
+ This action changes the frame but not the base point. With this right action, 
+
+$$
+\mathop{\mathrm{Fr}}(E)\to M
+$$
+
+ is a principal $\mathop{\mathrm{GL}}(r,\mathbb{R})$-bundle.
+
+If $E$ is a Hermitian complex vector bundle of rank $N$, the unitary frame bundle is 
+
+$$
+\mathop{\mathrm{Fr}}_U(E)=\bigsqcup_{x\in M}\mathop{\mathrm{Fr}}_U(E_x),
+$$
+
+ where $\mathop{\mathrm{Fr}}_U(E_x)$ is the set of unitary isomorphisms 
+
+$$
+u:\mathbb{C}^N\to E_x.
+$$
+
+ It is a principal $U(N)$-bundle. Conversely, 
+
+$$
+E\cong \mathop{\mathrm{Fr}}_U(E)\times_{U(N)}\mathbb{C}^N.
+$$
+
+
+<div className="mainbox">
+Structure group versus principal bundle A vector bundle with structure group $G$ and a principal $G$-bundle are not competing ideas. The vector-bundle description says: "the fibers are vector spaces and are glued by $G$-valued transition functions." The principal-bundle description says: "collect all allowed local frames into a bundle whose fiber is acted on freely and transitively by $G$." Passing to the frame bundle and passing to an associated vector bundle are inverse constructions up to natural isomorphism.
+</div>
+This is why physics often moves between the two languages without warning. When calculating wavefunctions, expectation values, and Hamiltonians, the vector bundle is natural because matter fields are sections of vector bundles. When studying gauge fields, curvature, Chern classes, and monopoles, the principal bundle is often cleaner because the connection is fundamentally a rule for moving frames.
+
+<div className="checkpointbox">
+What to remember from Lie groups
+
+1.  $G$ is the finite group of transformations.
+
+2.  $\mathfrak g=T_eG$ is the vector space of infinitesimal transformations.
+
+3.  $[X,Y]$ is induced from the Lie derivative bracket of left-invariant vector fields.
+
+4.  For matrix groups, $[X,Y]=XY-YX$.
+
+5.  $\mathop{\mathrm{Ad}}_g=(dC_g)_e$ is finite conjugation on infinitesimal generators.
+
+6.  $\mathop{\mathrm{ad}}_X=(d\mathop{\mathrm{Ad}})_e(X)$ is infinitesimal conjugation, and $\mathop{\mathrm{ad}}_XY=[X,Y]$.
+</div>

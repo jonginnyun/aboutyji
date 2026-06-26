@@ -1,7 +1,7 @@
 ---
 title: "Homology, Cohomology, and Characteristic Classes"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/algebraic-topology/homology-cohomology-and-characteristic-classes
 category: Mathematics
@@ -17,43 +17,1651 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Homology
+# From Homotopy to Cohomology
 
-Homology assigns algebraic data to holes of different dimensions. Very roughly, one studies chains, cycles, and boundaries:
+<div className="mainbox">
+Purpose and assumptions of this section This section is a self-contained algebraic-topology supplement for the surrounding material. It assumes only the most basic point-set topology vocabulary: topological space, open set, continuous map, product topology, quotient topology, and open cover. Everything else used below is defined before it is used.
+
+The goal is not to prove every theorem in algebraic topology. The goal is to give precise definitions and enough examples so that the following statements in the main text are no longer mysterious: 
+
 $$
-\partial_{k}\partial_{k+1}=0.
-$$
-
-Cycles with no boundary may still be boundaries of higher-dimensional chains. Homology classes are cycles modulo boundaries.
-
-## Cohomology
-
-Cohomology is the dual theory. Instead of chains, it uses cochains, and the coboundary operator satisfies
-$$
-d^2=0.
-$$
-
-In de Rham cohomology, cochains are differential forms. Closed forms satisfy $d\omega=0$, and exact forms have the form $\omega=d\eta$.
-
-The quotient
-$$
-H^k_{\mathrm{dR}}(M)=\frac{\ker d:\Omega^k(M)\to\Omega^{k+1}(M)}{\operatorname{im}d:\Omega^{k-1}(M)\to\Omega^k(M)}
-$$
-captures global information invisible to local calculus.
-
-## Characteristic Classes
-
-Characteristic classes assign cohomology classes to vector bundles. They measure global twisting that cannot be removed by local trivialization.
-
-For a complex line bundle with curvature two-form $F$, the first Chern class is represented by
-$$
-\frac{F}{2\pi}
-$$
-up to conventional factors depending on whether the connection is written as real or imaginary-valued.
-
-On a closed oriented surface, the first Chern number is
-$$
-\frac{1}{2\pi}\int F.
+\begin{gather*}
+\pi_1(S^1)\cong \mathbb{Z},\qquad \pi_1(SO(3))\cong \mathbb{Z}_2,\qquad H^2(S^2;\mathbb{Z})\cong \mathbb{Z},\\
+\text{complex line bundles are classified by }H^2(-;\mathbb{Z}),\\
+\left[\frac{F}{2\pi}\right]\in H^2_{\mathrm{dR}}(M)\text{ is the real image of }c_1(L)\in H^2(M;\mathbb{Z}).
+\end{gather*}
 $$
 
-This is the algebraic-topology backbone behind Berry curvature, Bloch bundles, and Chern insulators.
+ Here $\cong$ means "is isomorphic to" as groups or vector spaces. It does not mean equality of sets unless explicitly stated.
+</div>
+## Standing notation
+
+Throughout this section:
+
+- $I=[0,1]$.
+
+- $X,Y,Z$ denote topological spaces.
+
+- A map between topological spaces is assumed continuous unless explicitly stated otherwise.
+
+- A **based space** is a pair $(X,x_0)$ consisting of a topological space $X$ and a chosen point $x_0\in X$.
+
+- $S^n$ denotes the unit $n$-sphere 
+
+$$
+S^n=\{x\in \mathbb{R}^{n+1}: \|x\|=1\}.
+$$
+
+
+- $D^n$ denotes the closed unit $n$-disk 
+
+$$
+D^n=\{x\in \mathbb{R}^n: \|x\|\leq 1\}.
+$$
+
+ Its boundary is $\partial D^n=S^{n-1}$ for $n\geq 1$.
+
+- $\mathbb{Z}$ is the additive group of integers, $\mathbb{R}$ is the additive group of real numbers unless a ring structure is being used, and $U(1)=\{z\in\mathbb{C}: |z|=1\}$ is the multiplicative circle group.
+
+- $\mathsf A$ denotes an abelian coefficient group. In singular cohomology notation we write $H^n(X;\mathsf A)$, with a semicolon separating the space from the coefficients.
+
+When a topological space is said to be a "nice space" below, the intended class is the class of spaces usually encountered in differential geometry and condensed matter applications: manifolds, finite CW complexes, simplicial complexes, and spaces homotopy equivalent to these. The definitions themselves do not require niceness, but some classification theorems do.
+
+## Homotopy of maps
+
+Topology studies properties preserved by homeomorphism. Algebraic topology often studies weaker properties preserved by continuous deformation.
+
+<div className="definition">
+**Definition 31** (Homotopy of maps). Let $f_0,f_1:X\to Y$ be two maps. A homotopy from $f_0$ to $f_1$ is a map 
+
+$$
+H:X\times I\to Y
+$$
+
+ such that 
+
+$$
+H(x,0)=f_0(x),\qquad H(x,1)=f_1(x)
+$$
+
+ for every $x\in X$. If such an $H$ exists, $f_0$ and $f_1$ are called homotopic, and we write 
+
+$$
+f_0\simeq f_1.
+$$
+
+
+</div>
+The parameter $t\in I$ is deformation time. For fixed $t$, the map 
+
+$$
+H_t:X\to Y,\qquad H_t(x)=H(x,t)
+$$
+
+ is an intermediate map between $f_0$ and $f_1$.
+
+<div className="definition">
+**Definition 32** (Homotopy relative to a subspace). Let $A\subset X$. Suppose $f_0,f_1:X\to Y$ agree on $A$. A homotopy $H:X\times I\to Y$ from $f_0$ to $f_1$ is a homotopy relative to $A$ if 
+
+$$
+H(a,t)=f_0(a)=f_1(a)
+$$
+
+ for every $a\in A$ and every $t\in I$.
+</div>
+The phrase "relative to $A$" means that points of $A$ are held fixed during the deformation.
+
+<div className="definition">
+**Definition 33** (Null-homotopic map). A map $f:X\to Y$ is null-homotopic if it is homotopic to a constant map. Equivalently, there exists $y_0\in Y$ and a homotopy from $f$ to the map $x\mapsto y_0$.
+</div>
+<div className="definition">
+**Definition 34** (Homotopy equivalence). Two spaces $X$ and $Y$ are homotopy equivalent if there exist maps 
+
+$$
+f:X\to Y,\qquad g:Y\to X
+$$
+
+ such that 
+
+$$
+g\circ f\simeq \mathrm{id}_X,
+\qquad
+f\circ g\simeq \mathrm{id}_Y.
+$$
+
+ The maps $f$ and $g$ are called homotopy inverses.
+</div>
+A homeomorphism is a homotopy equivalence, but not conversely. For example, a solid disk $D^2$ is not homeomorphic to a point, but it is homotopy equivalent to a point because it can be contracted continuously to its center.
+
+<div className="definition">
+**Definition 35** (Contractible space). A space $X$ is contractible if $\mathrm{id}_X:X\to X$ is homotopic to a constant map. Equivalently, $X$ is homotopy equivalent to a point.
+</div>
+<div className="example">
+**Example 1** (Convex subsets of Euclidean space). Let $C\subset\mathbb{R}^n$ be convex, meaning that for any $x,y\in C$ and any $t\in I$, the point $(1-t)x+ty$ lies in $C$. Fix $x_0\in C$. The formula 
+
+$$
+H(x,t)=(1-t)x+tx_0
+$$
+
+ defines a homotopy from $\mathrm{id}_C$ to the constant map $x\mapsto x_0$. Therefore every convex subset of $\mathbb{R}^n$ is contractible.
+</div>
+## Paths, loops, and the fundamental group
+
+Homotopy becomes especially important when the domain is an interval or a sphere.
+
+<div className="definition">
+**Definition 36** (Path). A path in $X$ is a map 
+
+$$
+\gamma:I\to X.
+$$
+
+ The point $\gamma(0)$ is the initial point, and $\gamma(1)$ is the final point.
+</div>
+<div className="definition">
+**Definition 37** (Loop). Let $x_0\in X$. A loop based at $x_0$ is a path $\gamma:I\to X$ satisfying 
+
+$$
+\gamma(0)=\gamma(1)=x_0.
+$$
+
+
+</div>
+<div className="definition">
+**Definition 38** (Homotopy of paths relative to endpoints). Let $\gamma_0,\gamma_1:I\to X$ be paths with the same initial point and the same final point. A homotopy of paths relative to endpoints is a homotopy 
+
+$$
+H:I\times I\to X
+$$
+
+ such that 
+
+$$
+H(s,0)=\gamma_0(s),\qquad H(s,1)=\gamma_1(s),
+$$
+
+ and 
+
+$$
+H(0,t)=\gamma_0(0)=\gamma_1(0),
+\qquad
+H(1,t)=\gamma_0(1)=\gamma_1(1)
+$$
+
+ for all $s,t\in I$.
+</div>
+Thus the endpoints are not allowed to move during the deformation.
+
+<div className="definition">
+**Definition 39** (Concatenation of paths). Let $\alpha:I\to X$ and $\beta:I\to X$ be paths such that 
+
+$$
+\alpha(1)=\beta(0).
+$$
+
+ Their concatenation $\alpha*\beta:I\to X$ is the path 
+
+$$
+(\alpha*\beta)(t)=
+\begin{cases}
+\alpha(2t), & 0\leq t\leq \frac12,\\
+\beta(2t-1), & \frac12\leq t\leq 1.
+\end{cases}
+$$
+
+ This means that one first traverses $\alpha$, then traverses $\beta$.
+</div>
+<div className="definition">
+**Definition 40** (Reverse path). For a path $\alpha:I\to X$, the reverse path $\overline{\alpha}:I\to X$ is 
+
+$$
+\overline{\alpha}(t)=\alpha(1-t).
+$$
+
+
+</div>
+<div className="definition">
+**Definition 41** (Constant path). For $x_0\in X$, the constant path at $x_0$ is 
+
+$$
+c_{x_0}:I\to X,
+\qquad
+c_{x_0}(t)=x_0.
+$$
+
+
+</div>
+<div className="definition">
+**Definition 42** (Fundamental group). Let $(X,x_0)$ be a based space. The fundamental group $\pi_1(X,x_0)$ is the set of homotopy classes relative to endpoints of loops based at $x_0$. The group operation is 
+
+$$
+[\alpha]\,[\beta]=[\alpha*\beta].
+$$
+
+ The identity element is $[c_{x_0}]$, and the inverse of $[\alpha]$ is $[\overline{\alpha}]$.
+</div>
+The operation is well-defined on homotopy classes. Strictly speaking, path concatenation is associative only up to reparametrization, but it becomes associative on homotopy classes. Hence $\pi_1(X,x_0)$ is a group.
+
+<div className="definition">
+**Definition 43** (Simply connected). A space $X$ is simply connected if it is path connected and, for some point $x_0\in X$, the group $\pi_1(X,x_0)$ is the trivial group.
+</div>
+If $X$ is path connected, then different basepoints give isomorphic fundamental groups. More precisely, if $c$ is a path from $x_0$ to $x_1$, then 
+
+$$
+\pi_1(X,x_0)\to \pi_1(X,x_1),
+\qquad
+[\gamma]\mapsto [\overline c*\gamma*c]
+$$
+
+ is a group isomorphism. The isomorphism depends on the choice of $c$ unless $\pi_1(X,x_0)$ is abelian.
+
+## Computing the first examples of fundamental groups
+
+### The circle
+
+Let 
+
+$$
+p:\mathbb{R}\to S^1,
+\qquad
+p(\theta)=e^{i\theta}.
+$$
+
+ This map wraps the real line around the circle. It is periodic: 
+
+$$
+p(\theta+2\pi n)=p(\theta)
+$$
+
+ for every $n\in\mathbb{Z}$.
+
+A loop $\gamma:I\to S^1$ based at $1\in S^1$ can be lifted to a path $\widetilde\gamma:I\to\mathbb{R}$ satisfying 
+
+$$
+p\circ\widetilde\gamma=\gamma,
+\qquad
+\widetilde\gamma(0)=0.
+$$
+
+ Since $\gamma(1)=1$, the endpoint $\widetilde\gamma(1)$ must be an integer multiple of $2\pi$: 
+
+$$
+\widetilde\gamma(1)=2\pi n
+$$
+
+ for a unique $n\in\mathbb{Z}$.
+
+<div className="definition">
+**Definition 44** (Winding number of a loop in $S^1$). The integer 
+
+$$
+\operatorname{wind}(\gamma)=\frac{\widetilde\gamma(1)-\widetilde\gamma(0)}{2\pi}
+$$
+
+ is the winding number of $\gamma$.
+</div>
+Homotopic loops have the same winding number, and every integer occurs. Therefore 
+
+$$
+\pi_1(S^1,1)\cong \mathbb{Z}.
+$$
+
+ The isomorphism sends a loop class to its winding number.
+
+### The torus
+
+The $n$-torus is 
+
+$$
+T^n=(S^1)^n.
+$$
+
+ Since loops in a product can wind independently around each $S^1$ factor, 
+
+$$
+\pi_1(T^n)\cong \mathbb{Z}^n.
+$$
+
+ For the two-torus, 
+
+$$
+\pi_1(T^2)\cong \mathbb{Z}^2.
+$$
+
+ The two integer generators correspond to the two noncontractible cycles.
+
+### Higher spheres
+
+For $n\geq 2$, 
+
+$$
+\pi_1(S^n)\cong 0,
+$$
+
+ where $0$ denotes the trivial group. Geometrically, any loop on $S^n$ can be pulled away from at least one point and then contracted inside a copy of $\mathbb{R}^n$ obtained by stereographic projection.
+
+### Rotation groups
+
+The group $SU(2)$ is diffeomorphic to $S^3$, hence 
+
+$$
+\pi_1(SU(2))\cong 0.
+$$
+
+ The group $SO(3)$ is obtained from $SU(2)$ by identifying $U$ and $-U$: 
+
+$$
+SU(2)\to SO(3)
+$$
+
+ is a two-to-one covering map. As a result, 
+
+$$
+\pi_1(SO(3))\cong \mathbb{Z}_2.
+$$
+
+ This is the topology behind the distinction between integer-spin and half-integer-spin representations.
+
+## Covering spaces and universal covers
+
+Covering spaces make the previous examples precise.
+
+<div className="definition">
+**Definition 45** (Covering map). Let $\widetilde X$ and $X$ be topological spaces. A map 
+
+$$
+p:\widetilde X\to X
+$$
+
+ is a covering map if every point $x\in X$ has an open neighborhood $U\subset X$ such that 
+
+$$
+p^{-1}(U)=\bigsqcup_{a\in A} V_a,
+$$
+
+ where each $V_a\subset\widetilde X$ is open and the restriction 
+
+$$
+p|_{V_a}:V_a\to U
+$$
+
+ is a homeomorphism. The sets $V_a$ are called sheets over $U$.
+</div>
+<div className="example">
+**Example 2** (The exponential cover). The map 
+
+$$
+p:\mathbb{R}\to S^1,
+\qquad
+p(\theta)=e^{i\theta},
+$$
+
+ is a covering map. A small arc $U\subset S^1$ has infinitely many disjoint preimages in $\mathbb{R}$, one on each interval shifted by $2\pi n$.
+</div>
+<div className="definition">
+**Definition 46** (Universal cover). A covering map $p:\widetilde X\to X$ is a universal cover if $\widetilde X$ is simply connected.
+</div>
+For connected and locally well-behaved spaces, the universal cover is unique up to isomorphism of covering spaces. The universal cover of $S^1$ is $\mathbb{R}$. The universal cover of $SO(3)$ is $SU(2)$.
+
+<div className="mainbox">
+Why this matters for Lie groups For a connected Lie group $G$, the universal cover $\widetilde G$ is also a Lie group, and the covering map 
+
+$$
+\widetilde G\to G
+$$
+
+ is a Lie group homomorphism. The kernel is a discrete central subgroup of $\widetilde G$. Projective representations of many connected Lie groups are closely related to ordinary representations of their covering groups.
+</div>
+## Higher homotopy groups
+
+The fundamental group uses loops, or maps from $S^1$. Higher homotopy groups use maps from higher-dimensional spheres.
+
+<div className="definition">
+**Definition 47** (Higher homotopy group). Let $(X,x_0)$ be a based space and let $n\geq 1$. The $n$th homotopy group $\pi_n(X,x_0)$ is the set of based homotopy classes of based maps 
+
+$$
+f:(S^n,s_0)\to (X,x_0),
+$$
+
+ where $s_0\in S^n$ is a chosen basepoint. Based homotopy means the basepoint remains fixed throughout the homotopy.
+</div>
+For $n=1$, this recovers the fundamental group. For $n\geq 2$, the group $\pi_n(X,x_0)$ is abelian.
+
+A useful model is to identify $S^n$ with the quotient space 
+
+$$
+I^n/\partial I^n,
+$$
+
+ where the entire boundary of the cube is collapsed to one point. This makes the group operation visible: place two maps in adjacent subcubes and collapse the boundary.
+
+<div className="example">
+**Example 3** (Degree). The group 
+
+$$
+\pi_n(S^n)\cong \mathbb{Z}
+$$
+
+ for $n\geq 1$. The integer is the degree of a map $S^n\to S^n$. For $n=1$, this is winding number. For $n=2$, it counts how many times a sphere wraps around a sphere, with orientation.
+</div>
+Homotopy groups are powerful but hard to compute. Cohomology is usually easier to compute and is better adapted to differential forms, flux integrals, and Chern classes.
+
+## From homotopy to homology
+
+The fundamental group detects noncontractible loops. Higher homotopy groups detect nontrivial maps from spheres. Homology takes a different approach: it studies cycles built from simple pieces and records which cycles are boundaries.
+
+The guiding principle is: 
+
+$$
+\text{homology detects holes by testing whether cycles bound.}
+$$
+
+ For example:
+
+- A nontrivial element of $H_1(X;\mathbb{Z})$ is represented by a closed loop or collection of loops that is not the boundary of any surface in $X$.
+
+- A nontrivial element of $H_2(X;\mathbb{Z})$ is represented by a closed surface that is not the boundary of any three-dimensional region in $X$.
+
+The most general definition is singular homology.
+
+## Singular chains and singular homology
+
+<div className="definition">
+**Definition 48** (Standard simplex). The standard $n$-simplex is 
+
+$$
+\Delta^n=\left\{(t_0,\ldots,t_n)\in\mathbb{R}^{n+1}:t_i\geq 0\text{ for all }i,\ \sum_{i=0}^n t_i=1\right\}.
+$$
+
+ For example, $\Delta^0$ is a point, $\Delta^1$ is an interval, $\Delta^2$ is a triangle, and $\Delta^3$ is a tetrahedron.
+</div>
+<div className="definition">
+**Definition 49** (Singular simplex). A singular $n$-simplex in $X$ is a map 
+
+$$
+\sigma:\Delta^n\to X.
+$$
+
+ It is called "singular" because it need not be injective, embedded, or geometrically straight.
+</div>
+<div className="definition">
+**Definition 50** (Singular chain group). The singular $n$-chain group with integer coefficients is the free abelian group generated by all singular $n$-simplices in $X$. It is denoted 
+
+$$
+C_n(X;\mathbb{Z}).
+$$
+
+ An element $c\in C_n(X;\mathbb{Z})$ is a finite formal sum 
+
+$$
+c=\sum_{a=1}^N m_a\sigma_a,
+$$
+
+ where $m_a\in\mathbb{Z}$ and each $\sigma_a:\Delta^n\to X$ is a singular $n$-simplex.
+</div>
+The word "formal" means that the sum is not pointwise addition of maps. It is an algebraic record of oriented pieces with integer multiplicities.
+
+For $0\leq i\leq n$, define the $i$th face inclusion 
+
+$$
+\iota_i:\Delta^{n-1}\to \Delta^n
+$$
+
+ by inserting $0$ in the $i$th coordinate: 
+
+$$
+\iota_i(t_0,\ldots,t_{n-1})=(t_0,\ldots,t_{i-1},0,t_i,\ldots,t_{n-1}).
+$$
+
+
+<div className="definition">
+**Definition 51** (Boundary operator). For a singular $n$-simplex $\sigma:\Delta^n\to X$, define 
+
+$$
+\partial_n\sigma=\sum_{i=0}^n (-1)^i\,\sigma\circ\iota_i.
+$$
+
+ Extend this definition linearly to obtain a group homomorphism 
+
+$$
+\partial_n:C_n(X;\mathbb{Z})\to C_{n-1}(X;\mathbb{Z}).
+$$
+
+
+</div>
+The alternating signs encode orientation. For example, if $\sigma:\Delta^1\to X$ is a path, then 
+
+$$
+\partial_1\sigma=\sigma(1)-\sigma(0),
+$$
+
+ where the two endpoints are regarded as singular $0$-simplices.
+
+The key identity is 
+
+$$
+\partial_{n-1}\circ\partial_n=0.
+$$
+
+ In words: the boundary of a boundary is zero.
+
+<div className="definition">
+**Definition 52** (Cycles and boundaries). The group of $n$-cycles is 
+
+$$
+Z_n(X;\mathbb{Z})=\ker(\partial_n:C_n(X;\mathbb{Z})\to C_{n-1}(X;\mathbb{Z})).
+$$
+
+ The group of $n$-boundaries is 
+
+$$
+B_n(X;\mathbb{Z})=\operatorname{im}(\partial_{n+1}:C_{n+1}(X;\mathbb{Z})\to C_n(X;\mathbb{Z})).
+$$
+
+ Since $\partial_n\circ\partial_{n+1}=0$, every boundary is a cycle: 
+
+$$
+B_n(X;\mathbb{Z})\subset Z_n(X;\mathbb{Z}).
+$$
+
+
+</div>
+<div className="definition">
+**Definition 53** (Singular homology). The $n$th singular homology group of $X$ with integer coefficients is 
+
+$$
+H_n(X;\mathbb{Z})=Z_n(X;\mathbb{Z})/B_n(X;\mathbb{Z}).
+$$
+
+ An element of $H_n(X;\mathbb{Z})$ is a homology class of cycles, where two cycles are identified if their difference is a boundary.
+</div>
+The coefficient group can be changed. For an abelian group $\mathsf A$, one defines $C_n(X;\mathsf A)$ similarly, using coefficients in $\mathsf A$. The resulting homology group is denoted $H_n(X;\mathsf A)$.
+
+## Basic homology examples
+
+<div className="example">
+**Example 4** (A point). Let $\mathrm{pt}$ be a one-point space. Then 
+
+$$
+H_0(\mathrm{pt};\mathbb{Z})\cong \mathbb{Z},
+\qquad
+H_n(\mathrm{pt};\mathbb{Z})\cong 0\quad (n\geq 1).
+$$
+
+ There is one connected component and no positive-dimensional holes.
+</div>
+<div className="example">
+**Example 5** (Zeroth homology). For any space $X$, $H_0(X;\mathbb{Z})$ records path components. If $X$ has path components indexed by a set $A$, then 
+
+$$
+H_0(X;\mathbb{Z})\cong \bigoplus_{a\in A}\mathbb{Z}.
+$$
+
+ In particular, if $X$ is path connected, then $H_0(X;\mathbb{Z})\cong\mathbb{Z}$.
+</div>
+<div className="example">
+**Example 6** (Spheres). For $n\geq 1$, 
+
+$$
+H_k(S^n;\mathbb{Z})\cong
+\begin{cases}
+\mathbb{Z}, & k=0,\\
+\mathbb{Z}, & k=n,\\
+0, & \text{otherwise.}
+\end{cases}
+$$
+
+ The group $H_n(S^n;\mathbb{Z})\cong\mathbb{Z}$ is generated by the fundamental $n$-dimensional cycle of the sphere.
+</div>
+<div className="example">
+**Example 7** (The two-torus). For $T^2=S^1\times S^1$, 
+
+$$
+H_0(T^2;\mathbb{Z})\cong\mathbb{Z},
+\qquad
+H_1(T^2;\mathbb{Z})\cong\mathbb{Z}^2,
+\qquad
+H_2(T^2;\mathbb{Z})\cong\mathbb{Z},
+$$
+
+ and all higher homology groups vanish. The two generators of $H_1$ are the two independent noncontractible cycles. The generator of $H_2$ is the oriented fundamental surface of the torus.
+</div>
+<div className="mainbox">
+Homotopy invariance of homology If $f,g:X\to Y$ are homotopic maps, then they induce the same homomorphism on homology: 
+
+$$
+f_*=g_*:H_n(X;\mathbb{Z})\to H_n(Y;\mathbb{Z}).
+$$
+
+ If $X$ and $Y$ are homotopy equivalent, then 
+
+$$
+H_n(X;\mathbb{Z})\cong H_n(Y;\mathbb{Z})
+$$
+
+ for every $n$.
+</div>
+Here $f_*$ is induced by pushing singular simplices forward: 
+
+$$
+f_\#(\sigma)=f\circ\sigma.
+$$
+
+ The symbol $f_\#$ denotes the chain-level map, while $f_*$ denotes the induced map on homology classes.
+
+## Cochains and cohomology
+
+Homology is covariant: a map $f:X\to Y$ sends chains in $X$ to chains in $Y$. Cohomology reverses the direction: a map $f:X\to Y$ pulls cochains on $Y$ back to cochains on $X$.
+
+<div className="definition">
+**Definition 54** (Singular cochain group). The group of singular $n$-cochains on $X$ with coefficients in an abelian group $\mathsf A$ is 
+
+$$
+C^n(X;\mathsf A)=\operatorname{Hom}_{\mathbb{Z}}(C_n(X;\mathbb{Z}),\mathsf A).
+$$
+
+ Thus an $n$-cochain is a group homomorphism 
+
+$$
+\varphi:C_n(X;\mathbb{Z})\to \mathsf A.
+$$
+
+ It assigns an element of $A$ to every singular $n$-chain, linearly in the chain.
+</div>
+<div className="definition">
+**Definition 55** (Coboundary operator). The coboundary operator 
+
+$$
+\delta^n:C^n(X;\mathsf A)\to C^{n+1}(X;\mathsf A)
+$$
+
+ is defined by 
+
+$$
+(\delta^n\varphi)(c)=\varphi(\partial_{n+1}c)
+$$
+
+ for every $c\in C_{n+1}(X;\mathbb{Z})$.
+</div>
+Since $\partial_n\circ\partial_{n+1}=0$, one has 
+
+$$
+\delta^{n+1}\circ\delta^n=0.
+$$
+
+
+<div className="definition">
+**Definition 56** (Cocycles and coboundaries). The group of $n$-cocycles is 
+
+$$
+Z^n(X;\mathsf A)=\ker(\delta^n:C^n(X;\mathsf A)\to C^{n+1}(X;\mathsf A)).
+$$
+
+ The group of $n$-coboundaries is 
+
+$$
+B^n(X;\mathsf A)=\operatorname{im}(\delta^{n-1}:C^{n-1}(X;\mathsf A)\to C^n(X;\mathsf A)).
+$$
+
+ Because $\delta^n\circ\delta^{n-1}=0$, every coboundary is a cocycle: 
+
+$$
+B^n(X;\mathsf A)\subset Z^n(X;\mathsf A).
+$$
+
+
+</div>
+<div className="definition">
+**Definition 57** (Singular cohomology). The $n$th singular cohomology group of $X$ with coefficients in $\mathsf A$ is 
+
+$$
+H^n(X;\mathsf A)=Z^n(X;\mathsf A)/B^n(X;\mathsf A).
+$$
+
+
+</div>
+### Pairing with homology
+
+There is a natural pairing between cochains and chains: 
+
+$$
+\langle \varphi,c\rangle=\varphi(c),
+\qquad
+\varphi\in C^n(X;\mathsf A),\quad c\in C_n(X;\mathbb{Z}).
+$$
+
+ If $\varphi$ is a cocycle and $c$ is a cycle, this pairing depends only on the cohomology class $[\varphi]\in H^n(X;\mathsf A)$ and the homology class $[c]\in H_n(X;\mathbb{Z})$. Indeed, if $c=\partial b$ is a boundary and $\varphi$ is a cocycle, then 
+
+$$
+\langle\varphi,c\rangle
+=\varphi(\partial b)
+=(\delta\varphi)(b)=0.
+$$
+
+ If $\varphi=\delta\psi$ is a coboundary and $c$ is a cycle, then 
+
+$$
+\langle\varphi,c\rangle
+=(\delta\psi)(c)
+=\psi(\partial c)=0.
+$$
+
+
+Therefore there is a well-defined pairing 
+
+$$
+H^n(X;\mathsf A)\times H_n(X;\mathbb{Z})\to \mathsf A.
+$$
+
+
+### Pullback in cohomology
+
+Let $f:X\to Y$. The chain-level pushforward is 
+
+$$
+f_\#:C_n(X;\mathbb{Z})\to C_n(Y;\mathbb{Z}),
+\qquad
+f_\#(\sigma)=f\circ\sigma.
+$$
+
+ The cochain-level pullback is 
+
+$$
+f^\#:C^n(Y;\mathsf A)\to C^n(X;\mathsf A),
+\qquad
+(f^\#\varphi)(c)=\varphi(f_\#c).
+$$
+
+ This commutes with the coboundary operators, so it induces 
+
+$$
+f^*:H^n(Y;\mathsf A)\to H^n(X;\mathsf A).
+$$
+
+ The notation distinguishes the two levels:
+
+- $f^\#$ is the cochain-level pullback.
+
+- $f^*$ is the induced map on cohomology classes.
+
+In many texts both are denoted $f^*$, with context determining the meaning.
+
+## The homology--cohomology pairing: why only genuine topology survives
+
+The definitions of cycles, boundaries, cocycles, and coboundaries are designed so that cohomology classes can be evaluated on homology classes. Let $\mathsf A$ be an Abelian coefficient group. For simplicity, take singular cochains with coefficients in $\mathsf A$ and singular chains with integer coefficients. An $n$-cochain 
+
+$$
+\varphi\in C^n(X;\mathsf A)=\mathrm{Hom}(C_n(X;\mathbb{Z}),\mathsf A)
+$$
+
+ is a homomorphism from $n$-chains to $\mathsf A$. Therefore it can be evaluated on an $n$-chain $c$: 
+
+$$
+\langle \varphi,c\rangle:=\varphi(c).
+$$
+
+
+The important point is that this evaluation descends to a well-defined pairing 
+
+$$
+\boxed{
+H^n(X;\mathsf A)\times H_n(X;\mathbb{Z})\to\mathsf A,
+\qquad
+([\varphi],[c])\mapsto \varphi(c).
+}
+$$
+
+ Here is the proof. First suppose the cycle representative is changed by a boundary: 
+
+$$
+c\mapsto c+\partial b.
+$$
+
+ If $\varphi$ is a cocycle, then $\delta\varphi=0$, so 
+
+$$
+\varphi(c+\partial b)=\varphi(c)+\varphi(\partial b)
+=\varphi(c)+(\delta\varphi)(b)=\varphi(c).
+$$
+
+ Thus a cocycle cannot detect a boundary error in the chain representative.
+
+Second suppose the cochain representative is changed by a coboundary: 
+
+$$
+\varphi\mapsto \varphi+\delta\psi.
+$$
+
+ If $c$ is a cycle, then $\partial c=0$, so 
+
+$$
+(\varphi+\delta\psi)(c)=\varphi(c)+(\delta\psi)(c)
+=\varphi(c)+\psi(\partial c)=\varphi(c).
+$$
+
+ Thus a coboundary cannot detect a cycle.
+
+<div className="mainbox">
+Algebraic Stokes principle The identity 
+
+$$
+(\delta\psi)(c)=\psi(\partial c)
+$$
+
+ is the algebraic form of Stokes' theorem. It guarantees two complementary vanishings: 
+
+$$
+\langle \text{cocycle},\text{boundary}\rangle=0,
+\qquad
+\langle \text{coboundary},\text{cycle}\rangle=0.
+$$
+
+ Therefore a nonzero pairing requires both sides to be topologically nontrivial: a genuine cycle and a genuine cohomology class.
+</div>
+This is the algebraic version of the physical statement that a globally exact field integrates to zero on a closed cycle, and that a closed field integrates to zero on a cycle that is actually the boundary of a higher-dimensional region. Nonzero quantized flux appears only when a nontrivial field class is paired with a nontrivial cycle.
+
+## The cup product and the cohomology ring
+
+Cohomology has a multiplication operation. This extra structure is one reason cohomology is so useful.
+
+Let $\varphi\in C^p(X;R)$ and $\psi\in C^q(X;R)$, where $R$ is a commutative ring such as $\mathbb{Z}$, $\mathbb{R}$, or $\mathbb{Z}_2$. There is a cochain 
+
+$$
+\varphi\smile\psi\in C^{p+q}(X;R)
+$$
+
+ called the cup product. One standard definition is the Alexander-Whitney formula. If $\sigma:\Delta^{p+q}\to X$ is a singular $(p+q)$-simplex with ordered vertices $v_0,\ldots,v_{p+q}$, then 
+
+$$
+(\varphi\smile\psi)(\sigma)=
+\varphi(\sigma|[v_0,\ldots,v_p])\,\psi(\sigma|[v_p,\ldots,v_{p+q}]),
+$$
+
+ where $\sigma|[v_0,\ldots,v_p]$ and $\sigma|[v_p,\ldots,v_{p+q}]$ denote the restrictions of $\sigma$ to the corresponding front and back faces.
+
+This product descends to cohomology: 
+
+$$
+H^p(X;R)\times H^q(X;R)\to H^{p+q}(X;R).
+$$
+
+ The direct sum 
+
+$$
+H^*(X;R)=\bigoplus_{n\geq 0}H^n(X;R)
+$$
+
+ with this product is called the cohomology ring.
+
+On cohomology classes, the cup product is graded-commutative: 
+
+$$
+[\alpha]\smile[\beta]=(-1)^{pq}[\beta]\smile[\alpha]
+$$
+
+ for $[\alpha]\in H^p(X;R)$ and $[\beta]\in H^q(X;R)$.
+
+## Orientations and fundamental classes
+
+For integration and Chern numbers, one often pairs a top-degree cohomology class with a fundamental homology class.
+
+<div className="definition">
+**Definition 58** (Fundamental class). Let $M$ be a connected, compact, oriented $n$-manifold without boundary. Its fundamental class is a distinguished homology class 
+
+$$
+[M]\in H_n(M;\mathbb{Z})
+$$
+
+ representing the whole oriented manifold.
+</div>
+The fundamental class is the rigorous homology object behind notation such as 
+
+$$
+\int_M \omega.
+$$
+
+ If $[\alpha]\in H^n(M;\mathbb{Z})$, then 
+
+$$
+\langle [\alpha],[M]\rangle\in\mathbb{Z}
+$$
+
+ is the integer obtained by evaluating the top-degree cohomology class on the whole manifold.
+
+If $\Sigma$ is a connected, compact, oriented surface, then 
+
+$$
+[\Sigma]\in H_2(\Sigma;\mathbb{Z})
+$$
+
+ is its fundamental class. A first Chern number is an evaluation of the form 
+
+$$
+\langle c_1(L),[\Sigma]\rangle.
+$$
+
+
+## De Rham cohomology
+
+Singular cohomology is defined for topological spaces. On smooth manifolds there is another cohomology theory built from differential forms.
+
+Let $M$ be a smooth manifold. Recall the notation 
+
+$$
+\Omega^k(M)=\Gamma(\Lambda^kT^*M).
+$$
+
+ This means that $\Omega^k(M)$ is the real vector space of smooth differential $k$-forms on $M$.
+
+The exterior derivative is a linear map 
+
+$$
+d_k:\Omega^k(M)\to\Omega^{k+1}(M)
+$$
+
+ satisfying 
+
+$$
+d_{k+1}\circ d_k=0.
+$$
+
+ When the degree is clear, one writes $d$ instead of $d_k$.
+
+<div className="definition">
+**Definition 59** (Closed and exact forms). A form $\omega\in\Omega^k(M)$ is closed if 
+
+$$
+d\omega=0.
+$$
+
+ It is exact if there exists $\eta\in\Omega^{k-1}(M)$ such that 
+
+$$
+\omega=d\eta.
+$$
+
+ Since $d^2=0$, every exact form is closed.
+</div>
+<div className="definition">
+**Definition 60** (De Rham cohomology). The $k$th de Rham cohomology group of $M$ is 
+
+$$
+H^k_{\mathrm{dR}}(M)=
+\frac{\ker(d_k:\Omega^k(M)\to\Omega^{k+1}(M))}
+{\operatorname{im}(d_{k-1}:\Omega^{k-1}(M)\to\Omega^k(M))}.
+$$
+
+ An element of $H^k_{\mathrm{dR}}(M)$ is written $[\omega]_{\mathrm{dR}}$, where $\omega$ is a closed $k$-form. Two closed forms $\omega$ and $\omega'$ define the same class if and only if 
+
+$$
+\omega'-\omega=d\eta
+$$
+
+ for some $(k-1)$-form $\eta$.
+</div>
+### Pullback of forms and de Rham cohomology
+
+If $f:M\to N$ is smooth, then pullback gives 
+
+$$
+f^*:\Omega^k(N)\to\Omega^k(M).
+$$
+
+ The exterior derivative commutes with pullback: 
+
+$$
+f^*(d\omega)=d(f^*\omega).
+$$
+
+ Therefore $f^*$ sends closed forms to closed forms and exact forms to exact forms. It induces a well-defined map 
+
+$$
+f^*:H^k_{\mathrm{dR}}(N)\to H^k_{\mathrm{dR}}(M).
+$$
+
+ This is the smooth-manifold version of the contravariance of singular cohomology.
+
+### Integration pairing
+
+Let $c=\sum_{a=1}^N m_a\sigma_a$ be a smooth singular $k$-chain in $M$, where each 
+
+$$
+\sigma_a:\Delta^k\to M
+$$
+
+ is smooth. For $\omega\in\Omega^k(M)$, define 
+
+$$
+\int_c\omega=\sum_{a=1}^N m_a\int_{\Delta^k}\sigma_a^*\omega.
+$$
+
+ Stokes' theorem says 
+
+$$
+\int_c d\eta=\int_{\partial c}\eta.
+$$
+
+ Consequently:
+
+- if $\omega$ is closed and $c$ and $c'$ differ by a boundary, then 
+
+$$
+\int_c\omega=\int_{c'}\omega;
+$$
+
+
+- if $\omega$ is exact and $c$ is a cycle, then 
+
+$$
+\int_c\omega=0.
+$$
+
+
+Thus integration gives a well-defined pairing 
+
+$$
+H^k_{\mathrm{dR}}(M)\times H_k(M;\mathbb{Z})\to\mathbb{R},
+\qquad
+([\omega]_{\mathrm{dR}},[c])\mapsto \int_c\omega.
+$$
+
+
+<div className="mainbox">
+De Rham theorem For every smooth manifold $M$, integration defines a natural isomorphism 
+
+$$
+H^k_{\mathrm{dR}}(M)\cong H^k(M;\mathbb{R}).
+$$
+
+ This theorem is the bridge between differential forms and topological cohomology.
+</div>
+The theorem says that closed differential forms modulo exact differential forms compute the same real cohomology as singular cochains with real coefficients.
+
+## De Rham examples
+
+<div className="example">
+**Example 8** (Degree zero). A $0$-form is a smooth function $f\in C^\infty(M)$. The condition $df=0$ means that $f$ is locally constant. Therefore, if $M$ is connected, 
+
+$$
+H^0_{\mathrm{dR}}(M)\cong\mathbb{R}.
+$$
+
+
+</div>
+<div className="example">
+**Example 9** (The circle). On $S^1\subset\mathbb{R}^2$, write points as $(x,y)=(\cos\theta,\sin\theta)$. The one-form 
+
+$$
+\alpha=x\,dy-y\,dx
+$$
+
+ restricted to $S^1$ satisfies 
+
+$$
+\alpha=d\theta
+$$
+
+ in the angular coordinate. The coordinate function $\theta$ is not globally single-valued on $S^1$, but the one-form $\alpha$ is globally defined. Its integral is 
+
+$$
+\int_{S^1}\alpha=2\pi.
+$$
+
+ Therefore 
+
+$$
+\left[\frac{\alpha}{2\pi}\right]_{\mathrm{dR}}
+$$
+
+ is the normalized generator of $H^1_{\mathrm{dR}}(S^1)\cong\mathbb{R}$.
+</div>
+<div className="example">
+**Example 10** (The two-sphere). Let $\omega_{S^2}$ be the standard area form on the unit sphere $S^2$, oriented outward. Then 
+
+$$
+\int_{S^2}\omega_{S^2}=4\pi.
+$$
+
+ The normalized form 
+
+$$
+\frac{\omega_{S^2}}{4\pi}
+$$
+
+ represents the generator of $H^2_{\mathrm{dR}}(S^2)\cong\mathbb{R}$ normalized to integrate to $1$ over the fundamental class $[S^2]$.
+</div>
+<div className="example">
+**Example 11** (The two-torus). Let $T^2=\mathbb{R}^2/(2\pi\mathbb{Z})^2$ with angular coordinates $(\theta_1,\theta_2)$ modulo $2\pi$. The one-forms $d\theta_1$ and $d\theta_2$ are globally defined on the quotient. Then 
+
+$$
+H^0_{\mathrm{dR}}(T^2)\cong\mathbb{R},
+\qquad
+H^1_{\mathrm{dR}}(T^2)\cong \mathbb{R}[d\theta_1]\oplus\mathbb{R}[d\theta_2],
+\qquad
+H^2_{\mathrm{dR}}(T^2)\cong \mathbb{R}[d\theta_1\wedge d\theta_2].
+$$
+
+ A normalized generator of $H^2_{\mathrm{dR}}(T^2)$ is 
+
+$$
+\frac{1}{(2\pi)^2}d\theta_1\wedge d\theta_2,
+$$
+
+ because its integral over $T^2$ is $1$.
+</div>
+## Integral cohomology, periods, and quantization
+
+De Rham cohomology uses real coefficients. Chern classes live naturally in integral cohomology.
+
+There is a homomorphism of coefficient groups 
+
+$$
+\mathbb{Z}\to\mathbb{R},
+\qquad
+n\mapsto n.
+$$
+
+ It induces a natural map 
+
+$$
+H^k(X;\mathbb{Z})\to H^k(X;\mathbb{R}).
+$$
+
+ A real cohomology class is called integral if it lies in the image of this map.
+
+On a smooth manifold, the de Rham theorem identifies $H^k(M;\mathbb{R})$ with $H^k_{\mathrm{dR}}(M)$. Under this identification, a de Rham class $[\omega]_{\mathrm{dR}}$ is integral if and only if all its periods over integral $k$-cycles are integers: 
+
+$$
+\int_c\omega\in\mathbb{Z}
+$$
+
+ for every $[c]\in H_k(M;\mathbb{Z})$.
+
+This criterion is the mathematical source of flux quantization. In physics conventions for a $U(1)$ connection, the curvature two-form $F$ is real and the normalized class 
+
+$$
+\left[\frac{F}{2\pi}\right]_{\mathrm{dR}}
+$$
+
+ is integral when it comes from a genuine complex line bundle.
+
+Thus for every closed oriented surface $\Sigma\subset M$, 
+
+$$
+\frac{1}{2\pi}\int_\Sigma F\in\mathbb{Z}.
+$$
+
+ This integer is the first Chern number of the line bundle restricted to $\Sigma$.
+
+## Cech cohomology and transition functions
+
+Singular cohomology is defined using simplices. Fiber bundles are often described using open covers and transition functions. Cech cohomology is the cohomology theory naturally adapted to open covers.
+
+Let 
+
+$$
+\mathcal U=\{U_i\}_{i\in I}
+$$
+
+ be an open cover of $X$. For indices $i_0,\ldots,i_p$, write 
+
+$$
+U_{i_0\cdots i_p}=U_{i_0}\cap\cdots\cap U_{i_p}.
+$$
+
+
+<div className="definition">
+**Definition 61** (Cech cochains with constant coefficients). Let $A$ be an abelian group, written additively. A Cech $p$-cochain on the cover $\mathcal U$ with coefficients in $A$ assigns an element 
+
+$$
+a_{i_0\cdots i_p}\in A
+$$
+
+ to each nonempty $(p+1)$-fold intersection $U_{i_0\cdots i_p}$, with the alternating convention that swapping two indices changes the sign.
+</div>
+The Cech coboundary is 
+
+$$
+(\delta a)_{i_0\cdots i_{p+1}}
+=
+\sum_{m=0}^{p+1}(-1)^m a_{i_0\cdots \widehat{i_m}\cdots i_{p+1}},
+$$
+
+ where the hat means that the index is omitted.
+
+A Cech cocycle satisfies $\delta a=0$. A Cech coboundary is a cochain of the form $a=\delta b$. The quotient of cocycles by coboundaries gives Cech cohomology for the cover.
+
+For good covers of nice spaces, Cech cohomology agrees with singular cohomology. A good cover is an open cover for which every nonempty finite intersection $U_{i_0\cdots i_p}$ is contractible.
+
+### Multiplicative notation for $U(1)$
+
+For $U(1)$-valued transition functions, multiplicative notation is more natural. A Cech $1$-cochain is a collection of functions 
+
+$$
+g_{ij}:U_{ij}\to U(1).
+$$
+
+ The cocycle condition is 
+
+$$
+g_{ij}g_{jk}=g_{ik}
+$$
+
+ on triple overlaps $U_{ijk}$. Equivalently, 
+
+$$
+g_{ij}g_{jk}g_{ki}=1.
+$$
+
+ This is exactly the transition-function consistency condition for a complex line bundle.
+
+## Complex line bundles and the first Chern class
+
+A complex line bundle is a rank-$1$ complex vector bundle. Thus each fiber is a one-dimensional complex vector space.
+
+Let $L\to X$ be a complex line bundle and let $\mathcal U=\{U_i\}$ be a trivializing open cover. Choose a nonzero local frame $e^{(i)}$ over $U_i$. On an overlap $U_{ij}$, the frames differ by a function 
+
+$$
+g_{ij}:U_{ij}\to \mathbb{C}^*=\mathbb{C}\setminus\{0\}
+$$
+
+ such that 
+
+$$
+e^{(j)}=e^{(i)}g_{ij}.
+$$
+
+ If the bundle has a Hermitian metric and the frames are chosen to have unit length, then 
+
+$$
+g_{ij}:U_{ij}\to U(1).
+$$
+
+ On triple overlaps, 
+
+$$
+e^{(k)}=e^{(j)}g_{jk}=e^{(i)}g_{ij}g_{jk},
+$$
+
+ while also 
+
+$$
+e^{(k)}=e^{(i)}g_{ik}.
+$$
+
+ Therefore 
+
+$$
+g_{ij}g_{jk}=g_{ik}.
+$$
+
+
+If we change local frames by unitary functions 
+
+$$
+e'^{(i)}=e^{(i)}h_i,
+\qquad
+h_i:U_i\to U(1),
+$$
+
+ then the transition functions change to 
+
+$$
+g'_{ij}=h_i^{-1}g_{ij}h_j.
+$$
+
+ For $U(1)$ this is commutative, but the displayed order is the order dictated by the frame convention.
+
+The classification theorem is:
+
+<div className="mainbox">
+Classification of complex line bundles For a paracompact space $X$, isomorphism classes of complex line bundles over $X$ are classified by 
+
+$$
+H^2(X;\mathbb{Z}).
+$$
+
+ The class corresponding to a line bundle $L$ is its first Chern class 
+
+$$
+c_1(L)\in H^2(X;\mathbb{Z}).
+$$
+
+
+</div>
+This theorem explains why $H^2$ appears in the study of line bundles. A line bundle is not merely described by local vector spaces; its global twisting is measured by an integral degree-two cohomology class.
+
+## How transition functions produce an integer on $S^2$
+
+Cover $S^2$ by two open sets: 
+
+$$
+U_N=S^2\setminus\{\text{south pole}\},
+\qquad
+U_S=S^2\setminus\{\text{north pole}\}.
+$$
+
+ Their overlap deformation retracts to the equator $S^1$. A complex line bundle is described by one transition function 
+
+$$
+g_{NS}:U_N\cap U_S\to U(1).
+$$
+
+ Restricting to the equator gives a map 
+
+$$
+g_{NS}|_{S^1}:S^1\to U(1).
+$$
+
+ Such maps are classified up to homotopy by their winding number: 
+
+$$
+[S^1,U(1)]\cong \pi_1(U(1))\cong \mathbb{Z}.
+$$
+
+ If 
+
+$$
+g_{NS}(e^{i\phi})=e^{in\phi},
+$$
+
+ then the winding number is $n$. The corresponding line bundle has 
+
+$$
+\langle c_1(L),[S^2]\rangle=n.
+$$
+
+ Since 
+
+$$
+H^2(S^2;\mathbb{Z})\cong\mathbb{Z},
+$$
+
+ this integer fully classifies complex line bundles over $S^2$.
+
+## Connections, curvature, and the de Rham representative of $c_1$
+
+Let $L\to M$ be a Hermitian complex line bundle over a smooth manifold. Choose a unit local frame $e^{(i)}$ over $U_i$. A section can be written locally as 
+
+$$
+s=e^{(i)}\psi_i,
+$$
+
+ where $\psi_i:U_i\to\mathbb{C}$.
+
+Use the physics convention 
+
+$$
+D_i=d-iA_i,
+$$
+
+ where $A_i\in\Omega^1(U_i)$ is a real one-form. The covariant derivative is 
+
+$$
+D_i\psi_i=d\psi_i-iA_i\psi_i.
+$$
+
+ On overlaps, suppose 
+
+$$
+e^{(j)}=e^{(i)}g_{ij},
+\qquad
+\psi_i=g_{ij}\psi_j,
+\qquad
+g_{ij}:U_{ij}\to U(1).
+$$
+
+ The requirement that covariant derivatives transform in the same way as sections is 
+
+$$
+D_i\psi_i=g_{ij}D_j\psi_j.
+$$
+
+ Substituting $\psi_i=g_{ij}\psi_j$ gives 
+
+$$
+d(g_{ij}\psi_j)-iA_i g_{ij}\psi_j
+=
+g_{ij}(d\psi_j-iA_j\psi_j).
+$$
+
+ After cancellation of the $g_{ij}d\psi_j$ terms, this becomes 
+
+$$
+dg_{ij}-iA_i g_{ij}=-i g_{ij}A_j.
+$$
+
+ Multiplying by $g_{ij}^{-1}$ gives 
+
+$$
+g_{ij}^{-1}dg_{ij}-iA_i=-iA_j.
+$$
+
+ Therefore 
+
+$$
+A_j=A_i+i g_{ij}^{-1}dg_{ij}.
+$$
+
+ If $g_{ij}=e^{i\chi_{ij}}$, then 
+
+$$
+i g_{ij}^{-1}dg_{ij}=-d\chi_{ij},
+$$
+
+ so 
+
+$$
+A_j=A_i-d\chi_{ij}.
+$$
+
+
+The local curvature is 
+
+$$
+F_i=dA_i.
+$$
+
+ On overlaps, 
+
+$$
+F_j=dA_j=dA_i+d(i g_{ij}^{-1}dg_{ij})=dA_i=F_i,
+$$
+
+ because $g_{ij}^{-1}dg_{ij}=i\,d\chi_{ij}$ locally and $d^2\chi_{ij}=0$. Hence the $F_i$ glue to a globally defined closed two-form 
+
+$$
+F\in\Omega^2(M),
+\qquad
+ dF=0.
+$$
+
+
+The first Chern class satisfies 
+
+$$
+\left[\frac{F}{2\pi}\right]_{\mathrm{dR}}
+=
+\text{image of }c_1(L)\text{ under }H^2(M;\mathbb{Z})\to H^2(M;\mathbb{R})\cong H^2_{\mathrm{dR}}(M).
+$$
+
+ Equivalently, for every closed oriented surface $\Sigma\subset M$, 
+
+$$
+\langle c_1(L),[\Sigma]\rangle
+=
+\frac{1}{2\pi}\int_\Sigma F
+\in\mathbb{Z}.
+$$
+
+
+## Dirac monopole as the model computation
+
+Let $L\to S^2$ be the line bundle whose transition function on the equator is 
+
+$$
+g_{NS}=e^{in\phi}.
+$$
+
+ Choose local connection one-forms 
+
+$$
+A_N=\frac{n}{2}(1-\cos\theta)d\phi,
+\qquad
+A_S=-\frac{n}{2}(1+\cos\theta)d\phi.
+$$
+
+ On the overlap, 
+
+$$
+A_S=A_N-n\,d\phi.
+$$
+
+ This agrees with the transition rule because $g_{NS}=e^{in\phi}$ gives $\chi_{NS}=n\phi$ and hence 
+
+$$
+A_S=A_N-d\chi_{NS}.
+$$
+
+ The curvature is 
+
+$$
+F=dA_N=dA_S=\frac{n}{2}\sin\theta\,d\theta\wedge d\phi.
+$$
+
+ Therefore 
+
+$$
+\frac{1}{2\pi}\int_{S^2}F
+=
+\frac{1}{2\pi}\int_0^{2\pi}\int_0^\pi
+\frac{n}{2}\sin\theta\,d\theta\,d\phi
+=n.
+$$
+
+ The same integer appears in two ways: 
+
+$$
+\begin{align*}
+\text{transition function winding:}&& g_{NS}:S^1\to U(1),&& \operatorname{wind}(g_{NS})&=n,\\
+\text{curvature integral:}&& \frac{1}{2\pi}\int_{S^2}F&& &=n.
+\end{align*}
+$$
+
+ These are not two unrelated facts. They are two representatives of the same first Chern class.
+
+## Why cohomology appears in Chern classes
+
+The first Chern class is a cohomology class because it must be independent of the local choices used to describe the bundle.
+
+A connection is described locally by one-forms $A_i$. These one-forms are not globally defined in general. On overlaps they differ by gauge transformations. The curvature $F$ is globally defined, but it depends on the chosen connection. However, changing the connection changes $F$ by an exact form at the level of the normalized curvature class. Thus the de Rham cohomology class 
+
+$$
+\left[\frac{F}{2\pi}\right]_{\mathrm{dR}}
+$$
+
+ depends only on the bundle, not on the particular connection.
+
+Cohomology is exactly the language for this kind of object:
+
+> A differential form representative may change, but its class modulo exact forms remains fixed.
+
+The integral cohomology class $c_1(L)\in H^2(M;\mathbb{Z})$ is stronger than the real de Rham class because it remembers quantization. The de Rham class records the real fluxes. The integral class says those normalized fluxes are integers on closed surfaces.
+
+## Homotopy, homology, and cohomology: comparison
+
+The following table separates the main ideas.
+
+<div className="center">
+  Invariant                What it studies                                         Typical physics use
+  ------------------------ ------------------------------------------------------- ----------------------------------------------------------------------------------------
+  $\pi_1(X,x_0)$           Homotopy classes of based loops                         Winding, vortices, covering groups, projective representations of Lie groups
+  $\pi_n(X,x_0)$           Homotopy classes of maps $S^n\to X$                     Solitons, skyrmions, defects, wrapping numbers
+  $H_n(X;\mathbb{Z})$      $n$-cycles modulo boundaries                            Noncontractible cycles, surfaces, topological sectors
+  $H^n(X;\mathsf A)$       Algebraic functions on $n$-cycles modulo coboundaries   Fluxes, obstruction classes, characteristic classes
+  $H^n_{\mathrm{dR}}(M)$   Closed $n$-forms modulo exact $n$-forms                 Gauge curvature, Berry curvature, differential-form representatives of real cohomology
+</div>
+For fiber bundles and Berry phases, the most important chain of ideas is 
+
+$$
+\text{transition functions}
+\longrightarrow
+\text{Cech cocycles}
+\longrightarrow
+H^2(M;\mathbb{Z})
+\longrightarrow
+c_1(L)
+\longrightarrow
+\left[\frac{F}{2\pi}\right]_{\mathrm{dR}}
+\longrightarrow
+\frac{1}{2\pi}\int_\Sigma F\in\mathbb{Z}.
+$$
+
+
+## Minimal checklist for the surrounding material
+
+After this section, the following statements should have precise meanings:
+
+1.  A loop is a map $S^1\to X$, equivalently a path $I\to X$ whose endpoints agree.
+
+2.  $\pi_1(X,x_0)$ is the group of loops based at $x_0$ modulo homotopy relative to endpoints.
+
+3.  $\pi_1(S^1)\cong\mathbb{Z}$ because loops around a circle have an integer winding number.
+
+4.  $\pi_1(SO(3))\cong\mathbb{Z}_2$ because $SU(2)\to SO(3)$ is a two-to-one universal covering map.
+
+5.  $H_n(X;\mathbb{Z})$ is the group of $n$-cycles modulo $n$-boundaries.
+
+6.  $H^n(X;\mathsf A)$ is the group of $n$-cocycles modulo $n$-coboundaries.
+
+7.  $H^k_{\mathrm{dR}}(M)$ is the group of closed $k$-forms modulo exact $k$-forms.
+
+8.  De Rham cohomology agrees with singular cohomology with real coefficients.
+
+9.  Integral cohomology is needed to state flux quantization.
+
+10. The first Chern class $c_1(L)\in H^2(M;\mathbb{Z})$ is represented in de Rham cohomology by $F/(2\pi)$.
+
+## Exercises
+
+<div className="exercise">
+**Exercise 11** (Path concatenation). Show that if $\alpha$, $\beta$, and $\gamma$ are composable paths, then $(\alpha*\beta)*\gamma$ and $\alpha*(\beta*\gamma)$ are homotopic relative to endpoints.
+</div>
+<div className="exercise">
+**Exercise 12** (Winding number). Let $\gamma_n:I\to S^1$ be 
+
+$$
+\gamma_n(t)=e^{2\pi int}.
+$$
+
+ Compute the lift $\widetilde\gamma_n$ with $\widetilde\gamma_n(0)=0$ and show that $\operatorname{wind}(\gamma_n)=n$.
+</div>
+<div className="exercise">
+**Exercise 13** (Boundary of a boundary). Compute $\partial_1(\partial_2\sigma)$ explicitly for a singular two-simplex $\sigma:\Delta^2\to X$ and verify that it is zero.
+</div>
+<div className="exercise">
+**Exercise 14** (Exact forms integrate to zero on cycles). Let $c$ be a smooth singular $k$-cycle and let $\eta\in\Omega^{k-1}(M)$. Use Stokes' theorem to show 
+
+$$
+\int_c d\eta=0.
+$$
+
+
+</div>
+<div className="exercise">
+**Exercise 15** (Chern number of the monopole bundle). Using the local potentials 
+
+$$
+A_N=\frac{n}{2}(1-\cos\theta)d\phi,
+\qquad
+A_S=-\frac{n}{2}(1+\cos\theta)d\phi,
+$$
+
+ verify directly that $A_S=A_N-n\,d\phi$ on the equator and that 
+
+$$
+\frac{1}{2\pi}\int_{S^2}dA_N=n.
+$$
+
+
+</div>

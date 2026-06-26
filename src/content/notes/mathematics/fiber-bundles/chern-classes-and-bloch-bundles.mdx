@@ -1,7 +1,7 @@
 ---
 title: "Chern Classes and Bloch Bundles"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/fiber-bundles/chern-classes-and-bloch-bundles
 category: Mathematics
@@ -17,64 +17,1864 @@ canonical_lang: en
 naver_export: false
 ---
 
-## From Curvature to Topology
+# Characteristic Classes and the First Chern Number
 
-For a complex line bundle with a $U(1)$ connection, the curvature is a two-form
-$$
-F=dA.
-$$
+We have now built the geometric objects needed for Chern numbers: 
 
-On a closed oriented two-dimensional base, the first Chern number is
 $$
-c_1=\frac{1}{2\pi}\int_B F
-$$
-after the conventional physics normalization in which factors of $i$ are absorbed into the definition of the Berry curvature.
-
-The striking point is that this integral is an integer when the bundle is globally well-defined. Smooth changes of the connection can move curvature around locally, but cannot change the integer unless the bundle itself changes through a singular event.
-
-## Berry Connection
-
-Suppose a Hamiltonian $H(R)$ depends smoothly on parameters $R$. If $\lvert u_n(R)\rangle$ is a locally chosen normalized eigenstate, the Berry connection is
-$$
-A_n=i\langle u_n(R)\mid d u_n(R)\rangle.
+\text{vector bundle} \quad + \quad \text{connection} \quad \Longrightarrow \quad \text{curvature}.
 $$
 
-The Berry curvature is
+ Characteristic classes are topological invariants extracted from this data. The first Chern class is the most important example for complex line bundles and two-dimensional band topology.
+
+## The problem characteristic classes solve
+
+A bundle may be locally trivial but globally twisted. The twisting can be described in two different languages:
+
+1.  transition functions on overlaps,
+
+2.  curvature of a connection.
+
+The first language is visibly topological: transition functions remember how patches are glued. The second language is differential-geometric: curvature measures infinitesimal holonomy. Characteristic classes explain why these two languages give the same global invariants.
+
+<div className="mainbox">
+Two languages for the same topology 
+
 $$
-F_n=dA_n.
-$$
-
-Under a local phase change
-$$
-\lvert u_n\rangle\mapsto e^{i\chi}\lvert u_n\rangle,
-$$
-the connection changes by
-$$
-A_n\mapsto A_n-d\chi,
-$$
-while the curvature remains invariant.
-
-This is exactly the bundle story in quantum-mechanical language: the state vector is locally chosen, the phase is gauge freedom, and the curvature is geometric.
-
-## Bloch Bundles
-
-For a periodic crystal, the Brillouin zone is the base space. At each crystal momentum $k$, an isolated band or group of occupied bands determines a vector space of Bloch eigenstates.
-
-As $k$ varies, these eigenspaces assemble into a vector bundle over the Brillouin zone. This is the Bloch bundle.
-
-Topological band theory studies whether that bundle can be globally trivialized by smooth choices of Bloch states. When it cannot, the obstruction appears as a quantized invariant such as a Chern number.
-
-## Chern Insulator Intuition
-
-In a two-dimensional Chern insulator, the occupied-band Berry curvature integrates over the Brillouin zone to a nonzero integer:
-$$
-C=\frac{1}{2\pi}\int_{\mathrm{BZ}} F.
+\begin{align*}
+\text{Transition functions} &\quad \text{record topology by winding and cocycle data},\\
+\text{Curvature forms} &\quad \text{record topology by closed forms and quantized integrals}.
+\end{align*}
 $$
 
-This integer controls robust physical response, including quantized Hall conductance in the appropriate setting. The invariant is not a property of a single eigenvector at a single momentum; it is a global property of how eigenspaces twist across the entire Brillouin zone.
+ The first Chern class is the bridge between these two descriptions.
+</div>
+<div className="mainbox">
+Core idea A characteristic class is a cohomology class naturally associated to a vector bundle. It does not depend on the particular connection used to compute it, although curvature gives convenient differential-form representatives of it.
+</div>
+## From local potentials to global curvature
 
-## Why This Belongs With Fiber Bundles
+Let $L\to M$ be a complex line bundle with a unitary connection. Choose local frames on patches $U_i$. In each patch the connection is represented by a local one-form 
 
-Fiber bundles give the correct grammar for statements like "the eigenstate is only locally defined" or "the gauge choice changes the Berry connection but not the curvature."
+$$
+A_i\in\Omega^1(U_i;i\mathbb{R}),
+$$
 
-Without the bundle viewpoint, these statements can look like technical annoyances. With it, they become the central structure: topology lives in the obstruction to making all local choices agree globally.
+ where we use the mathematical anti-Hermitian convention. On overlaps, 
+
+$$
+A_j=A_i+g_{ij}^{-1}dg_{ij}
+$$
+
+ for $g_{ij}:U_i\cap U_j\to U(1)$.
+
+The curvature is 
+
+$$
+F_i=dA_i.
+$$
+
+ Since $U(1)$ is Abelian, 
+
+$$
+d(g_{ij}^{-1}dg_{ij})=0,
+$$
+
+ so 
+
+$$
+F_j=F_i.
+$$
+
+ Thus the local two-forms $F_i$ glue to a globally defined two-form 
+
+$$
+F\in\Omega^2(M;i\mathbb{R}).
+$$
+
+ This is the first important point: the potential $A_i$ may only exist locally, but the curvature $F$ is global.
+
+<div className="mainbox">
+Important point Even when the gauge potential $A$ cannot be chosen globally, the curvature $F$ may be globally defined. A nonzero Chern number is precisely a signal that the local potentials $A_i$ cannot be patched into one smooth global potential.
+</div>
+If $A$ were a globally defined one-form on a closed oriented surface $\Sigma$, then Stokes' theorem would give 
+
+$$
+\int_\Sigma F
+=
+\int_\Sigma dA
+=
+\int_{\partial\Sigma}A
+=0,
+$$
+
+ because $\partial\Sigma=\varnothing$. Therefore a nonzero integral 
+
+$$
+\int_\Sigma F\neq 0
+$$
+
+ forces the gauge potential to be only locally defined. This is the first geometric meaning of a nontrivial bundle.
+
+<div className="warningbox">
+Local potential versus global connection Saying that $A$ is local does not mean that the physics is nonlocal. It means that $A_i$ is the coordinate expression of a global connection after choosing a local frame. On a nontrivial line bundle there may be no single global potential $A$ satisfying $F=dA$ everywhere. The obstruction to finding such a global $A$ is exactly what the first Chern class measures.
+</div>
+## Closed forms, exact forms, and de Rham cohomology
+
+The curvature of a connection satisfies the Bianchi identity. For a line bundle this is simply 
+
+$$
+dF=0.
+$$
+
+ So $F$ is a closed two-form.
+
+<div className="definition">
+**Definition 28** (Closed and exact forms). A differential form $\omega\in\Omega^k(M)$ is closed if 
+
+$$
+d\omega=0.
+$$
+
+ It is exact if there exists $\eta\in\Omega^{k-1}(M)$ such that 
+
+$$
+\omega=d\eta.
+$$
+
+
+</div>
+Every exact form is closed because $d^2=0$. The converse need not hold. De Rham cohomology measures the failure of closed forms to be exact.
+
+<div className="definition">
+**Definition 29** (De Rham cohomology). The $k$-th de Rham cohomology group is 
+
+$$
+H^k_{\mathrm{dR}}(M)
+=
+\frac{\{\omega\in\Omega^k(M):d\omega=0\}}
+{\{d\eta:\eta\in\Omega^{k-1}(M)\}}.
+$$
+
+ The cohomology class of a closed form $\omega$ is denoted $[\omega]_{\mathrm{dR}}$.
+</div>
+Why does cohomology appear here? Because curvature is closed, and changing a connection changes the curvature by an exact form. Therefore the cohomology class of the curvature is independent of the connection.
+
+Indeed, if $\nabla^0$ and $\nabla^1$ are two connections on the same line bundle, then locally their connection forms differ by a globally defined $i\mathbb{R}$-valued one-form $\alpha$: 
+
+$$
+A^1_i-A^0_i=\alpha|_{U_i}.
+$$
+
+ Therefore 
+
+$$
+F^1-F^0=d\alpha.
+$$
+
+ So 
+
+$$
+[F^1]_{\mathrm{dR}}=[F^0]_{\mathrm{dR}}.
+$$
+
+
+## Integral cohomology and quantization
+
+De Rham cohomology uses real coefficients. But line bundles are classified by integral data. For a complex line bundle, the relevant topological invariant is 
+
+$$
+c_1(L)\in H^2(M;\mathbb{Z}),
+$$
+
+ the first Chern class.
+
+There is a natural map from integral cohomology to real de Rham cohomology, 
+
+$$
+H^2(M;\mathbb{Z})\to H^2_{\mathrm{dR}}(M),
+$$
+
+ which forgets the integrality but remembers the corresponding real cohomology class. A de Rham class is called integral if it lies in the image of this map.
+
+For a unitary connection on a line bundle, the normalized curvature 
+
+$$
+\frac{F}{2\pi i}
+$$
+
+ is a real closed two-form. Its de Rham cohomology class is the image of the integral class $c_1(L)$: 
+
+$$
+\boxed{
+\left[\frac{F}{2\pi i}\right]_{\mathrm{dR}}
+=
+\text{image of }c_1(L)\in H^2(M;\mathbb{Z}).
+}
+$$
+
+ Consequently, for every closed oriented surface $\Sigma\subset M$, 
+
+$$
+\boxed{
+\int_\Sigma \frac{F}{2\pi i}
+=
+\langle c_1(L),[\Sigma]\rangle
+\in\mathbb{Z}.
+}
+$$
+
+ This is the mathematical origin of flux quantization and Chern-number quantization.
+
+## Why $c_1(L)$ is integral: transition-function proof
+
+Here is the concrete proof of integrality.
+
+Let $\{U_i\}$ be a good open cover of $M$, meaning all nonempty finite intersections are contractible. Let 
+
+$$
+g_{ij}:U_i\cap U_j\to U(1)
+$$
+
+ be the transition functions of a complex line bundle $L$. They satisfy 
+
+$$
+g_{ij}g_{jk}g_{ki}=1
+$$
+
+ on triple overlaps $U_i\cap U_j\cap U_k$.
+
+Because $U_i\cap U_j$ is contractible, choose real-valued functions $\chi_{ij}$ such that 
+
+$$
+g_{ij}=e^{i\chi_{ij}}.
+$$
+
+ On a triple overlap, 
+
+$$
+e^{i(\chi_{ij}+\chi_{jk}+\chi_{ki})}=1.
+$$
+
+ Therefore 
+
+$$
+\chi_{ij}+\chi_{jk}+\chi_{ki}=2\pi n_{ijk}
+$$
+
+ for some integer-valued locally constant function 
+
+$$
+n_{ijk}:U_i\cap U_j\cap U_k\to\mathbb{Z}.
+$$
+
+ On a good cover, locally constant means constant on each connected component. The collection $\{n_{ijk}\}$ satisfies the Cech two-cocycle condition with integer coefficients. Its cohomology class 
+
+$$
+[n_{ijk}]\in H^2(M;\mathbb{Z})
+$$
+
+ is, by definition, the first Chern class: 
+
+$$
+\boxed{c_1(L)=[n_{ijk}]\in H^2(M;\mathbb{Z}).}
+$$
+
+ This proves that $c_1(L)$ is integral because it is constructed from integer-valued cocycle data.
+
+Changing the choices of logarithms $\chi_{ij}$ changes $n_{ijk}$ by an integer Cech coboundary. Changing local frames changes the transition functions by a Cech coboundary. Therefore the cohomology class $[n_{ijk}]$ is well-defined even though the representatives are not.
+
+## Curvature representative of the same integer class
+
+Now connect the integer Cech class to curvature. Locally choose connection one-forms $A_i\in\Omega^1(U_i;i\mathbb{R})$ satisfying 
+
+$$
+A_j=A_i+g_{ij}^{-1}dg_{ij}.
+$$
+
+ Since $g_{ij}=e^{i\chi_{ij}}$, 
+
+$$
+g_{ij}^{-1}dg_{ij}=i\,d\chi_{ij}.
+$$
+
+ Hence 
+
+$$
+A_j-A_i=i\,d\chi_{ij}.
+$$
+
+ Taking exterior derivatives gives 
+
+$$
+dA_j=dA_i,
+$$
+
+ so $F=dA_i$ is global. The de Rham theorem and the Cech-de Rham comparison imply that 
+
+$$
+\left[\frac{F}{2\pi i}\right]_{\mathrm{dR}}
+$$
+
+ is the real image of the integer Cech class $[n_{ijk}]$. Thus $F/(2\pi i)$ is the differential-form representative of $c_1(L)$.
+
+For a closed oriented surface $\Sigma$, this gives 
+
+$$
+\int_\Sigma\frac{F}{2\pi i}\in\mathbb{Z}.
+$$
+
+ The integer is the first Chern number of $L$ over $\Sigma$.
+
+## First Chern class and first Chern number
+
+For a complex line bundle $L\to M$ with unitary connection curvature $F$, 
+
+$$
+\boxed{
+c_1(L)
+\quad\text{is represented in de Rham cohomology by}\quad
+\frac{F}{2\pi i}.
+}
+$$
+
+ If $\Sigma$ is a closed oriented two-dimensional manifold and $L\to\Sigma$, the first Chern number is 
+
+$$
+\boxed{
+C_1(L)=\int_\Sigma\frac{F}{2\pi i}\in\mathbb{Z}.
+}
+$$
+
+ In physics conventions one often uses a real Berry curvature $\mathcal F$ instead of an anti-Hermitian curvature $F$. Then the same formula is usually written 
+
+$$
+C_1=\frac{1}{2\pi}\int_\Sigma \mathcal F.
+$$
+
+ The two formulas differ only by the convention $F=i\mathcal F$ or $F=-i\mathcal F$.
+
+## Physical meaning of the first Chern number
+
+The first Chern number measures the total twisting of a complex line bundle over a closed surface. In different physical contexts it appears as:
+
+- magnetic flux in units of $2\pi$,
+
+- monopole charge,
+
+- Berry curvature flux through parameter space,
+
+- Chern number of a two-dimensional band,
+
+- integer quantum Hall conductance in units of $e^2/h$ for a filled band.
+
+The integrality is not an approximation. It is a topological statement: smooth deformations of the bundle or connection cannot change the integer unless the bundle itself changes, which in band theory usually requires a gap closing.
+
+## Holonomy, curvature, and Stokes' theorem
+
+If $A$ is globally defined on a disk $D$ with boundary $\partial D$, then Stokes' theorem gives 
+
+$$
+\oint_{\partial D}A=\int_D dA=\int_DF.
+$$
+
+ This is the local relation between holonomy and curvature.
+
+On a nontrivial bundle, $A$ may not be globally defined on a closed surface. One must use patches. The failure of the patch potentials to glue into one global potential is exactly what allows 
+
+$$
+\int_\Sigma \frac{F}{2\pi i}
+$$
+
+ to be a nonzero integer.
+
+## Winding number of a transition function
+
+The Dirac monopole example uses a transition function on the equator, 
+
+$$
+g:S^1\to U(1).
+$$
+
+ The integer carried by such a map is called its winding number. Since this integer later becomes a Chern number, we spell out the definition carefully.
+
+Parametrize the domain circle by $\phi\in[0,2\pi]$ with endpoints identified. A smooth map $g:S^1\to U(1)$ can be written locally as 
+
+$$
+g(e^{i\phi})=e^{i\theta(\phi)}.
+$$
+
+ The phase $\theta$ need not be a single-valued function on the circle, but on the interval $[0,2\pi]$ we can choose a continuous lift $\theta:[0,2\pi]\to\mathbb{R}$ satisfying 
+
+$$
+g(e^{i\phi})=e^{i\theta(\phi)}.
+$$
+
+ Because $e^{i0}=e^{i2\pi}$ represents the same point of the domain circle, we must have 
+
+$$
+e^{i\theta(2\pi)}=e^{i\theta(0)}.
+$$
+
+ Therefore 
+
+$$
+\theta(2\pi)-\theta(0)=2\pi n
+$$
+
+ for a unique integer $n\in\mathbb{Z}$.
+
+<div className="definition">
+**Definition 30** (Winding number). The winding number of $g:S^1\to U(1)$ is 
+
+$$
+\operatorname{wind}(g):=\frac{\theta(2\pi)-\theta(0)}{2\pi}\in\mathbb{Z}.
+$$
+
+ Equivalently, 
+
+$$
+\boxed{
+\operatorname{wind}(g)=\frac{1}{2\pi i}\int_{S^1}g^{-1}dg.
+}
+$$
+
+
+</div>
+The second formula is often the most useful in bundle theory. To verify it, write $g=e^{i\theta}$ on the interval. Then 
+
+$$
+g^{-1}dg=e^{-i\theta}d(e^{i\theta})=i\,d\theta,
+$$
+
+ so 
+
+$$
+\frac{1}{2\pi i}\int_{S^1}g^{-1}dg
+=
+\frac{1}{2\pi}\int_0^{2\pi}\frac{d\theta}{d\phi}\,d\phi
+=
+\frac{\theta(2\pi)-\theta(0)}{2\pi}.
+$$
+
+
+<div className="theorem">
+**Theorem 2** (Basic properties of winding number). Let $g,h:S^1\to U(1)$ be smooth maps.
+
+1.  $\operatorname{wind}(gh)=\operatorname{wind}(g)+\operatorname{wind}(h)$.
+
+2.  $\operatorname{wind}(g^{-1})=-\operatorname{wind}(g)$.
+
+3.  If $g$ and $h$ are homotopic as maps $S^1\to U(1)$, then $\operatorname{wind}(g)=\operatorname{wind}(h)$.
+
+4.  Every integer occurs: $g_n(e^{i\phi})=e^{in\phi}$ has $\operatorname{wind}(g_n)=n$.
+
+Consequently, 
+
+$$
+[S^1,U(1)]\cong\pi_1(U(1))\cong\mathbb{Z},
+$$
+
+ where the isomorphism sends a homotopy class to its winding number.
+</div>
+The homotopy invariance is important. The integral formula varies continuously under a smooth homotopy, but it is integer-valued. A continuous path in $\mathbb{Z}$ is constant. Thus winding number cannot change under smooth deformation; it changes only if the map itself becomes ill-defined.
+
+<div className="mainbox">
+Why winding enters the first Chern number A complex line bundle over $S^2$ can be described by gluing the northern and southern trivial bundles along the equator. The gluing function is a map 
+
+$$
+g:S^1\to U(1).
+$$
+
+ Its winding number records how many times the fiber phase rotates as one goes once around the equator. The first Chern number is the same integer, expressed in curvature language.
+</div>
+## Dirac monopole as a principal $U(1)$-bundle over $S^2$
+
+The Dirac monopole is the cleanest example where all the bundle language becomes concrete. The base space is 
+
+$$
+B=S^2,
+$$
+
+ the two-sphere surrounding the monopole. This $S^2$ is not the whole physical space; it is a closed surface enclosing the monopole. The magnetic field through this sphere is encoded as curvature of a connection on a principal $U(1)$-bundle.
+
+### The principal bundle
+
+For each point $x\in S^2$, attach a copy of the gauge group $U(1)$. The resulting principal bundle is 
+
+$$
+\pi:P_n\to S^2,
+\qquad
+\pi^{-1}(x)\cong U(1).
+$$
+
+ The subscript $n$ denotes the integer Chern number. The fiber is a copy of $U(1)$, but more precisely it is a $U(1)$-torsor: there is no preferred identity element in a fiber until one chooses a local gauge frame.
+
+Cover $S^2$ by northern and southern patches, 
+
+$$
+U_N=S^2\setminus\{\text{south pole}\},
+\qquad
+U_S=S^2\setminus\{\text{north pole}\}.
+$$
+
+ Choose local sections 
+
+$$
+s_N:U_N\to P_n,
+\qquad
+s_S:U_S\to P_n.
+$$
+
+ On the overlap $U_N\cap U_S$, which deformation retracts to the equator, suppose 
+
+$$
+\boxed{s_N(x)=s_S(x)\cdot g_{SN}(x)}
+$$
+
+ with 
+
+$$
+g_{SN}:U_N\cap U_S\to U(1).
+$$
+
+ Restricting to the equator and using the angular coordinate $\phi$, take 
+
+$$
+\boxed{g_{SN}(\phi)=e^{in\phi}.}
+$$
+
+ Then 
+
+$$
+\operatorname{wind}(g_{SN})=n.
+$$
+
+ This integer labels the principal $U(1)$-bundle. For $n=0$, the bundle is the trivial product $S^2\times U(1)$. For $n=1$, the total space is $S^3$, and the projection 
+
+$$
+S^3\to S^2
+$$
+
+ is the Hopf fibration. Thus the Hopf fibration is the unit magnetic monopole bundle.
+
+<div className="mainbox">
+What is attached to $S^2$? For the principal bundle, the fiber over each point of $S^2$ is the gauge-frame space $U(1)$. This is not yet the electron wavefunction space. The wavefunction lives in an associated complex line bundle, constructed from a representation of $U(1)$.
+</div>
+### The connection and the local gauge potentials
+
+A principal connection is a global one-form 
+
+$$
+\omega\in\Omega^1(P_n;i\mathbb{R})
+$$
+
+ on the total space $P_n$. Local gauge potentials are obtained by pulling back $\omega$ along local sections: 
+
+$$
+A_N:=s_N^*\omega\in\Omega^1(U_N;i\mathbb{R}),
+\qquad
+A_S:=s_S^*\omega\in\Omega^1(U_S;i\mathbb{R}).
+$$
+
+ Using $s_N=s_S\cdot g_{SN}$ and the principal-connection transformation law gives, because $U(1)$ is Abelian, 
+
+$$
+\boxed{A_N=A_S+g_{SN}^{-1}dg_{SN}.}
+$$
+
+ For 
+
+$$
+g_{SN}(\phi)=e^{in\phi},
+$$
+
+ we have 
+
+$$
+g_{SN}^{-1}dg_{SN}=in\,d\phi.
+$$
+
+ Thus the local potentials differ by an exact-looking term on the overlap, but the phase function $n\phi$ is not single-valued on the equator unless $n=0$.
+
+The curvature of the principal connection is a global two-form on $S^2$ after pullback to local patches: 
+
+$$
+F|_{U_N}=dA_N,
+\qquad
+F|_{U_S}=dA_S.
+$$
+
+ The equality on the overlap follows from 
+
+$$
+d(A_N-A_S)=d(g_{SN}^{-1}dg_{SN})=0.
+$$
+
+ Thus $A_N$ and $A_S$ are local, but $F$ is global.
+
+### Patchwise Stokes theorem: Chern number equals winding number
+
+Choose the orientation of the equator to be the boundary orientation of $U_N$. Then the boundary orientation of $U_S$ is the opposite. Applying Stokes' theorem patch by patch gives 
+
+$$
+\begin{align*}
+\int_{S^2}F
+&=
+\int_{U_N}dA_N+
+\int_{U_S}dA_S \\
+&=
+\int_{\partial U_N}A_N+
+\int_{\partial U_S}A_S \\
+&=
+\int_{S^1}A_N-
+\int_{S^1}A_S \\
+&=
+\int_{S^1}(A_N-A_S) \\
+&=
+\int_{S^1}g_{SN}^{-1}dg_{SN}.
+\end{align*}
+$$
+
+ Therefore 
+
+$$
+\boxed{
+\int_{S^2}\frac{F}{2\pi i}
+=
+\frac{1}{2\pi i}\int_{S^1}g_{SN}^{-1}dg_{SN}
+=
+\operatorname{wind}(g_{SN})
+=n.
+}
+$$
+
+ This is the precise sense in which monopole charge, transition-function winding, and first Chern number are the same integer.
+
+<div className="warningbox">
+Sign convention If one instead writes $s_S=s_N\cdot g_{NS}$, then $g_{NS}=g_{SN}^{-1}$ and the winding number changes sign. The invariant statement is not the name $g_{SN}$ versus $g_{NS}$; the invariant statement is that, once the transition-function and orientation conventions are fixed, 
+
+$$
+\int_{S^2}\frac{F}{2\pi i}
+$$
+
+ equals the corresponding transition-function winding number.
+</div>
+### Associated line bundle and charged wavefunctions
+
+Quantum mechanics needs wavefunctions. A charged wavefunction is not a section of the principal bundle $P_n$ itself. It is a section of a complex line bundle associated to $P_n$.
+
+Let 
+
+$$
+\rho_q:U(1)\to\mathop{\mathrm{GL}}(\mathbb{C})
+$$
+
+ be a one-dimensional representation. Mathematically, continuous representations of $U(1)$ on $\mathbb{C}$ have integer weight. With the convention 
+
+$$
+\rho_q(e^{i\alpha})=e^{-iq\alpha},
+\qquad q\in\mathbb{Z},
+$$
+
+ the associated line bundle is 
+
+$$
+\boxed{L_q=P_n\times_{U(1)}\mathbb{C}.}
+$$
+
+ By definition, 
+
+$$
+L_q=(P_n\times\mathbb{C})/\sim,
+$$
+
+ where 
+
+$$
+(p,z)\sim(p\cdot h,\rho_q(h^{-1})z),
+\qquad h\in U(1).
+$$
+
+ A charged wavefunction is a section 
+
+$$
+\psi\in\Gamma(L_q).
+$$
+
+ After choosing a local section $s_N$ or $s_S$, the same global wavefunction is represented by local complex functions 
+
+$$
+\psi_N:U_N\to\mathbb{C},
+\qquad
+\psi_S:U_S\to\mathbb{C}.
+$$
+
+ On the overlap, since $s_N=s_S\cdot g_{SN}$, the local components transform by the representation: 
+
+$$
+\psi_S=\rho_q(g_{SN})\psi_N
+=e^{-iqn\phi}\psi_N.
+$$
+
+ This is the ordinary phase transformation of a charge-$q$ wavefunction. The point is that the phase change is not an optional decoration; it is forced by the associated-bundle construction.
+
+<div className="mainbox">
+Physical interpretation The base space is $S^2$. The principal bundle attaches gauge frames $U(1)$ to each point. The associated line bundle attaches the internal charge space $\mathbb{C}$ to each point. The electron's scalar wavefunction is a section of this associated complex line bundle, not a spin-space object and not an ordinary globally defined function unless the line bundle is trivial.
+</div>
+The connection on $P_n$ induces a connection on $L_q$. In a local gauge, it has the familiar form 
+
+$$
+D\psi=d\psi-iq\,\mathcal A\,\psi
+$$
+
+ if one writes the physical real gauge potential as $\mathcal A$ rather than the anti-Hermitian form $A=i\mathcal A$. This is the standard minimal coupling rule. In bundle language it is simply the connection on the associated line bundle.
+
+### The usual Dirac monopole potentials
+
+In the physics convention with real gauge potentials, one often writes 
+
+$$
+\mathcal A_N=\frac{n}{2}(1-\cos\theta)d\phi,
+\qquad
+\mathcal A_S=-\frac{n}{2}(1+\cos\theta)d\phi.
+$$
+
+ Then 
+
+$$
+\mathcal A_N-\mathcal A_S=n\,d\phi,
+$$
+
+ and 
+
+$$
+\mathcal F=d\mathcal A_N=d\mathcal A_S=\frac{n}{2}\sin\theta\,d\theta\wedge d\phi.
+$$
+
+ Therefore 
+
+$$
+\frac{1}{2\pi}\int_{S^2}\mathcal F
+=
+\frac{1}{2\pi}\int_0^{2\pi}\int_0^\pi
+\frac{n}{2}\sin\theta\,d\theta\,d\phi
+=n.
+$$
+
+ This is the same computation as above, written in the physicist's real-curvature convention.
+
+<div className="mainbox">
+Homotopy, cohomology, and curvature in one example For the monopole bundle over $S^2$, the following data all determine the same integer: 
+
+$$
+\begin{align*}
+\text{homotopy:}&& [g_{SN}]&\in[S^1,U(1)]\cong\mathbb{Z},\\
+\text{winding:}&& \operatorname{wind}(g_{SN})&=n,\\
+\text{cohomology:}&& c_1(L)&\in H^2(S^2;\mathbb{Z})\cong\mathbb{Z},\\
+\text{curvature:}&& \int_{S^2}\frac{F}{2\pi i}&=n.
+\end{align*}
+$$
+
+ These are not four different phenomena. They are four languages for the same topological twisting.
+</div>
+## The same example from homotopy
+
+For $S^2$ covered by two disks, the overlap deformation retracts to the equator $S^1$. A complex line bundle is therefore specified by a gluing map 
+
+$$
+g:S^1\to U(1).
+$$
+
+ Homotopy classes of such maps are classified by 
+
+$$
+\pi_1(U(1))\cong\mathbb{Z}.
+$$
+
+ The integer is the winding number. The first Chern class packages this same integer as an element of 
+
+$$
+H^2(S^2;\mathbb{Z})\cong\mathbb{Z}.
+$$
+
+ The curvature formula packages it as 
+
+$$
+\int_{S^2}\frac{F}{2\pi i}\in\mathbb{Z}.
+$$
+
+ Thus homotopy, cohomology, transition functions, and curvature are four languages for the same topological information in this example.
+
+## Higher-rank bundles and characteristic classes
+
+For a rank-$r$ complex vector bundle $E\to M$ with connection curvature $F$, the total Chern class is formally represented by 
+
+$$
+c(E)=\det\left(I+\frac{F}{2\pi i}\right)
+=1+c_1(E)+c_2(E)+\cdots.
+$$
+
+ The first Chern class is represented by 
+
+$$
+c_1(E)=\left[\frac{\mathrm{Tr}F}{2\pi i}\right].
+$$
+
+ The Chern character is 
+
+$$
+\operatorname{ch}(E)=\mathrm{Tr}\exp\left(\frac{F}{2\pi i}\right).
+$$
+
+ For real vector bundles, other characteristic classes appear, especially Stiefel-Whitney classes 
+
+$$
+w_i(E)\in H^i(M;\mathbb{Z}_2)
+$$
+
+ and Pontryagin classes 
+
+$$
+p_i(E)\in H^{4i}(M;\mathbb{Z}).
+$$
+
+ For example, 
+
+$$
+w_1(E)=0
+$$
+
+ is the obstruction to orientability, and 
+
+$$
+w_2(TM)=0
+$$
+
+ is the obstruction to the existence of a spin structure on an oriented Riemannian manifold.
+
+## Minimal algebraic topology needed here
+
+For the main text, the following operational facts are enough:
+
+- $\pi_1(U(1))\cong\mathbb{Z}$: loops in $U(1)$ have an integer winding number.
+
+- $H^2(S^2;\mathbb{Z})\cong\mathbb{Z}$: line bundles over $S^2$ are classified by an integer.
+
+- $H^2(T^2;\mathbb{Z})\cong\mathbb{Z}$: line bundles over a two-torus can have an integer Chern number.
+
+- Curvature gives a de Rham representative of an integral cohomology class.
+
+The section develops these facts from homotopy through cohomology.
+
+# Bloch Bundles and Chern Insulators
+
+The previous sections developed bundles in abstract language. Bloch bundles are where the same language becomes directly physical in band theory.
+
+## Why the Brillouin zone is a torus
+
+For a two-dimensional Chern insulator, the base space of the Bloch bundle is typically $T^2$. This statement belongs here, after vector bundles have been defined. It is not a statement about real space. It is a statement about momentum space.
+
+In a crystal, Bloch momentum $k$ is defined only modulo reciprocal lattice vectors. In one dimension, 
+
+$$
+k\sim k+G.
+$$
+
+ Therefore the one-dimensional Brillouin zone is a circle: 
+
+$$
+\mathrm{BZ}\cong S^1.
+$$
+
+ In two dimensions, 
+
+$$
+(k_x,k_y)\sim(k_x+G_x,k_y),
+\qquad
+(k_x,k_y)\sim(k_x,k_y+G_y).
+$$
+
+ So the Brillouin zone is a two-torus: 
+
+$$
+\mathrm{BZ}\cong S^1\times S^1=T^2.
+$$
+
+
+<div className="mainbox">
+Why this example is delayed The torus $T^2$ appears as the base space only when we discuss two-dimensional band topology. It is not needed for the initial manifold review. It belongs here, after fiber bundles and vector bundles have already been defined.
+</div>
+## Occupied states form a vector bundle
+
+Let 
+
+$$
+H(k)
+$$
+
+ be a Bloch Hamiltonian depending smoothly on $k\in\mathrm{BZ}$. Suppose there is an energy gap separating occupied bands from unoccupied bands. Let $N_{\mathrm{occ}}$ be the number of occupied bands.
+
+At each momentum $k$, define 
+
+$$
+E_k:=\operatorname{span}_{\mathbb{C}}\{\text{occupied eigenstates of }H(k)\}\subset \mathcal{H}_k.
+$$
+
+ Here $\mathcal{H}_k$ denotes the single-particle Hilbert space at momentum $k$. In a finite-band tight-binding model one usually identifies all $\mathcal{H}_k$ with one fixed finite-dimensional Hilbert space $\mathcal{H}\cong\mathbb{C}^N$, so the ambient Hilbert bundle is trivial: 
+
+$$
+\mathrm{BZ}\times\mathcal{H}\to\mathrm{BZ}.
+$$
+
+ The occupied subspaces $E_k\subset\mathcal{H}$ then define a subbundle 
+
+$$
+E=\bigsqcup_{k\in\mathrm{BZ}}E_k\subset\mathrm{BZ}\times\mathcal{H}.
+$$
+
+ Since 
+
+$$
+\dim_\mathbb{C}E_k=N_{\mathrm{occ}}
+$$
+
+ for all $k$, this is a rank-$N_{\mathrm{occ}}$ complex vector bundle over the Brillouin zone: 
+
+$$
+\boxed{E\to\mathrm{BZ}.}
+$$
+
+ This is the Bloch bundle.
+
+Equivalently, let 
+
+$$
+\mathcal P(k):\mathcal{H}\to\mathcal{H}
+$$
+
+ be the spectral projection onto the occupied subspace: 
+
+$$
+\mathcal P(k)=\sum_{a=1}^{N_{\mathrm{occ}}}|u_a(k)\rangle\langle u_a(k)|
+$$
+
+ for any local orthonormal basis of occupied states. The image of $\mathcal P(k)$ is $E_k$. Smoothness of $\mathcal P(k)$ is the coordinate-free way to say that the occupied subspaces vary smoothly with $k$.
+
+## The principal frame bundle of occupied states
+
+The Bloch vector bundle has an associated principal bundle of orthonormal frames. Define 
+
+$$
+P_{\mathrm{occ}}\to\mathrm{BZ}
+$$
+
+ by declaring the fiber over $k$ to be 
+
+$$
+(P_{\mathrm{occ}})_k
+=
+\{\text{unitary isomorphisms }p:\mathbb{C}^{N_{\mathrm{occ}}}\to E_k\}.
+$$
+
+ Equivalently, a point of $(P_{\mathrm{occ}})_k$ is an ordered orthonormal frame 
+
+$$
+(|u_1(k)\rangle,\ldots,|u_{N_{\mathrm{occ}}}(k)\rangle)
+$$
+
+ of the occupied subspace. The structure group is 
+
+$$
+G=U(N_{\mathrm{occ}}),
+$$
+
+ acting on the right by changing the frame: 
+
+$$
+p\cdot U:=p\circ U,
+\qquad U\in U(N_{\mathrm{occ}}).
+$$
+
+ In basis language this says 
+
+$$
+|u_a\rangle\mapsto |u_b\rangle U^b{}_a.
+$$
+
+
+The Bloch bundle is recovered as the associated vector bundle 
+
+$$
+\boxed{E\cong P_{\mathrm{occ}}\times_{U(N_{\mathrm{occ}})}\mathbb{C}^{N_{\mathrm{occ}}}.}
+$$
+
+ The isomorphism is explicit: 
+
+$$
+[p,v]\longmapsto p(v)\in E_k.
+$$
+
+ This formula says that a frame $p$ converts a coordinate vector $v\in\mathbb{C}^{N_{\mathrm{occ}}}$ into the actual occupied state $p(v)\in E_k$. If the frame is changed by $U$, then $v$ is changed by $U^{-1}$ in the quotient, so the actual vector $p(v)$ is unchanged.
+
+<div className="mainbox">
+Physics translation The principal bundle $P_{\mathrm{occ}}$ is the bundle of choices of occupied-band basis. The associated vector bundle $E$ is the bundle whose fibers are the occupied Hilbert spaces themselves. Local Bloch eigenvectors are local frames; their gauge freedom is the right action of $U(N_{\mathrm{occ}})$.
+</div>
+## Local frames are local choices of eigenvectors
+
+A local frame of the Bloch bundle is a local smooth choice of occupied eigenvectors 
+
+$$
+|u_1(k)\rangle,\ldots,|u_{N_{\mathrm{occ}}}(k)\rangle.
+$$
+
+ On an overlap of two patches, two choices of eigenvectors differ by a unitary matrix: 
+
+$$
+|u_a^{(j)}(k)\rangle=|u_b^{(i)}(k)\rangle\,g_{ij}^{ba}(k),
+$$
+
+ where 
+
+$$
+g_{ij}(k)\in U(N_{\mathrm{occ}}).
+$$
+
+ Thus band gauge freedom is literally frame freedom in a vector bundle.
+
+For a single occupied band, $N_{\mathrm{occ}}=1$, the structure group reduces to $U(1)$ and a local eigenvector can be changed by a phase: 
+
+$$
+|u(k)\rangle\mapsto e^{i\chi(k)}|u(k)\rangle.
+$$
+
+ If the line bundle has nonzero Chern number, no smooth nonvanishing eigenvector can be chosen globally over the entire Brillouin zone.
+
+## Berry connection as the projected derivative
+
+The formula 
+
+$$
+\mathcal A_{ab}=i\langle u_a|d u_b\rangle
+$$
+
+ is not an arbitrary definition. It is the local expression of a natural connection on the occupied subbundle.
+
+The ambient Hilbert bundle 
+
+$$
+\mathrm{BZ}\times\mathcal{H}\to\mathrm{BZ}
+$$
+
+ is trivial, so it has an ordinary flat derivative $d$. However, if $s(k)\in E_k$ is an occupied-band section, then $ds$ need not remain inside $E_k$; differentiating an occupied state can produce components in the unoccupied subspace. To get a derivative intrinsic to the occupied bundle, project back: 
+
+$$
+\boxed{\nabla s:=\mathcal P\,ds.}
+$$
+
+ This is called the Grassmann connection on the subbundle $E\subset\mathrm{BZ}\times\mathcal{H}$.
+
+Apply this to a local occupied frame $|u_b\rangle$. Since 
+
+$$
+\mathcal P=\sum_a |u_a\rangle\langle u_a|,
+$$
+
+ we get 
+
+$$
+\nabla |u_b\rangle
+=
+\mathcal P\,d|u_b\rangle
+=
+\sum_a |u_a\rangle\langle u_a|d u_b\rangle.
+$$
+
+ Compare this with the general local expression for a connection, 
+
+$$
+\nabla e_b=e_a A^a{}_b.
+$$
+
+ With $e_a=|u_a\rangle$, the connection matrix is therefore 
+
+$$
+\boxed{A^a{}_b=\langle u_a|d u_b\rangle.}
+$$
+
+ Because the frame is orthonormal, 
+
+$$
+d\langle u_a|u_b\rangle=0,
+$$
+
+ so 
+
+$$
+\langle d u_a|u_b\rangle+\langle u_a|d u_b\rangle=0.
+$$
+
+ This implies 
+
+$$
+A^\dagger=-A,
+$$
+
+ so $A$ is $\mathfrak u(N_{\mathrm{occ}})$-valued, as a unitary connection should be.
+
+Physics often uses a Hermitian Berry connection 
+
+$$
+\boxed{\mathcal A:=iA,\qquad \mathcal A_{ab}=i\langle u_a|d u_b\rangle.}
+$$
+
+ This is the same connection written with a different convention. The mathematical convention uses anti-Hermitian matrices; the physics convention often inserts a factor of $i$ so that the components are real in the one-band case.
+
+In coordinates, 
+
+$$
+\mathcal A_{ab}=i\langle u_a(k)|\partial_{k_i}u_b(k)\rangle\,dk_i.
+$$
+
+ For a single occupied band, 
+
+$$
+\mathcal A=i\langle u(k)|d u(k)\rangle.
+$$
+
+
+## Gauge transformation of the Berry connection
+
+Let a local occupied frame be changed by 
+
+$$
+|u_a\rangle\mapsto |u'_a\rangle=|u_b\rangle U^b{}_a(k),
+\qquad U(k)\in U(N_{\mathrm{occ}}).
+$$
+
+ In the anti-Hermitian convention $A_{ab}=\langle u_a|d u_b\rangle$, the connection transforms as 
+
+$$
+\boxed{A' = U^{-1}AU+U^{-1}dU.}
+$$
+
+ This is the same formula as for a vector-bundle connection.
+
+For a single band, write 
+
+$$
+|u'\rangle=e^{i\chi}|u\rangle.
+$$
+
+ Then 
+
+$$
+\begin{align*}
+\mathcal A'
+&=i\langle u'|d u'\rangle \\
+&=i\langle u|e^{-i\chi}d(e^{i\chi}|u\rangle) \\
+&=i\langle u|(i\,d\chi)|u\rangle+i\langle u|du\rangle \\
+&=\mathcal A-d\chi.
+\end{align*}
+$$
+
+ The Berry connection is not gauge-invariant. It depends on the phase convention for the local eigenvector. The Berry curvature is gauge-invariant for a line bundle: 
+
+$$
+\mathcal F=d\mathcal A.
+$$
+
+ For several occupied bands, the curvature in the anti-Hermitian convention is 
+
+$$
+F=dA+A\wedge A,
+$$
+
+ and in the common physics convention it is often written 
+
+$$
+\mathcal F=d\mathcal A-i\mathcal A\wedge\mathcal A.
+$$
+
+ The trace $\mathrm{Tr}\mathcal F$ is gauge-invariant and enters the first Chern number.
+
+## Chern number of occupied bands
+
+For a single occupied band over a two-dimensional Brillouin zone, 
+
+$$
+\boxed{C=\frac{1}{2\pi}\int_{\mathrm{BZ}}\mathcal F\in\mathbb{Z}.}
+$$
+
+ When $\mathrm{BZ}\cong T^2$, this is an integral over the momentum-space torus.
+
+For multiple occupied bands, the first Chern number of the occupied bundle is 
+
+$$
+\boxed{C=\frac{1}{2\pi}\int_{\mathrm{BZ}}\mathrm{Tr}\mathcal F\in\mathbb{Z},}
+$$
+
+ with the convention that $\mathcal F$ is the Hermitian/real physics curvature. In the anti-Hermitian mathematical convention, the same formula is 
+
+$$
+C=\int_{\mathrm{BZ}}\frac{\mathrm{Tr}F}{2\pi i}.
+$$
+
+
+<div className="warningbox">
+Real space versus momentum space The base space of the Bloch bundle is momentum space, usually the Brillouin zone. The physical sample lives in real space. For a two-dimensional crystal, real space is two-dimensional and the Brillouin zone is also two-dimensional, but they are different spaces.
+</div>
+## Why the Chern number gives Hall conductivity: TKNN in brief
+
+For a clean noninteracting two-dimensional band insulator at zero temperature, linear response theory gives the Hall conductivity. The starting point is the Kubo formula. For simplicity, consider nondegenerate bands and a completely filled set of occupied bands: 
+
+$$
+\sigma_{xy}
+=
+-i\hbar e^2\int_{\mathrm{BZ}}\frac{d^2k}{(2\pi)^2}
+\sum_{n\in\mathrm{occ}}\sum_{m\in\mathrm{emp}}
+\frac{
+\langle u_n|v_x|u_m\rangle\langle u_m|v_y|u_n\rangle
+-
+(x\leftrightarrow y)
+}{(E_n-E_m)^2}.
+$$
+
+ Here 
+
+$$
+v_i=\frac{1}{\hbar}\frac{\partial H}{\partial k_i}.
+$$
+
+ Different sign conventions for electron charge and Berry curvature can move an overall sign; the invariant content is the integer multiplying $e^2/h$.
+
+The key identity comes from differentiating the eigenvalue equation 
+
+$$
+H(k)|u_n(k)\rangle=E_n(k)|u_n(k)\rangle.
+$$
+
+ For $m\neq n$, 
+
+$$
+\langle u_m|\partial_{k_i}H|u_n\rangle
+=
+(E_n-E_m)\langle u_m|\partial_{k_i}u_n\rangle.
+$$
+
+ Substituting this into the Kubo formula cancels the energy denominators. The sum over empty states can then be rewritten using the completeness relation 
+
+$$
+\sum_{m\in\mathrm{all}}|u_m\rangle\langle u_m|=I.
+$$
+
+ After the antisymmetrization in $x$ and $y$, the occupied-state terms organize into the Berry curvature. For a single occupied band, 
+
+$$
+\mathcal F_{xy}
+=
+\partial_{k_x}\mathcal A_y-
+\partial_{k_y}\mathcal A_x
+=
+i\left(
+\langle \partial_{k_x}u|\partial_{k_y}u\rangle
+-
+\langle \partial_{k_y}u|\partial_{k_x}u\rangle
+\right).
+$$
+
+ Thus 
+
+$$
+\sigma_{xy}
+=
+\frac{e^2}{h}\frac{1}{2\pi}\int_{\mathrm{BZ}}\mathcal F.
+$$
+
+ For several occupied bands, 
+
+$$
+\boxed{\sigma_{xy}=\frac{e^2}{h}\,C,
+\qquad
+C=\frac{1}{2\pi}\int_{\mathrm{BZ}}\mathrm{Tr}\mathcal F\in\mathbb{Z}.}
+$$
+
+
+<div className="mainbox">
+Why this is robust The Kubo formula begins as a detailed expression involving energies and matrix elements. The gap lets it collapse to the curvature of the occupied bundle. The integral of that curvature is a Chern number, hence an integer. Smooth perturbations cannot change this integer unless the occupied and unoccupied bands touch, because only then can the vector bundle itself change topology.
+</div>
+This is the geometric core of the integer quantum Hall effect and Chern insulators. Disorder and interactions require more sophisticated formulations, but the clean band-theory statement already shows why topology enters transport.
+
+## Two-band model and degree of a map
+
+A common two-band Hamiltonian has the form 
+
+$$
+H(k)=\bm d(k)\cdot\bm\sigma.
+$$
+
+ If $\bm d(k)\neq0$ for all $k\in\mathrm{BZ}$, define 
+
+$$
+\widehat{\bm d}(k)=\frac{\bm d(k)}{|\bm d(k)|}.
+$$
+
+ Then 
+
+$$
+\widehat{\bm d}:\mathrm{BZ}\to S^2.
+$$
+
+ For a two-dimensional Brillouin zone, this is a map from the torus $T^2$ to the unit sphere.
+
+The unit sphere has a normalized area form 
+
+$$
+\omega_{S^2}
+=
+\frac{1}{4\pi}
+\left(
+ n_1\,dn_2\wedge dn_3
++n_2\,dn_3\wedge dn_1
++n_3\,dn_1\wedge dn_2
+\right),
+$$
+
+ where $(n_1,n_2,n_3)$ are the coordinate functions restricted to $S^2\subset\mathbb{R}^3$. It is normalized by 
+
+$$
+\int_{S^2}\omega_{S^2}=1.
+$$
+
+ Pull this two-form back along $\widehat{\bm d}$. Since 
+
+$$
+d\widehat{\bm d}
+=
+\frac{\partial\widehat{\bm d}}{\partial k_x}dk_x
++
+\frac{\partial\widehat{\bm d}}{\partial k_y}dk_y,
+$$
+
+ a direct wedge-product computation gives 
+
+$$
+\widehat{\bm d}^{\,*}\omega_{S^2}
+=
+\frac{1}{4\pi}
+\widehat{\bm d}\cdot
+\left(
+\frac{\partial\widehat{\bm d}}{\partial k_x}
+\times
+\frac{\partial\widehat{\bm d}}{\partial k_y}
+\right)
+ dk_x\wedge dk_y.
+$$
+
+
+<div className="theorem">
+**Theorem 3** (Degree formula). Let $M$ and $N$ be compact connected oriented smooth $n$-manifolds, and let $f:M\to N$ be smooth. If $\eta$ is any top-degree form on $N$, then 
+
+$$
+\int_M f^*\eta=\deg(f)\int_N\eta.
+$$
+
+ The integer $\deg(f)$ is the degree of $f$.
+</div>
+Applying this theorem to 
+
+$$
+f=\widehat{\bm d}:\mathrm{BZ}\to S^2,
+\qquad
+\eta=\omega_{S^2},
+$$
+
+ we obtain 
+
+$$
+\int_{\mathrm{BZ}}\widehat{\bm d}^{\,*}\omega_{S^2}
+=\deg(\widehat{\bm d}).
+$$
+
+ Therefore 
+
+$$
+\boxed{
+\deg(\widehat{\bm d})
+=
+\frac{1}{4\pi}\int_{\mathrm{BZ}}
+\widehat{\bm d}\cdot
+\left(
+\partial_{k_x}\widehat{\bm d}\times
+\partial_{k_y}\widehat{\bm d}
+\right)d^2k.
+}
+$$
+
+ This integer is the oriented wrapping number of the map $\widehat{\bm d}:T^2\to S^2$.
+
+For the eigenline whose spin is aligned with $\widehat{\bm d}$, the first Chern number is 
+
+$$
+C_+=\deg(\widehat{\bm d})
+$$
+
+ with the Berry-curvature convention used above. For the lower band of the Hamiltonian $H=\bm d\cdot\bm\sigma$, the spin is anti-aligned with $\widehat{\bm d}$, so many conventions give 
+
+$$
+C_-=-\deg(\widehat{\bm d}).
+$$
+
+ If one writes the Hamiltonian with the opposite sign, or defines the occupied eigenline differently, this sign flips. The invariant geometric statement is that the band Chern number is the degree of the map to the Bloch sphere, up to the convention-fixed sign.
+
+<div className="mainbox">
+Chern number as wrapping number The integrand 
+
+$$
+\widehat{\bm d}\cdot
+(\partial_{k_x}\widehat{\bm d}\times\partial_{k_y}\widehat{\bm d})
+$$
+
+ is the Jacobian measuring how oriented area in the Brillouin zone maps to oriented area on the Bloch sphere. Dividing by $4\pi$ normalizes the total area of the unit sphere to one. The integral counts how many times the Brillouin-zone torus covers the sphere, with orientation.
+</div>
+# Relation to Gauge Theory and Topological Order
+
+## Gauge theory in bundle language
+
+The bundle-level definition of a gauge theory is: 
+
+$$
+\text{principal }G\text{-bundle }P\to M
+\quad + \quad
+\text{connection }A.
+$$
+
+ Matter fields in representation $\rho:G\to \mathop{\mathrm{GL}}(V)$ are sections of 
+
+$$
+P\times_G V.
+$$
+
+ The field strength is the curvature 
+
+$$
+F=dA+A\wedge A.
+$$
+
+ Wilson loops are holonomies: 
+
+$$
+W_R(\gamma)=\mathrm{Tr}_R\,\mathcal P\exp\left(-\oint_\gamma A\right).
+$$
+
+
+## Flat bundles and topological sectors
+
+A connection is flat if 
+
+$$
+F=0.
+$$
+
+ Flat does not necessarily mean globally trivial. A flat connection can have nontrivial holonomy around noncontractible loops.
+
+For example, on a torus $T^2$, there are two fundamental noncontractible cycles. A flat $\mathbb{Z}_2$ gauge field can have holonomy $\pm1$ around each cycle. Thus there are four sectors: 
+
+$$
+(+,+),\quad (+,-),\quad (-,+),\quad (-,-).
+$$
+
+ This is the continuum/bundle intuition behind why $\mathbb{Z}_2$ gauge theories and the toric code have topological sectors on a torus.
+
+<div className="mainbox">
+Connection to constrained Hilbert spaces The constrained-Hilbert-space viewpoint says a local constraint can behave like Gauss's law. The bundle viewpoint says that gauge sectors are global data of gauge fields, such as holonomies around noncontractible cycles. These are two complementary descriptions of the same kind of physics.
+</div>
+# Relation to Projective Representations and Spin
+
+Spin-$1/2$ is naturally a projective representation of $SO(3)$ but a linear representation of $SU(2)$. Bundle language gives a geometric version of the same idea.
+
+Let $M$ be an oriented Riemannian $n$-manifold. At each point, choose an oriented orthonormal frame of $T_pM$. The collection of all such frames forms a principal $SO(n)$-bundle: 
+
+$$
+P_{SO}(M)\to M.
+$$
+
+ Spinors require lifting this principal bundle to a principal $Spin(n)$-bundle: 
+
+$$
+P_{Spin}(M)\to M.
+$$
+
+ The obstruction to doing this is the second Stiefel--Whitney class 
+
+$$
+w_2(TM)\in H^2(M;\mathbb{Z}_2).
+$$
+
+ If 
+
+$$
+w_2(TM)=0,
+$$
+
+ then a spin structure exists.
+
+<div className="mainbox">
+Physical memory rule Projective representations become linear after passing to a suitable covering group: 
+
+$$
+SO(3)\leftarrow SU(2),
+\qquad
+SO(n)\leftarrow Spin(n).
+$$
+
+ Spin structures are the bundle version of making this lift consistently over all of spacetime or space.
+</div>
+This topic is not needed for the first calculation of a Chern number, but it is a useful bridge between projective representations, topology, and geometry.
+
+# What Chern--Simons Theory and Anomalies Have to Do With This
+
+This section is optional on a first pass. It is included only to place later later physics topics in context.
+
+## Chern class versus Chern--Simons action
+
+Do not confuse these:
+
+<div className="center">
+  Concept                      Meaning
+  ---------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Chern class / Chern number   Topological invariant of a vector bundle, built from curvature. Essential for Berry curvature and Chern insulators.
+  Chern--Simons action         A topological field theory action in odd spacetime dimensions, built from a connection. Important for quantum Hall effective field theories and edge physics, but not required for first learning fiber bundles.
+</div>
+For a $U(1)$ connection in $2+1$ dimensions, a Chern--Simons term looks like 
+
+$$
+S_{CS}[A]=\frac{k}{4\pi}\int A\wedge dA.
+$$
+
+ This uses the language of connections and forms, but it is not the starting point for learning bundles.
+
+## Anomalies
+
+A rough bundle-language statement of a 't Hooft anomaly is:
+
+> There is an obstruction to defining the partition function consistently and gauge-invariantly for all background gauge bundles and gauge transformations.
+
+This is conceptually downstream from bundles, connections, and gauge transformations. It is not required for understanding what a vector bundle or a Berry connection is.
+
+# Minimal Study Plan
+
+## Day 1: Manifold and forms recovery
+
+You should be able to explain the following without looking:
+
+1.  A topological manifold is locally homeomorphic to open subsets of $\mathbb{R}^n$.
+
+2.  A smooth manifold has smooth coordinate transition maps.
+
+3.  A tangent vector at $p$ is a directional derivative operator.
+
+4.  A cotangent vector at $p$ is a linear functional on $T_pM$.
+
+5.  $dx^\mu(\partial/\partial x^\nu)=\delta^\mu_\nu$ because $dx^\mu=d(x^\mu)$.
+
+6.  A $k$-form eats $k$ tangent vectors and is antisymmetric.
+
+7.  Pullback replaces $y^i$ by $f^i(x)$ and $dy^i$ by $d(f^i(x))$.
+
+8.  A flow $\Phi_t$ follows a vector field, and $\mathcal{L}_XT=\left.\frac{d}{dt}\right|_{0}\Phi_t^*T$ is the infinitesimal pullback along that flow.
+
+## Day 2: Bundles and connections
+
+You should be able to explain:
+
+1.  A fiber bundle is a map $\pi:E\to B$ locally isomorphic to $U_i\times F$ over some open cover.
+
+2.  The definition requires the existence of a trivializing open cover, not that every open set trivializes.
+
+3.  A vector bundle is a fiber bundle with fiber $\mathbb{R}^r$ or $\mathbb{C}^r$ and linear transition functions.
+
+4.  $E$ is not automatically $M\times\mathbb{R}^{\dim M}$; that is only the trivial bundle of rank $\dim M$.
+
+5.  $TM$, $T^*M$, and $\Lambda^kT^*M$ are vector bundles over $M$.
+
+6.  A vector field is a section of $TM$.
+
+7.  A one-form is a section of $T^*M$.
+
+8.  Transition functions glue local trivializations.
+
+9.  A connection differentiates sections by comparing nearby fibers.
+
+10. Locally $\nabla=d+A$.
+
+11. Curvature is $F=dA+A\wedge A$.
+
+12. For a complex line bundle over a closed surface, $(1/2\pi)\int F\in\mathbb{Z}$.
+
+13. A 2D Bloch bundle has base $\mathrm{BZ}\cong T^2$, not real space.
+
+# Study Checkpoints
+
+## Local product does not mean global product
+
+The Möbius line bundle and cylinder are both locally $U\times\mathbb{R}$ over $S^1$. They differ globally. The difference is encoded in transition functions.
+
+## Rank is not base dimension
+
+A rank-$r$ vector bundle over an $n$-dimensional base has $r$-dimensional fibers. The tangent bundle has rank $n$, but a line bundle over $S^2$ has rank $1$, and a Bloch bundle over $T^2$ can have rank equal to the number of occupied bands.
+
+## A differential form is not just an integral sign
+
+A one-form is a covector field. It can be integrated over a curve because it eats the tangent vector to the curve and produces a scalar integrand.
+
+## Lie derivative is not the same as connection
+
+$\mathcal{L}_X$ differentiates by flow. $\nabla_X$ differentiates by a chosen comparison rule between fibers. On arbitrary vector bundles, $\nabla_X$ is the more general operation once a connection is chosen.
+
+## Gauge potentials are local
+
+A gauge potential $A_i$ is usually a local expression for a connection in patch $U_i$. On overlaps, local expressions are related by gauge transformations.
+
+# Exercises With Short Solutions
+
+<div className="exercise">
+**Exercise 1** (Dual basis identity). Show that 
+
+$$
+dx^\mu\left(\frac{\partial}{\partial x^\nu}\right)=\delta^\mu_\nu.
+$$
+
+
+</div>
+**Solution.** Since $dx^\mu=d(x^\mu)$, 
+
+$$
+dx^\mu\left(\frac{\partial}{\partial x^\nu}\right)=\frac{\partial x^\mu}{\partial x^\nu}=\delta^\mu_\nu.
+$$
+
+
+<div className="exercise">
+**Exercise 2** (Pullback of a one-form). Let $f:\mathbb{R}^2\to\mathbb{R}^2$ be 
+
+$$
+f(u,v)=(x,y)=(u^2+v,uv).
+$$
+
+ Compute $f^*(x\,dy)$.
+</div>
+**Solution.** Replace $x$ by $u^2+v$ and $dy$ by $d(uv)=v\,du+u\,dv$: 
+
+$$
+f^*(x\,dy)=(u^2+v)(v\,du+u\,dv).
+$$
+
+
+<div className="exercise">
+**Exercise 3** (A bundle from transition functions). Let $B=S^1$ and cover it by two arcs $U_1,U_2$ with two disconnected overlaps. Let the fiber be $\mathbb{R}$ and take transition function $+1$ on one overlap component and $-1$ on the other. Explain what bundle this gives.
+</div>
+**Solution.** This gluing reverses the fiber after going around the circle, so it gives the Möbius line bundle.
+
+<div className="exercise">
+**Exercise 4** (Section of a trivial bundle). Let $E=M\times\mathbb{R}^r$. Show that a section of $E$ is the same as a smooth function $\psi:M\to\mathbb{R}^r$.
+</div>
+**Solution.** A section $s:M\to M\times\mathbb{R}^r$ must satisfy $\pi\circ s=\mathrm{id}_M$, so it has the form 
+
+$$
+s(p)=(p,\psi(p))
+$$
+
+ for a smooth $\mathbb{R}^r$-valued function $\psi$.
+
+<div className="exercise">
+**Exercise 5** (Connection gauge transformation). Assume $\psi_i=g_{ij}\psi_j$ and $D_i\psi_i=g_{ij}D_j\psi_j$, with $D_i=d+A_i$. Derive the transformation law for $A$.
+</div>
+**Solution.** The computation in the connection section gives 
+
+$$
+(dg_{ij})+A_i g_{ij}=g_{ij}A_j,
+$$
+
+ so 
+
+$$
+A_j=g_{ij}^{-1}A_i g_{ij}+g_{ij}^{-1}dg_{ij}.
+$$
+
+
+<div className="exercise">
+**Exercise 6** (Curvature for $U(1)$). Let $A=A_xdx+A_ydy$ on $\mathbb{R}^2$. Compute $F=dA$.
+</div>
+**Solution.** 
+
+$$
+\begin{align*}
+F&=d(A_xdx+A_ydy)\\
+&=dA_x\wedge dx+dA_y\wedge dy\\
+&=(\partial_y A_xdy)\wedge dx+(\partial_x A_y dx)\wedge dy\\
+&=(\partial_x A_y-\partial_y A_x)dx\wedge dy.
+\end{align*}
+$$
+
+
+<div className="exercise">
+**Exercise 7** (Flow of a simple vector field). Let $M=\mathbb{R}^2$ and 
+
+$$
+X=x\frac{\partial}{\partial x}-y\frac{\partial}{\partial y}.
+$$
+
+ Find the flow $\Phi_t(x,y)$.
+</div>
+**Solution.** The flow equations are 
+
+$$
+\dot x(t)=x(t),
+\qquad
+\dot y(t)=-y(t).
+$$
+
+ With initial condition $(x(0),y(0))=(x,y)$, the solution is 
+
+$$
+\Phi_t(x,y)=(e^tx,e^{-t}y).
+$$
+
+
+<div className="exercise">
+**Exercise 8** (Lie derivative from pullback). Let $M=\mathbb{R}$ and $X=d/dx$, whose flow is $\Phi_t(x)=x+t$. For the function $f(x)=x^2$, compute $\mathcal{L}_Xf$ using 
+
+$$
+\mathcal{L}_Xf=\left.\frac{d}{dt}\right|_0\Phi_t^*f.
+$$
+
+
+</div>
+**Solution.** Since 
+
+$$
+\Phi_t^*f(x)=f(x+t)=(x+t)^2,
+$$
+
+ we get 
+
+$$
+\mathcal{L}_Xf=\left.\frac{d}{dt}\right|_0(x+t)^2=2x.
+$$
+
+ This agrees with $X[f]=d(x^2)/dx=2x$.
+
+<div className="exercise">
+**Exercise 9** (Lie derivative of a one-form). Let $X=X^\mu\partial_\mu$ and $\alpha=\alpha_\mu dx^\mu$. Use Cartan's formula to verify 
+
+$$
+(\mathcal{L}_X\alpha)_\mu=X^\nu\partial_\nu\alpha_\mu+\alpha_\nu\partial_\mu X^\nu.
+$$
+
+
+</div>
+**Solution.** Compute $\iota_X\alpha=X^\nu\alpha_\nu$, so 
+
+$$
+d(\iota_X\alpha)=\partial_\mu(X^\nu\alpha_\nu)dx^\mu.
+$$
+
+ Also 
+
+$$
+d\alpha=\partial_\mu\alpha_\nu dx^\mu\wedge dx^\nu,
+$$
+
+ and contracting with $X$ gives the remaining antisymmetric terms. Combining them cancels the unwanted term and gives 
+
+$$
+(\mathcal{L}_X\alpha)_\mu=X^\nu\partial_\nu\alpha_\mu+\alpha_\nu\partial_\mu X^\nu.
+$$
+
+
+<div className="exercise">
+**Exercise 10** (Why the BZ is $T^2$). Explain why a two-dimensional Brillouin zone is topologically a torus.
+</div>
+**Solution.** Crystal momenta differing by reciprocal lattice vectors are identified: 
+
+$$
+(k_x,k_y)\sim(k_x+G_x,k_y),
+\qquad
+(k_x,k_y)\sim(k_x,k_y+G_y).
+$$
+
+ Thus each momentum direction is a circle, so the two-dimensional BZ is $S^1\times S^1=T^2$.
+
+# Formula Sheet
+
+<div className="center">
+  Concept                           Formula
+  --------------------------------- -------------------------------------------------------------------------------------------------
+  Topological manifold              Locally homeomorphic to open subsets of $\mathbb{R}^n$
+  Smooth manifold                   Coordinate transition maps are smooth
+  Tangent basis                     $\partial_\mu=\partial/\partial x^\mu$
+  Cotangent basis                   $dx^\mu(\partial_\nu)=\delta^\mu_\nu$
+  One-form                          $\alpha=\alpha_\mu dx^\mu$
+  Exterior derivative               $d^2=0$
+  Pullback of coordinate one-form   $f^*(dy^i)=d(f^i)=\frac{\partial f^i}{\partial x^a}dx^a$
+  Flow equation                     $\frac{d}{dt}\Phi_t(p)=X_{\Phi_t(p)}$, $\Phi_0=\mathrm{id}_M$
+  General Lie derivative            $\mathcal{L}_XT=\left.\frac{d}{dt}\right|_{0}\Phi_t^*T$
+  Lie derivative of function        $\mathcal{L}_Xf=X^\mu\partial_\mu f$
+  Lie derivative of vector field    $\mathcal{L}_XY=[X,Y]$
+  Cartan formula                    $\mathcal{L}_X\omega=\iota_Xd\omega+d\iota_X\omega$
+  Fiber bundle                      $\pi:E\to B$, locally $\pi^{-1}(U_i)\cong U_i\times F$
+  Vector bundle                     Fiber $\mathbb{R}^r$ or $\mathbb{C}^r$, transition functions in $\mathop{\mathrm{GL}}(r)$
+  Real line bundle                  Rank-$1$ real vector bundle; fiber $\mathbb{R}$; metric transition functions in $O(1)=\{\pm1\}$
+  Section                           $s:B\to E$, $\pi\circ s=\mathrm{id}_B$
+  Transition functions              $g_{ij}:U_i\cap U_j\to G$, $g_{ij}g_{jk}=g_{ik}$
+  Connection                        $\nabla=d+A$ locally
+  Gauge transformation              $A_j=g_{ij}^{-1}A_i g_{ij}+g_{ij}^{-1}dg_{ij}$
+  Curvature                         $F=dA+A\wedge A$
+  $U(1)$ curvature                  $F=dA$
+  First Chern number                $C=\frac{1}{2\pi}\int_\Sigma F\in\mathbb{Z}$
+  Berry connection                  $\mathcal A_{ab}=i\langle u_a|d u_b\rangle$
+  Berry curvature                   $\mathcal F=d\mathcal A$ for one occupied band
+  2D BZ                             $\mathrm{BZ}\cong T^2=S^1\times S^1$
+</div>
+## Additional formulas
+
+
+$$
+\begin{align*}
+\mathop{\mathrm{Ad}}_gX &= gXg^{-1}\quad \text{for matrix Lie groups},\\
+\nabla_X(e\psi)&=e\bigl(X[\psi]+A(X)\psi\bigr),\\
+\nabla_{\partial_\mu}\partial_\nu&=\Gamma^\lambda{}_{\mu\nu}\partial_\lambda,\\
+(\nabla_\mu Y)^\lambda&=\partial_\mu Y^\lambda+\Gamma^\lambda{}_{\mu\nu}Y^\nu,\\
+F(X,Y)s&=\nabla_X\nabla_Ys-\nabla_Y\nabla_Xs-\nabla_{[X,Y]}s,\\
+F_{\mu\nu}&=\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu],\\
+H^k_{\mathrm{dR}}(M)&=\frac{\{\omega\in\Omega^k(M):d\omega=0\}}{\{d\eta:\eta\in\Omega^{k-1}(M)\}},\\
+C_1(L;\Sigma)&=\frac{1}{2\pi}\int_\Sigma F\in\mathbb{Z}.
+\end{align*}
+$$
+
+
+# Final Roadmap
+
+For your current purpose, learn in this order:
+
+1.  Topological manifolds and smooth coordinate changes.
+
+2.  $T_pM$, $T_p^*M$, and $dx^\mu(\partial_\nu)=\delta^\mu_\nu$.
+
+3.  Differential forms as covariant antisymmetric tensors, not just integration notation.
+
+4.  Pullback of forms and pushforward of vectors.
+
+5.  Lie derivatives as flow-based derivatives.
+
+6.  Topological fiber bundles and local trivializations.
+
+7.  Vector bundles, sections, frames, and transition functions.
+
+8.  Connections and curvature.
+
+9.  First Chern number.
+
+10. Bloch bundle over the Brillouin zone.
+
+Only after this should you worry about Chern--Simons actions, anomalies, index theorems, or K-theory.

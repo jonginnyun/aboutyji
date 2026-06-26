@@ -1,7 +1,7 @@
 ---
 title: "Forms, Flows, and Lie Derivatives"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/differential-geometry/forms-flows-and-lie-derivatives
 category: Mathematics
@@ -17,48 +17,866 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Differential Forms
+# Cotangent Vectors and Differential Forms
 
-A differential $k$-form is a section of
-$$
-\Lambda^kT^*M.
-$$
+## The cotangent space $T_p^*M$
 
-It eats $k$ tangent vectors and returns a number, alternating sign when two arguments are exchanged. The exterior derivative
-$$
-d:\Omega^k(M)\to \Omega^{k+1}(M)
-$$
-satisfies $d^2=0$ and generalizes gradient, curl, and divergence in a coordinate-independent way.
+The cotangent space at $p$ is the dual vector space of $T_pM$: 
 
-## Pullbacks
-
-If $F:M\to N$ is smooth, then forms on $N$ can be pulled back to forms on $M$:
 $$
-F^*:\Omega^k(N)\to \Omega^k(M).
+T_p^*M:=\mathrm{Hom}(T_pM,\mathbb{R}).
 $$
 
-Pullback is the natural direction because forms evaluate on tangent vectors, and $F$ pushes tangent vectors forward. This is also the correct language for change of variables and coordinate invariance.
+ So an element of $T_p^*M$ is a linear map 
 
-## Flows
-
-A vector field $X$ generates a local flow $\Phi_t$, a family of diffeomorphisms satisfying
 $$
-\frac{d}{dt}\Phi_t(p)=X_{\Phi_t(p)},\qquad \Phi_0(p)=p.
+\alpha_p:T_pM\to\mathbb{R}.
 $$
 
-The flow tells us how geometric objects move when points are transported along the vector field.
+ Such an object is called a covector or one-form at $p$.
 
-## Lie Derivative
+In local coordinates, the basis of $T_p^*M$ is 
 
-The Lie derivative measures the infinitesimal change of a tensor field along a vector field. For a function,
 $$
-\mathcal L_X f=X(f).
+dx^1_p,\ldots,dx^n_p.
 $$
 
-For a differential form $\omega$, Cartan's formula gives
-$$
-\mathcal L_X\omega=i_Xd\omega+d(i_X\omega),
-$$
-where $i_X$ is contraction with the vector field.
+ These are defined to be the dual basis to 
 
-The Lie derivative should not be confused with a connection. It differentiates along a flow that moves points of the manifold. A connection differentiates sections by comparing nearby fibers.
+$$
+\left.\frac{\partial}{\partial x^1}\right|_p,
+\ldots,
+\left.\frac{\partial}{\partial x^n}\right|_p.
+$$
+
+ This means 
+
+$$
+dx^\mu_p\left(\left.\frac{\partial}{\partial x^\nu}\right|_p\right)=\delta^\mu_{\nu}.
+$$
+
+
+<div className="mainbox">
+The basic pairing The expression 
+
+$$
+dx^\mu\left(\frac{\partial}{\partial x^\nu}\right)=\delta^\mu_{\nu}
+$$
+
+ means: the covector $dx^\mu$ is being evaluated on the vector $\partial/\partial x^\nu$. It returns $1$ if the directions match and $0$ otherwise.
+</div>
+## Why $dx^\mu(\partial/\partial x^\nu)=\delta^\mu_\nu$
+
+First recall that $x^\mu$ is a coordinate function: 
+
+$$
+x^\mu:M\to\mathbb{R}.
+$$
+
+ Its differential is a one-form 
+
+$$
+dx^\mu_p:T_pM\to\mathbb{R}.
+$$
+
+ For any tangent vector $v\in T_pM$, the differential is defined by 
+
+$$
+dx^\mu_p(v)=v[x^\mu].
+$$
+
+ Now take 
+
+$$
+v=\left.\frac{\partial}{\partial x^\nu}\right|_p.
+$$
+
+ Then 
+
+$$
+\begin{align*}
+ dx^\mu_p\left(\left.\frac{\partial}{\partial x^\nu}\right|_p\right)
+&=\left.\frac{\partial}{\partial x^\nu}\right|_p[x^\mu]\\
+&=\frac{\partial x^\mu}{\partial x^\nu}(p)\\
+&=\delta^\mu_{\nu}.
+\end{align*}
+$$
+
+
+For example, in $\mathbb{R}^2$ with coordinates $(x,y)$, 
+
+$$
+dx\left(\frac{\partial}{\partial x}\right)=1,
+\qquad
+ dx\left(\frac{\partial}{\partial y}\right)=0,
+$$
+
+ 
+
+$$
+dy\left(\frac{\partial}{\partial x}\right)=0,
+\qquad
+ dy\left(\frac{\partial}{\partial y}\right)=1.
+$$
+
+ So $dx$ measures the $x$ component of a tangent vector, and $dy$ measures the $y$ component.
+
+If 
+
+$$
+v=v^x\frac{\partial}{\partial x}+v^y\frac{\partial}{\partial y},
+$$
+
+ then 
+
+$$
+dx(v)=v^x,
+\qquad
+ dy(v)=v^y.
+$$
+
+
+## Differential forms are not defined only for integration
+
+A common first exposure to differential forms is through line integrals such as 
+
+$$
+\int_C P\,dx+Q\,dy.
+$$
+
+ This can make it look like $dx$ and $dy$ are merely integration symbols. That is not the intrinsic definition.
+
+<div className="definition">
+**Definition 9** (Differential $k$-form). A differential $k$-form on $M$ is a smooth rule that assigns to each point $p\in M$ an alternating multilinear map 
+
+$$
+\omega_p:T_pM\times\cdots\times T_pM\to\mathbb{R}
+$$
+
+ with $k$ tangent-vector inputs.
+</div>
+At a single point $p$, the vector space of alternating $k$-linear maps 
+
+$$
+T_pM\times\cdots\times T_pM\to\mathbb{R}
+$$
+
+ is denoted 
+
+$$
+\Lambda^kT_p^*M.
+$$
+
+ As $p$ varies, these spaces assemble into a bundle 
+
+$$
+\Lambda^kT^*M\to M.
+$$
+
+ A smooth $k$-form is a smooth choice 
+
+$$
+p\mapsto \omega_p\in \Lambda^kT_p^*M.
+$$
+
+ We denote the vector space of smooth $k$-forms by 
+
+$$
+\Omega^k(M).
+$$
+
+ Later, after vector bundles are defined formally, we will write the same statement compactly as 
+
+$$
+\Omega^k(M)=\Gamma(\Lambda^kT^*M),
+$$
+
+ where $\Gamma(E)$ means "smooth sections of the bundle $E$." Thus symbols like $\Gamma(\Lambda^kT^*M)$ are not new mysterious objects; they are just the space of differential $k$-forms.
+
+Special cases:
+
+- A $0$-form is a function $f:M\to\mathbb{R}$.
+
+- A $1$-form is a covector field: 
+
+$$
+\alpha_p:T_pM\to\mathbb{R}.
+$$
+
+
+- A $2$-form is an antisymmetric bilinear map: 
+
+$$
+\omega_p:T_pM\times T_pM\to\mathbb{R}.
+$$
+
+
+- A $k$-form eats $k$ tangent vectors and returns a number.
+
+Only after we define forms as geometric objects do we integrate them over curves, surfaces, and manifolds.
+
+## One-forms
+
+A one-form on $M$ is written locally as 
+
+$$
+\alpha=\alpha_\mu(x)\,dx^\mu.
+$$
+
+ At each point $p$, it eats a tangent vector 
+
+$$
+v=v^\mu \frac{\partial}{\partial x^\mu}
+$$
+
+ and gives 
+
+$$
+\alpha_p(v)=\alpha_\mu(p)v^\mu.
+$$
+
+
+Examples in physics:
+
+- Electromagnetic potential: 
+
+$$
+A=A_\mu dx^\mu.
+$$
+
+
+- Berry connection: 
+
+$$
+\mathcal A=\mathcal A_i dk^i.
+$$
+
+
+- Gradient of a function: 
+
+$$
+df=\frac{\partial f}{\partial x^\mu}dx^\mu.
+$$
+
+
+## Two-forms and the wedge product
+
+A two-form is locally written 
+
+$$
+\omega=\frac12\omega_{\mu\nu}\,dx^\mu\wedge dx^\nu,
+$$
+
+ where 
+
+$$
+\omega_{\mu\nu}=-\omega_{\nu\mu}.
+$$
+
+ The wedge product is antisymmetric: 
+
+$$
+dx^\mu\wedge dx^\nu=-dx^\nu\wedge dx^\mu.
+$$
+
+ In particular, 
+
+$$
+dx^\mu\wedge dx^\mu=0.
+$$
+
+ If $\alpha$ is a $p$-form and $\beta$ is a $q$-form, then 
+
+$$
+\alpha\wedge\beta=(-1)^{pq}\beta\wedge\alpha.
+$$
+
+
+## Exterior derivative
+
+The exterior derivative 
+
+$$
+d:\Omega^k(M)\to\Omega^{k+1}(M)
+$$
+
+ raises the degree of a form by one.
+
+For a function $f$, 
+
+$$
+df=\frac{\partial f}{\partial x^\mu}dx^\mu.
+$$
+
+ For a one-form $\alpha=\alpha_\mu dx^\mu$, 
+
+$$
+d\alpha=\frac{\partial \alpha_\nu}{\partial x^\mu}dx^\mu\wedge dx^\nu
+=\frac12(\partial_\mu\alpha_\nu-\partial_\nu\alpha_\mu)dx^\mu\wedge dx^\nu.
+$$
+
+ The most important identity is 
+
+$$
+d^2=0.
+$$
+
+ In electromagnetism, if 
+
+$$
+A=A_\mu dx^\mu,
+$$
+
+ then the field strength is 
+
+$$
+F=dA.
+$$
+
+ In components, 
+
+$$
+F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu.
+$$
+
+
+## Integration of forms
+
+Forms are not defined only by integration, but forms are exactly the objects that can be integrated naturally.
+
+### Integrating a one-form over a curve
+
+Let $\gamma:[0,1]\to M$ be a curve. Let 
+
+$$
+\alpha=P(x,y)dx+Q(x,y)dy
+$$
+
+ on $\mathbb{R}^2$. The integral over $\gamma(t)=(x(t),y(t))$ is 
+
+$$
+\int_\gamma \alpha=\int_0^1 \alpha_{\gamma(t)}(\dot\gamma(t))\,dt.
+$$
+
+ Since 
+
+$$
+\dot\gamma(t)=\dot x(t)\frac{\partial}{\partial x}+\dot y(t)\frac{\partial}{\partial y},
+$$
+
+ we get 
+
+$$
+\alpha_{\gamma(t)}(\dot\gamma(t))=P(x(t),y(t))\dot x(t)+Q(x(t),y(t))\dot y(t).
+$$
+
+ So 
+
+$$
+\int_\gamma \alpha
+=\int_0^1\left[P(x(t),y(t))\dot x(t)+Q(x(t),y(t))\dot y(t)\right]dt.
+$$
+
+ This is the familiar line integral.
+
+### The general definition of integrating a form
+
+The sentence "a $k$-form can be integrated over a $k$-dimensional object" is not meant to be automatic from the fact that a form is a multilinear dual object. One still has to define the operation of integration. The definition uses three ingredients:
+
+1.  an orientation, which tells us what counts as a positive coordinate volume element;
+
+2.  pullback, which moves the form to a parameter domain in Euclidean space;
+
+3.  the ordinary multiple integral of a function against $du^1\cdots du^k$.
+
+First consider one parametrized $k$-dimensional piece. Let 
+
+$$
+\sigma:U\subset \mathbb{R}^k\to M
+$$
+
+ be a smooth parametrization, and let $\omega\in\Omega^k(M)$. Pull back $\omega$ to $U$: 
+
+$$
+\sigma^*\omega\in\Omega^k(U).
+$$
+
+ Since $U\subset\mathbb{R}^k$ has coordinates $(u^1,\ldots,u^k)$, every $k$-form on $U$ has the form 
+
+$$
+\sigma^*\omega=f(u^1,\ldots,u^k)\,du^1\wedge\cdots\wedge du^k.
+$$
+
+ Then the integral over the parametrized piece is defined by 
+
+$$
+\boxed{
+\int_\sigma \omega
+:=
+\int_U f(u^1,\ldots,u^k)\,du^1\cdots du^k.
+}
+$$
+
+ Thus the wedge product is not itself the same thing as the measure $du^1\cdots du^k$; rather, once a top-degree form is written as a coefficient times the oriented coordinate form, we integrate the coefficient by ordinary calculus.
+
+For an oriented $k$-dimensional manifold $N$ and a smooth map 
+
+$$
+F:N\to M,
+$$
+
+ one defines 
+
+$$
+\int_N F^*\omega
+$$
+
+ by choosing oriented charts on $N$ and using a partition of unity. More explicitly, if $\{(V_\alpha,\varphi_\alpha)\}$ is an oriented atlas for $N$ and $\{\rho_\alpha\}$ is a smooth partition of unity subordinate to the cover $\{V_\alpha\}$, then 
+
+$$
+\boxed{
+\int_N F^*\omega
+=
+\sum_\alpha
+\int_{\varphi_\alpha(V_\alpha)}
+(\varphi_\alpha^{-1})^*(\rho_\alpha F^*\omega).
+}
+$$
+
+ Each summand is an ordinary integral of a function on an open subset of $\mathbb{R}^k$. This definition is independent of the oriented atlas and partition of unity. The independence is exactly the change-of-variables theorem from multivariable calculus.
+
+If $N$ is noncompact, the integral is automatically defined for compactly supported forms. For forms without compact support, convergence must be checked. In most physics examples here, the domain is compact, such as $S^1$, $S^2$, or the Brillouin torus $T^2$, or the form has suitable decay.
+
+<div className="mainbox">
+What integration of forms really means A differential form is first an alternating multilinear object on tangent vectors. To integrate it, we pull it back to a parameter domain, rewrite it as a coefficient times the standard oriented volume form, and then integrate that coefficient by ordinary calculus.
+</div>
+### Integrating a two-form over a surface
+
+Let $\Sigma$ be a two-dimensional surface with local parameters $(u,v)$. A two-form can be integrated over $\Sigma$ by pulling it back to the $(u,v)$ parameter domain and integrating the coefficient of $du\wedge dv$.
+
+This is the conceptual reason pullback matters: it converts forms on the target space into forms on the parameter space where we know how to integrate.
+
+## Pullback
+
+Let 
+
+$$
+f:M\to N
+$$
+
+ be a smooth map. Pullback takes differential forms on $N$ and produces differential forms on $M$: 
+
+$$
+f^*:\Omega^k(N)\to\Omega^k(M).
+$$
+
+ For a function $h:N\to\mathbb{R}$, 
+
+$$
+f^*h=h\circ f.
+$$
+
+ For a one-form, use the rule 
+
+$$
+f^*(dy^i)=d(f^i)=\frac{\partial f^i}{\partial x^a}dx^a.
+$$
+
+ Thus, if 
+
+$$
+\alpha=\alpha_i(y)dy^i
+$$
+
+ on $N$, then 
+
+$$
+f^*\alpha=\alpha_i(f(x))\frac{\partial f^i}{\partial x^a}dx^a.
+$$
+
+
+<div className="checkpointbox">
+Checkpoint: pullback in one line If a map is given by $y^i=f^i(x)$, then replace every $y^i$ by $f^i(x)$ and every $dy^i$ by $d(f^i(x))$.
+</div>
+Pullback respects the two main operations: 
+
+$$
+f^*(\alpha\wedge\beta)=f^*\alpha\wedge f^*\beta,
+$$
+
+ 
+
+$$
+f^*(d\alpha)=d(f^*\alpha).
+$$
+
+
+# Flows, Pullbacks, Pushforwards, and Lie Derivatives
+
+Lie derivatives combine three earlier ideas: vector fields, flows, and pullback/pushforward. We first give the precise definitions and then allow ourselves the standard shorthand.
+
+## Flows of vector fields
+
+Let $X\in\Gamma(TM)$ be a smooth vector field. A flow is a family of maps that moves points according to $X$.
+
+<div className="definition">
+**Definition 10** (Local flow). A local flow of $X$ is a smooth map 
+
+$$
+\Phi:D\subset \mathbb{R}\times M\to M,
+\qquad
+(t,p)\mapsto \Phi_t(p),
+$$
+
+ where $D$ is an open set containing $\{0\}\times M$, such that 
+
+$$
+\Phi_0(p)=p
+$$
+
+ and, for every fixed $p$, the curve 
+
+$$
+\gamma_p(t):=\Phi_t(p)
+$$
+
+ satisfies 
+
+$$
+\dot\gamma_p(t)=X_{\gamma_p(t)}.
+$$
+
+ Using the rigorous velocity definition from the previous section, this condition means 
+
+$$
+(\gamma_p)_{*t}\left(\left.\frac{d}{dt}\right|_t\right)
+=
+X_{\gamma_p(t)}.
+$$
+
+ Equivalently, for every $f\in C^\infty(M)$, 
+
+$$
+\left.\frac{d}{dt}\right|_{t=t_0} f(\Phi_t(p))
+=
+X_{\Phi_{t_0}(p)}[f].
+$$
+
+
+</div>
+For small enough $t$, $\Phi_t$ is a diffeomorphism onto its image. Where both sides are defined, 
+
+$$
+\Phi_{t+s}=\Phi_t\circ\Phi_s,
+\qquad
+\Phi_0=\mathrm{id}_M.
+$$
+
+ If the flow exists for all $t\in\mathbb{R}$ and all $p\in M$, the vector field is called complete. Compact manifolds often make vector fields complete, but compactness is not part of the definition.
+
+In local coordinates, 
+
+$$
+X=X^\mu(x)\partial_\mu,
+$$
+
+ the flow equation becomes the ordinary differential equation 
+
+$$
+\frac{d x^\mu(t)}{dt}=X^\mu(x(t)),
+\qquad
+x^\mu(0)=x^\mu(p).
+$$
+
+ This coordinate ODE is a representation of the intrinsic equation $\dot\gamma_p(t)=X_{\gamma_p(t)}$.
+
+Conversely, a one-parameter family of local diffeomorphisms $\Phi_t$ satisfying $\Phi_0=\mathrm{id}_M$ defines a vector field by 
+
+$$
+X_p=
+\left.\frac{d}{dt}\right|_{t=0}\Phi_t(p)
+:=
+(c_p)_{*0}\left(\left.\frac{d}{dt}\right|_{0}\right),
+$$
+
+ where $c_p(t)=\Phi_t(p)$. Thus the slogan "differentiate the flow to get the vector field" means "push forward the canonical tangent vector $d/dt$ along the trajectory curve."
+
+## Pullback and pushforward under diffeomorphisms
+
+A diffeomorphism 
+
+$$
+\phi:M\to M
+$$
+
+ acts on functions by pullback: 
+
+$$
+(\phi^*f)(p)=f(\phi(p)).
+$$
+
+ It acts on tangent vectors by pushforward: 
+
+$$
+\phi_{*p}:T_pM\to T_{\phi(p)}M.
+$$
+
+ For a one-form $\alpha$, the pullback is defined by 
+
+$$
+(\phi^*\alpha)_p(v)=\alpha_{\phi(p)}(\phi_{*p}v),
+\qquad
+v\in T_pM.
+$$
+
+ For a $k$-form $\omega$, 
+
+$$
+(\phi^*\omega)_p(v_1,\ldots,v_k)
+=
+\omega_{\phi(p)}(\phi_{*p}v_1,\ldots,\phi_{*p}v_k).
+$$
+
+
+A vector field can also be pulled back by a diffeomorphism, but one must use the inverse pushforward: 
+
+$$
+(\phi^*Y)_p
+=
+(\phi^{-1})_{*\phi(p)}\bigl(Y_{\phi(p)}\bigr)
+\in T_pM.
+$$
+
+ Equivalently, 
+
+$$
+(\phi^*Y)(f)=\phi^*\left(Y\bigl((\phi^{-1})^*f\bigr)\right).
+$$
+
+ This formula is often the most useful one in proofs.
+
+<div className="mainbox">
+Why pullback for forms but inverse pushforward for vector fields A one-form at $\phi(p)$ can eat the pushed-forward vector $\phi_*v$. Hence forms pull back directly. A vector field value $Y_{\phi(p)}$ lives at $\phi(p)$, but a pulled-back vector field at $p$ must live in $T_pM$, so we use $(\phi^{-1})_*$. This is why vector-field pullback requires $\phi$ to be a diffeomorphism.
+</div>
+## Tensor fields and notation
+
+A type $(r,s)$ tensor at $p$ is an element of 
+
+$$
+(T_pM)^{\otimes r}\otimes (T_p^*M)^{\otimes s}.
+$$
+
+ A smooth tensor field is a smooth assignment of such a tensor to every point. Examples are: 
+
+$$
+\text{functions }(0,0),
+\quad
+\text{vector fields }(1,0),
+\quad
+\text{one-forms }(0,1),
+\quad
+\text{metrics }(0,2).
+$$
+
+ A differential $k$-form is an antisymmetric type $(0,k)$ tensor field. After vector bundles are introduced, we write 
+
+$$
+\Omega^k(M):=\Gamma(\Lambda^kT^*M)
+$$
+
+ for the space of smooth $k$-forms.
+
+## General definition of the Lie derivative
+
+Let $X$ be a vector field with local flow $\Phi_t$. If $T$ is an ordinary tensor field on $M$, define 
+
+$$
+\boxed{
+\mathcal{L}_XT=
+\left.\frac{d}{dt}\right|_{t=0}\Phi_t^*T.
+}
+$$
+
+ For forms this uses the usual pullback. For vector fields and mixed tensors, $\Phi_t^*$ uses inverse pushforwards in the vector slots, as above.
+
+The Lie derivative is canonical: it uses only the smooth structure and the vector field $X$. It does not use a metric or a connection.
+
+## Functions
+
+For $f\in C^\infty(M)$, 
+
+$$
+\mathcal{L}_Xf
+=
+\left.\frac{d}{dt}\right|_{0} f(\Phi_t(p))
+=
+X_p[f].
+$$
+
+ In coordinates, 
+
+$$
+\mathcal{L}_X f=X^\mu\partial_\mu f.
+$$
+
+
+## Vector fields and the Lie bracket
+
+For a vector field $Y$, 
+
+$$
+(\Phi_t^*Y)_p=(\Phi_{-t})_{*\Phi_t(p)}Y_{\Phi_t(p)}.
+$$
+
+ The Lie derivative is 
+
+$$
+\mathcal{L}_XY=
+\left.\frac{d}{dt}\right|_{0}\Phi_t^*Y.
+$$
+
+ We now derive the standard formula 
+
+$$
+\boxed{\mathcal{L}_XY=[X,Y].}
+$$
+
+
+Let $f\in C^\infty(M)$. Using the function-action formula for pullback of a vector field, 
+
+$$
+(\Phi_t^*Y)(f)
+=
+\Phi_t^*\left(Y(\Phi_{-t}^*f)\right).
+$$
+
+ Differentiate at $t=0$: 
+
+$$
+\begin{align*}
+(\mathcal{L}_XY)(f)
+&=\left.\frac{d}{dt}\right|_{0}
+\Phi_t^*\left(Y(\Phi_{-t}^*f)\right)\\
+&=X[Y(f)] + Y\left(\left.\frac{d}{dt}\right|_0 \Phi_{-t}^*f\right)\\
+&=X[Y(f)]-Y[X(f)].
+\end{align*}
+$$
+
+ Therefore 
+
+$$
+\mathcal{L}_XY=[X,Y],
+\qquad
+[X,Y](f):=X(Y(f))-Y(X(f)).
+$$
+
+ In local coordinates, 
+
+$$
+[X,Y]
+=
+\left(X^\nu\partial_\nu Y^\mu-Y^\nu\partial_\nu X^\mu\right)\partial_\mu.
+$$
+
+
+<div className="mainbox">
+Geometric meaning of $[X,Y]$ The bracket measures the infinitesimal failure of the two flows to commute. In local coordinates, move a small time $\epsilon$ first along $X$ and then along $Y$: 
+
+$$
+x^\mu\mapsto x^\mu+
+\epsilon X^\mu+
+\epsilon Y^\mu+
+\epsilon^2 X^\nu\partial_\nu Y^\mu+O(\epsilon^3).
+$$
+
+ Moving first along $Y$ and then along $X$ gives 
+
+$$
+x^\mu\mapsto x^\mu+
+\epsilon Y^\mu+
+\epsilon X^\mu+
+\epsilon^2 Y^\nu\partial_\nu X^\mu+O(\epsilon^3).
+$$
+
+ The endpoint difference is 
+
+$$
+\epsilon^2\left(X^\nu\partial_\nu Y^\mu-Y^\nu\partial_\nu X^\mu\right)+O(\epsilon^3),
+$$
+
+ which is $\epsilon^2[X,Y]^\mu+O(\epsilon^3)$. Thus the bracket is an area-order, not length-order, measure of noncommutativity.
+</div>
+## Differential forms and Cartan's formula
+
+For a $k$-form $\omega$, 
+
+$$
+\mathcal{L}_X\omega=
+\left.\frac{d}{dt}\right|_{0}\Phi_t^*\omega.
+$$
+
+ The interior product $\iota_X\omega$ is the $(k-1)$-form obtained by inserting $X$ into the first slot: 
+
+$$
+(\iota_X\omega)(Y_1,\ldots,Y_{k-1})
+=
+\omega(X,Y_1,\ldots,Y_{k-1}).
+$$
+
+
+<div className="theorem">
+**Theorem 1** (Cartan formula). For every differential form $\omega$, 
+
+$$
+\boxed{\mathcal{L}_X\omega=\iota_X d\omega+d(\iota_X\omega).}
+$$
+
+
+</div>
+<div className="proof">
+*Derivation.* Both sides are derivations of degree zero on the exterior algebra of forms and obey the same product rule with respect to the wedge product. Therefore it is enough to check functions and one-forms.
+
+If $f$ is a function, then $\iota_X f=0$, so 
+
+$$
+\iota_Xdf+d(\iota_Xf)=df(X)=X[f]=\mathcal{L}_Xf.
+$$
+
+ Now let $\alpha$ be a one-form and let $Y$ be a vector field. From the definition of Lie derivative and the fact that vector fields pull back by inverse pushforward, one obtains 
+
+$$
+(\mathcal{L}_X\alpha)(Y)=X[\alpha(Y)]-\alpha([X,Y]).
+$$
+
+ On the other hand, 
+
+$$
+\begin{align*}
+(\iota_Xd\alpha+d(\iota_X\alpha))(Y)
+&=d\alpha(X,Y)+Y[\alpha(X)]\\
+&=X[\alpha(Y)]-Y[\alpha(X)]-\alpha([X,Y])+Y[\alpha(X)]\\
+&=X[\alpha(Y)]-\alpha([X,Y]).
+\end{align*}
+$$
+
+ Thus the two sides agree on one-forms. Since both sides are compatible with wedge products, they agree on all forms. ◻
+</div>
+For a one-form $\alpha=\alpha_\mu dx^\mu$, 
+
+$$
+(\mathcal{L}_X\alpha)_\mu
+=
+X^\nu\partial_\nu\alpha_\mu+
+\alpha_\nu\partial_\mu X^\nu.
+$$
+
+ For a coordinate one-form, 
+
+$$
+\mathcal{L}_X(dx^\mu)=d(X^\mu).
+$$
+
+
+## What the Lie derivative is not
+
+The Lie derivative is a canonical operation on ordinary tensor fields on $M$. It is not automatically defined for a section of an arbitrary vector bundle $E\to M$. To Lie-differentiate such a section, the flow of $X$ on $M$ must be lifted to a flow on $E$, which is extra structure. A connection, introduced later, is the standard tool for differentiating sections of arbitrary vector bundles.

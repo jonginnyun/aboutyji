@@ -1,7 +1,7 @@
 ---
 title: "Principal Bundles and Connections"
 date: 2026-06-22
-updated: 2026-06-22
+updated: 2026-06-26
 lang: en
 slug: mathematics/fiber-bundles/principal-bundles-and-connections
 category: Mathematics
@@ -17,73 +17,1324 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Principal Bundles
+# Principal Bundles and Associated Vector Bundles
 
-A principal $G$-bundle is a fiber bundle
-$$
-\pi:P\to B
-$$
-whose fibers look like the group $G$ itself, with a free and transitive right action of $G$ on each fiber.
+Vector bundles are enough for tangent bundles, cotangent bundles, and Bloch bundles. Gauge theory is cleaner if one first separates the bundle of gauge frames from the vector spaces on which matter fields live. This separation is the point of principal bundles and associated vector bundles.
 
-The important point is that a principal bundle stores frames or gauges rather than vectors. Once a representation
+## Principal bundles
+
+Let $G$ be a topological group or Lie group. A principal $G$-bundle is a fiber bundle whose fiber is $G$ itself, but with one crucial extra structure: $G$ acts on the fiber in a way compatible with all local product descriptions.
+
+<div className="definition">
+**Definition 22** (Principal $G$-bundle). A principal $G$-bundle over $M$ consists of a fiber bundle 
+
 $$
-\rho:G\to GL(V)
-$$
-is chosen, one can build an associated vector bundle
-$$
-P\times_G V.
+\pi:P\to M
 $$
 
-This construction explains why principal bundles are often the natural home for gauge theory: the principal bundle contains the gauge freedom, while associated bundles contain matter fields or vector-valued fields.
+ together with a continuous, or smooth in the smooth category, right action 
 
-## Why a Connection Is Needed
-
-In a product bundle, one can compare nearby fibers by using the product structure. In a general bundle, there is no canonical comparison.
-
-A connection supplies a rule for horizontal motion in the total space. It tells us how to lift a tangent vector on the base into a horizontal tangent vector upstairs. Equivalently, it gives a notion of parallel transport.
-
-Locally, a connection on a principal bundle is represented by a Lie-algebra-valued one-form
 $$
-A\in \Omega^1(U,\mathfrak g).
+P\times G\to P,
+\qquad
+(p,g)\mapsto p\cdot g,
 $$
 
-In physics language, this local object is the gauge potential.
+ such that:
 
-## Gauge Transformation Law
+1.  the action preserves fibers: 
 
-If the local section or gauge is changed by a map
 $$
-g:U\to G,
-$$
-then the local connection form transforms as
-$$
-A\mapsto g^{-1}Ag+g^{-1}dg.
+\pi(p\cdot g)=\pi(p),
 $$
 
-The inhomogeneous term $g^{-1}dg$ is the key signature that $A$ is not an ordinary tensor field. It is a local expression of a geometric rule for comparing fibers.
 
-## Curvature
+2.  the action is free: if $p\cdot g=p$, then $g=e$,
 
-The curvature of a connection is the Lie-algebra-valued two-form
-$$
-F=dA+A\wedge A.
-$$
+3.  the action is transitive on each fiber: if $p,q\in P_x:=\pi^{-1}(x)$, then there is a unique $g\in G$ such that $q=p\cdot g$,
 
-For an abelian group such as $U(1)$, this reduces to
+4.  there exists an open cover $\{U_i\}$ of $M$ and local trivializations 
+
 $$
-F=dA.
+\phi_i:\pi^{-1}(U_i)\to U_i\times G
 $$
 
-Curvature measures the failure of parallel transport to be path independent. Infinitesimally, it records the holonomy around small loops. Globally, curvature can carry topological information when integrated over cycles.
+ which are compatible with the right action in the following precise sense. If 
 
-## The Physical Dictionary
+$$
+\phi_i(p)=(x,h),
+$$
 
-The bundle language organizes several familiar statements:
+ then 
 
-- a vector field is a section of $TM$;
-- a one-form is a section of $T^*M$;
-- a gauge field is a local expression of a connection;
-- field strength is curvature;
-- Berry curvature is curvature of the Bloch or eigenstate bundle.
+$$
+\boxed{\phi_i(p\cdot g)=(x,hg).}
+$$
 
-The notation may look abstract at first, but it is designed to separate intrinsic geometry from the local coordinates and gauges used to compute it.
+
+</div>
+The last condition is often summarized by saying that the trivializations are $G$-equivariant. Written out explicitly, the local model is 
+
+$$
+((x,h),g)\mapsto (x,hg).
+$$
+
+ The base point $x$ is not moved. Only the group coordinate in the fiber is multiplied on the right.
+
+<div className="mainbox">
+Physical interpretation A principal bundle is a bundle of local gauge frames. A point $p\in P_x$ is a choice of frame at the base point $x$. Right multiplication $p\mapsto p\cdot g$ changes the frame at the same base point. It is a vertical operation: it does not move $x$.
+</div>
+## Local sections and transition functions
+
+A local section 
+
+$$
+s_i:U_i\to P
+$$
+
+ of a principal bundle is a local choice of gauge frame. Given a $G$-equivariant trivialization $\phi_i$, the corresponding section is 
+
+$$
+s_i(x)=\phi_i^{-1}(x,e).
+$$
+
+ Every point $p\in P_x$ over $x\in U_i$ can be uniquely written as 
+
+$$
+p=s_i(x)\cdot h
+$$
+
+ for a unique $h\in G$.
+
+On an overlap $U_i\cap U_j$, two local sections are related by a unique smooth map 
+
+$$
+g_{ij}:U_i\cap U_j\to G
+$$
+
+ such that 
+
+$$
+\boxed{s_j(x)=s_i(x)\cdot g_{ij}(x).}
+$$
+
+ These $g_{ij}$ are the transition functions of the principal bundle. In terms of local trivializations, if 
+
+$$
+\phi_j(p)=(x,h),
+$$
+
+ then 
+
+$$
+p=s_j(x)\cdot h=s_i(x)\cdot g_{ij}(x)h,
+$$
+
+ so 
+
+$$
+\boxed{
+(\phi_i\circ\phi_j^{-1})(x,h)=(x,g_{ij}(x)h).
+}
+$$
+
+ On triple overlaps, consistency gives the cocycle condition 
+
+$$
+\boxed{g_{ij}(x)g_{jk}(x)=g_{ik}(x).}
+$$
+
+ This is the principal-bundle version of patch-gluing consistency.
+
+## Associated vector bundles
+
+Matter fields usually transform in a representation of the gauge group. The principal bundle contains the gauge frames; a representation tells us what vector space a matter field lives in.
+
+Let $P\to M$ be a principal $G$-bundle and let 
+
+$$
+\rho:G\to \mathop{\mathrm{GL}}(V)
+$$
+
+ be a representation of $G$ on a real or complex vector space $V$.
+
+<div className="definition">
+**Definition 23** (Associated vector bundle). The associated vector bundle with fiber $V$ is the quotient space 
+
+$$
+E:=P\times_G V:=(P\times V)/\sim,
+$$
+
+ where 
+
+$$
+(p,v)\sim(p\cdot g,\rho(g^{-1})v)
+$$
+
+ for every $g\in G$. The equivalence class of $(p,v)$ is denoted 
+
+$$
+[p,v].
+$$
+
+ The projection is 
+
+$$
+\pi_E:E\to M,
+\qquad
+\pi_E([p,v])=\pi_P(p).
+$$
+
+
+</div>
+The word quotient means that we start with all pairs $(p,v)$ and then declare pairs related by the above rule to represent the same point of $E$. The inverse in $\rho(g^{-1})$ is not decorative: it ensures that changing the frame and transforming the coordinate vector in the opposite way leaves the actual geometric vector unchanged.
+
+Choose a local section $s_i:U_i\to P$. Then every element of $E_x$ for $x\in U_i$ can be written as 
+
+$$
+[s_i(x),v_i]
+$$
+
+ for a unique $v_i\in V$. If $s_j=s_i\cdot g_{ij}$, then 
+
+$$
+[s_j(x),v_j]
+=
+[s_i(x)\cdot g_{ij}(x),v_j]
+=
+[s_i(x),\rho(g_{ij}(x))v_j].
+$$
+
+ Thus local component vectors obey 
+
+$$
+\boxed{v_i=\rho(g_{ij})v_j.}
+$$
+
+ This is exactly the vector-bundle transition rule.
+
+<div className="examplebox">
+Physics examples
+
+- If spacetime is $M$ and $P\to M$ is a principal $U(1)$-bundle, a charge-$q$ complex scalar field is a section of the associated line bundle with representation 
+
+$$
+\rho(e^{i\alpha})=e^{iq\alpha}.
+$$
+
+ Locally it is a complex function $\psi_i(x)$, and on overlaps 
+
+$$
+\psi_i=e^{iq\alpha_{ij}}\psi_j.
+$$
+
+
+- If $P\to M$ is a principal $SU(N)$-bundle and $V=\mathbb{C}^N$ is the fundamental representation, a fundamental matter field is a section of 
+
+$$
+P\times_{SU(N)}\mathbb{C}^N.
+$$
+
+
+- The adjoint bundle 
+
+$$
+\operatorname{Ad}(P):=P\times_G\mathfrak g,
+$$
+
+ where $G$ acts on $\mathfrak g$ by $\mathop{\mathrm{Ad}}$, is where non-Abelian field strengths naturally live.
+
+- Spinor fields are sections of vector bundles associated to a principal $\mathrm{Spin}(n)$-bundle through a spinor representation.
+</div>
+<div className="mainbox">
+Matter fields as sections In physics language, a matter field is not fundamentally a function $M\to V$. It is a section of an associated vector bundle. It becomes a $V$-valued function only after choosing a local gauge frame.
+</div>
+# Connections: Why Gauge Fields Exist
+
+The central problem is simple but fundamental. A section of a vector bundle assigns a vector to each point, but those vectors live in different vector spaces. If $s\in\Gamma(E)$ and $p,q\in M$, then 
+
+$$
+s(p)\in E_p,
+\qquad
+s(q)\in E_q.
+$$
+
+ Unless the bundle has been trivialized, the expression 
+
+$$
+s(q)-s(p)
+$$
+
+ is not defined: it tries to subtract vectors in different vector spaces. A connection is the extra structure that makes differentiation of sections meaningful.
+
+## The conceptual move
+
+In ordinary calculus, one defines a derivative by subtracting nearby values and taking a limit. For a vector bundle this is not legal until one has a way to compare nearby fibers. One could try to define parallel transport first and then define differentiation, but parallel transport itself needs a rule for what it means to remain parallel. The clean mathematical solution is to define the differentiating machine directly.
+
+<div className="mainbox">
+Connection in one sentence A connection is an operator $\nabla$ that differentiates sections and satisfies the product rule one expects from differentiation.
+</div>
+This is not a trick. Once $\nabla$ is specified, it produces covariant derivatives, parallel transport, curvature, and holonomy. In a local frame it becomes the familiar expression 
+
+$$
+\nabla=d+A,
+$$
+
+ where $A$ is the gauge potential or connection one-form.
+
+## $E$-valued one-forms
+
+Before defining a connection, decode the target space of $\nabla$.
+
+Let $E\to M$ be a vector bundle. The tensor product bundle 
+
+$$
+T^*M\otimes E\to M
+$$
+
+ has fiber 
+
+$$
+(T^*M\otimes E)_p=T_p^*M\otimes E_p.
+$$
+
+ A section 
+
+$$
+\eta\in\Gamma(T^*M\otimes E)
+$$
+
+ is called an $E$-valued one-form. At each $p$, it is equivalently a linear map 
+
+$$
+\eta_p:T_pM\to E_p.
+$$
+
+ If locally 
+
+$$
+\eta=\alpha\otimes s,
+$$
+
+ where $\alpha$ is an ordinary one-form and $s$ is a section of $E$, then 
+
+$$
+\eta(X)=\alpha(X)s.
+$$
+
+ For a sum of such terms, extend linearly.
+
+Thus if $\nabla s\in\Gamma(T^*M\otimes E)$, then feeding in a vector field $X$ gives a section of $E$: 
+
+$$
+(\nabla s)(X)\in\Gamma(E).
+$$
+
+ We write 
+
+$$
+\nabla_Xs:=(\nabla s)(X).
+$$
+
+ This is also denoted $\iota_X(\nabla s)$, meaning insertion of $X$ into the one-form slot.
+
+<div className="warningbox">
+What $df\otimes s$ means In the Leibniz rule below, $df\otimes s$ is not saying that $s$ is a one-form. It is an $E$-valued one-form: 
+
+$$
+(df\otimes s)(X)=df(X)s=X[f]s.
+$$
+
+ Therefore $df\otimes s$ and $f\nabla s$ have the same type: both are sections of $T^*M\otimes E$.
+</div>
+## Connection on a vector bundle: formal definition
+
+<div className="definition">
+**Definition 24** (Connection on a vector bundle). A connection on a vector bundle $E\to M$ is an $\mathbb{R}$-linear map 
+
+$$
+\nabla:\Gamma(E)\to\Gamma(T^*M\otimes E)
+$$
+
+ satisfying the Leibniz rule 
+
+$$
+\boxed{\nabla(fs)=df\otimes s+f\nabla s}
+$$
+
+ for every $f\in C^\infty(M)$ and $s\in\Gamma(E)$.
+</div>
+Equivalently, a connection gives a bilinear operation 
+
+$$
+(X,s)\mapsto \nabla_Xs
+$$
+
+ satisfying 
+
+$$
+\nabla_{fX+gY}s=f\nabla_Xs+g\nabla_Ys,
+$$
+
+ 
+
+$$
+\nabla_X(fs)=X[f]s+f\nabla_Xs.
+$$
+
+ The first identity says that $\nabla_Xs$ is tensorial in the direction $X$: if you multiply the direction by a function, the result is multiplied by that function. The second identity says that $\nabla$ differentiates the section slot.
+
+## Local frames and the symbolic formula $\nabla=d+A$
+
+Let $e_1,\ldots,e_r$ be a local frame for $E$ over $U\subset M$. Every section over $U$ can be written uniquely as 
+
+$$
+s=\psi^a e_a,
+$$
+
+ where $\psi^a\in C^\infty(U)$ and repeated fiber indices are summed.
+
+A connection must say how to differentiate the local frame itself. Since $\nabla e_b$ is an $E$-valued one-form, it can be expanded as 
+
+$$
+\nabla e_b=A^a{}_b\otimes e_a,
+$$
+
+ where each $A^a{}_b\in\Omega^1(U)$ is an ordinary one-form. The collection 
+
+$$
+A=(A^a{}_b)
+$$
+
+ is a matrix-valued one-form.
+
+Now apply the Leibniz rule: 
+
+$$
+\begin{align*}
+\nabla s
+&=\nabla(\psi^b e_b)\\
+&=d\psi^b\otimes e_b+\psi^b\nabla e_b\\
+&=d\psi^a\otimes e_a+\psi^b A^a{}_b\otimes e_a\\
+&=\left(d\psi^a+A^a{}_b\psi^b\right)\otimes e_a.
+\end{align*}
+$$
+
+ This is the precise $T^*M\otimes E$-valued formula. Some authors swap the tensor factors and write the same object as 
+
+$$
+e_a\otimes \left(d\psi^a+A^a{}_b\psi^b\right).
+$$
+
+ The meaning is the same after the canonical swap $T^*M\otimes E\cong E\otimes T^*M$.
+
+If we evaluate on a vector field $X$, we get 
+
+$$
+\boxed{
+\nabla_Xs=
+\left(X[\psi^a]+A^a{}_b(X)\psi^b\right)e_a.
+}
+$$
+
+ In matrix notation, if $e$ is the row vector of basis sections and $\psi$ is the column vector of components, 
+
+$$
+s=e\psi,
+\qquad
+\nabla_Xs=e\left(X[\psi]+A(X)\psi\right).
+$$
+
+ The shorthand 
+
+$$
+\boxed{\nabla=d+A}
+$$
+
+ means precisely this local formula after choosing a local frame.
+
+<div className="mainbox">
+Intuition for the correction term The term $d\psi$ differentiates the component functions. The term $A\psi$ records how the chosen local frame changes from point to point. In physics language, $A$ is the gauge field. It is the translation rule telling us how the fiber at a nearby point is tilted relative to the fiber at the present point, as seen in the chosen frame.
+</div>
+## Why connection one-forms are Lie-algebra-valued, and how they act on matter
+
+Suppose the vector bundle $E$ is associated to a principal $G$-bundle: 
+
+$$
+E=P\times_G V,
+$$
+
+ where the action of $G$ on the model fiber $V$ is given by a representation 
+
+$$
+\rho:G\to \mathop{\mathrm{GL}}(V).
+$$
+
+ The principal connection itself is locally represented by a $\mathfrak g$-valued one-form 
+
+$$
+\omega_i\in \Omega^1(U_i;\mathfrak g),
+$$
+
+ where 
+
+$$
+\mathfrak g=T_eG.
+$$
+
+ This means that for a tangent vector $Y\in T_xM$, 
+
+$$
+\omega_i(Y)\in\mathfrak g.
+$$
+
+ At first sight this may look puzzling: an element of $\mathfrak g$ is an infinitesimal group element, while a matter field value lies in $V$. To let $\omega_i(Y)$ act on a vector in $V$, one must use the derivative of the representation.
+
+The representation $\rho:G\to\mathop{\mathrm{GL}}(V)$ is a smooth map between Lie groups. Its differential at the identity is 
+
+$$
+\boxed{
+d\rho_e:T_eG\to T_I\mathop{\mathrm{GL}}(V).
+}
+$$
+
+ By definition, 
+
+$$
+T_eG=\mathfrak g.
+$$
+
+ Also, 
+
+$$
+T_I\mathop{\mathrm{GL}}(V)\cong \mathrm{End}(V).
+$$
+
+ Indeed, $\mathop{\mathrm{GL}}(V)$ is an open subset of the vector space $\mathrm{End}(V)$, because invertibility is the open condition $\det\neq0$ in any basis. Therefore its tangent space at the identity is naturally the full vector space of endomorphisms of $V$. We therefore get the induced Lie-algebra representation 
+
+$$
+\boxed{
+d\rho:\mathfrak g\to\mathrm{End}(V).
+}
+$$
+
+ Concretely, if $X\in\mathfrak g$ is represented by a curve $g(t)$ in $G$ with 
+
+$$
+g(0)=e,
+\qquad
+\dot g(0)=X,
+$$
+
+ then 
+
+$$
+\boxed{
+d\rho(X)=\left.\frac{d}{dt}\right|_{t=0}\rho(g(t)).
+}
+$$
+
+ This derivative is an element of $\mathrm{End}(V)$, so it acts on $v\in V$ by ordinary linear algebra: 
+
+$$
+d\rho(X)v\in V.
+$$
+
+ Equivalently, 
+
+$$
+\left.\frac{d}{dt}\right|_{t=0}\rho(g(t))v=d\rho(X)v.
+$$
+
+
+Thus the associated vector-bundle connection has the local form 
+
+$$
+\nabla_Ys=e\left(Y[\psi]+d\rho(\omega_i(Y))\psi\right),
+$$
+
+ where $e$ is the local frame induced by a local section of $P$, and $\psi$ is the local component vector of $s$. If one writes 
+
+$$
+A_i:=d\rho(\omega_i)\in\Omega^1(U_i;\mathrm{End}(V)),
+$$
+
+ then this becomes the familiar formula 
+
+$$
+\boxed{
+\nabla_Ys=e\left(Y[\psi]+A_i(Y)\psi\right).
+}
+$$
+
+
+In many physics examples the notation suppresses $d\rho$. For instance, in the fundamental representation of $U(N)$ on $\mathbb{C}^N$, an element of 
+
+$$
+\mathfrak u(N)=\{X\in M_N(\mathbb{C}):X^\dagger=-X\}
+$$
+
+ is already an $N\times N$ matrix acting on $\mathbb{C}^N$. In that case $d\rho(X)=X$ in the chosen representation, and one simply writes $A(Y)\psi$. In a different representation, however, the same abstract $\mathfrak g$-valued connection form acts by the corresponding matrix $d\rho(A(Y))$.
+
+<div className="warningbox">
+Do not confuse $G$, $\mathfrak g$, and $\mathrm{End}(V)$ The finite gauge transformation is an element $g\in G$. The infinitesimal connection value is an element $A(Y)\in\mathfrak g$. A matter field vector lies in $V$. The reason $A(Y)$ can multiply a matter vector is that the representation differentiates to 
+
+$$
+d\rho:\mathfrak g\to\mathrm{End}(V).
+$$
+
+ Only after this map has been applied does the Lie-algebra element become a linear operator on the fiber.
+</div>
+## Why ordinary derivatives do not transform correctly
+
+Suppose on an overlap $U_i\cap U_j$ we have two frames related by 
+
+$$
+e^{(j)}=e^{(i)}g_{ij},
+$$
+
+ where $g_{ij}:U_i\cap U_j\to \mathop{\mathrm{GL}}(r,\mathbb{R})$ or $\mathop{\mathrm{GL}}(r,\mathbb{C})$ is an ordinary smooth matrix-valued function. It is not a Grassmann variable. In path-integral physics, a fermion field may be Grassmann-valued, but the gauge transformation matrix $g_{ij}(x)$ is still an ordinary even matrix acting on the field components.
+
+A section has components 
+
+$$
+s=e^{(i)}\psi_i=e^{(j)}\psi_j.
+$$
+
+ Therefore 
+
+$$
+\psi_i=g_{ij}\psi_j.
+$$
+
+ Taking an ordinary derivative gives 
+
+$$
+d\psi_i=(dg_{ij})\psi_j+g_{ij}d\psi_j.
+$$
+
+ The extra term $(dg_{ij})\psi_j$ means that ordinary derivatives of local components do not transform like the components themselves. A connection is designed so that 
+
+$$
+D_i\psi_i=g_{ij}D_j\psi_j.
+$$
+
+
+## Gauge transformation law for a vector-bundle connection
+
+Write the covariant derivative in frame $i$ as 
+
+$$
+D_i=d+A_i
+$$
+
+ and in frame $j$ as 
+
+$$
+D_j=d+A_j.
+$$
+
+ The geometric object $\nabla s$ is globally defined, so its components must transform like the components of $s$: 
+
+$$
+D_i\psi_i=g_{ij}D_j\psi_j.
+$$
+
+ Using $\psi_i=g_{ij}\psi_j$, 
+
+$$
+\begin{align*}
+D_i\psi_i
+&=d(g_{ij}\psi_j)+A_i g_{ij}\psi_j\\
+&=(dg_{ij})\psi_j+g_{ij}d\psi_j+A_i g_{ij}\psi_j.
+\end{align*}
+$$
+
+ The right-hand side is 
+
+$$
+g_{ij}D_j\psi_j=g_{ij}d\psi_j+g_{ij}A_j\psi_j.
+$$
+
+ Canceling $g_{ij}d\psi_j$ and using arbitrary $\psi_j$ gives 
+
+$$
+dg_{ij}+A_i g_{ij}=g_{ij}A_j.
+$$
+
+ Multiplying by $g_{ij}^{-1}$ on the left, 
+
+$$
+\boxed{A_j=g_{ij}^{-1}A_i g_{ij}+g_{ij}^{-1}dg_{ij}.}
+$$
+
+ The term $g_{ij}^{-1}dg_{ij}$ appears because the change of frame depends on position.
+
+<div className="mainbox">
+What the inhomogeneous term means The extra term $g_{ij}^{-1}dg_{ij}$ appears because the change of frame depends on position. If the frame change were constant, ordinary conjugation would be enough. Since the frame itself varies over $M$, differentiating $g_{ij}\psi_j$ produces an additional derivative of $g_{ij}$.
+</div>
+For a $U(1)$ line bundle, with $g_{ij}=e^{i\chi_{ij}}$, 
+
+$$
+g_{ij}^{-1}dg_{ij}=i\,d\chi_{ij}.
+$$
+
+ Depending on whether one uses Hermitian or anti-Hermitian gauge potentials, this becomes the familiar physics formula $A\mapsto A+d\chi$ up to sign and factors of $i$.
+
+## Local gauge transformations versus transition functions
+
+There are two closely related but distinct uses of $G$-valued functions.
+
+First, transition functions 
+
+$$
+g_{ij}:U_i\cap U_j\to G
+$$
+
+ are part of the gluing data of a bundle. They tell us how the frame on patch $U_j$ is compared with the frame on patch $U_i$.
+
+Second, a local gauge transformation is a change of local frame inside the same bundle. On a patch $U_i$, choose 
+
+$$
+h_i:U_i\to G.
+$$
+
+ If the old frame is $e^{(i)}$, the new frame may be written 
+
+$$
+\widetilde e^{(i)}=e^{(i)}h_i.
+$$
+
+ Then local components and gauge potentials change by 
+
+$$
+\widetilde\psi_i=h_i^{-1}\psi_i,
+\qquad
+\widetilde A_i=h_i^{-1}A_i h_i+h_i^{-1}dh_i.
+$$
+
+ On overlaps, the transition functions also change: 
+
+$$
+\widetilde g_{ij}=h_i^{-1}g_{ij}h_j.
+$$
+
+ Thus a gauge transformation is not literally the same thing as a transition function. Rather, both are $G$-valued functions describing changes of local frame. In QFT on flat spacetime $\mathbb{R}^d$, one often assumes the bundle is trivial and uses one global patch; then a gauge transformation is just a smooth map 
+
+$$
+h:M\to G.
+$$
+
+ On a nontrivial bundle there may be no global frame, so the same idea is described by compatible local functions $h_i:U_i\to G$.
+
+<div className="mainbox">
+Local does not mean non-geometric The local gauge potential $A_i$ is defined only after choosing a local trivialization. On a nontrivial bundle, one generally cannot choose a single $A$ on all of $M$. The global object is the connection; the local objects $A_i$ are its coordinate descriptions, related by gauge transformation laws on overlaps.
+</div>
+## Connection on the tangent bundle and Christoffel symbols
+
+A connection on $TM$ differentiates vector fields: 
+
+$$
+\nabla_XY\in\Gamma(TM).
+$$
+
+ Here $X$ is the direction of differentiation and $Y$ is the vector field being differentiated.
+
+Choose coordinates $x^1,\ldots,x^n$ on $U\subset M$. The coordinate vector fields 
+
+$$
+\partial_1,\ldots,\partial_n,
+\qquad
+\partial_\mu:=\frac{\partial}{\partial x^\mu},
+$$
+
+ form a local frame for $TM$. Since $\nabla_{\partial_\mu}\partial_\nu$ is again a vector field, it can be expanded in this frame: 
+
+$$
+\boxed{
+\nabla_{\partial_\mu}\partial_\nu
+=
+\Gamma^\lambda{}_{\mu\nu}\partial_\lambda.
+}
+$$
+
+ The coefficients $\Gamma^\lambda{}_{\mu\nu}$ are the Christoffel symbols, or connection coefficients, of this connection in this coordinate frame.
+
+This equation should be read exactly like the vector-bundle formula $\nabla e_b=A^a{}_b\otimes e_a$. For $TM$, the local frame is $e_\nu=\partial_\nu$, and 
+
+$$
+(A_\mu)^\lambda{}_{\nu}=\Gamma^\lambda{}_{\mu\nu}.
+$$
+
+
+If 
+
+$$
+Y=Y^\nu\partial_\nu,
+$$
+
+ then 
+
+$$
+\begin{align*}
+\nabla_{\partial_\mu}Y
+&=\nabla_{\partial_\mu}(Y^\nu\partial_\nu)\\
+&=(\partial_\mu Y^\nu)\partial_\nu+Y^\nu\nabla_{\partial_\mu}\partial_\nu\\
+&=(\partial_\mu Y^\lambda+\Gamma^\lambda{}_{\mu\nu}Y^\nu)\partial_\lambda.
+\end{align*}
+$$
+
+ Therefore 
+
+$$
+\boxed{(\nabla_\mu Y)^\lambda=\partial_\mu Y^\lambda+\Gamma^\lambda{}_{\mu\nu}Y^\nu.}
+$$
+
+
+<div className="warningbox">
+Christoffel symbols are not ordinary partial derivatives of basis vectors The expression $\partial_\mu\partial_\nu$ is not intrinsically meaningful as a derivative of a vector field on a manifold. The connection defines what it means to differentiate the basis vector field $\partial_\nu$ in the direction $\partial_\mu$. The result is expanded in the same basis, and the coefficients are $\Gamma^\lambda{}_{\mu\nu}$.
+</div>
+## Covariant derivative of covectors and tensors
+
+A one-form 
+
+$$
+\alpha=\alpha_\nu dx^\nu
+$$
+
+ is a section of $T^*M$. A connection on $TM$ induces a connection on $T^*M$ by requiring the natural pairing to obey the product rule: 
+
+$$
+X[\alpha(Y)]=(\nabla_X\alpha)(Y)+\alpha(\nabla_XY).
+$$
+
+ Set $X=\partial_\mu$ and $Y=\partial_\nu$. Since $\alpha(\partial_\nu)=\alpha_\nu$, 
+
+$$
+\begin{align*}
+\partial_\mu\alpha_\nu
+&=(\nabla_\mu\alpha)(\partial_\nu)+\alpha(\nabla_{\partial_\mu}\partial_\nu)\\
+&=(\nabla_\mu\alpha)_\nu+\Gamma^\lambda{}_{\mu\nu}\alpha_\lambda.
+\end{align*}
+$$
+
+ Thus 
+
+$$
+\boxed{(\nabla_\mu\alpha)_\nu=\partial_\mu\alpha_\nu-\Gamma^\lambda{}_{\mu\nu}\alpha_\lambda.}
+$$
+
+ The minus sign is forced by compatibility with the pairing between vectors and covectors.
+
+For a tensor, one gets one $+\Gamma$ term for each upper index and one $-\Gamma$ term for each lower index. This is just repeated use of the product rule.
+
+## Torsion
+
+The Lie bracket $[X,Y]$ measures the infinitesimal failure of the flows of $X$ and $Y$ to close as a coordinate parallelogram. The expression 
+
+$$
+\nabla_XY-\nabla_YX
+$$
+
+ measures an antisymmetrized change of vector fields using the chosen connection. These are not automatically the same.
+
+<div className="definition">
+**Definition 25** (Torsion). The torsion tensor of a connection on $TM$ is 
+
+$$
+\boxed{T(X,Y)=\nabla_XY-\nabla_YX-[X,Y].}
+$$
+
+
+</div>
+Torsion is tensorial in $X$ and $Y$, so it depends only on the values $X_p,Y_p$ at a point, not on how the vector fields are extended nearby.
+
+In a coordinate frame, $[\partial_\mu,\partial_\nu]=0$, so 
+
+$$
+T(\partial_\mu,\partial_\nu)
+=
+(\Gamma^\lambda{}_{\mu\nu}-\Gamma^\lambda{}_{\nu\mu})\partial_\lambda.
+$$
+
+ Thus 
+
+$$
+T^\lambda{}_{\mu\nu}=\Gamma^\lambda{}_{\mu\nu}-\Gamma^\lambda{}_{\nu\mu}.
+$$
+
+ A connection is torsion-free if 
+
+$$
+\nabla_XY-\nabla_YX=[X,Y].
+$$
+
+ In coordinates, torsion-free means 
+
+$$
+\Gamma^\lambda{}_{\mu\nu}=\Gamma^\lambda{}_{\nu\mu}
+$$
+
+ for coordinate vector fields.
+
+<div className="mainbox">
+Intuition for torsion The bracket $[X,Y]$ is the displacement defect of the infinitesimal flow parallelogram. The term $\nabla_XY-\nabla_YX$ is what the connection says the antisymmetric change of the directions should be. Torsion is the mismatch between the connection's antisymmetric change and the manifold's actual flow-commutator defect.
+</div>
+## Levi-Civita connection
+
+A general connection on $TM$ is not determined by the smooth manifold alone. If $M$ has a Riemannian metric $g$, there is a distinguished connection.
+
+<div className="definition">
+**Definition 26** (Levi-Civita connection). The Levi-Civita connection is the unique connection on $TM$ that is:
+
+1.  torsion-free: 
+
+$$
+T(X,Y)=0,
+$$
+
+ that is, 
+
+$$
+\nabla_XY-\nabla_YX=[X,Y],
+$$
+
+
+2.  metric-compatible: 
+
+$$
+X[g(Y,Z)]=g(\nabla_XY,Z)+g(Y,\nabla_XZ).
+$$
+
+
+</div>
+In coordinates, its Christoffel symbols are 
+
+$$
+\boxed{
+\Gamma^\lambda{}_{\mu\nu}
+=\frac12 g^{\lambda\rho}
+\left(
+\partial_\mu g_{\nu\rho}
++\partial_\nu g_{\mu\rho}
+-\partial_\rho g_{\mu\nu}
+\right).
+}
+$$
+
+ This formula is not the definition of every connection. It is the special formula for the unique torsion-free, metric-compatible connection determined by a metric.
+
+<div className="warningbox">
+Christoffel symbols are not tensors The numbers $\Gamma^\lambda{}_{\mu\nu}$ depend on the coordinate system. Under coordinate changes they transform with an inhomogeneous term, like a gauge potential. The connection is geometric; its local coefficients are coordinate-dependent.
+</div>
+## Curvature as noncommuting covariant derivatives
+
+The curvature of a vector-bundle connection is the obstruction to commuting covariant derivatives, corrected by the bracket of the directions.
+
+<div className="definition">
+**Definition 27** (Curvature of a vector-bundle connection). For vector fields $X,Y$, 
+
+$$
+\boxed{
+F(X,Y)s
+=
+\nabla_X\nabla_Ys
+-
+\nabla_Y\nabla_Xs
+-
+\nabla_{[X,Y]}s.
+}
+$$
+
+
+</div>
+Why is the final term needed? Moving along $X$ then $Y$ and moving along $Y$ then $X$ do not generally end at the same point. The endpoint mismatch is of order area and is governed by $[X,Y]$. To compare the transported vectors fairly, one must correct by the covariant derivative in the gap direction. This is exactly the role of $-\nabla_{[X,Y]}s$.
+
+<div className="mainbox">
+Infinitesimal-loop intuition For a small parameter $\epsilon$, the difference between the two ordered second covariant derivatives is area order: 
+
+$$
+\epsilon^2(\nabla_X\nabla_Ys-\nabla_Y\nabla_Xs).
+$$
+
+ But the two endpoint paths also differ by an area-order displacement $\epsilon^2[X,Y]$. Pulling one endpoint back along this displacement contributes 
+
+$$
+\epsilon^2\nabla_{[X,Y]}s.
+$$
+
+ After subtracting this basepoint mismatch and dividing by the area $\epsilon^2$, the remaining infinitesimal holonomy density is 
+
+$$
+F(X,Y)s.
+$$
+
+
+</div>
+## Derivation of $F=dA+A\wedge A$
+
+In a local frame, write 
+
+$$
+\nabla=d+A.
+$$
+
+ Let $\psi$ be the column vector of components of a section. Then 
+
+$$
+\nabla\psi=d\psi+A\psi.
+$$
+
+ Apply $\nabla$ again. Here $d\psi$ is a vector-valued one-form, and $A$ is a matrix-valued one-form. Using the graded product rule, 
+
+$$
+d(A\psi)=dA\,\psi-A\wedge d\psi.
+$$
+
+ Therefore 
+
+$$
+\begin{align*}
+\nabla^2\psi
+&=(d+A)(d\psi+A\psi)\\
+&=d^2\psi+d(A\psi)+A\wedge d\psi+A\wedge A\psi\\
+&=0+(dA\,\psi-A\wedge d\psi)+A\wedge d\psi+A\wedge A\psi\\
+&=(dA+A\wedge A)\psi.
+\end{align*}
+$$
+
+ Thus 
+
+$$
+\boxed{F=dA+A\wedge A.}
+$$
+
+ For matrix-valued forms, 
+
+$$
+(A\wedge A)^a{}_b=A^a{}_c\wedge A^c{}_b.
+$$
+
+
+Write 
+
+$$
+A=A_\mu dx^\mu.
+$$
+
+ Then 
+
+$$
+dA=(\partial_\mu A_\nu)dx^\mu\wedge dx^\nu
+=\frac12(\partial_\mu A_\nu-\partial_\nu A_\mu)dx^\mu\wedge dx^\nu.
+$$
+
+ Also 
+
+$$
+A\wedge A
+=\frac12[A_\mu,A_\nu]dx^\mu\wedge dx^\nu.
+$$
+
+ Therefore 
+
+$$
+\boxed{
+F=\frac12F_{\mu\nu}dx^\mu\wedge dx^\nu,
+\qquad
+F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu].
+}
+$$
+
+ For an Abelian $U(1)$ connection, the commutator vanishes, so $F=dA$.
+
+## Riemann curvature tensor
+
+For a connection on $TM$, the curvature acts on vector fields: 
+
+$$
+R(X,Y)Z
+=
+\nabla_X\nabla_YZ-
+\nabla_Y\nabla_XZ-
+\nabla_{[X,Y]}Z.
+$$
+
+ This is the Riemann curvature tensor of the connection. In coordinates, 
+
+$$
+R(\partial_\mu,\partial_\nu)\partial_\sigma
+=
+R^\rho{}_{\sigma\mu\nu}\partial_\rho.
+$$
+
+ Using $A_\mu{}^\rho{}_{\sigma}=\Gamma^\rho{}_{\mu\sigma}$ in the formula for $F_{\mu\nu}$ gives 
+
+$$
+\boxed{
+R^\rho{}_{\sigma\mu\nu}
+=
+\partial_\mu\Gamma^\rho{}_{\nu\sigma}
+-
+\partial_\nu\Gamma^\rho{}_{\mu\sigma}
++
+\Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma}
+-
+\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}.
+}
+$$
+
+ For the Levi-Civita connection, this is the usual Riemann curvature tensor of Riemannian geometry.
+
+## How curvature transforms under gauge transformations
+
+Under a frame change, 
+
+$$
+A_j=g_{ij}^{-1}A_i g_{ij}+g_{ij}^{-1}dg_{ij}.
+$$
+
+ A direct computation using $d(g^{-1})=-g^{-1}(dg)g^{-1}$ gives 
+
+$$
+\boxed{F_j=g_{ij}^{-1}F_i g_{ij}.}
+$$
+
+ Thus the connection one-form $A$ transforms inhomogeneously, but the curvature transforms covariantly.
+
+For $U(1)$, conjugation is trivial, so 
+
+$$
+F_j=F_i.
+$$
+
+ The local curvatures glue to a globally defined ordinary two-form $F$. The potentials $A_i$ may not glue to one global one-form.
+
+## Parallel transport and holonomy
+
+Let 
+
+$$
+\gamma:[0,1]\to M
+$$
+
+ be a path. A section of $E$ along $\gamma$ is a map 
+
+$$
+v(t)\in E_{\gamma(t)}.
+$$
+
+ More formally, it is a section of the pullback bundle $\gamma^*E\to[0,1]$.
+
+In a local frame along the path, write $v(t)$ as a component vector. The covariant derivative along the path is 
+
+$$
+\boxed{
+D_t v:=\nabla_{\dot\gamma(t)}v
+=
+\frac{dv}{dt}+A_{\gamma(t)}(\dot\gamma(t))v.
+}
+$$
+
+ Here inserting $\dot\gamma(t)$ into the one-form $A$ means 
+
+$$
+A_{\gamma(t)}(\dot\gamma(t))
+=
+A_\mu(\gamma(t))\dot\gamma^\mu(t).
+$$
+
+ A vector is parallel along $\gamma$ if 
+
+$$
+D_t v=0.
+$$
+
+ Thus parallel transport is the solution of the ordinary differential equation 
+
+$$
+\frac{dv}{dt}=-A_\mu(\gamma(t))\dot\gamma^\mu(t)v.
+$$
+
+
+The formal solution is 
+
+$$
+v(1)=\mathcal P\exp\left(-\int_\gamma A\right)v(0).
+$$
+
+ The path-ordering symbol $\mathcal P$ is needed because matrices $A_\mu(\gamma(t_1))$ and $A_\nu(\gamma(t_2))$ may not commute at different times.
+
+A precise definition is 
+
+$$
+\boxed{
+\mathcal P\exp\left(-\int_\gamma A\right)
+:=
+\lim_{N\to\infty}
+\prod_{n=N}^{1}
+\left(I-A_{\gamma(t_n)}(\dot\gamma(t_n))\Delta t\right),
+}
+$$
+
+ where $0=t_0<t_1<\cdots<t_N=1$ and $\Delta t=1/N$. The factor with larger time stands to the left because it acts later on the vector.
+
+If $\gamma$ is a closed loop, the resulting linear map from $E_{\gamma(0)}$ to itself is called holonomy: 
+
+$$
+\mathop{\mathrm{Hol}}_\gamma(A)=\mathcal P\exp\left(-\oint_\gamma A\right).
+$$
+
+ For $U(1)$, path ordering is unnecessary, and holonomy is simply a phase, up to convention: 
+
+$$
+\mathop{\mathrm{Hol}}_\gamma(A)=\exp\left(-\oint_\gamma A\right).
+$$
+
+ This is the bundle language for Berry phase and Aharonov-Bohm phase.
+
+## Infinitesimal holonomy and curvature
+
+Let us derive the standard small-loop formula. Work in local coordinates and consider the small rectangle based at $x$ with sides $dx^\mu$ and $dx^\nu$. Parallel transport in the $+\mu$ direction contributes 
+
+$$
+I-A_\mu(x)dx^\mu.
+$$
+
+ Transport in the $+\nu$ direction at the shifted point contributes 
+
+$$
+I-\left(A_\nu(x)+\partial_\mu A_\nu(x)dx^\mu\right)dx^\nu.
+$$
+
+ Transport back in the $-\mu$ direction contributes 
+
+$$
+I+\left(A_\mu(x)+\partial_\nu A_\mu(x)dx^\nu\right)dx^\mu.
+$$
+
+ Transport back in the $-\nu$ direction contributes 
+
+$$
+I+A_\nu(x)dx^\nu.
+$$
+
+ Multiplying these four factors in the order in which they act and keeping only terms of order $dx^\mu dx^\nu$ gives 
+
+$$
+\mathop{\mathrm{Hol}}_{\square}
+=
+I-
+\left(
+\partial_\mu A_\nu-
+\partial_\nu A_\mu+[A_\mu,A_\nu]
+\right)dx^\mu dx^\nu
++O(|dx|^3).
+$$
+
+ Therefore 
+
+$$
+\boxed{\mathop{\mathrm{Hol}}_{\square}\approx I-F_{\mu\nu}dx^\mu dx^\nu.}
+$$
+
+ Curvature is the infinitesimal holonomy per unit area.
+
+<div className="mainbox">
+Curvature as infinitesimal holonomy Curvature is the infinitesimal version of holonomy. Parallel transport around a very small loop spanning area elements $dx^\mu dx^\nu$ gives 
+
+$$
+\mathop{\mathrm{Hol}}_\square\approx I-F_{\mu\nu}dx^\mu dx^\nu.
+$$
+
+ Thus $F$ measures how much a vector fails to come back to itself after parallel transport around an infinitesimal loop.
+</div>
+## Principal connections
+
+Let $P\to M$ be a principal $G$-bundle with Lie algebra $\mathfrak g$. At $p\in P$, the vertical subspace is 
+
+$$
+V_pP:=\ker(d\pi_p)\subset T_pP.
+$$
+
+ It consists of tangent directions that move only along the fiber. A principal connection can be described as a smooth choice of horizontal subspaces 
+
+$$
+T_pP=H_pP\oplus V_pP
+$$
+
+ compatible with the right $G$-action.
+
+Equivalently, a principal connection is a $\mathfrak g$-valued one-form 
+
+$$
+\omega\in\Omega^1(P,\mathfrak g)
+$$
+
+ satisfying:
+
+1.  on vertical vectors generated by $X\in\mathfrak g$, it returns $X$,
+
+2.  under the right action $R_g:P\to P$, it transforms as 
+
+$$
+R_g^*\omega=\mathop{\mathrm{Ad}}_{g^{-1}}\omega.
+$$
+
+
+A local gauge field is obtained by choosing a local section $s_i:U_i\to P$ and pulling back: 
+
+$$
+A_i=s_i^*\omega\in\Omega^1(U_i,\mathfrak g).
+$$
+
+ Thus the physics object $A_i=A_{i,\mu}dx^\mu$ is the local expression of the global principal connection $\omega$.
+
+<div className="mainbox">
+Geometric meaning A principal connection tells us which tangent directions in the total space $P$ count as horizontal, meaning genuine motion along the base $M$ rather than pure motion along the gauge fiber. Parallel transport is horizontal lifting of paths from $M$ to $P$.
+</div>
+## Bianchi identity
+
+The curvature satisfies the Bianchi identity 
+
+$$
+d_AF=0,
+$$
+
+ where 
+
+$$
+d_AF=dF+A\wedge F-F\wedge A.
+$$
+
+ For $U(1)$, this reduces to 
+
+$$
+dF=0.
+$$
+
+ In electromagnetism, $dF=0$ contains the homogeneous Maxwell equations.
+
+## Lie derivative versus connection
+
+Now the difference can be stated cleanly.
+
+<div className="center">
+  Operation         Meaning
+  ----------------- ----------------------------------------------------------------------------------------------------------------------
+  $\mathcal{L}_X$   Differentiates tensor fields on $M$ by dragging them along the flow of $X$. It is canonical and needs no connection.
+  $\nabla_X$        Differentiates sections by comparing nearby fibers using a chosen connection. It depends on extra geometric data.
+</div>
+For functions, 
+
+$$
+\mathcal{L}_Xf=X[f]=\nabla_Xf.
+$$
+
+ For vector fields, if $\nabla$ is torsion-free, 
+
+$$
+\mathcal{L}_XY=[X,Y]=\nabla_XY-\nabla_YX.
+$$
+
+ Thus $\mathcal{L}_XY$ is not simply $\nabla_XY$. For sections of an arbitrary associated vector bundle, there is no canonical Lie derivative unless the base-space flow is lifted to the bundle. A connection, however, always gives $\nabla_Xs$.

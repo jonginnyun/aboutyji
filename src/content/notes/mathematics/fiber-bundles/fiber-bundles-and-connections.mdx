@@ -1,7 +1,7 @@
 ---
 title: "Fiber Bundles, Connections, and Curvature"
 date: 2026-06-21
-updated: 2026-06-21
+updated: 2026-06-26
 lang: en
 slug: mathematics/fiber-bundles/fiber-bundles-and-connections
 category: Mathematics
@@ -16,15 +16,56 @@ canonical_lang: en
 naver_export: false
 ---
 
-## Reading Guide
+# The Big Picture
 
-This is the overview page for the fiber-bundle section. It gives the route from local triviality to vector bundles, principal bundles, connections, curvature, characteristic classes, Berry curvature, and Bloch bundles.
+A fiber bundle is a mathematical device for describing the following situation:
 
-For shorter reads, use the neighboring section notes:
+> At each point of some base space, another space is attached. Locally the whole object looks like a product, but globally the attachment may be twisted.
 
-- Topological Fiber Bundles
-- Vector Bundles, Frames, and Sections
-- Principal Bundles and Connections
-- Chern Classes and Bloch Bundles
+The basic notation is 
 
-The shorter pages are the main public entries. This overview is a map of how they fit together.
+$$
+\pi:E\to B.
+$$
+
+ Here:
+
+- $B$ is the **base space**. In physics this may be real space, spacetime, parameter space, or momentum space.
+
+- $E$ is the **total space**. It contains all the attached fibers.
+
+- $\pi$ is the **projection map**. It tells you which base point a point of $E$ lies above.
+
+- The **fiber over $b\in B$** is 
+
+$$
+E_b:=\pi^{-1}(b).
+$$
+
+
+<div className="mainbox">
+One-sentence version A fiber bundle is locally a product $U\times F$, but it may fail to be globally a product $B\times F$.
+</div>
+The main hierarchy is this: 
+
+$$
+\boxed{\text{topological fiber bundle}}
+\quad \supset \quad
+\boxed{\text{vector bundle}}
+$$
+
+ Vector bundles are fiber bundles whose fibers are vector spaces and whose transition functions are linear. Principal bundles are another important class of fiber bundles, where the fiber is a group $G$ and the bundle describes gauge frames.
+
+<div className="center">
+  Physical language                            Bundle language
+  -------------------------------------------- ---------------------------------------------------------
+  Vector field on a manifold                   Section of the tangent bundle $TM\to M$
+  One-form such as $A=A_\mu dx^\mu$            Section of the cotangent bundle $T^*M\to M$
+  Electromagnetic vector potential             Local expression of a connection on a $U(1)$ bundle
+  Berry connection                             Connection on a Bloch vector bundle
+  Berry curvature                              Curvature of that connection
+  Chern number                                 Integral of a characteristic class
+  Bloch occupied states $\{|u_a(k)\rangle\}$   Local frame for a vector bundle over the Brillouin zone
+  Gauge transformation                         Change of local trivialization/frame
+</div>
+The note is written to prevent a common problem: if one jumps directly to Berry bundles or Chern numbers, the words "base space," "fiber," "section," and "connection" can feel like labels rather than definitions. We therefore build them in order.
