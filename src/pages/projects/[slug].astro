@@ -64,13 +64,13 @@ const projectBreadcrumbs = [
           </div>
           {project.data.summary && <p class="v1-project-summary">{project.data.summary}</p>}
           <Content />
+          {legacyDetails && (
+            <div class="v1-project-supplement">
+              <Fragment set:html={legacyDetails} />
+            </div>
+          )}
         </div>
       </div>
     </section>
-    {legacyDetails && (
-      <div class="v1-project-legacy">
-        <Fragment set:html={legacyDetails} />
-      </div>
-    )}
   </main>
 </LegacyLayout>
