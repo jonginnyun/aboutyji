@@ -687,6 +687,10 @@ body {
   width: 100% !important;
 }
 
+.v1-project-supplement .portfolio-details-slider .swiper-slide-duplicate {
+  display: none !important;
+}
+
 .v1-project-supplement .portfolio-details-slider img {
   background: #f6f6f6;
   display: block;
