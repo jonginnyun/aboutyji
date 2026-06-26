@@ -106,14 +106,14 @@ Legacy topology reconciliation completed in this pass:
 
 Remaining notes work:
 
-- Continue splitting and polishing large generated mathematics notes after the fiber-bundle section.
-- Reconcile future Notion exports against current MDX/generated material.
+- Continue polishing each mathematics note as an independent topic page rather than as a visible slice of a single source document.
+- Reconcile future Notion exports against current MDX material.
 - Continue expanding the public Physics notes from technical source material only; keep personal project management notes out of the website.
-- Keep generated lecture-note-derived pages draft or clearly marked until polished.
+- Keep raw source exports local and ignored; publish only curated MDX.
 
 ## Next Recommended Steps
 
 1. Audit remaining legacy lab/course pages before deciding whether to delete or rewrite them.
 2. Turn `QCQI-details.html` and `super-details.html` into course-note indexes only if the content is actually Jonginn's.
-3. Continue splitting large generated notes in differential geometry, algebraic topology, and analysis.
+3. Continue polishing differential geometry, algebraic topology, and analysis as independent note sequences.
 4. Review publication/CV consistency against the current PDF.

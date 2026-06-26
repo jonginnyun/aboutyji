@@ -12,7 +12,6 @@ npm run dev
 npm run build
 npm run preview
 npm run check
-npm run generate:notes
 ```
 
 If `node` or `npm` is not found in PowerShell, either add Node.js to `PATH` or use the explicit Windows npm path:
@@ -24,7 +23,6 @@ If `node` or `npm` is not found in PowerShell, either add Node.js to `PATH` or u
 & "C:\Program Files\nodejs\npm.cmd" run preview
 & "C:\Program Files\nodejs\npm.cmd" run check
 & "C:\Program Files\nodejs\npm.cmd" run lint
-& "C:\Program Files\nodejs\npm.cmd" run generate:notes
 ```
 
 `npm run dev` serves the site at `http://localhost:4321/`.
@@ -38,14 +36,6 @@ There are two modes:
 
 You do not manually edit `dist/`. It is generated output. The old hand-written HTML files are still preserved in the repository and mirrored under `/legacy/` during Astro builds.
 
-Lecture-note fragments generated from `source_notes/lecture_notes/fibre_bundles_phys374_selfcontained_v13.tex` are split into topical pages with:
-
-```powershell
-npm run generate:notes
-```
-
-Run this after editing the LaTeX source, then run `npm run dev` or `npm run build`.
-
 ## Structure
 
 - `src/pages/`: Astro pages for Home, Research, Publications, Projects, Notes, Essays, CV, and Contact.
@@ -54,7 +44,7 @@ Run this after editing the LaTeX source, then run `npm run dev` or `npm run buil
 - `src/content/config.ts`: front matter schema.
 - `src/styles/v1.css`: small Astro-specific layer on top of the legacy design.
 - `assets/`, `math/`, `physics/`, `engineering/`, `labnote/`, root `*.html`: preserved legacy site material.
-- `source_notes/lecture_notes/`: LaTeX source/reference material only.
+- `source_notes/`: ignored local-only source material. Do not commit personal note exports or raw lecture-note files.
 - `scripts/sync-legacy.mjs`: mirrors legacy assets/pages into `public/` for Astro builds.
 - `scripts/new-content.mjs`: local MDX draft generator.
 
@@ -104,7 +94,7 @@ Draft notes remain hidden from production builds unless explicitly enabled. Publ
 
 ## Math and MDX
 
-MDX supports math through `remark-math` and `rehype-katex`. Use inline math with `$...$` and display math with `$$...$$`. Long LaTeX notes should be converted into readable MDX structure before publication; keep the original source under `source_notes/` for reference.
+MDX supports math through `remark-math` and `rehype-katex`. Use inline math with `$...$` and display math with `$$...$$`. Long notes should be converted into readable, topic-specific MDX before publication. Keep raw source exports local under ignored `source_notes/` paths.
 
 ## Design Preservation
 
@@ -133,4 +123,4 @@ Phase 2 ideas are documented but not implemented:
 - OpenAI-assisted translation script using environment variables.
 - Naver draft export to local `.html` and `.txt` files only.
 - Optional Git-backed CMS through GitHub OAuth, implemented only with a secure backend or trusted provider.
-- Further reconciliation of LaTeX source notes into polished public MDX notes.
+- Further reconciliation of local source notes into polished public MDX notes.

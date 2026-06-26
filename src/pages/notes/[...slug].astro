@@ -1,6 +1,4 @@
 ---
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { getCollection, render } from 'astro:content';
 import LegacyLayout from '../../layouts/LegacyLayout.astro';
 import PageHero from '../../components/PageHero.astro';
@@ -33,20 +31,6 @@ interface TocItem {
   text: string;
 }
 
-const generatedNoteHtmlBySlug: Record<string, string> = {
-  'mathematics/topology/topological-spaces': 'src/generated/notes/mathematics/topology-point-set.html',
-  'mathematics/differential-geometry/manifolds-forms-connections':
-    'src/generated/notes/mathematics/differential-geometry-manifolds-forms-lie.html',
-  'mathematics/fiber-bundles/fiber-bundles-and-connections':
-    'src/generated/notes/mathematics/fiber-bundles-connections-curvature.html',
-  'mathematics/algebraic-topology/homotopy-fundamental-group-coverings':
-    'src/generated/notes/mathematics/algebraic-topology-homology-cohomology.html',
-  'mathematics/algebra/groups-rings-fields-modules':
-    'src/generated/notes/mathematics/algebra-category-refresher.html',
-  'mathematics/analysis/metric-spaces-and-convergence':
-    'src/generated/notes/mathematics/analysis-measure-refresher.html'
-};
-
 interface NoteNavItem {
   title: string;
   href: string;
@@ -73,35 +57,6 @@ function chunkItems<T>(items: T[], size: number) {
   return chunks;
 }
 
-function sourceHtml(path?: string) {
-  if (!path) return '';
-  const absolutePath = join(process.cwd(), path);
-  return existsSync(absolutePath) ? readFileSync(absolutePath, 'utf8') : '';
-}
-
-function cleanHeadingText(html: string) {
-  return html
-    .replace(/<[^>]+>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function headingsFromHtml(html: string): TocItem[] {
-  return [...html.matchAll(/<h([1-3])\b[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g)]
-    .map((match) => ({
-      depth: Number(match[1]),
-      slug: match[2],
-      text: cleanHeadingText(match[3])
-    }))
-    .filter((heading) => heading.slug && heading.text);
-}
-
-const convertedHtml = sourceHtml(note.data.source_html ?? generatedNoteHtmlBySlug[noteSlug()]);
 const sameSectionNotes = allNotes.filter(
   (entry) => entry.data.category === note.data.category && entry.data.section === note.data.section
 );
@@ -121,18 +76,9 @@ const nextNote =
   currentSectionIndex >= 0 && currentSectionIndex + 1 < sameSectionNotes.length
     ? sameSectionNotes[currentSectionIndex + 1]
     : undefined;
-const tocItems: TocItem[] = convertedHtml
-  ? [
-      ...(note.data.render_body_before_source
-        ? headings
-            .filter((heading) => heading.depth >= 1 && heading.depth <= 3)
-            .map((heading) => ({ depth: heading.depth, slug: heading.slug, text: heading.text }))
-        : []),
-      ...headingsFromHtml(convertedHtml)
-    ]
-  : headings
-      .filter((heading) => heading.depth >= 1 && heading.depth <= 3)
-      .map((heading) => ({ depth: heading.depth, slug: heading.slug, text: heading.text }));
+const tocItems: TocItem[] = headings
+  .filter((heading) => heading.depth >= 1 && heading.depth <= 3)
+  .map((heading) => ({ depth: heading.depth, slug: heading.slug, text: heading.text }));
 const showToc = tocItems.length >= 4;
 const showRail = showToc || sameSectionNotes.length > 1;
 const noteHeroBackgrounds: Record<string, string> = {
@@ -206,7 +152,7 @@ const noteHeroBackground = noteHeroBackgrounds[note.data.category ?? ''] ?? '/as
               </div>
             </aside>
           )}
-          <article class:list={['v1-prose', convertedHtml && 'v1-prose-wide']}>
+          <article class="v1-prose">
             <p class="v1-meta">
               {note.data.category} / {note.data.section}
               {note.data.subsection ? ` / ${note.data.subsection}` : ''}
@@ -260,13 +206,8 @@ const noteHeroBackground = noteHeroBackgrounds[note.data.category ?? ''] ?? '/as
                 </nav>
               </details>
             )}
-            {convertedHtml && note.data.render_body_before_source && (
-              <div class="v1-note-content v1-note-curated">
-                <Content />
-              </div>
-            )}
             <div class="v1-note-content">
-              {convertedHtml ? <Fragment set:html={convertedHtml} /> : <Content />}
+              <Content />
             </div>
           </article>
         </div>

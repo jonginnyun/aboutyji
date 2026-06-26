@@ -1,6 +1,6 @@
 # Notes Reconciliation TODO
 
-Version 1 creates the MDX hierarchy and draft seed notes. These pages should remain drafts until they are checked against source material and polished.
+Version 1 creates the MDX hierarchy and draft seed notes. Public pages should read as independent topic notes, not as exposed fragments of a private source document.
 
 ## Mathematics
 
@@ -10,7 +10,7 @@ Version 1 creates the MDX hierarchy and draft seed notes. These pages should rem
 - Algebra: split groups, rings, fields, modules, and representations into separate notes.
 - Algebraic topology: homotopy/covering-space and homology/cohomology entry notes added; continue with examples and computations.
 - Differential geometry: manifolds/tangent-space and forms/flows/Lie-derivative entry notes added; continue with connections and curvature.
-- Fiber bundles: split source-note-derived overview into fiber bundles, vector bundles, principal bundles, bundle connections, curvature, and characteristic classes.
+- Fiber bundles: keep topic pages separated into fiber bundles, vector bundles, principal bundles, bundle connections, curvature, and characteristic classes.
 
 ## Physics
 
@@ -23,7 +23,7 @@ Version 1 creates the MDX hierarchy and draft seed notes. These pages should rem
 
 ## Publishing Checklist
 
-- Verify all claims against source notes or public legacy content.
+- Verify all claims against local source notes or public legacy content.
 - Preserve equations but rewrite exposition for web readability.
 - Replace all TODO comments before setting `draft: false`.
 - Confirm no raw LaTeX dumps remain in public pages.

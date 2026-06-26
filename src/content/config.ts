@@ -14,8 +14,6 @@ const baseContentSchema = z.object({
   math: z.boolean().default(false),
   draft: z.boolean().default(false),
   source_note: z.string().optional(),
-  source_html: z.string().optional(),
-  render_body_before_source: z.boolean().default(false),
   translation_of: z.string().optional(),
   canonical_lang: z.string().optional(),
   naver_export: z.boolean().default(false)
