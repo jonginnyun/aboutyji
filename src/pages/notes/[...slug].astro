@@ -86,10 +86,15 @@ const noteHeroBackgrounds: Record<string, string> = {
   Physics: '/assets/img/physics-notes-hero.png'
 };
 const noteHeroBackground = noteHeroBackgrounds[note.data.category ?? ''] ?? '/assets/img/notes-hero.png';
+const noteBreadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Notes', href: '/notes/' },
+  { label: note.data.title }
+];
 ---
 
 <LegacyLayout title={`${note.data.title} - Notes - Jonginn Yun`} enableMathJax={note.data.math}>
-  <PageHero title={note.data.title} subtitle={note.data.summary} background={noteHeroBackground} />
+  <PageHero title={note.data.title} subtitle={note.data.summary} background={noteHeroBackground} breadcrumbs={noteBreadcrumbs} />
   <main id="main">
     <section class="v1-section">
       <div class="container">

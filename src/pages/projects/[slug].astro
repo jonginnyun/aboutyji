@@ -44,10 +44,15 @@ function legacyProjectSection(project: { data: { legacy_file?: string; legacy_ur
 }
 
 const legacyDetails = legacyProjectSection(project);
+const projectBreadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: project.data.title }
+];
 ---
 
 <LegacyLayout title={`${project.data.title} - Jonginn Yun`}>
-  <PageHero title={project.data.title} background={project.data.image} />
+  <PageHero title={project.data.title} background={project.data.image} breadcrumbs={projectBreadcrumbs} />
   <main id="main">
     <section class="portfolio-details">
       <div class="container">
@@ -65,13 +70,6 @@ const legacyDetails = legacyProjectSection(project);
     {legacyDetails && (
       <div class="v1-project-legacy">
         <Fragment set:html={legacyDetails} />
-      </div>
-    )}
-    {project.data.legacy_url && (
-      <div class="container v1-archive-link">
-        <p>
-          Preserved legacy archive: <a class="files" href={project.data.legacy_url}>open original HTML</a>
-        </p>
       </div>
     )}
   </main>

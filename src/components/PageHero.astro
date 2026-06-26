@@ -3,12 +3,20 @@ interface Props {
   title: string;
   subtitle?: string;
   background?: string;
+  breadcrumbs?: Array<{
+    label: string;
+    href?: string;
+  }>;
 }
 
 const {
   title,
   subtitle,
-  background = '/assets/img/overlay-bg.png'
+  background = '/assets/img/overlay-bg.png',
+  breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: title }
+  ]
 } = Astro.props;
 ---
 
@@ -20,8 +28,11 @@ const {
         <h2 class="hero-title mb-4">{title}</h2>
         {subtitle && <p class="hero-subtitle v1-hero-subtitle">{subtitle}</p>}
         <ol class="breadcrumb d-flex justify-content-center">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item active">{title}</li>
+          {breadcrumbs.map((item, index) => (
+            <li class:list={['breadcrumb-item', index === breadcrumbs.length - 1 && 'active']}>
+              {item.href && index !== breadcrumbs.length - 1 ? <a href={item.href}>{item.label}</a> : item.label}
+            </li>
+          ))}
         </ol>
       </div>
     </div>
